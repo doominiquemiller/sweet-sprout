@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://c128i37yyi53u"]
+
+[ext_resource type="Script" uid="uid://d171gk54vt2x7" path="res://Scripts/sleep_screen.gd" id="1_bmx3i"]
+[ext_resource type="Texture2D" uid="uid://dlwp7hn2xle3i" path="res://Assets/weather/Money.png" id="2_cljyl"]
+[ext_resource type="FontFile" uid="uid://n5p8m4kiw5un" path="res://Fonts/CutePixel.ttf" id="3_p5hx4"]
+[ext_resource type="Texture2D" uid="uid://cu6xygrwcn4dw" path="res://UI/Buttons/button.png" id="4_q3qp7"]
+[ext_resource type="Texture2D" uid="uid://c5160n8qxx2k5" path="res://UI/Buttons/button_pressed.png" id="5_k2pav"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4gak5"]
+atlas = ExtResource("2_cljyl")
+region = Rect2(6, 42, 48, 19)
+
+[node name="sleep_screen" type="CanvasLayer" unique_id=695225647]
+script = ExtResource("1_bmx3i")
+
+[node name="Background" type="ColorRect" parent="." unique_id=593134805]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1499401, 0.15613446, 0.15923136, 1)
+
+[node name="MenuPanel" type="TextureRect" parent="." unique_id=528665713]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = -60.0
+offset_right = 110.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(110, 60)
+texture = SubResource("AtlasTexture_4gak5")
+
+[node name="Label" type="Label" parent="MenuPanel" unique_id=1891459746]
+layout_mode = 0
+offset_top = 1.0
+offset_right = 40.0
+offset_bottom = 24.0
+theme_override_colors/font_color = Color(0.39215687, 0.33333334, 0.32156864, 1)
+theme_override_fonts/font = ExtResource("3_p5hx4")
+
+[node name="AcceptButton" type="TextureButton" parent="MenuPanel" unique_id=320426766]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 272.0
+offset_top = 92.0
+offset_right = 372.0
+offset_bottom = 167.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("4_q3qp7")
+texture_pressed = ExtResource("5_k2pav")
+ignore_texture_size = true
+stretch_mode = 5

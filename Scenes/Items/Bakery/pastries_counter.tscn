@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://dpp125ixn211q"]
+
+[ext_resource type="Texture2D" uid="uid://s2ios5p8nbxa" path="res://Assets/Bakery/bakery.png" id="1_2r2n6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3x1k8"]
+atlas = ExtResource("1_2r2n6")
+region = Rect2(0, 0, 64, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2r2n6"]
+size = Vector2(64, 25)
+
+[node name="pastries_counter" type="StaticBody2D" unique_id=621744536]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1712877585]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -24.0
+offset_right = 32.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_3x1k8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1599437071]
+position = Vector2(0, 11.5)
+shape = SubResource("RectangleShape2D_2r2n6")

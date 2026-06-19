@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://bgk21p4uqlydv"]
+
+[ext_resource type="Texture2D" uid="uid://s2ios5p8nbxa" path="res://Assets/Bakery/bakery.png" id="1_g6acj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_500ti"]
+atlas = ExtResource("1_g6acj")
+region = Rect2(112, 48, 48, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8sp3d"]
+size = Vector2(48, 28)
+
+[node name="sweet_stand" type="StaticBody2D" unique_id=1180083164]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=112443911]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_500ti")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1028351741]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_8sp3d")

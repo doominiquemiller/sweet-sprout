@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://vx8ltg0fpwk4"
+path="res://.godot/imported/bip_1.wav-2e324a517b24e03593a7043c1afe916b.sample"
+
+[deps]
+
+source_file="res://Sounds & Music/bip_1.wav"
+dest_files=["res://.godot/imported/bip_1.wav-2e324a517b24e03593a7043c1afe916b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

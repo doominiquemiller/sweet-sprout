@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://duxmkmgty85gt"]
+
+[ext_resource type="Texture2D" uid="uid://fq755et6okoa" path="res://Assets/Tilesets/Doors.png" id="1_lylan"]
+[ext_resource type="Script" uid="uid://b0yufee2lm71w" path="res://Scripts/door.gd" id="1_tkwx8"]
+[ext_resource type="FontFile" uid="uid://n5p8m4kiw5un" path="res://Fonts/CutePixel.ttf" id="3_tex1h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1s1qu"]
+atlas = ExtResource("1_lylan")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tkwx8"]
+atlas = ExtResource("1_lylan")
+region = Rect2(0, 32, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tex1h"]
+atlas = ExtResource("1_lylan")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qtt6v"]
+atlas = ExtResource("1_lylan")
+region = Rect2(16, 32, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3rnec"]
+atlas = ExtResource("1_lylan")
+region = Rect2(16, 32, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oi35t"]
+atlas = ExtResource("1_lylan")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ngtrb"]
+atlas = ExtResource("1_lylan")
+region = Rect2(0, 32, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rj6nu"]
+atlas = ExtResource("1_lylan")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wm0ht"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1s1qu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tkwx8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tex1h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qtt6v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3rnec")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oi35t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ngtrb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rj6nu")
+}],
+"loop": false,
+"name": &"door",
+"speed": 3.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_miru8"]
+size = Vector2(16, 23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_es77j"]
+size = Vector2(20, 42)
+
+[node name="fence_door" type="StaticBody2D" unique_id=1376706635]
+script = ExtResource("1_tkwx8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=204971810]
+sprite_frames = SubResource("SpriteFrames_wm0ht")
+animation = &"door"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=895823462]
+position = Vector2(0, -4.5)
+shape = SubResource("RectangleShape2D_miru8")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=619580057]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1193944843]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_es77j")
+debug_color = Color(0.5096888, 0.4810636, 0.8419676, 0.41960785)
+
+[node name="InteractLabel" type="Label" parent="." unique_id=550019559]
+visible = false
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+offset_bottom = -17.0
+theme_override_fonts/font = ExtResource("3_tex1h")
+theme_override_font_sizes/font_size = 10

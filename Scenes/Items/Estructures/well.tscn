@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://csujxnmorl57l"]
+
+[ext_resource type="Texture2D" uid="uid://b0ym1gsbhewcv" path="res://Assets/Objects/Well.png" id="1_dsw1n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dsw1n"]
+atlas = ExtResource("1_dsw1n")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dcv1s"]
+atlas = ExtResource("1_dsw1n")
+region = Rect2(32, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n8lcy"]
+atlas = ExtResource("1_dsw1n")
+region = Rect2(64, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ofm3h"]
+atlas = ExtResource("1_dsw1n")
+region = Rect2(96, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e3eyd"]
+atlas = ExtResource("1_dsw1n")
+region = Rect2(0, 48, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0bb57"]
+atlas = ExtResource("1_dsw1n")
+region = Rect2(32, 48, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4685s"]
+atlas = ExtResource("1_dsw1n")
+region = Rect2(64, 48, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1f5ev"]
+atlas = ExtResource("1_dsw1n")
+region = Rect2(96, 48, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e1aoh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dsw1n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dcv1s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n8lcy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ofm3h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e3eyd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0bb57")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4685s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1f5ev")
+}],
+"loop": false,
+"name": &"well",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ttfdm"]
+size = Vector2(24, 36)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e1aoh"]
+size = Vector2(31, 42)
+
+[node name="well" type="StaticBody2D" unique_id=1963474814]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1966094274]
+sprite_frames = SubResource("SpriteFrames_e1aoh")
+animation = &"well"
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=669538782]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_ttfdm")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1494973634]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=83953479]
+position = Vector2(-1.5, 5)
+shape = SubResource("RectangleShape2D_e1aoh")
+debug_color = Color(0.5845933, 0.4619376, 0.78587735, 0.41960785)

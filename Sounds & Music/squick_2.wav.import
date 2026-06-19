@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d11kdgv53am3k"
+path="res://.godot/imported/squick_2.wav-95e15ff48341a09b4143b12e51f8ccd1.sample"
+
+[deps]
+
+source_file="res://Sounds & Music/squick_2.wav"
+dest_files=["res://.godot/imported/squick_2.wav-95e15ff48341a09b4143b12e51f8ccd1.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

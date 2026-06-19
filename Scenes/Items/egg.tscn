@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bou4vdv3gig1p"]
+
+[ext_resource type="Script" uid="uid://pp0048c25eo6" path="res://Scripts/Chicken/egg.gd" id="1_8cd31"]
+[ext_resource type="Texture2D" uid="uid://dsy1hun8ksl2q" path="res://Assets/Objects/Egg_item.png" id="2_k08wc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5n8u2"]
+atlas = ExtResource("2_k08wc")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ipx8n"]
+
+[node name="Egg" type="Area2D" unique_id=148212148]
+script = ExtResource("1_8cd31")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=331528716]
+texture = SubResource("AtlasTexture_5n8u2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1623850282]
+shape = SubResource("RectangleShape2D_ipx8n")
