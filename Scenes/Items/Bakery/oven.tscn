@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://c8tgii52je7ao"]
+
+[ext_resource type="Texture2D" uid="uid://s2ios5p8nbxa" path="res://Assets/Bakery/bakery.png" id="1_ml8wo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8v8yq"]
+atlas = ExtResource("1_ml8wo")
+region = Rect2(272.07944, 48.94588, 17.080505, 46.160625)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ml8wo"]
+size = Vector2(17, 20.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8v8yq"]
+size = Vector2(21, 26)
+
+[node name="Oven" type="StaticBody2D" unique_id=1791195692]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=266193716]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_8v8yq")
+stretch_mode = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=695460403]
+position = Vector2(-11.5, 12.75)
+shape = SubResource("RectangleShape2D_ml8wo")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=333183253]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=430349804]
+position = Vector2(-11.5, 15)
+shape = SubResource("RectangleShape2D_8v8yq")
+debug_color = Color(0.58814657, 0.43373305, 0.8684508, 0.41960785)

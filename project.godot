@@ -22,6 +22,7 @@ GameTime="*uid://b3xhf2wc52nc2"
 
 [display]
 
+window/size/mode=2
 window/size/initial_position_type=4
 
 [input]
