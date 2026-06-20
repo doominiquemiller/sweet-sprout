@@ -1,11 +1,10 @@
 extends Node2D
 
 @onready var clock           : CanvasLayer     = $clock_ui as CanvasLayer
-@onready var sleep_screen    : CanvasLayer     = $sleep_screen as CanvasLayer
+@onready var sleep_screen    : CanvasLayer     = $SleepScreen as CanvasLayer
 @onready var canvas_modulate : CanvasModulate  = $CanvasModulate as CanvasModulate
 
 # --- Configuración del color por hora para el CanvasModulate ---
-# Puedes cambiar estos colores Hexadecimales para ajustar las tonalidades de tu juego
 const COLOR_NIGHT   = Color("353738") # Noche oscura (Cerrado / Madrugada)
 const COLOR_DAWN    = Color("cbe0de") # Amanecer cálido (6:00 AM)
 const COLOR_DAY     = Color("dce0d2") # Luz pura del día (8:00 AM - 4:00 PM)
@@ -16,15 +15,20 @@ func _ready() -> void:
 	# Registrar el reloj en el core de tiempo global
 	GameTime.register(clock)
 	sleep_screen.clock = clock
+	sleep_screen.reset_daily_tracking() # Inicializa el dinero del primer día
 	
-	# Conectar el final del día con la pantalla negra de dormir
+	# Conectar el final del día automático con la pantalla de dormir
 	clock.day_ended.connect(func():
 		clock.set_paused(true)
 		sleep_screen.show_screen()
 	)
 	
-	sleep_screen.sleep_confirmed.connect(func():
+	# CORREGIDO: Escuchamos la nueva señal 'player_slept'
+	sleep_screen.player_slept.connect(func():
+		# 1. Avanzamos el clima del juego
 		WeatherSystem.advance_day()
+		
+		# 2. Avanzamos el reloj al día siguiente (Día 1 -> Día 2 -> etc.)
 		clock.next_day()
 	)
 	

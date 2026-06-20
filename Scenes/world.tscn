@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bdp0mw5o2ivu2" path="res://Assets/Tilesets/Grass.png" id="1_7yui6"]
 [ext_resource type="PackedScene" uid="uid://b4i4fpk0eybx7" path="res://Scenes/player.tscn" id="1_kn0ld"]
 [ext_resource type="Script" uid="uid://d31xbc4m43ghi" path="res://Scripts/world.gd" id="1_pyn1s"]
+[ext_resource type="PackedScene" uid="uid://bveh1fe4dvwx8" path="res://Scenes/sleep_screen.tscn" id="3_b4e6k"]
 [ext_resource type="Texture2D" uid="uid://cv11nc2v7ba6i" path="res://Assets/Tilesets/CHills.png" id="5_t2t4p"]
 [ext_resource type="Texture2D" uid="uid://jr25d8h6tbyu" path="res://Assets/Objects/Basic Grass Biom things 1.png" id="6_axeuq"]
 [ext_resource type="Texture2D" uid="uid://o2wh6v8fmeis" path="res://Assets/Tilesets/Tilled_Dirt_Wide.png" id="6_t2t4p"]
@@ -23,7 +24,6 @@
 [ext_resource type="PackedScene" uid="uid://ckavxhxmjqjdo" path="res://UI/clock_ui.tscn" id="23_xbk3s"]
 [ext_resource type="PackedScene" uid="uid://dpp125ixn211q" path="res://Scenes/Items/Bakery/pastries_counter.tscn" id="24_dt0r1"]
 [ext_resource type="PackedScene" uid="uid://dg86u60lp4d1w" path="res://Scenes/Items/Bakery/counter.tscn" id="24_hmc15"]
-[ext_resource type="PackedScene" uid="uid://c128i37yyi53u" path="res://UI/sleep_screen.tscn" id="24_xbk3s"]
 [ext_resource type="PackedScene" uid="uid://bj7f20chsx37u" path="res://Scenes/Items/Bakery/counter_2.tscn" id="25_1vso6"]
 [ext_resource type="Texture2D" uid="uid://nwcvo04wv0ci" path="res://Assets/Objects/Basic Furniture.png" id="26_ochwf"]
 [ext_resource type="PackedScene" uid="uid://b77xhlb302qdk" path="res://Scenes/Items/Bakery/bread_stand.tscn" id="26_qebug"]
@@ -1158,13 +1158,10 @@ y_sort_enabled = true
 script = ExtResource("1_pyn1s")
 
 [node name="clock_ui" parent="." unique_id=1588631544 instance=ExtResource("23_xbk3s")]
-visible = false
 
-[node name="sleep_screen" parent="." unique_id=695225647 instance=ExtResource("24_xbk3s")]
-visible = false
+[node name="SleepScreen" parent="." unique_id=834690660 instance=ExtResource("3_b4e6k")]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1093347763]
-visible = false
 
 [node name="TileMap" type="Node" parent="." unique_id=1022579652]
 

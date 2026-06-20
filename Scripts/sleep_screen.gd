@@ -1,57 +1,57 @@
 extends CanvasLayer
 
-# --- Señales y Referencias ---
-signal sleep_confirmed
+# =============================================================
+#  SleepScreen — Pantalla de dormir
+# =============================================================
 
-var clock: Node = null
+@onready var day_label    : Label         = $Panel/DayLabel
+@onready var money_label  : Label         = $Panel/MoneyRow/MoneyLabel
+@onready var sleep_button : TextureButton = $Panel/SleepButton
 
-# Nodos hijos (Asegúrate de que los nombres coincidan en tu árbol de la interfaz)
-@onready var background  : ColorRect   = $Background
-@onready var menu_panel  : TextureRect = $MenuPanel
-@onready var label       : Label       = $MenuPanel/Label
-@onready var accept_btn  : TextureButton = $MenuPanel/AcceptButton # Cambiado a TextureRect si usas botones personalizados
+# Cambiamos el nombre a player_slept para que coincida con world.gd
+signal player_slept 
 
+var clock : Node = null
+var _money_at_day_start : int = 0
+
+# =============================================================
 func _ready() -> void:
-	# Forzamos a que ignore la pausa del juego para que el botón responda
-	process_mode = Node.PROCESS_MODE_ALWAYS
-	
-	# Inicializamos la interfaz invisible y transparente al arrancar
 	visible = false
-	background.modulate.a = 0.0
-	menu_panel.modulate.a = 0.0
-	menu_panel.scale = Vector2(0.7, 0.7) # Preparado para el efecto de escala
+	# Conectamos el botón visual a nuestra función interna
+	sleep_button.pressed.connect(_on_sleep_pressed)
 
-## Esta función la llama el mundo (world.gd) a las 10:00 PM
+## Llamado por GameManager o World cuando el reloj llega al fin del día
 func show_screen() -> void:
 	visible = true
-	
-	# Buscamos la variable de día correcta en tu clock_ui (current_day)
-	if clock and "current_day" in clock:
-		label.text = "¡Fin del Día %d!\n¿Quieres ir a dormir?" % clock.current_day
-	else:
-		label.text = "¡Fin del Día!\n¿Quieres ir a dormir?"
-		
-	# --- ANIMACIÓN COZY DE ENTRADA (Tween) ---
-	var tween = create_tween().set_parallel(true)
-	
-	# 1. El fondo oscuro aparece suavemente en 0.5 segundos
-	tween.tween_property(background, "modulate:a", 0.6, 0.5).set_trans(Tween.TRANS_SINE)
-	
-	# 2. El cartel aparece con un desvanecimiento y rebote elástico adorable
-	tween.tween_property(menu_panel, "modulate:a", 1.0, 0.4).set_trans(Tween.TRANS_SINE)
-	tween.tween_property(menu_panel, "scale", Vector2.ONE, 0.5).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
-## CONECTA ESTO A LA SEÑAL DEL BOTÓN DE CONFIRMAR (Al hacer clic)
-func _on_accept_button_pressed() -> void:
-	# Animación rápida de salida antes de cambiar el día
-	var tween = create_tween().set_parallel(true)
-	tween.tween_property(background, "modulate:a", 0.0, 0.3)
-	tween.tween_property(menu_panel, "modulate:a", 0.0, 0.3)
-	tween.tween_property(menu_panel, "scale", Vector2(0.8, 0.8), 0.3)
-	
-	# Esperamos a que la animación termine antes de avanzar el tiempo
-	await tween.finished
+	if not clock:
+		day_label.text = "¡Día completado!"
+		money_label.text = "+0g hoy"
+		return
+
+	# CORREGIDO: Ahora extrae el texto exacto (Ej: "WED. 1") desde el ClockUI
+	var clock_label : Label = clock.get_node_or_null("ClockPanel/DayBadge/DayLabel")
+	if clock_label:
+		day_label.text = "%s completado" % clock_label.text
+	else:
+		var total_days : int = clock.get("total_days_elapsed")
+		day_label.text = "Día %d completado" % (total_days + 1)
+
+	var money  : int = clock.get("money")
+	var earned : int = money - _money_at_day_start
+	money_label.text = "+%dg hoy" % max(0, earned)
+
+## Llamar al iniciar la partida y tras cada next_day() para resetear el contador
+func reset_daily_tracking() -> void:
+	if clock:
+		_money_at_day_start = clock.get("money")
+
+# =============================================================
+func _on_sleep_pressed() -> void:
 	visible = false
 	
-	# Avisamos al mundo para restablecer todo
-	sleep_confirmed.emit()
+	# CORREGIDO: Solo emitimos la señal. world.gd se encargará de llamar a next_day() UNA Sola vez.
+	player_slept.emit() 
+	
+	# Reseteamos el tracking para el dinero del día siguiente
+	reset_daily_tracking()
