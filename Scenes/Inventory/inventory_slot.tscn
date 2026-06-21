@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://bhghwukrl2wpn"]
+
+[ext_resource type="Texture2D" uid="uid://do8dgdbutrn88" path="res://Assets/Inventory/slot vacio.png" id="1_3qr85"]
+[ext_resource type="Script" uid="uid://bcierjjoab5tj" path="res://Scripts/inventory_slot.gd" id="1_71tl4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71tl4"]
+atlas = ExtResource("1_3qr85")
+region = Rect2(11, 11, 42, 44)
+
+[node name="InventorySlot" type="Control" unique_id=890256378]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_71tl4")
+
+[node name="SlotBg" type="TextureRect" parent="." unique_id=1493105080]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_71tl4")
+
+[node name="ItemIcon" type="TextureRect" parent="." unique_id=1894913626]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -24.0
+offset_right = 22.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CountBadge" type="Control" parent="." unique_id=157833346]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+offset_right = -20.0
+offset_bottom = -24.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="CountCircle" type="ColorRect" parent="CountBadge" unique_id=84936594]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CountLabel" type="Label" parent="CountBadge" unique_id=1573135746]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0

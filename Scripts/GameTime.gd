@@ -6,6 +6,7 @@ signal day_ended
 signal hour_changed(hour: int)
 signal period_changed(period: int)
 signal money_changed(total: int)
+signal season_changed(season_index: int)
 
 # =============================================================
 func register(clock_node: Node) -> void:
@@ -14,6 +15,7 @@ func register(clock_node: Node) -> void:
 	_clock.connect("hour_changed",   func(h): emit_signal("hour_changed", h))
 	_clock.connect("period_changed", func(p): emit_signal("period_changed", p))
 	_clock.connect("money_changed",  func(m): emit_signal("money_changed", m))
+	_clock.connect("season_changed", func(s): emit_signal("season_changed", s))
 
 # =============================================================
 #  PROXY — usa call() para invocar métodos sin error de tipo Node
@@ -41,6 +43,20 @@ func get_minutes_remaining() -> int:
 func get_current_day() -> int:
 	if not _clock: return 1
 	return _clock.get("current_day")
+
+# NUEVO — necesario para el timer de 5 minutos de la gallina
+func get_total_days_elapsed() -> int:
+	if not _clock: return 0
+	return _clock.get("total_days_elapsed")
+
+# NUEVO — útil para UI y eventos por estación
+func get_season_name() -> String:
+	if not _clock: return "Primavera"
+	return _clock.call("get_season_name")
+
+func get_full_date_string() -> String:
+	if not _clock: return ""
+	return _clock.call("get_full_date_string")
 
 func get_money() -> int:
 	if not _clock: return 0

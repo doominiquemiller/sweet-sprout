@@ -6,7 +6,7 @@
 [sub_resource type="AtlasTexture" id="AtlasTexture_5n8u2"]
 atlas = ExtResource("2_k08wc")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ipx8n"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8cd31"]
 
 [node name="Egg" type="Area2D" unique_id=148212148]
 script = ExtResource("1_8cd31")
@@ -15,4 +15,4 @@ script = ExtResource("1_8cd31")
 texture = SubResource("AtlasTexture_5n8u2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1623850282]
-shape = SubResource("RectangleShape2D_ipx8n")
+shape = SubResource("RectangleShape2D_8cd31")

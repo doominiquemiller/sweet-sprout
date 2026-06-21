@@ -1,6 +1,6 @@
 extends State
 
-@export var character              : CharacterBody2D
+@export var character              : NonPlayableCharacter
 @export var animation              : AnimatedSprite2D
 @export var idle_state_time_intervarl : float = 1.0
 
@@ -20,7 +20,6 @@ func _on_physics_process(_delta: float) -> void:
 	pass
 
 func _on_next_transitions() -> void:
-	# Usamos get() en vez de castear a Chicken — evita el error de tipo
 	if character and character.get("should_lay_egg") == true:
 		character.set("should_lay_egg", false)
 		transition.emit("lay")

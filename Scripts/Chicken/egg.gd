@@ -1,7 +1,6 @@
 extends Area2D
 
 const SELL_VALUE : int = 15
-
 var can_pickup : bool = false
 
 func _ready() -> void:
@@ -13,16 +12,19 @@ func _unhandled_input(event: InputEvent) -> void:
 		_pickup()
 
 func _on_body_entered(body: Node) -> void:
+	print("[Egg] body_entered: ", body.name, " grupos: ", body.get_groups())
 	if body.is_in_group("player"):
 		can_pickup = true
+		print("[Egg] can_pickup = true")
 
 func _on_body_exited(body: Node) -> void:
 	if body.is_in_group("player"):
 		can_pickup = false
 
 func _pickup() -> void:
+	print("[Egg] _pickup() ejecutado")
 	can_pickup = false
-	var player = get_tree().get_first_node_in_group("player")
-	if player and player.has_method("add_to_inventory"):
-		player.add_to_inventory("egg", 1)
+	print("[Egg] Inventory existe? ", Inventory)
+	Inventory.add_item("egg", 1)
+	print("[Egg] add_item llamado. Items actuales: ", Inventory.items)
 	queue_free()

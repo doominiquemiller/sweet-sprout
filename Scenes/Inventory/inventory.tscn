@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://bqa65unlacyr4"]
+
+[ext_resource type="Script" uid="uid://c0c7hms2vab6u" path="res://Scripts/inventory.gd" id="1_ck35p"]
+[ext_resource type="Texture2D" uid="uid://c1x4mc8qpia46" path="res://Assets/Inventory/Panel.png" id="2_0dubb"]
+[ext_resource type="PackedScene" uid="uid://bhghwukrl2wpn" path="res://Scenes/Inventory/inventory_slot.tscn" id="3_evvmy"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ck35p"]
+content_margin_left = 25.0
+content_margin_top = 26.0
+texture = ExtResource("2_0dubb")
+texture_margin_left = 26.0
+texture_margin_top = 50.0
+texture_margin_right = 30.0
+texture_margin_bottom = 20.0
+
+[node name="Inventory" type="CanvasLayer" unique_id=565181781]
+layer = 15
+script = ExtResource("1_ck35p")
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=449943141]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 296.0
+offset_bottom = 224.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ck35p")
+
+[node name="SlotGrid" type="GridContainer" parent="Panel" unique_id=1062470933]
+layout_mode = 2
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 2
+columns = 4
+
+[node name="InventorySlot" parent="Panel/SlotGrid" unique_id=890256378 instance=ExtResource("3_evvmy")]
+layout_mode = 2
+
+[node name="InventorySlot2" parent="Panel/SlotGrid" unique_id=247468407 instance=ExtResource("3_evvmy")]
+layout_mode = 2
+
+[node name="InventorySlot3" parent="Panel/SlotGrid" unique_id=370580256 instance=ExtResource("3_evvmy")]
+layout_mode = 2
+
+[node name="InventorySlot4" parent="Panel/SlotGrid" unique_id=500165322 instance=ExtResource("3_evvmy")]
+layout_mode = 2
+
+[node name="InventorySlot5" parent="Panel/SlotGrid" unique_id=2146426012 instance=ExtResource("3_evvmy")]
+layout_mode = 2
+
+[node name="InventorySlot6" parent="Panel/SlotGrid" unique_id=336975461 instance=ExtResource("3_evvmy")]
+layout_mode = 2
+
+[node name="InventorySlot7" parent="Panel/SlotGrid" unique_id=91068904 instance=ExtResource("3_evvmy")]
+layout_mode = 2
+
+[node name="InventorySlot8" parent="Panel/SlotGrid" unique_id=1811382653 instance=ExtResource("3_evvmy")]
+layout_mode = 2
+
+[node name="InventorySlot9" parent="Panel/SlotGrid" unique_id=488989486 instance=ExtResource("3_evvmy")]
+layout_mode = 2
+
+[node name="InventorySlot10" parent="Panel/SlotGrid" unique_id=1482071044 instance=ExtResource("3_evvmy")]
+layout_mode = 2
+
+[node name="InventorySlot11" parent="Panel/SlotGrid" unique_id=177575530 instance=ExtResource("3_evvmy")]
+layout_mode = 2
+
+[node name="InventorySlot12" parent="Panel/SlotGrid" unique_id=878942240 instance=ExtResource("3_evvmy")]
+layout_mode = 2
