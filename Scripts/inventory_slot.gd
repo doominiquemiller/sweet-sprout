@@ -1,21 +1,9 @@
 extends Control
 
-# =============================================================
-#  InventorySlot — Un slot individual de la grilla
-#
-#  Jerarquía:
-#  InventorySlot (Control) ← este script
-#  ├─ SlotBg (TextureRect)       ← slot vacio.png / slot resaltado.png
-#  ├─ ItemIcon (TextureRect)     ← icono del item (oculto si vacío)
-#  └─ CountBadge (Control)
-#     ├─ CountCircle (ColorRect o Sprite2D — círculo de fondo)
-#     └─ CountLabel (Label)      ← "3"
-# =============================================================
-
 @onready var slot_bg     : TextureRect = $SlotBg
 @onready var item_icon   : TextureRect = $ItemIcon
 @onready var count_badge : Control     = $CountBadge
-@onready var count_label : Label       = $CountBadge/CountLabel
+@onready var count_label : Label       = $CountBadge/CountCircle/CountLabel
 
 const TEX_SLOT_EMPTY      := preload("res://Assets/Inventory/slot vacio.png")
 const TEX_SLOT_HIGHLIGHT  := preload("res://Assets/Inventory/slot resaltado.png")
@@ -28,11 +16,12 @@ func _ready() -> void:
 	mouse_exited.connect(_on_mouse_exited)
 	set_empty()
 
-# =============================================================
 func set_item(icon: Texture2D, count: int) -> void:
+	print("[Slot ", name, "] set_item llamado — icon: ", icon, " count: ", count)
 	is_empty = false
 	item_icon.visible = true
 	item_icon.texture = icon
+	print("[Slot ", name, "] item_icon.visible = ", item_icon.visible, " texture = ", item_icon.texture)
 
 	if count > 1:
 		count_badge.visible = true
@@ -45,7 +34,6 @@ func set_empty() -> void:
 	item_icon.visible = false
 	count_badge.visible = false
 
-# =============================================================
 func _on_mouse_entered() -> void:
 	slot_bg.texture = TEX_SLOT_HIGHLIGHT
 

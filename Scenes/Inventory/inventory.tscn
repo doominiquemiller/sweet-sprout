@@ -5,16 +5,20 @@
 [ext_resource type="PackedScene" uid="uid://bhghwukrl2wpn" path="res://Scenes/Inventory/inventory_slot.tscn" id="3_evvmy"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ck35p"]
-content_margin_left = 25.0
-content_margin_top = 26.0
 texture = ExtResource("2_0dubb")
-texture_margin_left = 26.0
-texture_margin_top = 50.0
-texture_margin_right = 30.0
-texture_margin_bottom = 20.0
+texture_margin_left = 40.0
+texture_margin_top = 40.0
+texture_margin_right = 40.0
+texture_margin_bottom = 40.0
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
 
 [node name="Inventory" type="CanvasLayer" unique_id=565181781]
 layer = 15
+scale = Vector2(1.5, 1.5)
+transform = Transform2D(1.5, 0, 0, 1.5, 0, 0)
 script = ExtResource("1_ck35p")
 
 [node name="Panel" type="PanelContainer" parent="." unique_id=449943141]
@@ -23,18 +27,18 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 296.0
-offset_bottom = 224.0
+offset_left = -126.0
+offset_top = -135.33333
+offset_right = 191.0
+offset_bottom = 106.66669
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_ck35p")
 
 [node name="SlotGrid" type="GridContainer" parent="Panel" unique_id=1062470933]
 layout_mode = 2
-theme_override_constants/h_separation = 2
-theme_override_constants/v_separation = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
 columns = 4
 
 [node name="InventorySlot" parent="Panel/SlotGrid" unique_id=890256378 instance=ExtResource("3_evvmy")]

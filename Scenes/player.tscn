@@ -239,8 +239,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v0iea"]
-radius = 4.0
-height = 10.0
+radius = 3.0
+height = 6.0
 
 [node name="Player" type="CharacterBody2D" unique_id=62884988 groups=["player"]]
 process_mode = 3
@@ -253,7 +253,7 @@ sprite_frames = SubResource("SpriteFrames_0gysh")
 animation = &"down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=494866450]
-position = Vector2(-1, 10)
+position = Vector2(-1, 12)
 shape = SubResource("CapsuleShape2D_v0iea")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=85191338]

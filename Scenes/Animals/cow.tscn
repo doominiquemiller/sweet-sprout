@@ -1,11 +1,12 @@
 [gd_scene format=3 uid="uid://b7bgllmssqghd"]
 
-[ext_resource type="Script" uid="uid://boq505w61oq7u" path="res://Scenes/Animals/cow.gd" id="1_swtc8"]
+[ext_resource type="Script" uid="uid://boq505w61oq7u" path="res://Scripts/Cow/cow.gd" id="1_swtc8"]
 [ext_resource type="Texture2D" uid="uid://dq3jnvknkdtbk" path="res://Assets/Characters/Free Cow Sprites.png" id="1_uaxjc"]
 [ext_resource type="Script" uid="uid://c5fj0dxwt4wrf" path="res://Scripts/Chicken/state_machine.gd" id="2_tc63g"]
-[ext_resource type="Script" uid="uid://fts2ahxbweah" path="res://Scripts/Chicken/idle_state.gd" id="3_jhu8x"]
-[ext_resource type="Script" uid="uid://cp6k3emx70hsh" path="res://Scripts/Chicken/walk_state.gd" id="4_363vg"]
+[ext_resource type="Script" uid="uid://b4a4vhtpcx6hy" path="res://Scripts/Cow/idle_state_cow.gd" id="4_swtc8"]
+[ext_resource type="Script" uid="uid://dmnenht0jcaeu" path="res://Scripts/Cow/walk_state_cow.gd" id="5_hrek1"]
 [ext_resource type="Script" uid="uid://dhd3jrxgjlw71" path="res://Scripts/Chicken/sleep_state.gd" id="5_jbpbs"]
+[ext_resource type="Script" uid="uid://itqdejn8pmvp" path="res://Scripts/Cow/milk_state.gd" id="7_hrek1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_isgm3"]
 atlas = ExtResource("1_uaxjc")
@@ -95,15 +96,20 @@ script = ExtResource("2_tc63g")
 initial_node_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateMachine" unique_id=1177969752 node_paths=PackedStringArray("character", "animation")]
-script = ExtResource("3_jhu8x")
+script = ExtResource("4_swtc8")
 character = NodePath("../..")
 animation = NodePath("../../AnimatedSprite2D")
 
 [node name="Walk" type="Node" parent="StateMachine" unique_id=847705581 node_paths=PackedStringArray("character", "animation", "navigation")]
-script = ExtResource("4_363vg")
+script = ExtResource("5_hrek1")
 character = NodePath("../..")
 animation = NodePath("../../AnimatedSprite2D")
 navigation = NodePath("../../NavigationAgent2D")
 
 [node name="Sleep" type="Node" parent="StateMachine" unique_id=1126942142]
 script = ExtResource("5_jbpbs")
+
+[node name="Milk" type="Node" parent="StateMachine" unique_id=1441414746]
+script = ExtResource("7_hrek1")
+
+[node name="MilkSpawnPoint" type="Marker2D" parent="." unique_id=1932166776]
