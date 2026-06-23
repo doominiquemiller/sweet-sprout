@@ -9,6 +9,8 @@ const TEX_SLOT_EMPTY      := preload("res://Assets/Inventory/slot vacio.png")
 const TEX_SLOT_HIGHLIGHT  := preload("res://Assets/Inventory/slot resaltado.png")
 
 var is_empty : bool = true
+var mi_item_id : String = ""
+var esta_seleccionado_por_teclado : bool = false
 
 func _ready() -> void:
 	slot_bg.texture = TEX_SLOT_EMPTY
@@ -17,11 +19,9 @@ func _ready() -> void:
 	set_empty()
 
 func set_item(icon: Texture2D, count: int) -> void:
-	print("[Slot ", name, "] set_item llamado — icon: ", icon, " count: ", count)
 	is_empty = false
 	item_icon.visible = true
 	item_icon.texture = icon
-	print("[Slot ", name, "] item_icon.visible = ", item_icon.visible, " texture = ", item_icon.texture)
 
 	if count > 1:
 		count_badge.visible = true
@@ -34,8 +34,19 @@ func set_empty() -> void:
 	item_icon.visible = false
 	count_badge.visible = false
 
+# Control de resalte por teclado
+func marcar_como_seleccionado(activado: bool) -> void:
+	esta_seleccionado_por_teclado = activado
+	if esta_seleccionado_por_teclado:
+		slot_bg.texture = TEX_SLOT_HIGHLIGHT
+	else:
+		# Solo regresa a vacío si el puntero del mouse tampoco está encima
+		if not Rect2(Vector2(), size).has_point(get_local_mouse_position()):
+			slot_bg.texture = TEX_SLOT_EMPTY
+
 func _on_mouse_entered() -> void:
 	slot_bg.texture = TEX_SLOT_HIGHLIGHT
 
 func _on_mouse_exited() -> void:
-	slot_bg.texture = TEX_SLOT_EMPTY
+	if not esta_seleccionado_por_teclado:
+		slot_bg.texture = TEX_SLOT_EMPTY

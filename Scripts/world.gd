@@ -3,6 +3,7 @@ extends Node2D
 @onready var clock           : CanvasLayer     = $clock_ui as CanvasLayer
 @onready var sleep_screen    : CanvasLayer     = $SleepScreen as CanvasLayer
 @onready var canvas_modulate : CanvasModulate  = $CanvasModulate as CanvasModulate
+@onready var planting_system : Node2D = $PlantingSystem
 
 # --- Configuración del color por hora para el CanvasModulate ---
 const COLOR_NIGHT   = Color("353738") # Noche oscura (Cerrado / Madrugada)
@@ -18,7 +19,7 @@ func _ready() -> void:
 	sleep_screen.reset_daily_tracking() # Inicializa el dinero del primer día
 	
 	# Conectar el final del día automático con la pantalla de dormir
-	clock.day_ended.connect(func():
+	clock.connect("day_ended", func():
 		clock.set_paused(true)
 		sleep_screen.show_screen()
 	)
@@ -30,9 +31,27 @@ func _ready() -> void:
 		
 		# 2. Avanzamos el reloj al día siguiente (Día 1 -> Día 2 -> etc.)
 		clock.next_day()
+		
+		# NUEVO: avanzar todos los árboles 1 día
+		_advance_fruit_trees()
 	)
 	
 	get_tree().paused = false
+	
+	# Esperamos un instante a que el Singleton de inventario cargue sus ranuras visuales
+	await get_tree().create_timer(0.1).timeout
+	
+	# Limpiamos cualquier residuo del arranque para asegurar que sea exactamente 1 de cada una
+	Inventory.items.clear()
+	Inventory._slot_order.clear()
+	
+	# Inyectamos las 4 semillas listas para plantar
+	Inventory.add_item("apple_seed", 1)
+	Inventory.add_item("orange_seed", 1)
+	Inventory.add_item("peach_seed", 1)
+	Inventory.add_item("pear_seed", 1)
+	
+	print("¡Semillas de prueba añadidas con éxito al inventario global!")
 
 func _process(_delta: float) -> void:
 	_update_ambient_light()
@@ -66,3 +85,7 @@ func _update_ambient_light() -> void:
 		target_color = COLOR_NIGHT
 		
 	canvas_modulate.color = target_color
+	
+func _advance_fruit_trees() -> void:
+	for tree in get_tree().get_nodes_in_group("fruit_trees"):
+		tree.on_day_passed()

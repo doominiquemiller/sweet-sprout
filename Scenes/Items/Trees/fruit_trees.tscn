@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bgfkcyi0xqxb3"]
 
+[ext_resource type="Script" uid="uid://djbfospbiccah" path="res://Scripts/fruit_trees.gd" id="1_awek8"]
 [ext_resource type="Texture2D" uid="uid://ba7nx52qi5wfu" path="res://Assets/Plants/Trees, stumps and bushes v2.png" id="1_defqv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rnkue"]
@@ -115,13 +116,12 @@ radius = 12.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rnkue"]
 size = Vector2(30, 35)
 
-[node name="treeA" type="StaticBody2D" unique_id=275646237]
+[node name="FruitTree" type="Node2D" unique_id=1543696822]
+script = ExtResource("1_awek8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1749410897]
 sprite_frames = SubResource("SpriteFrames_gommq")
 animation = &"tree_apple"
-frame = 1
-frame_progress = 0.3217361
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=563228158]
 position = Vector2(0, -4)
