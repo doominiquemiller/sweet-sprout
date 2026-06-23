@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://ckavxhxmjqjdo"]
+
+[ext_resource type="Texture2D" uid="uid://dgdcx55eriixw" path="res://Assets/weather/clock.png" id="1_0qyg6"]
+[ext_resource type="Script" uid="uid://d0fs346k713u2" path="res://Scripts/clock_ui.gd" id="1_oyeg0"]
+[ext_resource type="Texture2D" uid="uid://ce2l3ccri2mjk" path="res://Assets/weather/Day.png" id="3_wm553"]
+[ext_resource type="FontFile" uid="uid://n5p8m4kiw5un" path="res://Fonts/CutePixel.ttf" id="6_oyeg0"]
+[ext_resource type="Texture2D" uid="uid://dlwp7hn2xle3i" path="res://Assets/weather/Money.png" id="6_x27aw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s7psx"]
+atlas = ExtResource("1_0qyg6")
+region = Rect2(1, 34, 48, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_705sf"]
+atlas = ExtResource("6_x27aw")
+region = Rect2(6, 40, 48, 21)
+
+[node name="clock_ui" type="CanvasLayer" unique_id=1588631544]
+layer = 10
+script = ExtResource("1_oyeg0")
+
+[node name="ClockPanel" type="NinePatchRect" parent="." unique_id=497952040]
+custom_minimum_size = Vector2(264, 136)
+offset_left = 21.0
+offset_top = 13.0
+offset_right = 285.0
+offset_bottom = 149.0
+texture = ExtResource("1_0qyg6")
+region_rect = Rect2(0, 0, 66, 34)
+
+[node name="SlotLeft" type="NinePatchRect" parent="ClockPanel" unique_id=190131479]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 36.0
+offset_right = 108.0
+offset_bottom = 104.0
+
+[node name="DayIcon" type="TextureRect" parent="ClockPanel/SlotLeft" unique_id=633067452]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.0
+offset_top = -34.0
+offset_right = 54.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_wm553")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="DayBadge" type="NinePatchRect" parent="ClockPanel" unique_id=2119129153]
+layout_mode = 1
+offset_left = 3.0
+offset_top = 136.0
+offset_right = 163.0
+offset_bottom = 212.0
+texture = SubResource("AtlasTexture_s7psx")
+
+[node name="DayLabel" type="Label" parent="ClockPanel/DayBadge" unique_id=1004315022]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.39215687, 0.33333334, 0.32156864, 1)
+theme_override_fonts/font = ExtResource("6_oyeg0")
+theme_override_font_sizes/font_size = 22
+text = "FRI. 14"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MoneyBadge" type="NinePatchRect" parent="." unique_id=1162777324]
+offset_left = 23.0
+offset_top = 221.0
+offset_right = 199.0
+offset_bottom = 291.0
+texture = SubResource("AtlasTexture_705sf")
+
+[node name="MoneyLabel" type="Label" parent="MoneyBadge" unique_id=415225198]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.39215687, 0.33333334, 0.32156864, 1)
+theme_override_fonts/font = ExtResource("6_oyeg0")
+theme_override_font_sizes/font_size = 22
+text = "0s"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2

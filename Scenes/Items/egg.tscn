@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bou4vdv3gig1p"]
+
+[ext_resource type="Script" uid="uid://pp0048c25eo6" path="res://Scripts/Chicken/egg.gd" id="1_8cd31"]
+[ext_resource type="Texture2D" uid="uid://dsy1hun8ksl2q" path="res://Assets/Objects/Egg_item.png" id="2_k08wc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5n8u2"]
+atlas = ExtResource("2_k08wc")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8cd31"]
+radius = 8.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k08wc"]
+size = Vector2(22, 22)
+
+[node name="Egg" type="Area2D" unique_id=314387536]
+script = ExtResource("1_8cd31")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=331528716]
+texture = SubResource("AtlasTexture_5n8u2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1623850282]
+shape = SubResource("CircleShape2D_8cd31")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1020879598]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=160705820]
+shape = SubResource("RectangleShape2D_k08wc")
+debug_color = Color(0.6143428, 0.43927106, 0.8060044, 0.41960785)

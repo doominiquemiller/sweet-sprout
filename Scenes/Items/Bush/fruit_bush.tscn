@@ -1,0 +1,108 @@
+[gd_scene format=3 uid="uid://dwl3akclvb6ln"]
+
+[ext_resource type="Texture2D" uid="uid://ba7nx52qi5wfu" path="res://Assets/Plants/Trees, stumps and bushes v2.png" id="1_hbtyg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2xfne"]
+atlas = ExtResource("1_hbtyg")
+region = Rect2(145, 19, 13, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mp2qp"]
+atlas = ExtResource("1_hbtyg")
+region = Rect2(144, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dpd2j"]
+atlas = ExtResource("1_hbtyg")
+region = Rect2(144, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5w2cu"]
+atlas = ExtResource("1_hbtyg")
+region = Rect2(145, 19, 13, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_601we"]
+atlas = ExtResource("1_hbtyg")
+region = Rect2(144, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rwspv"]
+atlas = ExtResource("1_hbtyg")
+region = Rect2(160, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kj6km"]
+atlas = ExtResource("1_hbtyg")
+region = Rect2(145, 19, 13, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1hoi1"]
+atlas = ExtResource("1_hbtyg")
+region = Rect2(144, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dkjtx"]
+atlas = ExtResource("1_hbtyg")
+region = Rect2(128, 64, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5hfi0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xfne")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mp2qp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dpd2j")
+}],
+"loop": false,
+"name": &"blackberry",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5w2cu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_601we")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rwspv")
+}],
+"loop": false,
+"name": &"blueberry",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kj6km")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1hoi1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dkjtx")
+}],
+"loop": false,
+"name": &"raspberry",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hbtyg"]
+size = Vector2(16, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_60amg"]
+size = Vector2(20, 19)
+
+[node name="fruit_bush" type="StaticBody2D" unique_id=1268558160]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1242576582]
+sprite_frames = SubResource("SpriteFrames_5hfi0")
+animation = &"blackberry"
+frame = 1
+frame_progress = 0.639205
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=149630738]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_hbtyg")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=689059021]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2120590970]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_60amg")

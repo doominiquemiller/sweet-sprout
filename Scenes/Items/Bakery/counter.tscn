@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://dg86u60lp4d1w"]
+
+[ext_resource type="Texture2D" uid="uid://s2ios5p8nbxa" path="res://Assets/Bakery/bakery.png" id="1_7p0er"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7p0er"]
+atlas = ExtResource("1_7p0er")
+region = Rect2(64, 6, 64, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w4xmi"]
+atlas = ExtResource("1_7p0er")
+region = Rect2(128, 6, 64, 42)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xkw6t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7p0er")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w4xmi")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xkw6t"]
+size = Vector2(64, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jrubs"]
+size = Vector2(41, 27)
+
+[node name="Counter" type="StaticBody2D" unique_id=873098121]
+visibility_layer = 3
+y_sort_enabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1022571840]
+y_sort_enabled = true
+sprite_frames = SubResource("SpriteFrames_xkw6t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=984294708]
+position = Vector2(0, 9)
+shape = SubResource("RectangleShape2D_xkw6t")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1113000239]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=470718180]
+position = Vector2(-16, -16)
+shape = SubResource("RectangleShape2D_jrubs")
+debug_color = Color(0.62320155, 0.43675715, 0.7970354, 0.41960785)

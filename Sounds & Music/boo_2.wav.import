@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cg5i36dkj5soo"
+path="res://.godot/imported/boo_2.wav-26544a52e831d201bbe8a10222c3d3ad.sample"
+
+[deps]
+
+source_file="res://Sounds & Music/boo_2.wav"
+dest_files=["res://.godot/imported/boo_2.wav-26544a52e831d201bbe8a10222c3d3ad.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

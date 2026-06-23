@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://wbq2klspeapf"]
+
+[ext_resource type="Texture2D" uid="uid://ci3ml1du2ixcl" path="res://Assets/Objects/Free_Chicken_House.png" id="1_riq0l"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_unadx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_riq0l")
+}],
+"loop": true,
+"name": &"Coop",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d1xlk"]
+size = Vector2(38, 44)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vj2qs"]
+size = Vector2(42, 25)
+
+[node name="Coop" type="StaticBody2D" unique_id=1860616439]
+y_sort_enabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1208122084]
+sprite_frames = SubResource("SpriteFrames_unadx")
+animation = &"Coop"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1285594578]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_d1xlk")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1566618357]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=921249924]
+position = Vector2(0, 11.5)
+shape = SubResource("RectangleShape2D_vj2qs")
+debug_color = Color(0.33945054, 0.59892815, 0.4773047, 0.41960785)

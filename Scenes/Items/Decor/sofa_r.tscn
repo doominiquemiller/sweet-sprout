@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://nj08utrnev6s"]
+
+[ext_resource type="Texture2D" uid="uid://nwcvo04wv0ci" path="res://Assets/Objects/Basic Furniture.png" id="1_lc8ic"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bbn83"]
+atlas = ExtResource("1_lc8ic")
+region = Rect2(99, 17, 10, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y0sc3"]
+size = Vector2(41, 28)
+
+[node name="sofaR" type="StaticBody2D" unique_id=645288242]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=532629593]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_bbn83")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1696561799]
+position = Vector2(-0.5, 6)
+shape = SubResource("RectangleShape2D_y0sc3")

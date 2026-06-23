@@ -1,0 +1,135 @@
+[gd_scene format=3 uid="uid://bgfkcyi0xqxb3"]
+
+[ext_resource type="Texture2D" uid="uid://ba7nx52qi5wfu" path="res://Assets/Plants/Trees, stumps and bushes v2.png" id="1_defqv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rnkue"]
+atlas = ExtResource("1_defqv")
+region = Rect2(32, 31, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gd2um"]
+atlas = ExtResource("1_defqv")
+region = Rect2(67, 16, 26, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jnaio"]
+atlas = ExtResource("1_defqv")
+region = Rect2(3, 80, 26, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y171a"]
+atlas = ExtResource("1_defqv")
+region = Rect2(32, 31, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jm0tq"]
+atlas = ExtResource("1_defqv")
+region = Rect2(67, 16, 26, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nirsf"]
+atlas = ExtResource("1_defqv")
+region = Rect2(35, 79, 26, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ae8qg"]
+atlas = ExtResource("1_defqv")
+region = Rect2(32, 31, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_apguq"]
+atlas = ExtResource("1_defqv")
+region = Rect2(67, 16, 26, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ba3du"]
+atlas = ExtResource("1_defqv")
+region = Rect2(99, 79, 26, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4svlm"]
+atlas = ExtResource("1_defqv")
+region = Rect2(32, 31, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vmo5r"]
+atlas = ExtResource("1_defqv")
+region = Rect2(67, 16, 26, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gommq"]
+atlas = ExtResource("1_defqv")
+region = Rect2(67, 79, 26, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gommq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rnkue")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gd2um")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jnaio")
+}],
+"loop": false,
+"name": &"tree_apple",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y171a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jm0tq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nirsf")
+}],
+"loop": false,
+"name": &"tree_orange",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ae8qg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_apguq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ba3du")
+}],
+"loop": false,
+"name": &"tree_peach",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4svlm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vmo5r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gommq")
+}],
+"loop": false,
+"name": &"tree_pear",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_defqv"]
+radius = 12.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rnkue"]
+size = Vector2(30, 35)
+
+[node name="treeA" type="StaticBody2D" unique_id=275646237]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1749410897]
+sprite_frames = SubResource("SpriteFrames_gommq")
+animation = &"tree_apple"
+frame = 1
+frame_progress = 0.3217361
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=563228158]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_defqv")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=344419421]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=389549932]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_rnkue")
+debug_color = Color(0.44985878, 0.57834834, 0.4188514, 0.41960785)

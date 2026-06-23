@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bdnscoeummy4j"]
+
+[ext_resource type="Texture2D" uid="uid://cftjcmftpflri" path="res://Assets/Objects/Milk_item.png" id="1_6bwce"]
+[ext_resource type="Script" uid="uid://cnvn17xxs4uqy" path="res://Scripts/Cow/milk.gd" id="1_f7tjq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f7tjq"]
+atlas = ExtResource("1_6bwce")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kqweo"]
+
+[node name="milk" type="Area2D" unique_id=1537014896]
+script = ExtResource("1_f7tjq")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=202378167]
+texture = SubResource("AtlasTexture_f7tjq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1637352971]
+shape = SubResource("RectangleShape2D_kqweo")

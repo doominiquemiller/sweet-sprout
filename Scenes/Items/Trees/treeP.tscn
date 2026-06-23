@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://dw7wt177quejw"]
+
+[ext_resource type="Texture2D" uid="uid://ca6h2ijb33qh3" path="res://Assets/Plants/Cherry Blossom Biom.png" id="1_bx667"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rp0sc"]
+atlas = ExtResource("1_bx667")
+region = Rect2(116, 0, 40, 48)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iwxp3"]
+radius = 20.024984
+
+[node name="TreeP" type="StaticBody2D" unique_id=702486470]
+
+[node name="CanvasLayer" type="TextureRect" parent="." unique_id=659920466]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -13.0
+offset_top = -15.5
+offset_right = 13.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_rp0sc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1208030296]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_iwxp3")

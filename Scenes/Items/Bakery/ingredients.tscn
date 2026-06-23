@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://cty312xm1d72b"]
+
+[ext_resource type="Texture2D" uid="uid://5yw3rpyrenue" path="res://Assets/Bakery/bakeryy.png" id="1_6ccy4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ccrfe"]
+atlas = ExtResource("1_6ccy4")
+region = Rect2(111.941826, 0.99272823, 16.198631, 15.089135)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vdexv"]
+radius = 2.236068
+
+[node name="ingredients" type="StaticBody2D" unique_id=1699040999]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1072972480]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_ccrfe")
+stretch_mode = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=967130089]
+position = Vector2(-3, 1)
+shape = SubResource("CircleShape2D_vdexv")

@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dbedud0wrda8x"]
+
+[ext_resource type="Texture2D" uid="uid://dxhyabhqqut6i" path="res://Assets/Plants/haybale.png" id="1_ahoap"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fwte6"]
+atlas = ExtResource("1_ahoap")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l3nrp"]
+size = Vector2(40, 38)
+
+[node name="Haybale" type="StaticBody2D" unique_id=1597187020]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=39947444]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_fwte6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1011891920]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_l3nrp")

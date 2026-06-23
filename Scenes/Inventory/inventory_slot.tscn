@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://bhghwukrl2wpn"]
+
+[ext_resource type="Texture2D" uid="uid://do8dgdbutrn88" path="res://Assets/Inventory/slot vacio.png" id="1_3qr85"]
+[ext_resource type="Script" uid="uid://bcierjjoab5tj" path="res://Scripts/inventory_slot.gd" id="1_71tl4"]
+[ext_resource type="FontFile" uid="uid://n5p8m4kiw5un" path="res://Fonts/CutePixel.ttf" id="3_8bkrn"]
+[ext_resource type="Texture2D" uid="uid://bsb0jwxqaqq2p" path="res://Assets/Inventory/count_badge.png" id="3_cvkr4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71tl4"]
+atlas = ExtResource("1_3qr85")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q5hys"]
+atlas = ExtResource("3_cvkr4")
+
+[node name="InventorySlot" type="Control" unique_id=890256378]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_71tl4")
+
+[node name="SlotBg" type="TextureRect" parent="." unique_id=1493105080]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_71tl4")
+
+[node name="ItemIcon" type="TextureRect" parent="." unique_id=1894913626]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -24.0
+offset_right = 22.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CountBadge" type="Control" parent="." unique_id=157833346]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -16.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="CountCircle" type="TextureRect" parent="CountBadge" unique_id=1340404031]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -7.0
+offset_right = 28.0
+offset_bottom = 25.0
+scale = Vector2(0.6, 0.6)
+texture = SubResource("AtlasTexture_q5hys")
+expand_mode = 2
+
+[node name="CountLabel" type="Label" parent="CountBadge/CountCircle" unique_id=1573135746]
+layout_mode = 0
+offset_left = 4.9999995
+offset_right = 30.0
+offset_bottom = 30.999998
+theme_override_colors/font_color = Color(0.47058824, 0.6313726, 0.34509805, 1)
+theme_override_fonts/font = ExtResource("3_8bkrn")
+theme_override_font_sizes/font_size = 28
+horizontal_alignment = 1
+vertical_alignment = 1
