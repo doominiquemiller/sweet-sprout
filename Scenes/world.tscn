@@ -1149,14 +1149,19 @@ texture = ExtResource("26_ochwf")
 sources/0 = SubResource("TileSetAtlasSource_r74th")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_3ua1v"]
-vertices = PackedVector2Array(3.453125, -3.0078125, 6.453125, -50.007813, 49.453125, -50.007813, 49.453125, -47.007813, 45.453125, -13.0078125, 3.453125, 14.9921875, 68.453125, -47.007813, 68.453125, -13.0078125, 45.453125, 14.9921875, -13.546875, -3.0078125, -13.546875, -20.007813, -12.546875, -64.00781, 6.453125, -73.00781, -37.546875, -20.007813, -37.546875, -64.00781, -12.546875, -73.00781)
+vertices = PackedVector2Array(3.453125, -3.0078125, 6.453125, -50.007813, 49.453125, -50.007813, 49.453125, -47.007813, 45.453125, -13.0078125, 3.453125, 14.9921875, 68.453125, -47.007813, 68.453125, -13.0078125, 45.453125, 14.9921875, -13.546875, -3.0078125, -13.546875, -20.007813, -12.546875, -50.007813, 6.453125, -73.00781, -37.546875, -20.007813, -37.546875, -50.007813, -12.546875, -73.00781)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(3, 6, 7, 4), PackedInt32Array(4, 8, 5), PackedInt32Array(1, 0, 9, 10, 11, 12), PackedInt32Array(10, 13, 14, 11), PackedInt32Array(12, 11, 15)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(55.451363, 24.991684, -6.5486374, 24.991684, -6.5486374, 6.991684, -23.548637, 6.991684, -23.548637, -10.008316, -47.548637, -10.008316, -47.548637, -74.008316, -22.548637, -74.008316, -22.548637, -83.008316, 16.451363, -83.008316, 16.451363, -60.008316, 59.451363, -60.008316, 59.451363, -57.008316, 78.45136, -57.008316, 78.45136, -3.008316, 55.451363, -3.008316)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(55.451363, 24.991684, -6.5486374, 24.991684, -6.5486374, 6.991684, -23.548637, 6.991684, -23.548637, -10.008316, -47.548637, -10.008316, -47.548637, -60.008316, -22.548637, -60.008316, -22.548637, -83.008316, 16.451363, -83.008316, 16.451363, -60.008316, 59.451363, -60.008316, 59.451363, -57.008316, 78.45136, -57.008316, 78.45136, -3.008316, 55.451363, -3.008316)])
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_r0ikl"]
-vertices = PackedVector2Array(-198, 58, -198, 57, -173, 57, -173, 145, -258, 145, -258, 128, -223, 58, -276, 128, -276, 13, -223, 13)
+vertices = PackedVector2Array(-198, 58, -198, 57, -173, 57, -173, 145, -258, 145, -258, 128, -223, 58, -274, 128, -274, 13, -223, 13)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(0, 3, 4, 5, 6), PackedInt32Array(6, 5, 7, 8, 9)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-286, 138, -286, 3, -213, 3, -213, 48, -208, 48, -208, 47, -163, 47, -163, 155, -268, 155, -268, 138)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-284, 138, -284, 3, -213, 3, -213, 48, -208, 48, -208, 47, -163, 47, -163, 155, -268, 155, -268, 138)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_13n8b"]
+vertices = PackedVector2Array(-113, -6, -172, -6, -172, -87, -113, -87)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-182, -97, -103, -97, -103, 4, -182, 4)])
 
 [node name="world" type="Node2D" unique_id=1530126941]
 y_sort_enabled = true
@@ -1832,6 +1837,10 @@ position = Vector2(-141, -5)
 [node name="Bee4" parent="Bees" unique_id=295658823 instance=ExtResource("49_b4e6k")]
 z_index = 1
 position = Vector2(-172, -28)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Bees" unique_id=1392717420]
+navigation_polygon = SubResource("NavigationPolygon_13n8b")
+navigation_layers = 4
 
 [node name="PlantingSystem" type="Node2D" parent="." unique_id=1596363724]
 script = ExtResource("51_l33cg")

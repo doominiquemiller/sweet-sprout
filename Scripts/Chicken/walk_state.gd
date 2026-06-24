@@ -61,7 +61,7 @@ func _on_next_transitions() -> void:
 		transition.emit("idle")
 
 func _on_enter() -> void:
-	animation.play("walk")
+	animation.play("default")
 	character.current_walk_cycle = 0
 
 func _on_exit() -> void:
