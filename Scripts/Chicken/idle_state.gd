@@ -2,7 +2,7 @@ extends State
 
 @export var character              : NonPlayableCharacter
 @export var animation              : AnimatedSprite2D
-@export var idle_state_time_intervarl : float = 1.0
+@export var idle_state_time_intervarl : float = 4.0
 
 @onready var idle_state_timer : Timer = Timer.new()
 
@@ -29,7 +29,7 @@ func _on_next_transitions() -> void:
 		transition.emit("walk")
 
 func _on_enter() -> void:
-	animation.play("default")
+	animation.play("idle")
 	idle_state_timeout = false
 	idle_state_timer.start()
 

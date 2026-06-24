@@ -67,7 +67,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6e7ea"]
-radius = 8.333333
+radius = 6.666666
+height = 23.333334
 
 [node name="cow" type="CharacterBody2D" unique_id=1077693140]
 z_index = 1

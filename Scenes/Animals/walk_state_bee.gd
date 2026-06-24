@@ -50,10 +50,9 @@ func _on_next_transitions() -> void:
 	# Prioridad 1: si debe poner huevo, interrumpe la caminata
 	# Usamos get()/set() porque character es NonPlayableCharacter,
 	# que no tiene should_lay_egg declarado — solo Chicken la tiene
-	if character.get("should_lay_egg") == true:
-		character.set("should_lay_egg", false)
+	if character.get("should_give_honey") == true:
+		character.set("should_give_honey", false)
 		character.velocity = Vector2.ZERO
-		transition.emit("lay")
 		return
 
 	if character.current_walk_cycle == character.walk_cycle:
@@ -61,7 +60,7 @@ func _on_next_transitions() -> void:
 		transition.emit("idle")
 
 func _on_enter() -> void:
-	animation.play("walk")
+	animation.play("default")
 	character.current_walk_cycle = 0
 
 func _on_exit() -> void:
