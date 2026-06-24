@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cjdr8a1j20s1q" path="res://Scripts/Chicken/chicken.gd" id="1_bmen7"]
 [ext_resource type="Texture2D" uid="uid://dq7beim31vjxg" path="res://Assets/Characters/Free Chicken Sprites.png" id="1_t6670"]
-[ext_resource type="Script" uid="uid://c5fj0dxwt4wrf" path="res://Scripts/Chicken/state_machine.gd" id="2_em1tw"]
+[ext_resource type="Script" uid="uid://c5fj0dxwt4wrf" path="res://Scripts/state_machine.gd" id="2_em1tw"]
 [ext_resource type="Texture2D" uid="uid://csty04m2ubm40" path="res://Assets/Characters/Free Chicken Sprites-export.png" id="2_trapn"]
 [ext_resource type="Script" uid="uid://fts2ahxbweah" path="res://Scripts/Chicken/idle_state.gd" id="3_trapn"]
 [ext_resource type="Script" uid="uid://cp6k3emx70hsh" path="res://Scripts/Chicken/walk_state.gd" id="4_bmen7"]

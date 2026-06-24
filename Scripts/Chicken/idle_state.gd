@@ -29,7 +29,7 @@ func _on_next_transitions() -> void:
 		transition.emit("walk")
 
 func _on_enter() -> void:
-	animation.play("idle")
+	animation.play("default")
 	idle_state_timeout = false
 	idle_state_timer.start()
 
