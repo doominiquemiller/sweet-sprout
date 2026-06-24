@@ -127,9 +127,9 @@ animation = &"tree_apple"
 position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_defqv")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=344419421]
+[node name="HarvestArea" type="Area2D" parent="." unique_id=344419421]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=389549932]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HarvestArea" unique_id=389549932]
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_rnkue")
 debug_color = Color(0.44985878, 0.57834834, 0.4188514, 0.41960785)

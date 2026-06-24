@@ -55,3 +55,14 @@ func _on_sleep_pressed() -> void:
 	
 	# Reseteamos el tracking para el dinero del día siguiente
 	reset_daily_tracking()
+	
+	print("El jugador duerme... Avanzando el tiempo del huerto.")
+	
+	# Recorremos de manera inmediata todos los árboles plantados usando su grupo
+	var active_trees = get_tree().get_nodes_in_group("planted_trees")
+	
+	for tree in active_trees:
+		if tree.has_method("advance_growth_state"):
+			tree.advance_growth_state() # Esto cambia automáticamente el frame visual del 0 al 1 o 2
+			
+	# Continúa aquí con tu animación de oscurecer pantalla (Fade out) o cambio de día...

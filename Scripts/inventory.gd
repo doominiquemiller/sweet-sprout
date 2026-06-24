@@ -54,11 +54,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 		
 	# Detección de teclas A (Izquierda) y D (Derecha)
-	if event.is_action_pressed("move_left") or (event is InputEventKey and event.pressed and event.keycode == KEY_A):
+	if event.is_action_pressed("ui_left") or (event is InputEventKey and event.pressed and event.keycode == KEY_A):
 		cambiar_seleccion(-1)
 		get_viewport().set_input_as_handled()
 		
-	elif event.is_action_pressed("move_right") or (event is InputEventKey and event.pressed and event.keycode == KEY_D):
+	elif event.is_action_pressed("ui_right") or (event is InputEventKey and event.pressed and event.keycode == KEY_D):
 		cambiar_seleccion(1)
 		get_viewport().set_input_as_handled()
 

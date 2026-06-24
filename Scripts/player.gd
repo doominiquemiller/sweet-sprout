@@ -8,6 +8,9 @@ extends CharacterBody2D
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
+# 🖐️ NUEVO: Referencia al sprite del ítem en la mano
+@onready var item_en_mano_sprite: Sprite2D = $ItemEnMano
+
 # Pre-cargamos la escena del árbol frutal para clonarla en el mapa
 const FRUIT_TREE_SCENE = preload("res://Scenes/Items/Trees/fruit_trees.tscn") 
 
@@ -16,10 +19,15 @@ var celdas_ocupadas: Dictionary = {}
 
 # =============================================================
 func _ready() -> void:
-	# Aseguramos que el script del jugador procese inputs incluso en pausa general
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	# Nos aseguramos de que empiece oculto al arrancar
+	if item_en_mano_sprite:
+		item_en_mano_sprite.visible = false
 
 func _physics_process(_delta: float) -> void:
+	# ACTUALIZAR EL ÍTEM VISUAL EN LA MANO
+	_actualizar_item_en_mano()
+
 	# 📦 CONGELAMIENTO EN INVENTARIO:
 	# Si el inventario está abierto, el jugador se detiene pero mantiene la escucha de acciones
 	if Inventory and Inventory.visible:
@@ -39,15 +47,34 @@ func _physics_process(_delta: float) -> void:
 	actualizar_animacion_8_vias(direccion)
 
 # =============================================================
-#  SISTEMA DE INTERACCIÓN Abierto durante Inventario Visible
+#  MUESTRA U OCULTA EL ÍTEM EN LA MANO DEL PLAYER
+# =============================================================
+func _actualizar_item_en_mano() -> void:
+	if not item_en_mano_sprite:
+		return
+		
+	var item_id : String = Inventory.get_item_seleccionado()
+	
+	# Si no hay nada seleccionado, ocultamos el sprite de la mano
+	if item_id == "":
+		item_en_mano_sprite.visible = false
+		return
+		
+	# Buscamos si el inventario global tiene la textura de ese ítem registrada
+	if Inventory.ITEM_ICONS.has(item_id):
+		item_en_mano_sprite.texture = Inventory.ITEM_ICONS[item_id]
+		item_en_mano_sprite.visible = true
+	else:
+		item_en_mano_sprite.visible = false
+
+# =============================================================
+#  SISTEMA DE INTERACCIÓN 
 # =============================================================
 func _unhandled_input(event: InputEvent) -> void:
-	# Detecta la tecla F de interactuar sin importar si el inventario está abierto o cerrado
 	if event.is_action_pressed("interact") or (event is InputEventKey and event.pressed and event.keycode == KEY_F):
 		_intentar_plantar()
 
 func _intentar_plantar() -> void:
-	# Si estás usando un script externo de control (ej. PlantingSystem) puedes delegar la función o usar esta:
 	if not capa_cultivos:
 		return
 
@@ -67,7 +94,7 @@ func _intentar_plantar() -> void:
 	# Obtener coordenadas de la celda actual del jugador
 	var posicion_celda : Vector2i = capa_cultivos.local_to_map(capa_cultivos.to_local(global_position))
 	
-	# Verificar si el terreno es válido (-1 es vacío)
+	# Verificar si el terreno es válido
 	if capa_cultivos.get_cell_source_id(posicion_celda) == -1:
 		print("Aquí no se puede plantar.")
 		return
@@ -82,7 +109,6 @@ func _intentar_plantar() -> void:
 
 	var tipo_fruta : String = item_en_mano.replace("_seed", "")
 	
-	# Remoción definitiva del inventario y refresco visual
 	var se_quito : bool = inventario_global.remove_item(item_en_mano, 1)
 	
 	if se_quito:

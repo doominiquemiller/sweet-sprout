@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://i6ndiexpiyb7"]
+
+[ext_resource type="Texture2D" uid="uid://bvxj7bsftiuac" path="res://Assets/Tilesets/Tilled Dirt.png" id="1_3ro8n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k2qs8"]
+atlas = ExtResource("1_3ro8n")
+region = Rect2(4, 100, 8, 8)
+
+[sub_resource type="GDScript" id="GDScript_3ro8n"]
+script/source = "extends Area2D
+
+# Guarda la referencia del árbol que crezca en este espacio
+var hosted_tree : Node2D = null
+
+func _ready() -> void:
+	# Nos unimos a un grupo para que el sistema de siembra nos reconozca al hacer clic
+	add_to_group(\"tree_space\")
+
+# Verifica si el espacio está disponible
+func is_empty() -> bool:
+	return hosted_tree == null
+
+# Registra el nuevo árbol instanciado en este terreno
+func set_occupied(tree_node: Node2D) -> void:
+	hosted_tree = tree_node
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k2qs8"]
+size = Vector2(18.666668, 17.333334)
+
+[node name="TreeSpace" type="Sprite2D" unique_id=1680679629]
+scale = Vector2(1.5, 1.5)
+texture = SubResource("AtlasTexture_k2qs8")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=567870882]
+script = SubResource("GDScript_3ro8n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1385434360]
+position = Vector2(2.3841858e-07, 1.5894572e-07)
+shape = SubResource("RectangleShape2D_k2qs8")

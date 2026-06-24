@@ -1,109 +1,77 @@
 extends Node2D
 
 # =============================================================
-#  FruitTree — Árbol de frutas
-#
-#  Jerarquía en fruit_tree.tscn:
-#  FruitTree (Node2D) ← este script
-#  ├─ AnimatedSprite2D
-#  ├─ CollisionShape2D
-#  └─ HarvestArea (Area2D)
-#     └─ CollisionShape2D
+#  FruitTree — Controlador de Animaciones y Crecimiento
 # =============================================================
 
-@onready var sprite       : AnimatedSprite2D = $AnimatedSprite2D
-@onready var harvest_area : Area2D           = $HarvestArea
+# Referencias a los nodos hijos (Asegúrate de que se llamen así en tu escena FruitTree)
+@onready var animated_sprite : AnimatedSprite2D = $AnimatedSprite2D
+@onready var harvest_area    : Area2D           = $HarvestArea
 
-const ANIM_MAP : Dictionary = {
-	"apple":  "tree_apple",
-	"orange": "tree_orange",
-	"peach":  "tree_peach",
-	"pear":   "tree_pear",
-}
+# Estados de crecimiento del árbol (Corresponden a tus frames 0, 1 y 2)
+enum TreeState { SPROUT = 0, ADULT = 1, READY_TO_HARVEST = 2 }
 
-const FRUIT_ITEM : Dictionary = {
-	"apple":  "apple",
-	"orange": "orange",
-	"peach":  "peach",
-	"pear":   "pear",
-}
-
-var fruit_type     : String = ""
-var is_ready       : bool   = false
-var is_planted     : bool   = false
-var _player_nearby : bool   = false
-
-signal fruit_harvested(fruit_type: String)
+var current_state : TreeState = TreeState.SPROUT
+var fruit_type    : String    = ""
 
 # =============================================================
 func _ready() -> void:
-	harvest_area.body_entered.connect(_on_body_entered)
-	harvest_area.body_exited.connect(_on_body_exited)
-	harvest_area.monitoring = true
-	add_to_group("fruit_trees")
-
-func _unhandled_input(event: InputEvent) -> void:
-	if _player_nearby and is_ready and event.is_action_pressed("interact"):
-		_harvest()
-
-# =============================================================
-#  PLANTAR
-# =============================================================
-func plant(type: String) -> void:
-	if not ANIM_MAP.has(type):
-		push_error("[FruitTree] Tipo desconocido: %s" % type)
-		return
-
-	fruit_type = type
-	is_planted  = true
-	is_ready    = false
-
-	var anim_name : String = ANIM_MAP[fruit_type]
-	sprite.play(anim_name)
-	sprite.pause()
-	sprite.frame = 0
-
-	print("[FruitTree] Plantado: %s — frame 0/%d" % [
-		fruit_type,
-		sprite.sprite_frames.get_frame_count(anim_name) - 1
-	])
-
-# =============================================================
-#  AL DORMIR — avanza 1 frame
-# =============================================================
-func on_day_passed() -> void:
-	if not is_planted or is_ready:
-		return
-
-	var anim_name  : String = ANIM_MAP[fruit_type]
-	var last_frame : int    = sprite.sprite_frames.get_frame_count(anim_name) - 1
-
-	if sprite.frame < last_frame:
-		sprite.frame += 1
-
-	if sprite.frame >= last_frame:
-		is_ready = true
-		print("[FruitTree] %s listo para cosechar!" % fruit_type)
+	# Nos añadimos al grupo global para que el botón de dormir nos encuentre al pasar la noche
+	add_to_group("planted_trees")
+	
+	# Enlazamos la señal de colisión de forma segura desde el hijo Area2D
+	if harvest_area:
+		harvest_area.body_entered.connect(_on_player_entered_range)
+		harvest_area.body_exited.connect(_on_player_exited_range)
 	else:
-		print("[FruitTree] %s — frame %d/%d" % [fruit_type, sprite.frame, last_frame])
+		print("⚠️ [FruitTree] ERROR: No se encontró el nodo hijo 'HarvestArea' en la jerarquía.")
 
 # =============================================================
-#  COSECHAR
+#  CONFIGURACIÓN AL SEMBRAR
 # =============================================================
-func _harvest() -> void:
-	var item_id : String = FRUIT_ITEM[fruit_type]
-	Inventory.add_item(item_id, 1)
-	emit_signal("fruit_harvested", fruit_type)
+func setup_tree(type: String) -> void:
+	fruit_type = type
+	current_state = TreeState.SPROUT  # Inicia como brote (Frame 0)
+	print("[FruitTree] Sembrado árbol de: ", fruit_type)
+	_update_tree_visuals()
 
-	# Resetear al frame 0 después de cosechar
-	is_ready   = false
-	sprite.frame = 0
-	print("[FruitTree] Cosechado: %s" % item_id)
+func plant(type: String) -> void:
+	setup_tree(type)
 
-func _on_body_entered(body: Node) -> void:
-	if body.is_in_group("player"):
-		_player_nearby = true
+# =============================================================
+#  CONTROL DE FRAMES VISUALES
+# =============================================================
+func _update_tree_visuals() -> void:
+	if not animated_sprite:
+		return
 
-func _on_body_exited(body: Node) -> void:
-	if body.is_in_group("player"):
-		_player_nearby = false
+	# Si creaste una animación por fruta (ej: "apple"), reproduce esa animación y fija el frame del estado
+	if animated_sprite.sprite_frames.has_animation(fruit_type):
+		animated_sprite.play(fruit_type)
+		animated_sprite.frame = current_state
+	else:
+		# Si usas la animación "default" para todo, descomenta las líneas de abajo:
+		# animated_sprite.play("default")
+		# animated_sprite.frame = current_state
+		pass
+
+# Función vital llamada por el sistema de dormir para avanzar las etapas
+func advance_growth_state() -> void:
+	if current_state < TreeState.READY_TO_HARVEST:
+		current_state += 1 as TreeState
+		_update_tree_visuals()
+		print("[FruitTree] ¡El tiempo avanzó! Nuevo estado del árbol: ", current_state)
+
+# =============================================================
+#  DETECCIÓN INTERACTIVA
+# =============================================================
+func _on_player_entered_range(body: Node2D) -> void:
+	if body.is_in_group("player") or body.name == "Player":
+		if current_state == TreeState.READY_TO_HARVEST:
+			print("[FruitTree] ¡Cosecha lista! Presiona interactuar para recoger tu: ", fruit_type)
+		else:
+			print("[FruitTree] El árbol está creciendo. Estado actual: ", current_state)
+
+func _on_player_exited_range(body: Node2D) -> void:
+	if body.is_in_group("player") or body.name == "Player":
+		print("[FruitTree] El jugador se alejó del árbol.")

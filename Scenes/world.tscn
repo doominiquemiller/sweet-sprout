@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://dw7wt177quejw" path="res://Scenes/Items/Trees/treeP.tscn" id="14_0sgyr"]
 [ext_resource type="PackedScene" uid="uid://b6nkjlv1lberw" path="res://Scenes/Items/Trees/tree.tscn" id="17_0pcbe"]
 [ext_resource type="PackedScene" uid="uid://dbedud0wrda8x" path="res://Scenes/Items/Decor/haybale.tscn" id="18_axeuq"]
+[ext_resource type="PackedScene" uid="uid://i6ndiexpiyb7" path="res://Scenes/Items/Trees/tree_space.tscn" id="19_13n8b"]
 [ext_resource type="PackedScene" uid="uid://dwl3akclvb6ln" path="res://Scenes/Items/Bush/fruit_bush.tscn" id="21_pyn1s"]
 [ext_resource type="PackedScene" uid="uid://dkrsmo13p2aqr" path="res://Scenes/Items/Trees/cb_tree.tscn" id="21_qebug"]
 [ext_resource type="Texture2D" uid="uid://dg8yu3vt5j47w" path="res://Assets/Tilesets/Wooden_House_Walls_Tilset.png" id="22_pt3ps"]
@@ -1219,7 +1220,7 @@ tile_map_data = PackedByteArray("AAAAAP//DQAGAAEAAAD8//3/DQAFAAEAAAD8/wAADQAGAAE
 tile_set = SubResource("TileSet_btko3")
 
 [node name="Dirt" type="TileMapLayer" parent="TileMap/Farm" unique_id=1398902584]
-tile_map_data = PackedByteArray("AAABAAcAAAACAAEAAAABAAgAAAACAAEAAAAAAAgAAAABAAEAAAAAAAcAAAABAAEAAAD9/wcAAAACAAEAAAD9/wgAAAACAAEAAAABAAkAAAACAAIAAAAAAAkAAAABAAIAAAD9/wkAAAACAAIAAAD//wcAAAAAAAEAAAD//wgAAAAAAAEAAAD//wkAAAAAAAIAAAD8/wcAAAABAAEAAAD7/wcAAAAAAAEAAAD7/wgAAAAAAAEAAAD7/wkAAAAAAAIAAAD8/wkAAAABAAIAAAD8/wgAAAABAAEAAAD5/wcAAAACAAEAAAD4/wcAAAABAAEAAAD3/wcAAAAAAAEAAAD3/wgAAAAAAAEAAAD3/wkAAAAAAAIAAAD4/wkAAAABAAIAAAD5/wkAAAACAAIAAAD5/wgAAAACAAEAAAD4/wgAAAABAAEAAAD//wYAAAAAAAAAAAAAAAYAAAABAAAAAAABAAYAAAACAAAAAAD3/wYAAAAAAAAAAAD4/wYAAAABAAAAAAD5/wYAAAACAAAAAAD8/wYAAAABAAAAAAD9/wYAAAACAAAAAAD7/wYAAAAAAAAAAADr//n/AAADAAMAAADu//n/AAADAAMAAADx//n/AAADAAMAAAD0//n/AAADAAMAAAD3//n/AAADAAMAAAA=")
+tile_map_data = PackedByteArray("AAABAAcAAAACAAEAAAABAAgAAAACAAEAAAAAAAgAAAABAAEAAAAAAAcAAAABAAEAAAD9/wcAAAACAAEAAAD9/wgAAAACAAEAAAABAAkAAAACAAIAAAAAAAkAAAABAAIAAAD9/wkAAAACAAIAAAD//wcAAAAAAAEAAAD//wgAAAAAAAEAAAD//wkAAAAAAAIAAAD8/wcAAAABAAEAAAD7/wcAAAAAAAEAAAD7/wgAAAAAAAEAAAD7/wkAAAAAAAIAAAD8/wkAAAABAAIAAAD8/wgAAAABAAEAAAD5/wcAAAACAAEAAAD4/wcAAAABAAEAAAD3/wcAAAAAAAEAAAD3/wgAAAAAAAEAAAD3/wkAAAAAAAIAAAD4/wkAAAABAAIAAAD5/wkAAAACAAIAAAD5/wgAAAACAAEAAAD4/wgAAAABAAEAAAD//wYAAAAAAAAAAAAAAAYAAAABAAAAAAABAAYAAAACAAAAAAD3/wYAAAAAAAAAAAD4/wYAAAABAAAAAAD5/wYAAAACAAAAAAD8/wYAAAABAAAAAAD9/wYAAAACAAAAAAD7/wYAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_r0ikl")
 
 [node name="well" parent="TileMap/Farm" unique_id=1963474814 instance=ExtResource("29_3ua1v")]
@@ -1240,6 +1241,9 @@ scale = Vector2(0.7, 0.7)
 [node name="Beehive4" parent="TileMap/Farm" unique_id=1789874945 instance=ExtResource("28_1vso6")]
 position = Vector2(-157, -28)
 scale = Vector2(0.7, 0.7)
+
+[node name="TreeSpace" parent="TileMap/Farm" unique_id=280366587 instance=ExtResource("19_13n8b")]
+position = Vector2(-328, -104)
 
 [node name="Bakery2" type="Node" parent="TileMap" unique_id=1896068470]
 
@@ -1816,22 +1820,18 @@ position = Vector2(-199, 117)
 [node name="Bee" parent="Bees" unique_id=2004895695 instance=ExtResource("49_b4e6k")]
 z_index = 1
 position = Vector2(-180, -46)
-scale = Vector2(1.5, 1.5)
 
 [node name="Bee2" parent="Bees" unique_id=1012407562 instance=ExtResource("49_b4e6k")]
 z_index = 1
 position = Vector2(-112, -52)
-scale = Vector2(1.5, 1.5)
 
 [node name="Bee3" parent="Bees" unique_id=949214817 instance=ExtResource("49_b4e6k")]
 z_index = 1
 position = Vector2(-141, -5)
-scale = Vector2(1.5, 1.5)
 
 [node name="Bee4" parent="Bees" unique_id=295658823 instance=ExtResource("49_b4e6k")]
 z_index = 1
 position = Vector2(-172, -28)
-scale = Vector2(1.5, 1.5)
 
 [node name="PlantingSystem" type="Node2D" parent="." unique_id=1596363724]
 script = ExtResource("51_l33cg")

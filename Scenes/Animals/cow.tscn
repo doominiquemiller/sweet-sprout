@@ -109,7 +109,10 @@ navigation = NodePath("../../NavigationAgent2D")
 [node name="Sleep" type="Node" parent="StateMachine" unique_id=1126942142]
 script = ExtResource("5_jbpbs")
 
-[node name="Milk" type="Node" parent="StateMachine" unique_id=1441414746]
+[node name="Milk" type="Node" parent="StateMachine" unique_id=1441414746 node_paths=PackedStringArray("character", "animation", "milk_spawn")]
 script = ExtResource("7_hrek1")
+character = NodePath("../..")
+animation = NodePath("../../AnimatedSprite2D")
+milk_spawn = NodePath("../../MilkSpawnPoint")
 
 [node name="MilkSpawnPoint" type="Marker2D" parent="." unique_id=1932166776]
