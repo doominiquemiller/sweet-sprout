@@ -1154,9 +1154,9 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedIn
 outlines = Array[PackedVector2Array]([PackedVector2Array(55.451363, 24.991684, -6.5486374, 24.991684, -6.5486374, 6.991684, -23.548637, 6.991684, -23.548637, -10.008316, -47.548637, -10.008316, -47.548637, -60.008316, -22.548637, -60.008316, -22.548637, -83.008316, 16.451363, -83.008316, 16.451363, -60.008316, 59.451363, -60.008316, 59.451363, -57.008316, 78.45136, -57.008316, 78.45136, -3.008316, 55.451363, -3.008316)])
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_r0ikl"]
-vertices = PackedVector2Array(-198, 58, -198, 57, -173, 57, -173, 145, -258, 145, -258, 128, -223, 58, -274, 128, -274, 13, -223, 13)
+vertices = PackedVector2Array(-198, 61, -198, 60, -173, 60, -173, 145, -258, 145, -258, 128, -223, 61, -274, 128, -274, 13, -223, 13)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(0, 3, 4, 5, 6), PackedInt32Array(6, 5, 7, 8, 9)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-284, 138, -284, 3, -213, 3, -213, 48, -208, 48, -208, 47, -163, 47, -163, 155, -268, 155, -268, 138)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-284, 138, -284, 3, -213, 3, -213, 51, -208, 51, -208, 50, -163, 50, -163, 155, -268, 155, -268, 138)])
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_13n8b"]
 vertices = PackedVector2Array(-113, -6, -172, -6, -172, -87, -113, -87)
@@ -1824,19 +1824,19 @@ position = Vector2(-199, 117)
 
 [node name="Bee" parent="Bees" unique_id=2004895695 instance=ExtResource("49_b4e6k")]
 z_index = 1
-position = Vector2(-180, -46)
+position = Vector2(-162, -77)
 
 [node name="Bee2" parent="Bees" unique_id=1012407562 instance=ExtResource("49_b4e6k")]
 z_index = 1
-position = Vector2(-112, -52)
+position = Vector2(-123, -51)
 
 [node name="Bee3" parent="Bees" unique_id=949214817 instance=ExtResource("49_b4e6k")]
 z_index = 1
-position = Vector2(-141, -5)
+position = Vector2(-133, -10)
 
 [node name="Bee4" parent="Bees" unique_id=295658823 instance=ExtResource("49_b4e6k")]
 z_index = 1
-position = Vector2(-172, -28)
+position = Vector2(-152, -29)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="Bees" unique_id=1392717420]
 navigation_polygon = SubResource("NavigationPolygon_13n8b")

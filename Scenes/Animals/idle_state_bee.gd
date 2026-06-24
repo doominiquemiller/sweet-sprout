@@ -20,17 +20,15 @@ func _on_physics_process(_delta: float) -> void:
 	pass
 
 func _on_next_transitions() -> void:
-	# Prioridad 1: si debe dar leche, va a Milk primero
-	if character and character.get("should_give_milk") == true:
-		character.set("should_give_milk", false)
-		transition.emit("milk")
+	if character and character.get("should_give_honey") == true:
+		character.set("should_give_honey", false)
 		return
 
 	if idle_state_timeout:
 		transition.emit("walk")
 
 func _on_enter() -> void:
-	animation.play("idle")
+	animation.play("default")
 	idle_state_timeout = false
 	idle_state_timer.start()
 
