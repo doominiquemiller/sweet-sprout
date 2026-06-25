@@ -3,13 +3,13 @@ extends Node2D
 @onready var clock           : CanvasLayer     = $clock_ui as CanvasLayer
 @onready var sleep_screen    : CanvasLayer     = $SleepScreen as CanvasLayer
 @onready var canvas_modulate : CanvasModulate  = $CanvasModulate as CanvasModulate
-@onready var planting_system : Node2D = $PlantingSystem
+@onready var planting_system : Node2D          = $PlantingSystem
 
 # --- Configuración del color por hora para el CanvasModulate ---
 const COLOR_NIGHT   = Color("353738") # Noche oscura (Cerrado / Madrugada)
 const COLOR_DAWN    = Color("cbe0de") # Amanecer cálido (6:00 AM)
 const COLOR_DAY     = Color("dce0d2") # Luz pura del día (8:00 AM - 4:00 PM)
-const COLOR_SUNSET  = Color("eeba77") # Atardecer naranja (6:00 PM)
+const COLOR_SUNSET  = Color("euba77") # Atardecer naranja (6:00 PM)
 const COLOR_EVENING = Color("577297") # Anochecer azulado (7:00 PM)
 
 func _ready() -> void:
@@ -24,7 +24,7 @@ func _ready() -> void:
 		sleep_screen.show_screen()
 	)
 	
-	# CORREGIDO: Escuchamos la nueva señal 'player_slept'
+	# CORREGIDO: Sincronización exacta de señales, crecimiento de huerto y dinero
 	sleep_screen.player_slept.connect(func():
 		# 1. Avanzamos el clima del juego
 		WeatherSystem.advance_day()
@@ -32,7 +32,10 @@ func _ready() -> void:
 		# 2. Avanzamos el reloj al día siguiente (Día 1 -> Día 2 -> etc.)
 		clock.next_day()
 		
-		# NUEVO: avanzar todos los árboles 1 día
+		# 3. Reiniciamos el rastreo del dinero al iniciar el nuevo día oficial
+		sleep_screen.reset_daily_tracking()
+		
+		# 4. CORREGIDO: Llamamos a la función con los nombres correctos de grupo y método
 		_advance_fruit_trees()
 	)
 	
@@ -86,6 +89,10 @@ func _update_ambient_light() -> void:
 		
 	canvas_modulate.color = target_color
 	
+## CORREGIDO: Cambiado para apuntar al grupo 'planted_trees' y al método 'advance_growth_state'
 func _advance_fruit_trees() -> void:
-	for tree in get_tree().get_nodes_in_group("fruit_trees"):
-		tree.on_day_passed()
+	var active_trees = get_tree().get_nodes_in_group("planted_trees")
+	
+	for tree in active_trees:
+		if is_instance_valid(tree) and tree.has_method("advance_growth_state"):
+			tree.advance_growth_state()

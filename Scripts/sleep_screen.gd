@@ -8,7 +8,7 @@ extends CanvasLayer
 @onready var money_label  : Label         = $Panel/MoneyRow/MoneyLabel
 @onready var sleep_button : TextureButton = $Panel/SleepButton
 
-# Cambiamos el nombre a player_slept para que coincida con world.gd
+# Señal que escucha world.gd para hacer el Fade Out y cambiar el día
 signal player_slept 
 
 var clock : Node = null
@@ -20,7 +20,7 @@ func _ready() -> void:
 	# Conectamos el botón visual a nuestra función interna
 	sleep_button.pressed.connect(_on_sleep_pressed)
 
-## Llamado por GameManager o World cuando el reloj llega al fin del día
+## Llamado por GameManager o World cuando el reloj llega al fin del día o vas a la cama
 func show_screen() -> void:
 	visible = true
 
@@ -29,7 +29,7 @@ func show_screen() -> void:
 		money_label.text = "+0g hoy"
 		return
 
-	# CORREGIDO: Ahora extrae el texto exacto (Ej: "WED. 1") desde el ClockUI
+	# Extrae el texto exacto (Ej: "WED. 1") desde el ClockUI
 	var clock_label : Label = clock.get_node_or_null("ClockPanel/DayBadge/DayLabel")
 	if clock_label:
 		day_label.text = "%s completado" % clock_label.text
@@ -37,11 +37,12 @@ func show_screen() -> void:
 		var total_days : int = clock.get("total_days_elapsed")
 		day_label.text = "Día %d completado" % (total_days + 1)
 
-	var money  : int = clock.get("money")
-	var earned : int = money - _money_at_day_start
+	# Cálculo de ganancias del día actual
+	var current_money : int = clock.get("money")
+	var earned : int = current_money - _money_at_day_start
 	money_label.text = "+%dg hoy" % max(0, earned)
 
-## Llamar al iniciar la partida y tras cada next_day() para resetear el contador
+## Llamar AL DESPERTAR (tras ejecutar next_day() en el reloj) para registrar el inicio económico
 func reset_daily_tracking() -> void:
 	if clock:
 		_money_at_day_start = clock.get("money")
@@ -50,19 +51,19 @@ func reset_daily_tracking() -> void:
 func _on_sleep_pressed() -> void:
 	visible = false
 	
-	# CORREGIDO: Solo emitimos la señal. world.gd se encargará de llamar a next_day() UNA Sola vez.
-	player_slept.emit() 
+	print("[SleepScreen] El jugador presionó dormir... Procesando crecimiento del huerto.")
 	
-	# Reseteamos el tracking para el dinero del día siguiente
-	reset_daily_tracking()
-	
-	print("El jugador duerme... Avanzando el tiempo del huerto.")
-	
-	# Recorremos de manera inmediata todos los árboles plantados usando su grupo
+	# 1. Hacemos crecer los árboles frutales de forma segura
 	var active_trees = get_tree().get_nodes_in_group("planted_trees")
 	
 	for tree in active_trees:
-		if tree.has_method("advance_growth_state"):
-			tree.advance_growth_state() # Esto cambia automáticamente el frame visual del 0 al 1 o 2
-			
-	# Continúa aquí con tu animación de oscurecer pantalla (Fade out) o cambio de día...
+		# Validamos que el árbol no sea una instancia nula liberada previamente
+		if is_instance_valid(tree) and tree.has_method("advance_growth_state"):
+			tree.advance_growth_state() # Cambia automáticamente el frame del 0 al 1 o 2
+	
+	# 2. Emitimos la señal para que world.gd corra el cambio de día y Fade Out
+	player_slept.emit()
+	
+	# NOTA: Asegúrate de que en tu 'world.gd', justo después de llamar a clock.next_day(),
+	# invoques de vuelta a: sleep_screen.reset_daily_tracking()
+	# Esto garantizará que el conteo comience limpio en la mañana.

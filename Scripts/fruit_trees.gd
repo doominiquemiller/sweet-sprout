@@ -1,76 +1,69 @@
 extends Node2D
 
 # =============================================================
-#  FruitTree — Controlador de Animaciones y Crecimiento
+#  FruitTree — Controlador de Animaciones y Ciclo de Vida
 # =============================================================
 
-# Referencias a los nodos hijos (Asegúrate de que se llamen así en tu escena FruitTree)
 @onready var animated_sprite : AnimatedSprite2D = $AnimatedSprite2D
 @onready var harvest_area    : Area2D           = $HarvestArea
 
-# Estados de crecimiento del árbol (Corresponden a tus frames 0, 1 y 2)
 enum TreeState { SPROUT = 0, ADULT = 1, READY_TO_HARVEST = 2 }
 
 var current_state : TreeState = TreeState.SPROUT
 var fruit_type    : String    = ""
 
-# =============================================================
-func _ready() -> void:
-	# Nos añadimos al grupo global para que el botón de dormir nos encuentre al pasar la noche
-	add_to_group("planted_trees")
-	
-	# Enlazamos la señal de colisión de forma segura desde el hijo Area2D
-	if harvest_area:
-		harvest_area.body_entered.connect(_on_player_entered_range)
-		harvest_area.body_exited.connect(_on_player_exited_range)
-	else:
-		print("⚠️ [FruitTree] ERROR: No se encontró el nodo hijo 'HarvestArea' en la jerarquía.")
+func _enter_tree() -> void:
+	# Forzamos al nodo a registrarse en el grupo global antes de su _ready
+	if not is_in_group("planted_trees"):
+		add_to_group("planted_trees")
 
-# =============================================================
-#  CONFIGURACIÓN AL SEMBRAR
-# =============================================================
+func _ready() -> void:
+	if harvest_area:
+		harvest_area.monitoring = true
+		harvest_area.monitorable = true
+		if not harvest_area.body_entered.is_connected(_on_player_entered_range):
+			harvest_area.body_entered.connect(_on_player_entered_range)
+		if not harvest_area.body_exited.is_connected(_on_player_exited_range):
+			harvest_area.body_exited.connect(_on_player_exited_range)
+			
+	_update_tree_visuals()
+
 func setup_tree(type: String) -> void:
 	fruit_type = type
-	current_state = TreeState.SPROUT  # Inicia como brote (Frame 0)
-	print("[FruitTree] Sembrado árbol de: ", fruit_type)
+	current_state = TreeState.SPROUT
 	_update_tree_visuals()
 
 func plant(type: String) -> void:
 	setup_tree(type)
 
-# =============================================================
-#  CONTROL DE FRAMES VISUALES
-# =============================================================
 func _update_tree_visuals() -> void:
 	if not animated_sprite:
 		return
 
-	# Si creaste una animación por fruta (ej: "apple"), reproduce esa animación y fija el frame del estado
+	# Si usas animaciones con el nombre de cada fruta (ej: "apple"), fijamos su frame (0, 1 o 2)
 	if animated_sprite.sprite_frames.has_animation(fruit_type):
 		animated_sprite.play(fruit_type)
 		animated_sprite.frame = current_state
+		animated_sprite.stop() # Evita que la animación avance sola por segundo
 	else:
-		# Si usas la animación "default" para todo, descomenta las líneas de abajo:
-		# animated_sprite.play("default")
-		# animated_sprite.frame = current_state
-		pass
+		# Por si usas una animación por defecto con todos los frames juntos
+		if animated_sprite.sprite_frames.has_animation("default"):
+			animated_sprite.play("default")
+			animated_sprite.frame = current_state
+			animated_sprite.stop()
 
-# Función vital llamada por el sistema de dormir para avanzar las etapas
+# Función que manda a llamar el botón de Dormir para pasar de día
 func advance_growth_state() -> void:
 	if current_state < TreeState.READY_TO_HARVEST:
 		current_state += 1 as TreeState
 		_update_tree_visuals()
-		print("[FruitTree] ¡El tiempo avanzó! Nuevo estado del árbol: ", current_state)
+		print("[FruitTree] El tiempo avanzó. Nuevo estado de frame visual: ", current_state)
 
-# =============================================================
-#  DETECCIÓN INTERACTIVA
-# =============================================================
 func _on_player_entered_range(body: Node2D) -> void:
 	if body.is_in_group("player") or body.name == "Player":
+		print("[FruitTree] Jugador entró al rango del árbol de: ", fruit_type)
 		if current_state == TreeState.READY_TO_HARVEST:
-			print("[FruitTree] ¡Cosecha lista! Presiona interactuar para recoger tu: ", fruit_type)
-		else:
-			print("[FruitTree] El árbol está creciendo. Estado actual: ", current_state)
+			print("[FruitTree] ¡Cosecha lista para recoger con F!")
 
 func _on_player_exited_range(body: Node2D) -> void:
 	if body.is_in_group("player") or body.name == "Player":

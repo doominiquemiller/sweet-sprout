@@ -124,12 +124,12 @@ sprite_frames = SubResource("SpriteFrames_gommq")
 animation = &"tree_apple"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=563228158]
-position = Vector2(0, -4)
+position = Vector2(0, -3)
 shape = SubResource("CircleShape2D_defqv")
 
 [node name="HarvestArea" type="Area2D" parent="." unique_id=344419421]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HarvestArea" unique_id=389549932]
-position = Vector2(0, -1)
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_rnkue")
 debug_color = Color(0.44985878, 0.57834834, 0.4188514, 0.41960785)
