@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://fun8hf7ajwe3"]
+
+[ext_resource type="Texture2D" uid="uid://dsy1hun8ksl2q" path="res://Assets/Objects/Egg_item.png" id="1_kjxej"]
+[ext_resource type="Script" uid="uid://c2gyuhctjqdvj" path="res://Scripts/store_item.gd" id="1_om1ql"]
+[ext_resource type="FontFile" uid="uid://n5p8m4kiw5un" path="res://Fonts/CutePixel.ttf" id="2_om1ql"]
+
+[node name="StoreItem" type="PanelContainer" unique_id=798024514]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -866.0
+offset_bottom = -498.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_om1ql")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1003391115]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer" unique_id=307090594]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/MarginContainer" unique_id=1382757860]
+layout_mode = 2
+texture = ExtResource("1_kjxej")
+stretch_mode = 5
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer" unique_id=1218906534]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer2" unique_id=1094439692]
+layout_mode = 2
+theme_override_constants/separation = 5
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer/MarginContainer2/VBoxContainer" unique_id=108475749]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.56165755, 0.78960353, 0.84423155, 1)
+theme_override_colors/font_shadow_color = Color(0.28235295, 0.6431373, 0.75686276, 0.61960787)
+theme_override_colors/font_outline_color = Color(0.02794481, 0.2629959, 0.5274233, 1)
+theme_override_fonts/font = ExtResource("2_om1ql")
+theme_override_font_sizes/font_size = 30
+text = "Label1"
+autowrap_mode = 3
+
+[node name="Label2" type="Label" parent="HBoxContainer/MarginContainer2/VBoxContainer" unique_id=1890964081]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8732984, 0.8732984, 0.8732984, 1)
+theme_override_colors/font_shadow_color = Color(0.8784314, 0.8784314, 0.8784314, 0.32941177)
+theme_override_fonts/font = ExtResource("2_om1ql")
+theme_override_font_sizes/font_size = 20
+text = "Label 2"
+
+[node name="Control" type="Control" parent="HBoxContainer/MarginContainer2/VBoxContainer" unique_id=1183133032]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="HBoxContainer/MarginContainer2/VBoxContainer" unique_id=268900562]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_colors/font_pressed_color = Color(0.13635722, 0.7325087, 0.47499424, 1)
+theme_override_colors/font_hover_color = Color(0.2396616, 0.91169435, 0.60609883, 1)
+theme_override_fonts/font = ExtResource("2_om1ql")
+text = "Buy"
+
+[connection signal="pressed" from="HBoxContainer/MarginContainer2/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="tree_exited" from="HBoxContainer/MarginContainer2/VBoxContainer/Button" to="." method="_on_button_tree_exited"]
