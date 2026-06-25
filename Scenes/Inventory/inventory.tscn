@@ -27,10 +27,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -126.0
-offset_top = -135.33333
-offset_right = 191.0
-offset_bottom = 106.66669
+offset_left = -172.66666
+offset_top = -258.6667
+offset_right = 175.33337
+offset_bottom = 89.33331
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_ck35p")
@@ -75,4 +75,16 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="InventorySlot12" parent="Panel/SlotGrid" unique_id=878942240 instance=ExtResource("3_evvmy")]
+layout_mode = 2
+
+[node name="InventorySlot13" parent="Panel/SlotGrid" unique_id=1704742649 instance=ExtResource("3_evvmy")]
+layout_mode = 2
+
+[node name="InventorySlot14" parent="Panel/SlotGrid" unique_id=866063489 instance=ExtResource("3_evvmy")]
+layout_mode = 2
+
+[node name="InventorySlot15" parent="Panel/SlotGrid" unique_id=1679193150 instance=ExtResource("3_evvmy")]
+layout_mode = 2
+
+[node name="InventorySlot16" parent="Panel/SlotGrid" unique_id=1165838117 instance=ExtResource("3_evvmy")]
 layout_mode = 2

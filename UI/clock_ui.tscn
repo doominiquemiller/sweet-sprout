@@ -2,7 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://dgdcx55eriixw" path="res://Assets/weather/clock.png" id="1_0qyg6"]
 [ext_resource type="Script" uid="uid://d0fs346k713u2" path="res://Scripts/clock_ui.gd" id="1_oyeg0"]
+[ext_resource type="PackedScene" uid="uid://bo41fn811eeaf" path="res://store.tscn" id="2_oyeg0"]
 [ext_resource type="Texture2D" uid="uid://ce2l3ccri2mjk" path="res://Assets/weather/Day.png" id="3_wm553"]
+[ext_resource type="Texture2D" uid="uid://b3fpbips0chsl" path="res://Assets/emoji style ui/Store Menu.png" id="6_0qyg6"]
 [ext_resource type="FontFile" uid="uid://n5p8m4kiw5un" path="res://Fonts/CutePixel.ttf" id="6_oyeg0"]
 [ext_resource type="Texture2D" uid="uid://dlwp7hn2xle3i" path="res://Assets/weather/Money.png" id="6_x27aw"]
 
@@ -17,6 +19,7 @@ region = Rect2(6, 40, 48, 21)
 [node name="clock_ui" type="CanvasLayer" unique_id=1588631544]
 layer = 10
 script = ExtResource("1_oyeg0")
+store_scene = ExtResource("2_oyeg0")
 
 [node name="ClockPanel" type="NinePatchRect" parent="." unique_id=497952040]
 custom_minimum_size = Vector2(264, 136)
@@ -94,3 +97,17 @@ text = "0s"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="." unique_id=632490668]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -107.0
+offset_top = 10.0
+offset_right = -67.0
+offset_bottom = 50.0
+grow_horizontal = 0
+scale = Vector2(3, 3)
+texture_normal = ExtResource("6_0qyg6")
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

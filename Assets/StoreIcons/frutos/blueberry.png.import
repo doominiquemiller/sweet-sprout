@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7niw17cx0bjq"
-path="res://.godot/imported/orange_seed.png-f46d3c7333308d7b2eaa277b9bd7114c.ctex"
+uid="uid://b7xknaeiry3gh"
+path="res://.godot/imported/blueberry.png-f61a05e34e2338e83fe754b20f6563af.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/StoreIcons/orange_seed.png"
-dest_files=["res://.godot/imported/orange_seed.png-f46d3c7333308d7b2eaa277b9bd7114c.ctex"]
+source_file="res://Assets/StoreIcons/frutos/blueberry.png"
+dest_files=["res://.godot/imported/blueberry.png-f61a05e34e2338e83fe754b20f6563af.ctex"]
 
 [params]
 
