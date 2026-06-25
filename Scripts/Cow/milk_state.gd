@@ -27,6 +27,11 @@ func _on_enter() -> void:
 	_finished = false
 	_timer = 0.0
 
+	# CORREGIDO: Validación de seguridad por si se olvida arrastrar el nodo al Inspector
+	if animation == null:
+		print("⚠️ [MilkState] ERROR: No has arrastrado el AnimatedSprite2D al estado Milk en el Inspector.")
+		return
+
 	if animation.sprite_frames.has_animation(MILK_ANIMATION_NAME):
 		animation.play(MILK_ANIMATION_NAME)
 		if not animation.sprite_frames.get_animation_loop(MILK_ANIMATION_NAME):

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://djbfospbiccah" path="res://Scripts/fruit_trees.gd" id="1_awek8"]
 [ext_resource type="Texture2D" uid="uid://ba7nx52qi5wfu" path="res://Assets/Plants/Trees, stumps and bushes v2.png" id="1_defqv"]
+[ext_resource type="Texture2D" uid="uid://73r3l5k7gyng" path="res://Assets/Seeds/tree_seed.png" id="2_k2xy4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rnkue"]
 atlas = ExtResource("1_defqv")
@@ -55,6 +56,9 @@ region = Rect2(67, 79, 26, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("2_k2xy4")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_rnkue")
 }, {
 "duration": 1.0,
@@ -68,6 +72,9 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_k2xy4")
+}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_y171a")
 }, {
@@ -83,6 +90,9 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("2_k2xy4")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_ae8qg")
 }, {
 "duration": 1.0,
@@ -96,6 +106,9 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_k2xy4")
+}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4svlm")
 }, {
@@ -117,11 +130,13 @@ radius = 12.0
 size = Vector2(30, 35)
 
 [node name="FruitTree" type="Node2D" unique_id=1543696822]
+z_index = 1
+y_sort_enabled = true
 script = ExtResource("1_awek8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1749410897]
 sprite_frames = SubResource("SpriteFrames_gommq")
-animation = &"tree_apple"
+animation = &"tree_pear"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=563228158]
 position = Vector2(0, -3)

@@ -1,70 +1,123 @@
 extends Node2D
 
 # =============================================================
-#  FruitTree — Controlador de Animaciones y Ciclo de Vida
+#  FruitTree — Árbol de frutas
+#
+#  Jerarquía en fruit_tree.tscn:
+#  FruitTree (Node2D) ← este script
+#  ├─ AnimatedSprite2D
+#  ├─ CollisionShape2D
+#  └─ HarvestArea (Area2D)
+#     └─ CollisionShape2D
 # =============================================================
 
-@onready var animated_sprite : AnimatedSprite2D = $AnimatedSprite2D
-@onready var harvest_area    : Area2D           = $HarvestArea
+@onready var sprite       : AnimatedSprite2D = $AnimatedSprite2D
+@onready var harvest_area : Area2D           = $HarvestArea
 
-enum TreeState { SPROUT = 0, ADULT = 1, READY_TO_HARVEST = 2 }
+const ANIM_MAP : Dictionary = {
+	"apple":  "tree_apple",
+	"orange": "tree_orange",
+	"peach":  "tree_peach",
+	"pear":   "tree_pear",
+}
 
-var current_state : TreeState = TreeState.SPROUT
-var fruit_type    : String    = ""
+const FRUIT_ITEM : Dictionary = {
+	"apple":  "apple",
+	"orange": "orange",
+	"peach":  "peach",
+	"pear":   "pear",
+}
 
-func _enter_tree() -> void:
-	# Forzamos al nodo a registrarse en el grupo global antes de su _ready
-	if not is_in_group("planted_trees"):
-		add_to_group("planted_trees")
+var fruit_type     : String = ""
+var is_ready       : bool   = false
+var is_planted     : bool   = false
+var _player_nearby : bool   = false
 
+signal fruit_harvested(fruit_type: String)
+
+# =============================================================
 func _ready() -> void:
-	if harvest_area:
-		harvest_area.monitoring = true
-		harvest_area.monitorable = true
-		if not harvest_area.body_entered.is_connected(_on_player_entered_range):
-			harvest_area.body_entered.connect(_on_player_entered_range)
-		if not harvest_area.body_exited.is_connected(_on_player_exited_range):
-			harvest_area.body_exited.connect(_on_player_exited_range)
-			
-	_update_tree_visuals()
+	add_to_group("planted_trees")
+	harvest_area.body_entered.connect(_on_body_entered)
+	harvest_area.body_exited.connect(_on_body_exited)
+	harvest_area.monitoring = true
+	
+	z_index = 1
+	
+func advance_growth_state() -> void:
+	on_day_passed()
 
-func setup_tree(type: String) -> void:
-	fruit_type = type
-	current_state = TreeState.SPROUT
-	_update_tree_visuals()
+func _unhandled_input(event: InputEvent) -> void:
+	if _player_nearby and is_ready and event.is_action_pressed("interact"):
+		_harvest()
 
+# =============================================================
+#  PLANTAR
+# =============================================================
 func plant(type: String) -> void:
-	setup_tree(type)
-
-func _update_tree_visuals() -> void:
-	if not animated_sprite:
+	if not ANIM_MAP.has(type):
+		push_error("[FruitTree] Tipo desconocido: %s" % type)
 		return
 
-	# Si usas animaciones con el nombre de cada fruta (ej: "apple"), fijamos su frame (0, 1 o 2)
-	if animated_sprite.sprite_frames.has_animation(fruit_type):
-		animated_sprite.play(fruit_type)
-		animated_sprite.frame = current_state
-		animated_sprite.stop() # Evita que la animación avance sola por segundo
+	fruit_type = type
+	is_planted  = true
+	is_ready    = false
+
+	var anim_name : String = ANIM_MAP[fruit_type]
+
+	# Usamos stop() + frame = 0 en vez de play() + pause()
+	# para evitar que Godot 4 no redibuje el sprite al cambiar frames
+	sprite.stop()
+	sprite.animation = anim_name
+	sprite.frame = 0
+
+	print("[FruitTree] Plantado: %s — frame 0/%d" % [
+		fruit_type,
+		sprite.sprite_frames.get_frame_count(anim_name) - 1
+	])
+
+# =============================================================
+#  AL DORMIR — avanza 1 frame
+# =============================================================
+func on_day_passed() -> void:
+	if not is_planted or is_ready:
+		return
+
+	var anim_name  : String = ANIM_MAP[fruit_type]
+	var last_frame : int    = sprite.sprite_frames.get_frame_count(anim_name) - 1
+
+	if sprite.frame < last_frame:
+		sprite.frame += 1
+
+	# Forzar actualización visual — clave para que Godot 4 redibuje el frame
+	sprite.stop()
+
+	if sprite.frame >= last_frame:
+		is_ready = true
+		print("[FruitTree] %s listo para cosechar! (frame %d)" % [fruit_type, sprite.frame])
 	else:
-		# Por si usas una animación por defecto con todos los frames juntos
-		if animated_sprite.sprite_frames.has_animation("default"):
-			animated_sprite.play("default")
-			animated_sprite.frame = current_state
-			animated_sprite.stop()
+		print("[FruitTree] %s — frame %d/%d" % [fruit_type, sprite.frame, last_frame])
 
-# Función que manda a llamar el botón de Dormir para pasar de día
-func advance_growth_state() -> void:
-	if current_state < TreeState.READY_TO_HARVEST:
-		current_state += 1 as TreeState
-		_update_tree_visuals()
-		print("[FruitTree] El tiempo avanzó. Nuevo estado de frame visual: ", current_state)
+# =============================================================
+#  COSECHAR
+# =============================================================
+func _harvest() -> void:
+	var item_id : String = FRUIT_ITEM[fruit_type]
+	Inventory.add_item(item_id, 1)
+	emit_signal("fruit_harvested", fruit_type)
 
-func _on_player_entered_range(body: Node2D) -> void:
-	if body.is_in_group("player") or body.name == "Player":
-		print("[FruitTree] Jugador entró al rango del árbol de: ", fruit_type)
-		if current_state == TreeState.READY_TO_HARVEST:
-			print("[FruitTree] ¡Cosecha lista para recoger con F!")
+	# Resetear al frame 0 para el próximo ciclo
+	is_ready     = false
+	sprite.stop()
+	sprite.frame = 0
 
-func _on_player_exited_range(body: Node2D) -> void:
-	if body.is_in_group("player") or body.name == "Player":
-		print("[FruitTree] El jugador se alejó del árbol.")
+	print("[FruitTree] Cosechado: %s" % item_id)
+
+# =============================================================
+func _on_body_entered(body: Node) -> void:
+	if body.is_in_group("player"):
+		_player_nearby = true
+
+func _on_body_exited(body: Node) -> void:
+	if body.is_in_group("player"):
+		_player_nearby = false
