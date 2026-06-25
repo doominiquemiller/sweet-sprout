@@ -63,6 +63,7 @@ toggle_inventory={
 
 2d_navigation/layer_1="Chicken Navigation"
 2d_navigation/layer_2="Cow Navigation"
+2d_navigation/layer_3="Bee Navigation"
 
 [physics]
 

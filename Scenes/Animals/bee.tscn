@@ -1,7 +1,10 @@
 [gd_scene format=3 uid="uid://dm76s17n37nnl"]
 
-[ext_resource type="Script" uid="uid://ojovk0hat0gk" path="res://Scripts/non_playable_character.gd" id="1_mbhdh"]
+[ext_resource type="Script" uid="uid://dpsflmgomeehw" path="res://Scripts/bee/bee.gd" id="1_mbhdh"]
 [ext_resource type="Texture2D" uid="uid://bgvx0tl0i0821" path="res://Assets/Objects/bee_spritesheet.png" id="2_mbhdh"]
+[ext_resource type="Script" uid="uid://c5fj0dxwt4wrf" path="res://Scripts/state_machine.gd" id="3_qu0yc"]
+[ext_resource type="Script" uid="uid://bhaa0l5bbe1w5" path="res://Scenes/Animals/idle_state_bee.gd" id="4_qu0yc"]
+[ext_resource type="Script" uid="uid://bvl2oiuksjfpi" path="res://Scenes/Animals/walk_state_bee.gd" id="5_8xnv1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nat66"]
 atlas = ExtResource("2_mbhdh")
@@ -76,3 +79,21 @@ sprite_frames = SubResource("SpriteFrames_8xnv1")
 autoplay = "default"
 frame = 5
 frame_progress = 0.78953016
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1522138269]
+navigation_layers = 4
+
+[node name="StateMachine" type="Node" parent="." unique_id=1593504035 node_paths=PackedStringArray("initial_node_state")]
+script = ExtResource("3_qu0yc")
+initial_node_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1876025097 node_paths=PackedStringArray("character", "animation")]
+script = ExtResource("4_qu0yc")
+character = NodePath("../..")
+animation = NodePath("../../AnimatedSprite2D")
+
+[node name="Walk" type="Node" parent="StateMachine" unique_id=790089090 node_paths=PackedStringArray("character", "animation", "navigation")]
+script = ExtResource("5_8xnv1")
+character = NodePath("../..")
+animation = NodePath("../../AnimatedSprite2D")
+navigation = NodePath("../../NavigationAgent2D")

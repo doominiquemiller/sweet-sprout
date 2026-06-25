@@ -2,7 +2,7 @@ extends State
 
 @export var character              : NonPlayableCharacter
 @export var animation              : AnimatedSprite2D
-@export var idle_state_time_intervarl : float = 1.0
+@export var idle_state_time_intervarl : float = 4.0
 
 @onready var idle_state_timer : Timer = Timer.new()
 

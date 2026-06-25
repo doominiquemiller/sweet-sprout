@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://boq505w61oq7u" path="res://Scripts/Cow/cow.gd" id="1_swtc8"]
 [ext_resource type="Texture2D" uid="uid://dq3jnvknkdtbk" path="res://Assets/Characters/Free Cow Sprites.png" id="1_uaxjc"]
-[ext_resource type="Script" uid="uid://c5fj0dxwt4wrf" path="res://Scripts/Chicken/state_machine.gd" id="2_tc63g"]
+[ext_resource type="Script" uid="uid://c5fj0dxwt4wrf" path="res://Scripts/state_machine.gd" id="2_tc63g"]
 [ext_resource type="Script" uid="uid://b4a4vhtpcx6hy" path="res://Scripts/Cow/idle_state_cow.gd" id="4_swtc8"]
 [ext_resource type="Script" uid="uid://dmnenht0jcaeu" path="res://Scripts/Cow/walk_state_cow.gd" id="5_hrek1"]
 [ext_resource type="Script" uid="uid://dhd3jrxgjlw71" path="res://Scripts/Chicken/sleep_state.gd" id="5_jbpbs"]
@@ -67,7 +67,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6e7ea"]
-radius = 8.333333
+radius = 6.666666
+height = 23.333334
 
 [node name="cow" type="CharacterBody2D" unique_id=1077693140]
 z_index = 1
