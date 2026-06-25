@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://dnjddeegnddgf"]
+
+[ext_resource type="PackedScene" uid="uid://fun8hf7ajwe3" path="res://store_item.tscn" id="1_c176v"]
+
+[sub_resource type="GDScript" id="GDScript_x8qpf"]
+script/source = "extends Control
+
+@onready var grid : GridContainer = $ScrollContainer/GridContainer
+
+@export var store_item : PackedScene
+
+var store_item_id : int = 0
+
+var store_data: Array = [
+	{
+		\"icon_path\" : \"res://Assets/Store Icons/apple_seed.png\",
+		\"label1\" : \"10 coins\",
+		\"label2\" : \"value pack\",
+		\"custom_button_text\" : \"10 Dia\"
+	}
+]
+
+func _ready() -> void:
+	setup_store()
+	
+func setup_store() -> void:
+	for data in store_data:
+		var temp = store_item.instantiate()
+		temp.item_buy_pressed.connect(on_item_buy_pressed)
+		grid.add_child(temp)
+		temp.setup(data, store_item_id)
+		store_item_id += 1
+		
+func on_item_buy_pressed(id:int) -> void:
+	print(store_data[id].get(\"label1\")+\" comprado.\")
+"
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_3hi0p"]
+
+[node name="Store" type="Control" unique_id=1098486450]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_x8qpf")
+store_item = ExtResource("1_c176v")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=269303863]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="GridContainer" type="GridContainer" parent="ScrollContainer" unique_id=113408274]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=139846014]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("CanvasTexture_3hi0p")
