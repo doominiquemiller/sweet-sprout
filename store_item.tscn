@@ -5,24 +5,19 @@
 [ext_resource type="FontFile" uid="uid://n5p8m4kiw5un" path="res://Fonts/CutePixel.ttf" id="2_om1ql"]
 
 [node name="StoreItem" type="PanelContainer" unique_id=798024514]
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -866.0
-offset_bottom = -498.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 290.0
+offset_bottom = 106.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_om1ql")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1003391115]
 layout_mode = 2
-theme_override_constants/separation = 50
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer" unique_id=307090594]
+custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
@@ -30,11 +25,14 @@ theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/MarginContainer" unique_id=1382757860]
+texture_filter = 1
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 texture = ExtResource("1_kjxej")
 stretch_mode = 5
 
 [node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer" unique_id=1218906534]
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
@@ -42,12 +40,13 @@ theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer2" unique_id=1094439692]
+layout_direction = 1
 layout_mode = 2
 theme_override_constants/separation = 5
 alignment = 1
 
 [node name="Label" type="Label" parent="HBoxContainer/MarginContainer2/VBoxContainer" unique_id=108475749]
-custom_minimum_size = Vector2(200, 0)
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.56165755, 0.78960353, 0.84423155, 1)
 theme_override_colors/font_shadow_color = Color(0.28235295, 0.6431373, 0.75686276, 0.61960787)
@@ -58,7 +57,7 @@ text = "Label1"
 autowrap_mode = 3
 
 [node name="Label2" type="Label" parent="HBoxContainer/MarginContainer2/VBoxContainer" unique_id=1890964081]
-custom_minimum_size = Vector2(200, 0)
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8732984, 0.8732984, 0.8732984, 1)
 theme_override_colors/font_shadow_color = Color(0.8784314, 0.8784314, 0.8784314, 0.32941177)
@@ -67,6 +66,7 @@ theme_override_font_sizes/font_size = 20
 text = "Label 2"
 
 [node name="Control" type="Control" parent="HBoxContainer/MarginContainer2/VBoxContainer" unique_id=1183133032]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_vertical = 3
 

@@ -21,6 +21,3 @@ func setup(data: Dictionary, p_id: int) -> void:
 
 func _on_button_pressed() -> void:
 	emit_signal("item_buy_pressed", id)
-
-func _on_button_tree_exited() -> void:
-	pass # Replace with function body.

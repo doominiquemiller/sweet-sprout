@@ -67,7 +67,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 4.0
+"speed": 16.0
 }]
 
 [node name="Bee" type="CharacterBody2D" unique_id=2004895695]
@@ -77,8 +77,7 @@ metadata/_custom_type_script = "uid://ojovk0hat0gk"
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1068514098]
 sprite_frames = SubResource("SpriteFrames_8xnv1")
 autoplay = "default"
-frame = 5
-frame_progress = 0.78953016
+frame_progress = 0.24836694
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1522138269]
 navigation_layers = 4

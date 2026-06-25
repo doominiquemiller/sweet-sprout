@@ -208,3 +208,18 @@ func set_speed(speed: float) -> void:
 # =============================================================
 func _on_boton_dormir_pressed() -> void:
 	next_day() # Llama a la función de arriba para avanzar el día
+	
+	
+	
+#Botón de la tienda
+
+@export var store_scene: PackedScene
+
+
+
+func _on_texture_button_pressed() -> void:
+	var store = store_scene.instantiate()
+	add_child(store)
+	
+func _on_close_button_pressed() -> void:
+	queue_free()

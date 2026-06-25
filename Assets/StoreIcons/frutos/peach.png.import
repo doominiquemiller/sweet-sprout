@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bk4i6yhgul7ri"
-path="res://.godot/imported/pear_seed.png-c11ce46bb25325532298f72047e6248c.ctex"
+uid="uid://ci4d0ps7dmkml"
+path="res://.godot/imported/peach.png-88c731e18ab7e349e0b9c5236777eb98.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/StoreIcons/pear_seed.png"
-dest_files=["res://.godot/imported/pear_seed.png-c11ce46bb25325532298f72047e6248c.ctex"]
+source_file="res://Assets/StoreIcons/frutos/peach.png"
+dest_files=["res://.godot/imported/peach.png-88c731e18ab7e349e0b9c5236777eb98.ctex"]
 
 [params]
 
