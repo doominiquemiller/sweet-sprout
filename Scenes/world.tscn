@@ -1164,9 +1164,9 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 outlines = Array[PackedVector2Array]([PackedVector2Array(-284, 138, -284, 3, -213, 3, -213, 51, -208, 51, -208, 50, -163, 50, -163, 155, -268, 155, -268, 138)])
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_13n8b"]
-vertices = PackedVector2Array(-113, -6, -172, -6, -172, -87, -113, -87)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-182, -97, -103, -97, -103, 4, -182, 4)])
+vertices = PackedVector2Array(27, -55.328125, 27, -10.0234375, -345, -10.96875, -345, -110, -104, -110)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-355, -120, -102, -120, 37, -62, 37, 0, -355, -1)])
 
 [node name="world" type="Node2D" unique_id=1530126941]
 y_sort_enabled = true
@@ -1231,7 +1231,7 @@ scale = Vector2(0.4, 0.4)
 [node name="Decor" type="TileMapLayer" parent="TileMap/Farm" unique_id=65750566]
 position = Vector2(-3.8146973e-06, 1.9073486e-06)
 scale = Vector2(0.99999994, 0.99999994)
-tile_map_data = PackedByteArray("AAAAAP//DQAGAAEAAAD8//3/DQAFAAEAAAD8/wAADQAGAAEAAAD7/wAADQABAAMAAAAAAAEADQABAAMAAAD///7/DQAGAAMAAAD7////DQAGAAIAAAAAAAAADwADAAAAAAD7//3/DwADAAAAAADw/wcADQAGAAIAAAD0/wcADQAFAAEAAADz/wEADQAGAAEAAAD0/wMADQAGAAMAAAD2//n/CwAIAAQAAADy//n/CwAIAAQAAADw//n/CwAIAAQAAAD1//n/CwAFAAQAAADz//n/CwAFAAQAAADv//n/CwAFAAQAAAABAPz/DQAEAAIAAAD4/wQAAAAHAAUAAAABAAkAAAAHAAUAAADy//z/AAAHAAUAAAD5//7/AAAHAAUAAAD9/wUAAAAIAAYAAAD5/wMAAAAIAAYAAAD5/wAAAAAIAAYAAAD3/wEAAAAIAAYAAAD2/wUAAAAIAAYAAAACAAcAAAAIAAYAAADz//v/AAAIAAYAAADv//r/AAAIAAYAAADz//7/AAAIAAYAAADw////AAAIAAYAAAD4//z/AAAIAAYAAAD4//3/DQAFAAMAAAD1//z/DQAGAAIAAAD2////DQAHAAMAAAD3//3/DQAGAAEAAAD1//7/DQAFAAEAAAD5//z/DQAFAAEAAADx/wEADgADAAAAAADv/wUADgAAAAAAAAD5////DgADAAAAAADt//n/CwAIAAQAAADs//n/CwAIAAQAAADp//n/CwAIAAQAAADq//n/CwAFAAQAAADq//j/CwAIAAIAAADq//f/CwAIAAEAAADr//f/CwAJAAEAAADp//f/CwAHAAEAAADp//j/CwAHAAIAAADp//b/CwAHAAAAAADq//b/CwAIAAAAAADr//b/CwAJAAAAAADv//j/CwAIAAIAAADu//j/CwAHAAIAAADu//f/CwAHAAEAAADv//f/CwAIAAEAAADw//f/CwAJAAEAAADw//b/CwAJAAAAAADv//b/CwAIAAAAAADu//b/CwAHAAAAAADz//j/CwAIAAIAAADy//j/CwAHAAIAAADy//f/CwAHAAEAAADz//f/CwAIAAEAAAD0//f/CwAJAAEAAAD0//b/CwAJAAAAAADz//b/CwAIAAAAAADy//b/CwAHAAAAAAD4//j/CwAIAAIAAAD3//j/CwAHAAIAAAD3//f/CwAHAAEAAAD4//f/CwAIAAEAAAD5//f/CwAJAAEAAAD5//b/CwAJAAAAAAD4//b/CwAIAAAAAAD3//b/CwAHAAAAAAACAPr/CwAFAAMAAAADAPr/CwAGAAMAAAA=")
+tile_map_data = PackedByteArray("AAAAAP//DQAGAAEAAAD8//3/DQAFAAEAAAD8/wAADQAGAAEAAAD7/wAADQABAAMAAAAAAAEADQABAAMAAAD///7/DQAGAAMAAAD7////DQAGAAIAAAAAAAAADwADAAAAAAD7//3/DwADAAAAAADw/wcADQAGAAIAAAD0/wcADQAFAAEAAADz/wEADQAGAAEAAAD0/wMADQAGAAMAAAABAPz/DQAEAAIAAAD4/wQAAAAHAAUAAAABAAkAAAAHAAUAAADy//z/AAAHAAUAAAD5//7/AAAHAAUAAAD9/wUAAAAIAAYAAAD5/wMAAAAIAAYAAAD5/wAAAAAIAAYAAAD3/wEAAAAIAAYAAAD2/wUAAAAIAAYAAAACAAcAAAAIAAYAAADz//v/AAAIAAYAAADv//r/AAAIAAYAAADz//7/AAAIAAYAAADw////AAAIAAYAAAD4//z/AAAIAAYAAAD4//3/DQAFAAMAAAD1//z/DQAGAAIAAAD2////DQAHAAMAAAD3//3/DQAGAAEAAAD1//7/DQAFAAEAAAD5//z/DQAFAAEAAADx/wEADgADAAAAAADv/wUADgAAAAAAAAD5////DgADAAAAAADq//j/CwAIAAIAAADq//f/CwAIAAEAAADr//f/CwAJAAEAAADp//f/CwAHAAEAAADp//j/CwAHAAIAAADp//b/CwAHAAAAAADq//b/CwAIAAAAAADr//b/CwAJAAAAAADv//j/CwAIAAIAAADu//j/CwAHAAIAAADu//f/CwAHAAEAAADv//f/CwAIAAEAAADw//f/CwAJAAEAAADw//b/CwAJAAAAAADv//b/CwAIAAAAAADu//b/CwAHAAAAAADz//j/CwAIAAIAAADy//j/CwAHAAIAAADy//f/CwAHAAEAAADz//f/CwAIAAEAAAD0//f/CwAJAAEAAAD0//b/CwAJAAAAAADz//b/CwAIAAAAAADy//b/CwAHAAAAAAD4//j/CwAIAAIAAAD3//j/CwAHAAIAAAD3//f/CwAHAAEAAAD4//f/CwAIAAEAAAD5//f/CwAJAAEAAAD5//b/CwAJAAAAAAD4//b/CwAIAAAAAAD3//b/CwAHAAAAAAACAPr/CwAFAAMAAAADAPr/CwAGAAMAAAA=")
 tile_set = SubResource("TileSet_btko3")
 
 [node name="Dirt" type="TileMapLayer" parent="TileMap/Farm" unique_id=1398902584]
@@ -1259,27 +1259,27 @@ scale = Vector2(0.7, 0.7)
 
 [node name="CropSpace" parent="TileMap/Farm" unique_id=1680679629 instance=ExtResource("19_13n8b")]
 z_index = 1
-position = Vector2(-303, -57.000004)
+position = Vector2(-313, -57.000004)
 
 [node name="CropSpace2" parent="TileMap/Farm" unique_id=589010234 instance=ExtResource("19_13n8b")]
 z_index = 1
-position = Vector2(-303, -30.000004)
+position = Vector2(-313, -23.000002)
 
 [node name="CropSpace3" parent="TileMap/Farm" unique_id=175308658 instance=ExtResource("19_13n8b")]
 z_index = 1
-position = Vector2(-274, -57)
+position = Vector2(-275, -57)
 
 [node name="CropSpace4" parent="TileMap/Farm" unique_id=702662997 instance=ExtResource("19_13n8b")]
 z_index = 1
-position = Vector2(-274, -30)
+position = Vector2(-274, -23)
 
 [node name="CropSpace5" parent="TileMap/Farm" unique_id=400302069 instance=ExtResource("19_13n8b")]
 z_index = 1
-position = Vector2(-245, -57)
+position = Vector2(-238.00002, -57)
 
 [node name="CropSpace6" parent="TileMap/Farm" unique_id=655783184 instance=ExtResource("19_13n8b")]
 z_index = 1
-position = Vector2(-245.00002, -30)
+position = Vector2(-238, -23)
 
 [node name="TreeSpace" parent="TileMap/Farm" unique_id=266234154 instance=ExtResource("21_uqdn7")]
 z_index = 1
@@ -1817,7 +1817,6 @@ position = Vector2(113, -98)
 position = Vector2(-51, -175)
 
 [node name="Player" parent="." unique_id=62884988 instance=ExtResource("1_kn0ld")]
-z_index = 2
 position = Vector2(-184, -86)
 
 [node name="Chickens" type="Node2D" parent="." unique_id=564528914]
@@ -1854,7 +1853,7 @@ position = Vector2(-162, -77)
 
 [node name="Bee2" parent="Bees" unique_id=1012407562 instance=ExtResource("49_b4e6k")]
 z_index = 1
-position = Vector2(-123, -51)
+position = Vector2(-63, -41)
 
 [node name="Bee3" parent="Bees" unique_id=949214817 instance=ExtResource("49_b4e6k")]
 z_index = 1
@@ -1862,7 +1861,23 @@ position = Vector2(-133, -10)
 
 [node name="Bee4" parent="Bees" unique_id=295658823 instance=ExtResource("49_b4e6k")]
 z_index = 1
-position = Vector2(-152, -29)
+position = Vector2(-191, -26)
+
+[node name="Bee5" parent="Bees" unique_id=773918205 instance=ExtResource("49_b4e6k")]
+z_index = 1
+position = Vector2(-245, -47)
+
+[node name="Bee6" parent="Bees" unique_id=580061840 instance=ExtResource("49_b4e6k")]
+z_index = 1
+position = Vector2(-199, -90)
+
+[node name="Bee7" parent="Bees" unique_id=121403175 instance=ExtResource("49_b4e6k")]
+z_index = 1
+position = Vector2(-319, -73)
+
+[node name="Bee8" parent="Bees" unique_id=1888302602 instance=ExtResource("49_b4e6k")]
+z_index = 1
+position = Vector2(-260, -85)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="Bees" unique_id=1392717420]
 navigation_polygon = SubResource("NavigationPolygon_13n8b")

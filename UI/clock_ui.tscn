@@ -4,9 +4,9 @@
 [ext_resource type="Script" uid="uid://d0fs346k713u2" path="res://Scripts/clock_ui.gd" id="1_oyeg0"]
 [ext_resource type="PackedScene" uid="uid://bo41fn811eeaf" path="res://store.tscn" id="2_oyeg0"]
 [ext_resource type="Texture2D" uid="uid://ce2l3ccri2mjk" path="res://Assets/weather/Day.png" id="3_wm553"]
-[ext_resource type="Texture2D" uid="uid://b3fpbips0chsl" path="res://Assets/emoji style ui/Store Menu.png" id="6_0qyg6"]
 [ext_resource type="FontFile" uid="uid://n5p8m4kiw5un" path="res://Fonts/CutePixel.ttf" id="6_oyeg0"]
 [ext_resource type="Texture2D" uid="uid://dlwp7hn2xle3i" path="res://Assets/weather/Money.png" id="6_x27aw"]
+[ext_resource type="Texture2D" uid="uid://d3362rh8ypn7v" path="res://Assets/buttons/store_icon.png" id="7_oyeg0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s7psx"]
 atlas = ExtResource("1_0qyg6")
@@ -15,6 +15,14 @@ region = Rect2(1, 34, 48, 22)
 [sub_resource type="AtlasTexture" id="AtlasTexture_705sf"]
 atlas = ExtResource("6_x27aw")
 region = Rect2(6, 40, 48, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wm553"]
+atlas = ExtResource("7_oyeg0")
+region = Rect2(11, 11, 26, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r6g7n"]
+atlas = ExtResource("7_oyeg0")
+region = Rect2(59, 11, 26, 26)
 
 [node name="clock_ui" type="CanvasLayer" unique_id=1588631544]
 layer = 10
@@ -108,6 +116,7 @@ offset_right = -67.0
 offset_bottom = 50.0
 grow_horizontal = 0
 scale = Vector2(3, 3)
-texture_normal = ExtResource("6_0qyg6")
+texture_normal = SubResource("AtlasTexture_wm553")
+texture_pressed = SubResource("AtlasTexture_r6g7n")
 
 [connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]
