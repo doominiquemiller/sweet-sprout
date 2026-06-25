@@ -21,21 +21,34 @@ const ITEM_ICONS : Dictionary = {
 	"egg":          preload("res://Assets/Objects/Egg item.png"),
 	"milk":         preload("res://Assets/Objects/Milk_item.png"),
 	"honey":        preload("res://Assets/Objects/Honey_item.png"),
+	
 	# Frutas cosechadas
 	"apple":        preload("res://Assets/Fruit/apple_fruit.png"),
 	"orange":       preload("res://Assets/Fruit/orange_fruit.png"),
 	"peach":        preload("res://Assets/Fruit/peach_fruit.png"),
 	"pear":         preload("res://Assets/Fruit/pear_fruit.png"),
-	# Semillas
+	
+	# Semillas de árboles
 	"apple_seed":   preload("res://Assets/Seeds/apple_seed.png"),
 	"orange_seed":  preload("res://Assets/Seeds/orange_seed.png"),
 	"peach_seed":   preload("res://Assets/Seeds/peach_seed.png"),
 	"pear_seed":    preload("res://Assets/Seeds/pear_seed.png"),
+	
+	# NUEVO: Bayas cosechadas e ítems de arbusto
+	"blackberry_item": preload("res://Assets/Fruit/blackberry_item.png"),
+	"blueberry_item":  preload("res://Assets/Fruit/blueberry_item.png"),
+	"raspberry_item":  preload("res://Assets/Fruit/raspberry_item.png"),
+	
+	# NUEVO: Semillas de arbustos (Bushes)
+	"blackberry_seeds": preload("res://Assets/Seeds/blackberry_seeds.png"),
+	"blueberry_seeds":  preload("res://Assets/Seeds/blueberry_seeds.png"),
+	"raspberry_seeds":  preload("res://Assets/Seeds/raspberry_seeds.png"),
 }
 
-# IDs que son semillas — para auto-seleccionar al PlantingSystem
+# IDs que son semillas — para auto-seleccionar al PlantingSystem o CropSpaces
 const SEED_IDS : Array[String] = [
-	"apple_seed", "orange_seed", "peach_seed", "pear_seed"
+	"apple_seed", "orange_seed", "peach_seed", "pear_seed",
+	"blackberry_seeds", "blueberry_seeds", "raspberry_seeds"
 ]
 
 var _slot_order : Array[String] = []
@@ -99,7 +112,6 @@ func _actualizar_marcos_visuales() -> void:
 	_sync_planting_system()
 
 func _sync_planting_system() -> void:
-	# Solo si el PlantingSystem existe en la escena
 	var planting = get_tree().get_first_node_in_group("planting_system")
 	if not planting:
 		return

@@ -18,9 +18,9 @@
 [ext_resource type="PackedScene" uid="uid://bpfag6epgakv4" path="res://Scenes/Items/Bakery/wall.tscn" id="14_uqdn7"]
 [ext_resource type="PackedScene" uid="uid://b6nkjlv1lberw" path="res://Scenes/Items/Trees/tree.tscn" id="17_0pcbe"]
 [ext_resource type="PackedScene" uid="uid://dbedud0wrda8x" path="res://Scenes/Items/Decor/haybale.tscn" id="18_axeuq"]
-[ext_resource type="PackedScene" uid="uid://i6ndiexpiyb7" path="res://Scenes/Items/Trees/tree_space.tscn" id="19_13n8b"]
-[ext_resource type="PackedScene" uid="uid://dwl3akclvb6ln" path="res://Scenes/Items/Bush/fruit_bush.tscn" id="21_pyn1s"]
+[ext_resource type="PackedScene" uid="uid://i6ndiexpiyb7" path="res://Scenes/Items/Trees/crop_space.tscn" id="19_13n8b"]
 [ext_resource type="PackedScene" uid="uid://dkrsmo13p2aqr" path="res://Scenes/Items/Trees/cb_tree.tscn" id="21_qebug"]
+[ext_resource type="PackedScene" uid="uid://de08lga4kyrkh" path="res://Scenes/Items/Trees/tree_space.tscn" id="21_uqdn7"]
 [ext_resource type="Texture2D" uid="uid://dg8yu3vt5j47w" path="res://Assets/Tilesets/Wooden_House_Walls_Tilset.png" id="22_pt3ps"]
 [ext_resource type="PackedScene" uid="uid://duxmkmgty85gt" path="res://Scenes/Items/Doors/door.tscn" id="23_hmc15"]
 [ext_resource type="PackedScene" uid="uid://ckavxhxmjqjdo" path="res://UI/clock_ui.tscn" id="23_xbk3s"]
@@ -1257,20 +1257,45 @@ scale = Vector2(0.7, 0.7)
 position = Vector2(-157, -28)
 scale = Vector2(0.7, 0.7)
 
-[node name="TreeSpace" parent="TileMap/Farm" unique_id=280366587 instance=ExtResource("19_13n8b")]
-position = Vector2(-328, -104)
+[node name="CropSpace" parent="TileMap/Farm" unique_id=1680679629 instance=ExtResource("19_13n8b")]
+z_index = 1
+position = Vector2(-303, -57.000004)
 
-[node name="TreeSpace2" parent="TileMap/Farm" unique_id=1680679629 instance=ExtResource("19_13n8b")]
-position = Vector2(-280, -103)
+[node name="CropSpace2" parent="TileMap/Farm" unique_id=589010234 instance=ExtResource("19_13n8b")]
+z_index = 1
+position = Vector2(-303, -30.000004)
 
-[node name="TreeSpace3" parent="TileMap/Farm" unique_id=1561118814 instance=ExtResource("19_13n8b")]
-position = Vector2(-232, -103.00001)
+[node name="CropSpace3" parent="TileMap/Farm" unique_id=175308658 instance=ExtResource("19_13n8b")]
+z_index = 1
+position = Vector2(-274, -57)
 
-[node name="TreeSpace4" parent="TileMap/Farm" unique_id=702168467 instance=ExtResource("19_13n8b")]
-position = Vector2(-184, -103)
+[node name="CropSpace4" parent="TileMap/Farm" unique_id=702662997 instance=ExtResource("19_13n8b")]
+z_index = 1
+position = Vector2(-274, -30)
 
-[node name="TreeSpace5" parent="TileMap/Farm" unique_id=338611107 instance=ExtResource("19_13n8b")]
-position = Vector2(-136, -103.00001)
+[node name="CropSpace5" parent="TileMap/Farm" unique_id=400302069 instance=ExtResource("19_13n8b")]
+z_index = 1
+position = Vector2(-245, -57)
+
+[node name="CropSpace6" parent="TileMap/Farm" unique_id=655783184 instance=ExtResource("19_13n8b")]
+z_index = 1
+position = Vector2(-245.00002, -30)
+
+[node name="TreeSpace" parent="TileMap/Farm" unique_id=266234154 instance=ExtResource("21_uqdn7")]
+z_index = 1
+position = Vector2(-328, -103)
+
+[node name="TreeSpace2" parent="TileMap/Farm" unique_id=408755376 instance=ExtResource("21_uqdn7")]
+z_index = 1
+position = Vector2(-280, -103.00001)
+
+[node name="TreeSpace3" parent="TileMap/Farm" unique_id=414073003 instance=ExtResource("21_uqdn7")]
+z_index = 1
+position = Vector2(-232, -103)
+
+[node name="TreeSpace4" parent="TileMap/Farm" unique_id=274550392 instance=ExtResource("21_uqdn7")]
+z_index = 1
+position = Vector2(-184, -103.00001)
 
 [node name="Bakery2" type="Node" parent="TileMap" unique_id=1896068470]
 
@@ -1379,32 +1404,6 @@ scale = Vector2(0.6, 0.6)
 [node name="fence_door2" parent="TileMap" unique_id=2096683146 instance=ExtResource("23_hmc15")]
 position = Vector2(-276, 348)
 scale = Vector2(1.5, 1.5)
-
-[node name="Bushes" type="Node" parent="TileMap" unique_id=2132395907]
-
-[node name="fruit_bush" parent="TileMap/Bushes" unique_id=1268558160 instance=ExtResource("21_pyn1s")]
-position = Vector2(-284, -60)
-
-[node name="fruit_bush2" parent="TileMap/Bushes" unique_id=888895217 instance=ExtResource("21_pyn1s")]
-position = Vector2(-284, -34)
-
-[node name="fruit_bush3" parent="TileMap/Bushes" unique_id=898787941 instance=ExtResource("21_pyn1s")]
-position = Vector2(-265, -60)
-
-[node name="fruit_bush4" parent="TileMap/Bushes" unique_id=1351486994 instance=ExtResource("21_pyn1s")]
-position = Vector2(-265, -34)
-
-[node name="fruit_bush5" parent="TileMap/Bushes" unique_id=1610753170 instance=ExtResource("21_pyn1s")]
-position = Vector2(-246, -60)
-
-[node name="fruit_bush6" parent="TileMap/Bushes" unique_id=2024726127 instance=ExtResource("21_pyn1s")]
-position = Vector2(-246, -34)
-
-[node name="fruit_bush7" parent="TileMap/Bushes" unique_id=1510372536 instance=ExtResource("21_pyn1s")]
-position = Vector2(-303, -34)
-
-[node name="fruit_bush8" parent="TileMap/Bushes" unique_id=324570899 instance=ExtResource("21_pyn1s")]
-position = Vector2(-303, -60)
 
 [node name="Trees" type="Node" parent="TileMap" unique_id=1095749843]
 

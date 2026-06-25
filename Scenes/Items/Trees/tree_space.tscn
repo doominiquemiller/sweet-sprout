@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://i6ndiexpiyb7"]
+[gd_scene format=3 uid="uid://de08lga4kyrkh"]
 
 [ext_resource type="Texture2D" uid="uid://bvxj7bsftiuac" path="res://Assets/Tilesets/Tilled Dirt.png" id="1_3ro8n"]
 
@@ -10,16 +10,14 @@ region = Rect2(4, 100, 8, 8)
 script/source = "extends Area2D
 
 # =============================================================
-#  TreeSpace Area — Parcela de cultivo modular (Teclado sin Mouse)
+#  TreeSpace Area — Interacción y Cosecha Simétrica
 # =============================================================
 
-# Buscamos de forma segura el nodo PlantingSystem en la escena actual
-@onready var planting_system = get_tree().current_scene.get_node_or_null(\"PlantingSystem\")
+@export var fruit_tree_scene : PackedScene = preload(\"res://Scenes/Items/Trees/fruit_trees.tscn\")
 
 var is_player_inside : bool = false
 var hosted_tree     : Node = null
 
-# Mapeo de semillas a tipos de frutas
 const SEED_TO_FRUIT : Dictionary = {
 	\"apple_seed\":  \"apple\",
 	\"pear_seed\":   \"pear\",
@@ -28,39 +26,37 @@ const SEED_TO_FRUIT : Dictionary = {
 }
 
 func _ready() -> void:
-	if not body_entered.is_connected(_on_body_entered):
-		body_entered.connect(_on_body_entered)
-	if not body_exited.is_connected(_on_body_exited):
-		body_exited.connect(_on_body_exited)
-
-## Funciones de estado para el control del PlantingSystem
-func is_empty() -> bool:
-	return hosted_tree == null
-
-func set_occupied(tree_node: Node) -> void:
-	hosted_tree = tree_node
-	# Si el árbol es removido o cosechado en el futuro, liberamos la parcela automáticamente
-	if is_instance_valid(hosted_tree):
-		hosted_tree.tree_exiting.connect(func():
-			hosted_tree = null
-			print(\"[TreeSpace] Parcela de tierra liberada.\")
-		)
+	add_to_group(\"tree_space\")
+	
+	if body_entered.is_connected(_on_body_entered):
+		body_entered.disconnect(_on_body_entered)
+	if body_exited.is_connected(_on_body_exited):
+		body_exited.disconnect(_on_body_exited)
+		
+	body_entered.connect(_on_body_entered)
+	body_exited.connect(_on_body_exited)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not is_player_inside:
 		return
 
 	if event.is_action_pressed(\"interact\") or (event is InputEventKey and event.pressed and event.keycode == KEY_F):
-		_try_plant()
+		_handle_space_interaction()
 
-func _try_plant() -> void:
-	if not is_empty():
-		print(\"[TreeSpace] Parcela ocupada.\")
+func _handle_space_interaction() -> void:
+	# SI YA HAY UN ÁRBOL: Verificamos si se puede cosechar usando sus variables nativas
+	if hosted_tree != null and is_instance_valid(hosted_tree):
+		if hosted_tree.get(\"is_ready\") == true:
+			if hosted_tree.has_method(\"_harvest\"):
+				hosted_tree._harvest()
+		else:
+			print(\"[TreeSpace] El árbol no tiene frutas listas para cosechar en este momento.\")
 		return
 
+	# SI NO HAY ÁRBOL: Mecanismo para plantar la semilla seleccionada
 	var selected_seed : String = Inventory.get_item_seleccionado()
 	if selected_seed == \"\" or not SEED_TO_FRUIT.has(selected_seed):
-		print(\"[TreeSpace] Selecciona una semilla válida en tu inventario.\")
+		print(\"[TreeSpace] Selecciona una semilla de árbol válida en tu inventario.\")
 		return
 
 	if not Inventory.has_item(selected_seed, 1):
@@ -68,29 +64,39 @@ func _try_plant() -> void:
 		Inventory.limpiar_seleccion()
 		return
 
-	# Si pasa los filtros, procesamos el consumo de la semilla e invocamos al gestor central
-	_plant_tree(selected_seed)
+	_plant_tree_directly(selected_seed)
 
-func _plant_tree(seed_id: String) -> void:
-	if not planting_system:
-		print(\"⚠️ [TreeSpace] ERROR: No se encontró 'PlantingSystem' en la escena raíz.\")
+func _plant_tree_directly(seed_id: String) -> void:
+	if not fruit_tree_scene:
+		print(\"⚠️ [TreeSpace] ERROR: Falta asignar la escena de los árboles.\")
 		return
 
-	# Descontamos el ítem de forma definitiva del inventario global
 	Inventory.remove_item(seed_id, 1)
-
-	# Extraemos el string de la fruta (ej: \"apple\")
 	var fruit_type : String = SEED_TO_FRUIT[seed_id]
-	
-	# CORREGIDO: Le delegamos la instanciación al PlantingSystem pasándole esta parcela y la fruta real
-	planting_system.plant_tree_at_space(self, fruit_type)
 
-	# Limpiamos el slot visual de la mano si nos quedamos sin unidades
+	var new_tree = fruit_tree_scene.instantiate()
+	new_tree.position = Vector2.ZERO
+	add_child(new_tree)
+	
+	new_tree.position = Vector2.ZERO
+	new_tree.z_index = 1
+
+	if new_tree.has_method(\"plant\"):
+		new_tree.plant(fruit_type)
+
+	hosted_tree = new_tree
+	
+	new_tree.tree_exiting.connect(func():
+		hosted_tree = null
+	)
+
 	if not Inventory.has_item(seed_id, 1):
 		Inventory.limpiar_seleccion()
+		
+	print(\"[TreeSpace] ¡Árbol de %s plantado correctamente!\" % fruit_type)
 
 # =============================================================
-#  DETECCIÓN DEL CUERPO (PLAYER)
+#  DETECCIÓN JUGADOR
 # =============================================================
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group(\"player\") or body.name == \"Player\":

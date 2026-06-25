@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://dwl3akclvb6ln"]
 
+[ext_resource type="Script" uid="uid://0bqskpbo8tie" path="res://Scripts/fruit_bush.gd" id="1_2xfne"]
 [ext_resource type="Texture2D" uid="uid://ba7nx52qi5wfu" path="res://Assets/Plants/Trees, stumps and bushes v2.png" id="1_hbtyg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2xfne"]
@@ -90,12 +91,11 @@ size = Vector2(16, 15)
 size = Vector2(20, 19)
 
 [node name="fruit_bush" type="StaticBody2D" unique_id=1268558160]
+script = ExtResource("1_2xfne")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1242576582]
 sprite_frames = SubResource("SpriteFrames_5hfi0")
 animation = &"blackberry"
-frame = 1
-frame_progress = 0.639205
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=149630738]
 position = Vector2(0, -0.5)

@@ -123,28 +123,30 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_defqv"]
-radius = 12.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k2xy4"]
+size = Vector2(32, 33.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rnkue"]
-size = Vector2(30, 35)
+size = Vector2(67, 66)
 
-[node name="FruitTree" type="Node2D" unique_id=1543696822]
+[node name="FruitTree" type="StaticBody2D" unique_id=807614679]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_awek8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1749410897]
+position = Vector2(0, -14)
 sprite_frames = SubResource("SpriteFrames_gommq")
 animation = &"tree_pear"
+frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=563228158]
-position = Vector2(0, -3)
-shape = SubResource("CircleShape2D_defqv")
+position = Vector2(0, -13.75)
+shape = SubResource("RectangleShape2D_k2xy4")
 
 [node name="HarvestArea" type="Area2D" parent="." unique_id=344419421]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HarvestArea" unique_id=389549932]
-position = Vector2(0, 1)
+position = Vector2(-0.5, -4)
 shape = SubResource("RectangleShape2D_rnkue")
 debug_color = Color(0.44985878, 0.57834834, 0.4188514, 0.41960785)

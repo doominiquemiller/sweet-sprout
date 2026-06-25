@@ -1,18 +1,10 @@
-extends Node2D
+extends StaticBody2D
 
 # =============================================================
-#  FruitTree — Árbol de frutas
-#
-#  Jerarquía en fruit_tree.tscn:
-#  FruitTree (Node2D) ← este script
-#  ├─ AnimatedSprite2D
-#  ├─ CollisionShape2D
-#  └─ HarvestArea (Area2D)
-#     └─ CollisionShape2D
+#  FruitTree — Mecanismo Idéntico al Arbusto (4 Frames)
 # =============================================================
 
-@onready var sprite       : AnimatedSprite2D = $AnimatedSprite2D
-@onready var harvest_area : Area2D           = $HarvestArea
+@onready var sprite : AnimatedSprite2D = $AnimatedSprite2D
 
 const ANIM_MAP : Dictionary = {
 	"apple":  "tree_apple",
@@ -21,6 +13,7 @@ const ANIM_MAP : Dictionary = {
 	"pear":   "tree_pear",
 }
 
+# IDs exactos de los ítems en tu inventario
 const FRUIT_ITEM : Dictionary = {
 	"apple":  "apple",
 	"orange": "orange",
@@ -29,95 +22,80 @@ const FRUIT_ITEM : Dictionary = {
 }
 
 var fruit_type     : String = ""
-var is_ready       : bool   = false
 var is_planted     : bool   = false
-var _player_nearby : bool   = false
+var is_ready       : bool   = false
 
-signal fruit_harvested(fruit_type: String)
+var _produced_morning_this_day   : bool = false
+var _produced_afternoon_this_day : bool = false
 
-# =============================================================
 func _ready() -> void:
 	add_to_group("planted_trees")
-	harvest_area.body_entered.connect(_on_body_entered)
-	harvest_area.body_exited.connect(_on_body_exited)
-	harvest_area.monitoring = true
-	
 	z_index = 1
-	
-func advance_growth_state() -> void:
-	on_day_passed()
+	if sprite:
+		sprite.position = Vector2.ZERO
 
-func _unhandled_input(event: InputEvent) -> void:
-	if _player_nearby and is_ready and event.is_action_pressed("interact"):
-		_harvest()
-
-# =============================================================
-#  PLANTAR
-# =============================================================
 func plant(type: String) -> void:
 	if not ANIM_MAP.has(type):
-		push_error("[FruitTree] Tipo desconocido: %s" % type)
 		return
 
 	fruit_type = type
-	is_planted  = true
-	is_ready    = false
+	is_planted = true
+	is_ready = false
 
-	var anim_name : String = ANIM_MAP[fruit_type]
-
-	# Usamos stop() + frame = 0 en vez de play() + pause()
-	# para evitar que Godot 4 no redibuje el sprite al cambiar frames
 	sprite.stop()
-	sprite.animation = anim_name
-	sprite.frame = 0
+	sprite.animation = ANIM_MAP[fruit_type]
+	sprite.frame = 0 
+	_actualizar_escala()
 
-	print("[FruitTree] Plantado: %s — frame 0/%d" % [
-		fruit_type,
-		sprite.sprite_frames.get_frame_count(anim_name) - 1
-	])
-
-# =============================================================
-#  AL DORMIR — avanza 1 frame
-# =============================================================
-func on_day_passed() -> void:
-	if not is_planted or is_ready:
+func check_hourly_growth(hour: int) -> void:
+	if not is_planted:
 		return
+		
+	# Frame 0 -> Frame 1 (Brote a Joven)
+	if hour >= 7 and hour < 9 and sprite.frame == 0:
+		sprite.frame = 1
 
-	var anim_name  : String = ANIM_MAP[fruit_type]
-	var last_frame : int    = sprite.sprite_frames.get_frame_count(anim_name) - 1
+	# Frame 1 -> Frame 2 (Joven a Adulto listo)
+	if hour >= 11 and sprite.frame == 1:
+		sprite.frame = 2
 
-	if sprite.frame < last_frame:
-		sprite.frame += 1
+	# Mañana: Genera fruta (Frame 2 -> Frame 3)
+	if hour >= 13 and hour < 15:
+		if not _produced_morning_this_day and sprite.frame == 2:
+			_produced_morning_this_day = true
+			_spawn_fruit()
 
-	# Forzar actualización visual — clave para que Godot 4 redibuje el frame
-	sprite.stop()
+	# Tarde: Genera fruta (Frame 2 -> Frame 3)
+	elif hour >= 16 and hour < 20:
+		if not _produced_afternoon_this_day and sprite.frame == 2:
+			_produced_afternoon_this_day = true
+			_spawn_fruit()
 
-	if sprite.frame >= last_frame:
-		is_ready = true
-		print("[FruitTree] %s listo para cosechar! (frame %d)" % [fruit_type, sprite.frame])
+	_actualizar_escala()
+
+func _spawn_fruit() -> void:
+	sprite.frame = 3 
+	is_ready = true
+	_actualizar_escala()
+
+func _actualizar_escala() -> void:
+	if not sprite:
+		return
+	if sprite.frame == 0:
+		sprite.scale = Vector2(0.5, 0.5) 
 	else:
-		print("[FruitTree] %s — frame %d/%d" % [fruit_type, sprite.frame, last_frame])
+		sprite.scale = Vector2(1.0, 1.0) 
 
-# =============================================================
-#  COSECHAR
-# =============================================================
+# Mecanismo de recolección idéntico al del arbusto
 func _harvest() -> void:
 	var item_id : String = FRUIT_ITEM[fruit_type]
 	Inventory.add_item(item_id, 1)
-	emit_signal("fruit_harvested", fruit_type)
+	
+	is_ready = false
+	sprite.frame = 2 # Regresa al estado adulto sin frutas
+	_actualizar_escala()
+	print("[FruitTree] Cosechado con éxito: %s" % item_id)
 
-	# Resetear al frame 0 para el próximo ciclo
-	is_ready     = false
-	sprite.stop()
-	sprite.frame = 0
-
-	print("[FruitTree] Cosechado: %s" % item_id)
-
-# =============================================================
-func _on_body_entered(body: Node) -> void:
-	if body.is_in_group("player"):
-		_player_nearby = true
-
-func _on_body_exited(body: Node) -> void:
-	if body.is_in_group("player"):
-		_player_nearby = false
+func reset_daily_tree_flags() -> void:
+	_produced_morning_this_day = false
+	_produced_afternoon_this_day = false
