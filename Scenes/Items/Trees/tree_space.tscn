@@ -10,7 +10,7 @@ region = Rect2(4, 100, 8, 8)
 script/source = "extends Area2D
 
 # =============================================================
-#  TreeSpace Area — Interacción y Cosecha Simétrica
+#  TreeSpace Area — Parcela Autónoma (Código de Raíz Area2D)
 # =============================================================
 
 @export var fruit_tree_scene : PackedScene = preload(\"res://Scenes/Items/Trees/fruit_trees.tscn\")
@@ -28,6 +28,7 @@ const SEED_TO_FRUIT : Dictionary = {
 func _ready() -> void:
 	add_to_group(\"tree_space\")
 	
+	# Al ser este mismo nodo un Area2D, conectamos sus señales nativas directamente
 	if body_entered.is_connected(_on_body_entered):
 		body_entered.disconnect(_on_body_entered)
 	if body_exited.is_connected(_on_body_exited):
@@ -44,16 +45,16 @@ func _unhandled_input(event: InputEvent) -> void:
 		_handle_space_interaction()
 
 func _handle_space_interaction() -> void:
-	# SI YA HAY UN ÁRBOL: Verificamos si se puede cosechar usando sus variables nativas
+	# SI YA HAY UN ÁRBOL: Cosechar usando su variable interna
 	if hosted_tree != null and is_instance_valid(hosted_tree):
 		if hosted_tree.get(\"is_ready\") == true:
 			if hosted_tree.has_method(\"_harvest\"):
 				hosted_tree._harvest()
 		else:
-			print(\"[TreeSpace] El árbol no tiene frutas listas para cosechar en este momento.\")
+			print(\"[TreeSpace] El árbol no tiene frutas listas.\")
 		return
 
-	# SI NO HAY ÁRBOL: Mecanismo para plantar la semilla seleccionada
+	# SI NO HAY ÁRBOL: Plantar semilla seleccionada
 	var selected_seed : String = Inventory.get_item_seleccionado()
 	if selected_seed == \"\" or not SEED_TO_FRUIT.has(selected_seed):
 		print(\"[TreeSpace] Selecciona una semilla de árbol válida en tu inventario.\")
@@ -75,9 +76,10 @@ func _plant_tree_directly(seed_id: String) -> void:
 	var fruit_type : String = SEED_TO_FRUIT[seed_id]
 
 	var new_tree = fruit_tree_scene.instantiate()
-	new_tree.position = Vector2.ZERO
-	add_child(new_tree)
 	
+	# CENTRADO ABSOLUTO: Al meterlo como hijo directo de este Area2D,
+	# la posición local (0,0) lo clava en el centro exacto de la colisión de tierra.
+	add_child(new_tree)
 	new_tree.position = Vector2.ZERO
 	new_tree.z_index = 1
 
@@ -88,15 +90,16 @@ func _plant_tree_directly(seed_id: String) -> void:
 	
 	new_tree.tree_exiting.connect(func():
 		hosted_tree = null
+		print(\"[TreeSpace] Parcela liberada.\")
 	)
 
 	if not Inventory.has_item(seed_id, 1):
 		Inventory.limpiar_seleccion()
 		
-	print(\"[TreeSpace] ¡Árbol de %s plantado correctamente!\" % fruit_type)
+	print(\"[TreeSpace] ¡Árbol de %s plantado y centrado correctamente!\" % fruit_type)
 
 # =============================================================
-#  DETECCIÓN JUGADOR
+#  DETECCIÓN JUGADOR (Señales Propias del Area2D)
 # =============================================================
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group(\"player\") or body.name == \"Player\":
@@ -108,7 +111,7 @@ func _on_body_exited(body: Node2D) -> void:
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k2qs8"]
-size = Vector2(18.666668, 17.333334)
+size = Vector2(15.333333, 18)
 
 [node name="TreeSpace" type="Sprite2D" unique_id=1680679629]
 scale = Vector2(1.5, 1.5)
@@ -118,5 +121,5 @@ texture = SubResource("AtlasTexture_k2qs8")
 script = SubResource("GDScript_3ro8n")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1385434360]
-position = Vector2(2.3841858e-07, 1.5894572e-07)
+position = Vector2(0.33333325, 1.0000002)
 shape = SubResource("RectangleShape2D_k2qs8")

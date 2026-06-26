@@ -39,7 +39,7 @@ func _ready() -> void:
 # =============================================================
 func check_production(hour: int) -> void:
 	# --- MAÑANA (6:00 AM a 8:00 AM) ---
-	if hour >= 6 and hour < 9:
+	if hour >= 9 and hour < 11:
 		if not _produced_morning_this_day:
 			_produced_morning_this_day = true
 			_trigger_production("Mañana")

@@ -1,130 +1,157 @@
 extends Node2D
 
-@onready var clock            : CanvasLayer     = $clock_ui as CanvasLayer
-@onready var sleep_screen     : CanvasLayer     = $SleepScreen as CanvasLayer
-@onready var canvas_modulate : CanvasModulate  = $CanvasModulate as CanvasModulate
-@onready var planting_system : Node2D          = $PlantingSystem
+# Cambiamos @onready estricto por @export para que puedas arrastrarlo desde el inspector
+@export var dirt_tilemap_layer : TileMapLayer 
 
-# --- Configuración del color por hora para el CanvasModulate ---
-const COLOR_NIGHT   = Color("353738") # Noche oscura (Cerrado / Madrugada)
-const COLOR_DAWN    = Color("cbe0de") # Amanecer cálido (6:00 AM)
-const COLOR_DAY     = Color("dce0d2") # Luz pura del día (8:00 AM - 4:00 PM)
-const COLOR_SUNSET  = Color("ba7c54") # Atardecer naranja (6:00 PM)
-const COLOR_EVENING = Color("577297") # Anochecer azulado (7:00 PM)
+@export var dynamic_crop_scene : PackedScene = preload("res://Scenes/dynamic_crop.tscn")
 
-# CORREGIDO: Variable de control para mandar el pulso a las colmenas una sola vez por minuto
-var _last_checked_minute : int = -1
+var grid_data : Dictionary = {}
+var last_player_coord : Vector2i = Vector2i(-999, -999)
+
+const SEED_CONFIG : Dictionary = {
+	"wheat_seed":     {"type": "wheat"},
+	"sugarcane_seed": {"type": "sugarcane"}
+}
+
+# Coordenadas del Atlas en tu TileSet
+const TILE_DIRT_NORMAL   := Vector2i(0, 0)
+const TILE_DIRT_TILLED   := Vector2i(1, 0)
+const TILE_DIRT_WATERED  := Vector2i(2, 0)
 
 func _ready() -> void:
-	# Registrar el reloj en el core de tiempo global
-	GameTime.register(clock)
-	sleep_screen.clock = clock
-	sleep_screen.reset_daily_tracking() # Inicializa el dinero del primer día
+	add_to_group("world")
 	
-	# Conectar el final del día automático con la pantalla de dormir
-	clock.connect("day_ended", func():
-		clock.set_paused(true)
-		sleep_screen.show_screen()
-	)
-	
-	# Sincronización exacta de señales, crecimiento de huerto y dinero
-	sleep_screen.player_slept.connect(func():
-		# 1. Avanzamos el clima del juego
-		WeatherSystem.advance_day()
-		
-		# 2. Avanzamos el reloj al día siguiente (Día 1 -> Día 2 -> etc.)
-		clock.next_day()
-		
-		# 3. Reiniciamos el rastreo del dinero al iniciar el nuevo día oficial
-		sleep_screen.reset_daily_tracking()
-		
-		# 4. Forzamos el avance de crecimiento en árboles y arbustos frutales
-		_advance_fruit_trees()
-		
-		# 5. CORREGIDO: Reinicia los bloqueadores de producción diaria de las colmenas
-		get_tree().call_group("beehives", "reset_daily_production_flags")
-		get_tree().call_group("planted_bushes", "reset_daily_bush_flags")
-		get_tree().call_group("planted_trees", "reset_daily_tree_flags")
-	)
-	
-	get_tree().paused = false
-	
-	# Esperamos un instante a que el Singleton de inventario cargue sus ranuras visuales
-	await get_tree().create_timer(0.1).timeout
-	
-	# Limpiamos cualquier residuo del arranque para asegurar que sea exactamente 1 de cada una
-	Inventory.items.clear()
-	Inventory._slot_order.clear()
-	
-	# Inyectamos las 4 semillas listas para plantar
-	Inventory.add_item("apple_seed", 1)
-	Inventory.add_item("orange_seed", 1)
-	Inventory.add_item("peach_seed", 1)
-	Inventory.add_item("pear_seed", 1)
-	Inventory.add_item("blackberry_seeds", 1)
-	Inventory.add_item("blueberry_seeds", 1)
-	Inventory.add_item("raspberry_seeds", 1)
-	
-	print("¡Semillas de prueba añadidas con éxito al inventario global!")
+	# MECANISMO DE SEGURIDAD AUTOMÁTICO: 
+	# Si no arrastraste el nodo en el inspector, intentamos buscarlo por tipo en la escena
+	if not dirt_tilemap_layer:
+		var found_layer = find_child("*DirtLayer*", true, false)
+		if found_layer and found_layer is TileMapLayer:
+			dirt_tilemap_layer = found_layer
+		else:
+			# Si falla, busca el primer TileMapLayer que encuentre como plan C
+			for child in get_children():
+				if child is TileMapLayer:
+					dirt_tilemap_layer = child
+					break
+					
+	if not dirt_tilemap_layer:
+		push_error("[ERROR CRÍTICO] world.gd: ¡No se encontró ningún nodo TileMapLayer en la escena! Asegúrate de asignarlo en el Inspector.")
 
 func _process(_delta: float) -> void:
-	_update_ambient_light()
-	_check_beehive_production_schedule()
+	_monitor_player_movement()
 
-## Controla la transición de color suave del CanvasModulate basada en el reloj
-func _update_ambient_light() -> void:
-	var hour : int = clock.get_hour()
-	var minute : int = clock.get_minute()
-	
-	# Forzamos a que el factor de tiempo sea un cálculo flotante exacto (0.0 a 1.0)
-	var time_factor : float = float(minute) / 60.0 
-	
-	var target_color : Color = COLOR_DAY
-	
-	# Sistema de interpolación horaria garantizado de 24 horas
-	if hour >= 0 and hour < 5:
-		target_color = COLOR_NIGHT
-	elif hour == 5:
-		target_color = COLOR_NIGHT.lerp(COLOR_DAWN, time_factor)
-	elif hour == 6:
-		target_color = COLOR_DAWN.lerp(COLOR_DAY, time_factor)
-	elif hour >= 7 and hour < 17:
-		target_color = COLOR_DAY
-	elif hour == 17:
-		target_color = COLOR_DAY.lerp(COLOR_SUNSET, time_factor)
-	elif hour == 18:
-		target_color = COLOR_SUNSET.lerp(COLOR_EVENING, time_factor)
-	elif hour == 19:
-		target_color = COLOR_EVENING.lerp(COLOR_NIGHT, time_factor)
-	else: # De 20:00 a 23:59
-		target_color = COLOR_NIGHT
+func _monitor_player_movement() -> void:
+	# Si el nodo no existe, salimos pacíficamente en lugar de romper el juego
+	if not dirt_tilemap_layer: 
+		return
 		
-	canvas_modulate.color = target_color
-
-## CORREGIDO: Verifica y envía la señal a las colmenas de forma optimizada una sola vez por minuto
-func _check_beehive_production_schedule() -> void:
-	var current_minute : int = clock.get_minute()
+	var player = get_tree().get_first_node_in_group("player")
+	if not player:
+		return
+		
+	var current_coord : Vector2i = dirt_tilemap_layer.local_to_map(dirt_tilemap_layer.to_local(player.global_position))
 	
-	if current_minute != _last_checked_minute:
-		_last_checked_minute = current_minute
-		
-		var current_hour : int = clock.get_hour()
-		get_tree().call_group("beehives", "check_production", current_hour)
-		
-		get_tree().call_group("planted_bushes", "check_hourly_growth", current_hour)
-		
-		get_tree().call_group("planted_trees", "check_hourly_growth", current_hour)
-
-## Avanza de etapa tanto los árboles como los nuevos arbustos de bayas al cambiar de día
-func _advance_fruit_trees() -> void:
-	# 1. Buscamos y avanzamos todas las parcelas de árboles del mapa
-	var tree_spaces = get_tree().get_nodes_in_group("tree_space")
-	for space in tree_spaces:
-		if is_instance_valid(space) and space.has_method("advance_hosted_tree"):
-			space.advance_hosted_tree() # Le dice a la tierra: "Haz crecer tu árbol"
+	if current_coord != last_player_coord:
+		if grid_data.has(last_player_coord) and is_instance_valid(grid_data[last_player_coord]["crop_node"]):
+			grid_data[last_player_coord]["crop_node"]._hide_interaction_prompt()
 			
-	# 2. NUEVO: Buscamos y avanzamos todas las parcelas de arbustos (Crop Spaces) del mapa
-	var crop_spaces = get_tree().get_nodes_in_group("crop_space")
-	for space in crop_spaces:
-		if is_instance_valid(space) and space.has_method("advance_hosted_bush"):
-			space.advance_hosted_bush() # Le dice a la tierra: "Haz crecer tu arbusto"
+		if grid_data.has(current_coord) and is_instance_valid(grid_data[current_coord]["crop_node"]):
+			grid_data[current_coord]["crop_node"].show_interaction_prompt()
+			
+		last_player_coord = current_coord
+
+func _check_player_proximity_on_mature(coord: Vector2i) -> void:
+	if coord == last_player_coord and grid_data.has(coord) and is_instance_valid(grid_data[coord]["crop_node"]):
+		grid_data[coord]["crop_node"].show_interaction_prompt()
+
+func _unhandled_input(event: InputEvent) -> void:
+	# Evitamos ejecutar interacciones si la capa de suelo falló al cargar
+	if not dirt_tilemap_layer: 
+		return
+		
+	if event.is_action_pressed("interact") or (event is InputEventKey and event.pressed and event.keycode == KEY_F):
+		var player = get_tree().get_first_node_in_group("player")
+		if player:
+			var cell_coord : Vector2i = dirt_tilemap_layer.local_to_map(dirt_tilemap_layer.to_local(player.global_position))
+			_handle_tool_and_crop_interaction(cell_coord)
+
+func _handle_tool_and_crop_interaction(coord: Vector2i) -> void:
+	if dirt_tilemap_layer.get_cell_source_id(coord) == -1:
+		return
+
+	if not grid_data.has(coord):
+		grid_data[coord] = {"crop_node": null, "is_tilled": false, "is_watered": false}
+
+	var cell = grid_data[coord]
+	var active_tool : String = Inventory.get_item_seleccionado()
+
+	# 1. HERRAMIENTA: AZADA
+	if active_tool == "hoe":
+		if not cell["is_tilled"]:
+			cell["is_tilled"] = true
+			_update_tile_visual(coord, TILE_DIRT_TILLED)
+			print("[Mundo] Celda labrada en: ", coord)
+		return
+
+	# 2. HERRAMIENTA: REGADERA
+	if active_tool == "watering_can":
+		if cell["is_tilled"] and not cell["is_watered"]:
+			cell["is_watered"] = true
+			_update_tile_visual(coord, TILE_DIRT_WATERED)
+			if is_instance_valid(cell["crop_node"]):
+				cell["crop_node"].apply_water()
+			print("[Mundo] Celda regada en: ", coord)
+		return
+
+	# 3. ACCIÓN: COSECHAR
+	if is_instance_valid(cell["crop_node"]):
+		var crop_node = cell["crop_node"]
+		if crop_node.is_ready:
+			crop_node.collect_harvest()
+		else:
+			print("[Mundo] El cultivo aún se encuentra en desarrollo.")
+		return
+
+	# 4. ACCIÓN: PLANTAR SEMILLA
+	if cell["is_tilled"] and cell["crop_node"] == null:
+		_try_plant_on_tile(coord)
+
+func _try_plant_on_tile(coord: Vector2i) -> void:
+	var selected_seed : String = Inventory.get_item_seleccionado()
+	
+	if selected_seed == "" or not SEED_CONFIG.has(selected_seed):
+		print("[Mundo] Selecciona una semilla de cultivo válida.")
+		return
+
+	if not Inventory.has_item(selected_seed, 1):
+		print("[Mundo] No tienes suficientes semillas.")
+		Inventory.limpiar_seleccion()
+		return
+
+	Inventory.remove_item(selected_seed, 1)
+	var plant_type : String = SEED_CONFIG[selected_seed]["type"]
+
+	var new_crop = dynamic_crop_scene.instantiate()
+	dirt_tilemap_layer.add_child(new_crop)
+	new_crop.global_position = dirt_tilemap_layer.to_global(dirt_tilemap_layer.map_to_local(coord))
+	new_crop.init_crop(plant_type, coord)
+
+	if grid_data[coord]["is_watered"]:
+		new_crop.apply_water()
+
+	grid_data[coord]["crop_node"] = new_crop
+	
+	if not Inventory.has_item(selected_seed, 1):
+		Inventory.limpiar_seleccion()
+
+func _update_tile_visual(coord: Vector2i, tile_atlas_coord: Vector2i) -> void:
+	if not dirt_tilemap_layer: return
+	var source_id = dirt_tilemap_layer.get_cell_source_id(coord)
+	dirt_tilemap_layer.set_cell(coord, source_id, tile_atlas_coord)
+
+func free_tile_data(coord: Vector2i) -> void:
+	if grid_data.has(coord):
+		grid_data[coord]["crop_node"] = null
+		grid_data[coord]["is_watered"] = false
+		_update_tile_visual(coord, TILE_DIRT_TILLED)
+		print("[Huerto] Ciclo completado. Celda arada reestablecida: ", coord)

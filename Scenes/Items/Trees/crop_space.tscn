@@ -1,147 +1,29 @@
-[gd_scene format=3 uid="uid://i6ndiexpiyb7"]
+[gd_scene format=3 uid="uid://blndarpado0nr"]
 
 [ext_resource type="Texture2D" uid="uid://bvxj7bsftiuac" path="res://Assets/Tilesets/Tilled Dirt.png" id="1_3ro8n"]
+[ext_resource type="Script" uid="uid://db3myh777hbbf" path="res://Scripts/crop_space.gd" id="2_axnad"]
+[ext_resource type="FontFile" uid="uid://n5p8m4kiw5un" path="res://Fonts/CutePixel.ttf" id="3_s5ybs"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k2qs8"]
 atlas = ExtResource("1_3ro8n")
 region = Rect2(4, 100, 8, 8)
 
-[sub_resource type="GDScript" id="GDScript_3ro8n"]
-script/source = "extends Area2D
-
-# =============================================================
-#  CropSpace — Parcela Universal para cualquier Semilla
-# =============================================================
-
-# Asegúrate de asignar estas escenas en el Inspector de tu CropSpace
-@export var fruit_tree_scene : PackedScene = preload(\"res://Scenes/Items/Trees/fruit_trees.tscn\")
-@export var fruit_bush_scene : PackedScene = preload(\"res://Scenes/Items/Bush/fruit_bush.tscn\")
-
-var is_player_inside : bool = false
-var hosted_plant     : Node = null
-
-# Diccionario unificado que acepta CUALQUIER semilla del juego
-const SEED_CONFIG : Dictionary = {
-	# Semillas de Árboles
-	\"apple_seed\":       {\"type\": \"apple\",      \"is_tree\": true},
-	\"pear_seed\":        {\"type\": \"pear\",       \"is_tree\": true},
-	\"orange_seed\":      {\"type\": \"orange\",     \"is_tree\": true},
-	\"peach_seed\":       {\"type\": \"peach\",      \"is_tree\": true},
-	
-	# Semillas de Arbustos (Bayas)
-	\"blackberry_seeds\": {\"type\": \"blackberry\", \"is_tree\": false},
-	\"blueberry_seeds\":  {\"type\": \"blueberry\",  \"is_tree\": false},
-	\"raspberry_seeds\":  {\"type\": \"raspberry\",  \"is_tree\": false}
-}
-
-func _ready() -> void:
-	# Nos aseguramos de añadirlo al grupo para el world.gd
-	add_to_group(\"crop_space\")
-	
-	# Conexiones limpias de señales
-	if body_entered.is_connected(_on_body_entered):
-		body_entered.disconnect(_on_body_entered)
-	if body_exited.is_connected(_on_body_exited):
-		body_exited.disconnect(_on_body_exited)
-		
-	body_entered.connect(_on_body_entered)
-	body_exited.connect(_on_body_exited)
-
-func _unhandled_input(event: InputEvent) -> void:
-	if not is_player_inside:
-		return
-
-	# Detecta interacción con la F o acción configurada
-	if event.is_action_pressed(\"interact\") or (event is InputEventKey and event.pressed and event.keycode == KEY_F):
-		_try_plant()
-
-func _try_plant() -> void:
-	# 1. Si ya hay algo creciendo aquí, no hacemos nada
-	if hosted_plant != null and is_instance_valid(hosted_plant):
-		print(\"[CropSpace] Esta parcela ya está ocupada.\")
-		return
-
-	# 2. Obtenemos qué tiene seleccionado el jugador en el inventario
-	var selected_seed : String = Inventory.get_item_seleccionado()
-	
-	# 3. Validamos que sea una semilla que esté en nuestra lista universal
-	if selected_seed == \"\" or not SEED_CONFIG.has(selected_seed):
-		print(\"[CropSpace] Selecciona una semilla válida en tu inventario para plantar aquí.\")
-		return
-
-	# 4. Verificamos que realmente le queden semillas en el inventario
-	if not Inventory.has_item(selected_seed, 1):
-		print(\"[CropSpace] No tienes más unidades de esta semilla.\")
-		Inventory.limpiar_seleccion()
-		return
-
-	# Si pasa todos los filtros, procedemos a plantar
-	_plant_resource(selected_seed)
-
-func _plant_resource(seed_id: String) -> void:
-	var config = SEED_CONFIG[seed_id]
-	var plant_type : String = config[\"type\"]
-	var is_tree    : bool   = config[\"is_tree\"]
-	
-	# Elegimos dinámicamente qué escena instanciar
-	var target_scene : PackedScene = fruit_tree_scene if is_tree else fruit_bush_scene
-	
-	if not target_scene:
-		print(\"⚠️ [CropSpace] ERROR: No se ha asignado la escena en el Inspector para esta planta.\")
-		return
-
-	# Restamos la semilla consumida
-	Inventory.remove_item(seed_id, 1)
-
-	# Instanciamos el nodo correspondiente (Árbol o Arbusto)
-	var new_plant = target_scene.instantiate()
-	add_child(new_plant)
-	
-	# Posicionamiento centrado y z_index para que se renderice correctamente
-	new_plant.position = Vector2.ZERO
-	new_plant.z_index = 1
-
-	# Como ambos scripts ahora usan la misma estructura horaria, llamamos a plant()
-	if new_plant.has_method(\"plant\"):
-		new_plant.plant(plant_type)
-
-	# Guardamos la referencia de la planta alojada
-	hosted_plant = new_plant
-	
-	# Si la planta llega a ser destruida o quitada, liberamos el espacio automáticamente
-	new_plant.tree_exiting.connect(func():
-		hosted_plant = null
-		print(\"[CropSpace] Planta removida. Parcela libre de nuevo.\")
-	)
-
-	# Si nos quedamos con 0 semillas de este tipo, limpiamos la mano del jugador
-	if not Inventory.has_item(seed_id, 1):
-		Inventory.limpiar_seleccion()
-		
-	print(\"[CropSpace] ¡%s plantado con éxito en el espacio de cultivo!\" % plant_type)
-
-# =============================================================
-#  DETECCIÓN DEL JUGADOR
-# =============================================================
-func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group(\"player\") or body.name == \"Player\":
-		is_player_inside = true
-
-func _on_body_exited(body: Node2D) -> void:
-	if body.is_in_group(\"player\") or body.name == \"Player\":
-		is_player_inside = false
-"
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k2qs8"]
-size = Vector2(18.666668, 17.333334)
+size = Vector2(12, 12)
 
 [node name="CropSpace" type="Sprite2D" unique_id=1680679629]
 scale = Vector2(1.5, 1.5)
 texture = SubResource("AtlasTexture_k2qs8")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=567870882]
-script = SubResource("GDScript_3ro8n")
+script = ExtResource("2_axnad")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1385434360]
-position = Vector2(2.3841858e-07, 1.5894572e-07)
+position = Vector2(-2.3841858e-07, -1.5894572e-07)
 shape = SubResource("RectangleShape2D_k2qs8")
+
+[node name="InteractionLabel" type="Label" parent="." unique_id=1923856816]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("3_s5ybs")
+text = "[F] Cosechar"

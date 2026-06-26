@@ -244,7 +244,7 @@ height = 6.0
 
 [node name="Player" type="CharacterBody2D" unique_id=62884988 groups=["player"]]
 process_mode = 3
-z_index = 2
+z_index = 3
 y_sort_enabled = true
 script = ExtResource("1_cvnsp")
 
