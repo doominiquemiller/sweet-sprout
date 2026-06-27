@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://b6nkjlv1lberw" path="res://Scenes/Items/Trees/tree.tscn" id="17_0pcbe"]
 [ext_resource type="PackedScene" uid="uid://dbedud0wrda8x" path="res://Scenes/Items/Decor/haybale.tscn" id="18_axeuq"]
 [ext_resource type="PackedScene" uid="uid://i6ndiexpiyb7" path="res://Scenes/Items/Trees/bush_space.tscn" id="19_13n8b"]
-[ext_resource type="PackedScene" uid="uid://blndarpado0nr" path="res://Scenes/Items/Trees/crop_space.tscn" id="21_gwaj6"]
+[ext_resource type="PackedScene" uid="uid://difnq87w0ljk2" path="res://Scenes/crop_plot.tscn" id="21_gwaj6"]
 [ext_resource type="PackedScene" uid="uid://dkrsmo13p2aqr" path="res://Scenes/Items/Trees/cb_tree.tscn" id="21_qebug"]
 [ext_resource type="PackedScene" uid="uid://de08lga4kyrkh" path="res://Scenes/Items/Trees/tree_space.tscn" id="21_uqdn7"]
 [ext_resource type="Texture2D" uid="uid://dg8yu3vt5j47w" path="res://Assets/Tilesets/Wooden_House_Walls_Tilset.png" id="22_pt3ps"]
@@ -952,10 +952,8 @@ y_sort_enabled = true
 script = ExtResource("1_pyn1s")
 
 [node name="clock_ui" parent="." unique_id=1588631544 instance=ExtResource("23_xbk3s")]
-visible = false
 
 [node name="SleepScreen" parent="." unique_id=834690660 instance=ExtResource("3_b4e6k")]
-visible = false
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1093347763]
 
@@ -1074,77 +1072,8 @@ position = Vector2(-232, -103)
 z_index = 1
 position = Vector2(-184, -103.00001)
 
-[node name="CropSpace7" parent="TileMap/Farm" unique_id=69742451 instance=ExtResource("21_gwaj6")]
-position = Vector2(-148, 144)
-
-[node name="CropSpace8" parent="TileMap/Farm" unique_id=731066744 instance=ExtResource("21_gwaj6")]
-position = Vector2(-122, 144)
-
-[node name="CropSpace9" parent="TileMap/Farm" unique_id=97133858 instance=ExtResource("21_gwaj6")]
-position = Vector2(-148, 126)
-
-[node name="CropSpace10" parent="TileMap/Farm" unique_id=615574538 instance=ExtResource("21_gwaj6")]
-position = Vector2(-122, 126)
-
-[node name="CropSpace11" parent="TileMap/Farm" unique_id=1437340418 instance=ExtResource("21_gwaj6")]
-position = Vector2(-97, 144)
-
-[node name="CropSpace12" parent="TileMap/Farm" unique_id=1789203296 instance=ExtResource("21_gwaj6")]
-position = Vector2(-71, 144)
-
-[node name="CropSpace13" parent="TileMap/Farm" unique_id=308910636 instance=ExtResource("21_gwaj6")]
-position = Vector2(-97, 126)
-
-[node name="CropSpace14" parent="TileMap/Farm" unique_id=2091170842 instance=ExtResource("21_gwaj6")]
-position = Vector2(-71, 126)
-
-[node name="CropSpace15" parent="TileMap/Farm" unique_id=675368712 instance=ExtResource("21_gwaj6")]
-position = Vector2(-46, 144)
-
-[node name="CropSpace16" parent="TileMap/Farm" unique_id=2096485513 instance=ExtResource("21_gwaj6")]
-position = Vector2(-20, 144)
-
-[node name="CropSpace17" parent="TileMap/Farm" unique_id=151993544 instance=ExtResource("21_gwaj6")]
-position = Vector2(-46, 126)
-
-[node name="CropSpace18" parent="TileMap/Farm" unique_id=886271351 instance=ExtResource("21_gwaj6")]
-position = Vector2(-20, 126)
-
-[node name="CropSpace19" parent="TileMap/Farm" unique_id=650506690 instance=ExtResource("21_gwaj6")]
-position = Vector2(5, 144)
-
-[node name="CropSpace20" parent="TileMap/Farm" unique_id=1862578880 instance=ExtResource("21_gwaj6")]
-position = Vector2(31, 144)
-
-[node name="CropSpace21" parent="TileMap/Farm" unique_id=1080491582 instance=ExtResource("21_gwaj6")]
-position = Vector2(5, 126)
-
-[node name="CropSpace22" parent="TileMap/Farm" unique_id=656063670 instance=ExtResource("21_gwaj6")]
-position = Vector2(31, 126)
-
-[node name="CropSpace23" parent="TileMap/Farm" unique_id=852129728 instance=ExtResource("21_gwaj6")]
-position = Vector2(-148, 108)
-
-[node name="CropSpace24" parent="TileMap/Farm" unique_id=896144367 instance=ExtResource("21_gwaj6")]
-position = Vector2(-122, 108)
-
-[node name="CropSpace25" parent="TileMap/Farm" unique_id=1325315638 instance=ExtResource("21_gwaj6")]
-position = Vector2(-97, 108)
-
-[node name="CropSpace26" parent="TileMap/Farm" unique_id=1033865973 instance=ExtResource("21_gwaj6")]
-position = Vector2(-71, 108)
-
-[node name="CropSpace27" parent="TileMap/Farm" unique_id=1575243278 instance=ExtResource("21_gwaj6")]
-position = Vector2(-46, 108)
-
-[node name="CropSpace28" parent="TileMap/Farm" unique_id=1619566448 instance=ExtResource("21_gwaj6")]
-position = Vector2(-20, 108)
-
-[node name="CropSpace29" parent="TileMap/Farm" unique_id=498780523 instance=ExtResource("21_gwaj6")]
-position = Vector2(5, 108)
-
-[node name="CropSpace30" parent="TileMap/Farm" unique_id=575213416 instance=ExtResource("21_gwaj6")]
-position = Vector2(31, 108)
+[node name="CropPlot" parent="TileMap/Farm" unique_id=401292526 instance=ExtResource("21_gwaj6")]
+position = Vector2(-129, 118)
 
 [node name="Bakery2" type="Node" parent="TileMap" unique_id=1896068470]
 

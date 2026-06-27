@@ -15,14 +15,16 @@ size = Vector2(12, 12)
 scale = Vector2(1.5, 1.5)
 texture = SubResource("AtlasTexture_k2qs8")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=567870882]
+[node name="Area2D" type="Area2D" parent="." unique_id=567870882 node_paths=PackedStringArray("label")]
 script = ExtResource("2_axnad")
+label = NodePath("../InteractionLabel")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1385434360]
 position = Vector2(-2.3841858e-07, -1.5894572e-07)
 shape = SubResource("RectangleShape2D_k2qs8")
 
 [node name="InteractionLabel" type="Label" parent="." unique_id=1923856816]
+visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 theme_override_fonts/font = ExtResource("3_s5ybs")
