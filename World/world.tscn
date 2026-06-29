@@ -1,61 +1,61 @@
 [gd_scene format=4 uid="uid://b1fdg53evmpx1"]
 
-[ext_resource type="Texture2D" uid="uid://bdp0mw5o2ivu2" path="res://Assets/Tilesets/Grass.png" id="1_7yui6"]
-[ext_resource type="PackedScene" uid="uid://b4i4fpk0eybx7" path="res://Scenes/player.tscn" id="1_kn0ld"]
-[ext_resource type="Script" uid="uid://d31xbc4m43ghi" path="res://Scripts/world.gd" id="1_pyn1s"]
-[ext_resource type="PackedScene" uid="uid://bveh1fe4dvwx8" path="res://Scenes/sleep_screen.tscn" id="3_b4e6k"]
-[ext_resource type="Texture2D" uid="uid://cv11nc2v7ba6i" path="res://Assets/Tilesets/CHills.png" id="5_t2t4p"]
-[ext_resource type="Texture2D" uid="uid://jr25d8h6tbyu" path="res://Assets/Objects/Basic Grass Biom things 1.png" id="6_axeuq"]
-[ext_resource type="Texture2D" uid="uid://ciqo5eqr1dji4" path="res://Assets/Characters/Egg_And_Nest.png" id="7_1cojt"]
-[ext_resource type="Texture2D" uid="uid://ca6h2ijb33qh3" path="res://Assets/Plants/Cherry Blossom Biom.png" id="7_hmc15"]
-[ext_resource type="Texture2D" uid="uid://s3kadje4e66w" path="res://Assets/Tilesets/Hills.png" id="8_axeuq"]
-[ext_resource type="Texture2D" uid="uid://o2hqpa3buphc" path="res://Assets/Plants/Pine Tree Biome.png" id="10_dt0r1"]
-[ext_resource type="Texture2D" uid="uid://bwqiburpkywbx" path="res://Assets/Objects/Paths.png" id="10_yq1aw"]
-[ext_resource type="Texture2D" uid="uid://dae1h20xbqpp4" path="res://Assets/Tilesets/Fences.png" id="12_c5t2i"]
-[ext_resource type="PackedScene" uid="uid://wbq2klspeapf" path="res://Scenes/Items/Estructures/coop.tscn" id="12_no8kt"]
-[ext_resource type="PackedScene" uid="uid://dw7wt177quejw" path="res://Scenes/Items/Trees/treeP.tscn" id="14_0sgyr"]
-[ext_resource type="PackedScene" uid="uid://bpfag6epgakv4" path="res://Scenes/Items/Bakery/wall.tscn" id="14_uqdn7"]
-[ext_resource type="PackedScene" uid="uid://b6nkjlv1lberw" path="res://Scenes/Items/Trees/tree.tscn" id="17_0pcbe"]
-[ext_resource type="PackedScene" uid="uid://dbedud0wrda8x" path="res://Scenes/Items/Decor/haybale.tscn" id="18_axeuq"]
-[ext_resource type="PackedScene" uid="uid://i6ndiexpiyb7" path="res://Scenes/Items/Trees/bush_space.tscn" id="19_13n8b"]
-[ext_resource type="PackedScene" uid="uid://difnq87w0ljk2" path="res://Scenes/crop_plot.tscn" id="21_gwaj6"]
-[ext_resource type="PackedScene" uid="uid://dkrsmo13p2aqr" path="res://Scenes/Items/Trees/cb_tree.tscn" id="21_qebug"]
-[ext_resource type="PackedScene" uid="uid://de08lga4kyrkh" path="res://Scenes/Items/Trees/tree_space.tscn" id="21_uqdn7"]
-[ext_resource type="Texture2D" uid="uid://dg8yu3vt5j47w" path="res://Assets/Tilesets/Wooden_House_Walls_Tilset.png" id="22_pt3ps"]
-[ext_resource type="PackedScene" uid="uid://duxmkmgty85gt" path="res://Scenes/Items/Doors/door.tscn" id="23_hmc15"]
-[ext_resource type="PackedScene" uid="uid://ckavxhxmjqjdo" path="res://UI/clock_ui.tscn" id="23_xbk3s"]
-[ext_resource type="PackedScene" uid="uid://dpp125ixn211q" path="res://Scenes/Items/Bakery/pastries_counter.tscn" id="24_dt0r1"]
-[ext_resource type="PackedScene" uid="uid://dg86u60lp4d1w" path="res://Scenes/Items/Bakery/counter.tscn" id="24_hmc15"]
-[ext_resource type="PackedScene" uid="uid://bj7f20chsx37u" path="res://Scenes/Items/Bakery/counter_2.tscn" id="25_1vso6"]
-[ext_resource type="Texture2D" uid="uid://nwcvo04wv0ci" path="res://Assets/Objects/Basic Furniture.png" id="26_ochwf"]
-[ext_resource type="PackedScene" uid="uid://b77xhlb302qdk" path="res://Scenes/Items/Bakery/bread_stand.tscn" id="26_qebug"]
-[ext_resource type="PackedScene" uid="uid://o6mfc65td22g" path="res://Scenes/Items/Bakery/counter_3.tscn" id="26_t6yt7"]
-[ext_resource type="PackedScene" uid="uid://bgk21p4uqlydv" path="res://Scenes/Items/Bakery/sweet_stand.tscn" id="27_o2rbt"]
-[ext_resource type="PackedScene" uid="uid://52yrvejy7y0b" path="res://Scenes/Animals/beehive.tscn" id="28_1vso6"]
-[ext_resource type="PackedScene" uid="uid://csujxnmorl57l" path="res://Scenes/Items/Estructures/well.tscn" id="29_3ua1v"]
-[ext_resource type="PackedScene" uid="uid://nj08utrnev6s" path="res://Scenes/Items/Decor/sofa_r.tscn" id="29_r0ikl"]
-[ext_resource type="PackedScene" uid="uid://dn7kymyxo2i3q" path="res://Scenes/Items/Decor/sofa_l.tscn" id="30_opbav"]
-[ext_resource type="PackedScene" uid="uid://cfdbkk5gsfwnd" path="res://Scenes/Items/Decor/mesa.tscn" id="31_coyub"]
-[ext_resource type="PackedScene" uid="uid://da4sddfeth374" path="res://Scenes/Animals/chicken.tscn" id="32_3ua1v"]
-[ext_resource type="PackedScene" uid="uid://vjvpmp7s6hiu" path="res://Scenes/Items/Bakery/cafe_board.tscn" id="33_p5wkl"]
-[ext_resource type="PackedScene" uid="uid://b7bgllmssqghd" path="res://Scenes/Animals/cow.tscn" id="33_r0ikl"]
-[ext_resource type="PackedScene" uid="uid://ckv432pt1w55g" path="res://Scenes/Items/Decor/mesa_v.tscn" id="34_te07t"]
-[ext_resource type="PackedScene" uid="uid://byeod06hi4xyk" path="res://Scenes/Items/Bakery/sink.tscn" id="35_al5m0"]
-[ext_resource type="PackedScene" uid="uid://c8tgii52je7ao" path="res://Scenes/Items/Bakery/oven.tscn" id="36_6mm6r"]
-[ext_resource type="PackedScene" uid="uid://dvskwlg0t5gv3" path="res://Scenes/Items/Bakery/counter_4.tscn" id="37_xcb5n"]
-[ext_resource type="PackedScene" uid="uid://c7rusqnds5kn5" path="res://Scenes/Items/Bakery/cutting board.tscn" id="38_te07t"]
-[ext_resource type="PackedScene" uid="uid://ds7f05k7btavb" path="res://Scenes/Items/Bakery/dough.tscn" id="39_b4e6k"]
-[ext_resource type="PackedScene" uid="uid://pbvn6oavjau5" path="res://Scenes/Items/Bakery/manual_blender.tscn" id="40_0sgyr"]
-[ext_resource type="PackedScene" uid="uid://bmsbpkug3gmxk" path="res://Scenes/Items/Bakery/blender.tscn" id="41_l33cg"]
-[ext_resource type="PackedScene" uid="uid://cty312xm1d72b" path="res://Scenes/Items/Bakery/ingredients.tscn" id="42_xcb5n"]
-[ext_resource type="PackedScene" uid="uid://cifrre8db3msl" path="res://Scenes/Items/Bakery/dishes.tscn" id="43_te07t"]
-[ext_resource type="PackedScene" uid="uid://gkn71ljrtmiq" path="res://Scenes/Items/Bakery/ingredients2.tscn" id="44_b4e6k"]
-[ext_resource type="PackedScene" uid="uid://c34picphhum36" path="res://Scenes/Items/Trees/treePino.tscn" id="46_l33cg"]
-[ext_resource type="PackedScene" uid="uid://dm76s17n37nnl" path="res://Scenes/Animals/bee.tscn" id="49_b4e6k"]
-[ext_resource type="Script" uid="uid://co8u4ndjgy3de" path="res://Scripts/planting_system.gd" id="51_l33cg"]
+[ext_resource type="Script" uid="uid://d31xbc4m43ghi" path="res://Scripts/world.gd" id="1_o2cvn"]
+[ext_resource type="PackedScene" uid="uid://ckavxhxmjqjdo" path="res://UI/clock_ui.tscn" id="2_4giqt"]
+[ext_resource type="PackedScene" uid="uid://bveh1fe4dvwx8" path="res://World/sleep_screen.tscn" id="3_8iv6r"]
+[ext_resource type="Texture2D" uid="uid://s3kadje4e66w" path="res://Assets/Tilesets/Hills.png" id="4_3gnva"]
+[ext_resource type="Texture2D" uid="uid://dg8yu3vt5j47w" path="res://Assets/Tilesets/Wooden_House_Walls_Tilset.png" id="5_i5ake"]
+[ext_resource type="Texture2D" uid="uid://bdp0mw5o2ivu2" path="res://Assets/Tilesets/Grass.png" id="6_dmovf"]
+[ext_resource type="Texture2D" uid="uid://ca6h2ijb33qh3" path="res://Assets/Plants/Cherry Blossom Biom.png" id="7_m1472"]
+[ext_resource type="Texture2D" uid="uid://cv11nc2v7ba6i" path="res://Assets/Tilesets/CHills.png" id="8_eyejc"]
+[ext_resource type="Texture2D" uid="uid://jr25d8h6tbyu" path="res://Assets/Objects/Basic Grass Biom things 1.png" id="9_l3fwa"]
+[ext_resource type="Texture2D" uid="uid://o2hqpa3buphc" path="res://Assets/Plants/Pine Tree Biome.png" id="10_3i426"]
+[ext_resource type="Texture2D" uid="uid://ciqo5eqr1dji4" path="res://Assets/Characters/Egg_And_Nest.png" id="11_1ex6t"]
+[ext_resource type="Texture2D" uid="uid://bwqiburpkywbx" path="res://Assets/Objects/Paths.png" id="12_32rkg"]
+[ext_resource type="Texture2D" uid="uid://dae1h20xbqpp4" path="res://Assets/Tilesets/Fences.png" id="13_a5wjk"]
+[ext_resource type="PackedScene" uid="uid://bpfag6epgakv4" path="res://Scenes/Items/Bakery/wall.tscn" id="14_oyb3p"]
+[ext_resource type="PackedScene" uid="uid://duxmkmgty85gt" path="res://Scenes/Items/Doors/door.tscn" id="15_2hrtt"]
+[ext_resource type="PackedScene" uid="uid://dbedud0wrda8x" path="res://Scenes/Items/Decor/haybale.tscn" id="16_g3lo7"]
+[ext_resource type="PackedScene" uid="uid://csujxnmorl57l" path="res://Scenes/Items/Estructures/well.tscn" id="17_5aim4"]
+[ext_resource type="PackedScene" uid="uid://52yrvejy7y0b" path="res://Scenes/Animals/beehive.tscn" id="18_h4nnu"]
+[ext_resource type="PackedScene" uid="uid://i6ndiexpiyb7" path="res://Scenes/Items/Bush/bush_space.tscn" id="19_houwb"]
+[ext_resource type="PackedScene" uid="uid://de08lga4kyrkh" path="res://Scenes/Items/Trees/tree_space.tscn" id="20_o8btu"]
+[ext_resource type="PackedScene" uid="uid://blndarpado0nr" path="res://Scenes/Items/Crops/crop_space.tscn" id="21_2j1j3"]
+[ext_resource type="Texture2D" uid="uid://nwcvo04wv0ci" path="res://Assets/Objects/Basic Furniture.png" id="22_12w7i"]
+[ext_resource type="PackedScene" uid="uid://bj7f20chsx37u" path="res://Scenes/Items/Bakery/counter_2.tscn" id="23_xmbla"]
+[ext_resource type="PackedScene" uid="uid://o6mfc65td22g" path="res://Scenes/Items/Bakery/counter_3.tscn" id="24_ngrok"]
+[ext_resource type="PackedScene" uid="uid://byeod06hi4xyk" path="res://Scenes/Items/Bakery/sink.tscn" id="25_isdyu"]
+[ext_resource type="PackedScene" uid="uid://c8tgii52je7ao" path="res://Scenes/Items/Bakery/oven.tscn" id="26_8tc7i"]
+[ext_resource type="PackedScene" uid="uid://dvskwlg0t5gv3" path="res://Scenes/Items/Bakery/counter_4.tscn" id="27_c4deb"]
+[ext_resource type="PackedScene" uid="uid://c7rusqnds5kn5" path="res://Scenes/Items/Bakery/cutting board.tscn" id="28_sw2vp"]
+[ext_resource type="PackedScene" uid="uid://ds7f05k7btavb" path="res://Scenes/Items/Bakery/dough.tscn" id="29_jdjvx"]
+[ext_resource type="PackedScene" uid="uid://pbvn6oavjau5" path="res://Scenes/Items/Bakery/manual_blender.tscn" id="30_8g8aq"]
+[ext_resource type="PackedScene" uid="uid://bmsbpkug3gmxk" path="res://Scenes/Items/Bakery/blender.tscn" id="31_fl40u"]
+[ext_resource type="PackedScene" uid="uid://cty312xm1d72b" path="res://Scenes/Items/Bakery/ingredients.tscn" id="32_6agqs"]
+[ext_resource type="PackedScene" uid="uid://cifrre8db3msl" path="res://Scenes/Items/Bakery/dishes.tscn" id="33_of366"]
+[ext_resource type="PackedScene" uid="uid://gkn71ljrtmiq" path="res://Scenes/Items/Bakery/ingredients2.tscn" id="34_lspjd"]
+[ext_resource type="PackedScene" uid="uid://dg86u60lp4d1w" path="res://Scenes/Items/Bakery/counter.tscn" id="35_07sb8"]
+[ext_resource type="PackedScene" uid="uid://b77xhlb302qdk" path="res://Scenes/Items/Bakery/bread_stand.tscn" id="36_dk2pd"]
+[ext_resource type="PackedScene" uid="uid://bgk21p4uqlydv" path="res://Scenes/Items/Bakery/sweet_stand.tscn" id="37_a2jdt"]
+[ext_resource type="PackedScene" uid="uid://nj08utrnev6s" path="res://Scenes/Items/Decor/sofa_r.tscn" id="38_0sujd"]
+[ext_resource type="PackedScene" uid="uid://dn7kymyxo2i3q" path="res://Scenes/Items/Decor/sofa_l.tscn" id="39_cxdgx"]
+[ext_resource type="PackedScene" uid="uid://cfdbkk5gsfwnd" path="res://Scenes/Items/Decor/mesa.tscn" id="40_m7w2p"]
+[ext_resource type="PackedScene" uid="uid://ckv432pt1w55g" path="res://Scenes/Items/Decor/mesa_v.tscn" id="41_5yard"]
+[ext_resource type="PackedScene" uid="uid://vjvpmp7s6hiu" path="res://Scenes/Items/Bakery/cafe_board.tscn" id="42_u84s7"]
+[ext_resource type="PackedScene" uid="uid://dpp125ixn211q" path="res://Scenes/Items/Bakery/pastries_counter.tscn" id="43_33bit"]
+[ext_resource type="PackedScene" uid="uid://dw7wt177quejw" path="res://Scenes/Items/Trees/treeP.tscn" id="44_pjvc3"]
+[ext_resource type="PackedScene" uid="uid://b6nkjlv1lberw" path="res://Scenes/Items/Trees/tree.tscn" id="45_vnce2"]
+[ext_resource type="PackedScene" uid="uid://dkrsmo13p2aqr" path="res://Scenes/Items/Trees/cb_tree.tscn" id="46_q37gl"]
+[ext_resource type="PackedScene" uid="uid://wbq2klspeapf" path="res://Scenes/Items/Estructures/coop.tscn" id="47_hejoe"]
+[ext_resource type="PackedScene" uid="uid://c34picphhum36" path="res://Scenes/Items/Trees/treePino.tscn" id="48_pj0qk"]
+[ext_resource type="PackedScene" uid="uid://b4i4fpk0eybx7" path="res://World/player.tscn" id="49_w2jjc"]
+[ext_resource type="PackedScene" uid="uid://da4sddfeth374" path="res://Scenes/Animals/chicken.tscn" id="50_aei6u"]
+[ext_resource type="PackedScene" uid="uid://b7bgllmssqghd" path="res://Scenes/Animals/cow.tscn" id="51_ne13v"]
+[ext_resource type="PackedScene" uid="uid://dm76s17n37nnl" path="res://Scenes/Animals/bee.tscn" id="52_5l1j7"]
+[ext_resource type="Script" uid="uid://co8u4ndjgy3de" path="res://Scripts/planting_system.gd" id="53_hm3sf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r0ikl"]
-texture = ExtResource("8_axeuq")
+texture = ExtResource("4_3gnva")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -143,7 +143,7 @@ texture = ExtResource("8_axeuq")
 7:8/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ochwf"]
-texture = ExtResource("22_pt3ps")
+texture = ExtResource("5_i5ake")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -203,7 +203,7 @@ sources/0 = SubResource("TileSetAtlasSource_r0ikl")
 sources/1 = SubResource("TileSetAtlasSource_ochwf")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_amofe"]
-texture = ExtResource("1_7yui6")
+texture = ExtResource("6_dmovf")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -277,7 +277,7 @@ texture = ExtResource("1_7yui6")
 8:6/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p5wkl"]
-texture = ExtResource("22_pt3ps")
+texture = ExtResource("5_i5ake")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -333,7 +333,7 @@ texture = ExtResource("22_pt3ps")
 3:9/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o2rbt"]
-texture = ExtResource("7_hmc15")
+texture = ExtResource("7_m1472")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -381,7 +381,7 @@ texture = ExtResource("7_hmc15")
 8:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hgpy0"]
-texture = ExtResource("5_t2t4p")
+texture = ExtResource("8_eyejc")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -7.017543, -4.354759, -7.017542, -6.962067, -3.0233684, -7.125063, 8, -8, 8)
 1:0/0 = 0
@@ -480,7 +480,7 @@ texture = ExtResource("5_t2t4p")
 7:8/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1cojt"]
-texture = ExtResource("6_axeuq")
+texture = ExtResource("9_l3fwa")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -534,7 +534,7 @@ texture = ExtResource("6_axeuq")
 8:4/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1vso6"]
-texture = ExtResource("10_dt0r1")
+texture = ExtResource("10_3i426")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -573,7 +573,7 @@ texture = ExtResource("10_dt0r1")
 9:3/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yq1aw"]
-texture = ExtResource("7_1cojt")
+texture = ExtResource("11_1ex6t")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -581,7 +581,7 @@ texture = ExtResource("7_1cojt")
 3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(3.9199028, -0.02292347, 5.9371624, 1.9484894, 5.9371624, 4.8368387, 4.057443, 7.0374856, -4.2408304, 7.0833325, -6.0288553, 4.928532, -6.0288553, 2.040183, -4.011596, -0.06877041)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d67sf"]
-texture = ExtResource("8_axeuq")
+texture = ExtResource("4_3gnva")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -669,7 +669,7 @@ texture = ExtResource("8_axeuq")
 7:8/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pt3ps"]
-texture = ExtResource("10_yq1aw")
+texture = ExtResource("12_32rkg")
 0:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
@@ -694,7 +694,7 @@ sources/0 = SubResource("TileSetAtlasSource_amofe")
 sources/1 = SubResource("TileSetAtlasSource_p5wkl")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e0ngr"]
-texture = ExtResource("12_c5t2i")
+texture = ExtResource("13_a5wjk")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3.0788424, -6.962067, 3.023368, -7.017542, 2.9678936, 8, -3.0788422, 8)
 1:0/0 = 0
@@ -733,7 +733,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_e0ngr")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_04jkj"]
-texture = ExtResource("22_pt3ps")
+texture = ExtResource("5_i5ake")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -792,7 +792,7 @@ texture = ExtResource("22_pt3ps")
 sources/0 = SubResource("TileSetAtlasSource_04jkj")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dt0r1"]
-texture = ExtResource("22_pt3ps")
+texture = ExtResource("5_i5ake")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(3.1448555, -8, 8, -8, 8, 8, 3.2431316, 8)
 1:0/0 = 0
@@ -878,7 +878,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_dt0r1")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r74th"]
-texture = ExtResource("26_ochwf")
+texture = ExtResource("22_12w7i")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -949,11 +949,11 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-355, -120, -102, -120,
 
 [node name="world" type="Node2D" unique_id=1530126941]
 y_sort_enabled = true
-script = ExtResource("1_pyn1s")
+script = ExtResource("1_o2cvn")
 
-[node name="clock_ui" parent="." unique_id=1588631544 instance=ExtResource("23_xbk3s")]
+[node name="clock_ui" parent="." unique_id=1588631544 instance=ExtResource("2_4giqt")]
 
-[node name="SleepScreen" parent="." unique_id=834690660 instance=ExtResource("3_b4e6k")]
+[node name="SleepScreen" parent="." unique_id=834690660 instance=ExtResource("3_8iv6r")]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1093347763]
 
@@ -976,34 +976,34 @@ tile_set = SubResource("TileSet_btko3")
 tile_map_data = PackedByteArray("AAD6//z/AAABAAAAAAD7//z/AAACAAMAAAD8//z/AAACAAMAAAD9//z/AAACAAMAAAD+//z/AAACAAMAAAD///z/AAACAAMAAAAAAPz/AAADAAAAAAABAP3/AAADAAAAAAAAAP3/AAABAAIAAAD6//3/AAAAAAEAAAD6//7/AAAAAAEAAAD6////AAAAAAEAAAD6/wAAAAAAAAIAAAABAAAAAAAAAAEAAAABAP//AAAAAAEAAAABAP7/AAAAAAEAAAABAAEAAAAAAAIAAADu/wgAAAABAAIAAADv/wkAAAABAAIAAADv/wgAAAADAAAAAAD1/wkAAAADAAIAAAD0/wkAAAACAAMAAADz/wkAAAACAAMAAADy/wkAAAACAAMAAADx/wkAAAACAAMAAADw/wkAAAACAAMAAADu/wUAAAAAAAEAAADu/wYAAAAAAAEAAADu/wcAAAAAAAEAAAD1/wYAAAAAAAAAAAD1/wcAAAAAAAEAAAD1/wgAAAAAAAEAAADu/wQAAAAAAAEAAADu/wMAAAAAAAEAAADu/wIAAAAAAAEAAAD1/wQAAAAAAAIAAAD1/wMAAAAAAAEAAAD1/wIAAAADAAAAAAD0/wIAAAACAAMAAADz/wIAAAACAAMAAADy/wIAAAABAAIAAADy/wEAAAAAAAEAAADu/wEAAAAAAAEAAADu/wAAAAABAAAAAADy/wAAAAADAAAAAADx/wAAAAACAAMAAADv/wAAAAACAAMAAADw/wAAAAACAAMAAAA=")
 tile_set = SubResource("TileSet_kn0ld")
 
-[node name="wall2" parent="TileMap" unique_id=1298083150 instance=ExtResource("14_uqdn7")]
+[node name="wall2" parent="TileMap" unique_id=1298083150 instance=ExtResource("14_oyb3p")]
 z_index = 2
 position = Vector2(-324, 180)
 scale = Vector2(0.6, 0.6)
 
-[node name="fence_door" parent="TileMap" unique_id=1376706635 instance=ExtResource("23_hmc15")]
+[node name="fence_door" parent="TileMap" unique_id=1376706635 instance=ExtResource("15_2hrtt")]
 position = Vector2(-324, 204.00002)
 scale = Vector2(1.5, 1.5)
 
 [node name="Farm" type="Node" parent="TileMap" unique_id=1301139040]
 
-[node name="Haybale" parent="TileMap/Farm" unique_id=1597187020 instance=ExtResource("18_axeuq")]
+[node name="Haybale" parent="TileMap/Farm" unique_id=1597187020 instance=ExtResource("16_g3lo7")]
 position = Vector2(10, -36)
 scale = Vector2(0.4, 0.4)
 
-[node name="Haybale2" parent="TileMap/Farm" unique_id=1368332778 instance=ExtResource("18_axeuq")]
+[node name="Haybale2" parent="TileMap/Farm" unique_id=1368332778 instance=ExtResource("16_g3lo7")]
 position = Vector2(-57, 32)
 scale = Vector2(0.4, 0.4)
 
-[node name="Haybale3" parent="TileMap/Farm" unique_id=866821732 instance=ExtResource("18_axeuq")]
+[node name="Haybale3" parent="TileMap/Farm" unique_id=866821732 instance=ExtResource("16_g3lo7")]
 position = Vector2(-210, 47)
 scale = Vector2(0.4, 0.4)
 
-[node name="Haybale4" parent="TileMap/Farm" unique_id=417779633 instance=ExtResource("18_axeuq")]
+[node name="Haybale4" parent="TileMap/Farm" unique_id=417779633 instance=ExtResource("16_g3lo7")]
 position = Vector2(-197.99998, 8.999999)
 scale = Vector2(0.4, 0.4)
 
-[node name="Haybale5" parent="TileMap/Farm" unique_id=373443301 instance=ExtResource("18_axeuq")]
+[node name="Haybale5" parent="TileMap/Farm" unique_id=373443301 instance=ExtResource("16_g3lo7")]
 position = Vector2(-186, 16)
 scale = Vector2(0.4, 0.4)
 
@@ -1013,67 +1013,94 @@ scale = Vector2(0.99999994, 0.99999994)
 tile_map_data = PackedByteArray("AAAAAP//DQAGAAEAAAD8//3/DQAFAAEAAAD8/wAADQAGAAEAAAD7/wAADQABAAMAAAAAAAEADQABAAMAAAD///7/DQAGAAMAAAD7////DQAGAAIAAAAAAAAADwADAAAAAAD7//3/DwADAAAAAADw/wcADQAGAAIAAAD0/wcADQAFAAEAAADz/wEADQAGAAEAAAD0/wMADQAGAAMAAAABAPz/DQAEAAIAAAD4/wQAAAAHAAUAAAABAAkAAAAHAAUAAADy//z/AAAHAAUAAAD5//7/AAAHAAUAAAD9/wUAAAAIAAYAAAD5/wMAAAAIAAYAAAD5/wAAAAAIAAYAAAD3/wEAAAAIAAYAAAD2/wUAAAAIAAYAAAACAAcAAAAIAAYAAADz//v/AAAIAAYAAADv//r/AAAIAAYAAADz//7/AAAIAAYAAADw////AAAIAAYAAAD4//z/AAAIAAYAAAD4//3/DQAFAAMAAAD1//z/DQAGAAIAAAD2////DQAHAAMAAAD3//3/DQAGAAEAAAD1//7/DQAFAAEAAAD5//z/DQAFAAEAAADx/wEADgADAAAAAADv/wUADgAAAAAAAAD5////DgADAAAAAADq//j/CwAIAAIAAADq//f/CwAIAAEAAADr//f/CwAJAAEAAADp//f/CwAHAAEAAADp//j/CwAHAAIAAADp//b/CwAHAAAAAADq//b/CwAIAAAAAADr//b/CwAJAAAAAADv//j/CwAIAAIAAADu//j/CwAHAAIAAADu//f/CwAHAAEAAADv//f/CwAIAAEAAADw//f/CwAJAAEAAADw//b/CwAJAAAAAADv//b/CwAIAAAAAADu//b/CwAHAAAAAADz//j/CwAIAAIAAADy//j/CwAHAAIAAADy//f/CwAHAAEAAADz//f/CwAIAAEAAAD0//f/CwAJAAEAAAD0//b/CwAJAAAAAADz//b/CwAIAAAAAADy//b/CwAHAAAAAAD4//j/CwAIAAIAAAD3//j/CwAHAAIAAAD3//f/CwAHAAEAAAD4//f/CwAIAAEAAAD5//f/CwAJAAEAAAD5//b/CwAJAAAAAAD4//b/CwAIAAAAAAD3//b/CwAHAAAAAAACAPr/CwAFAAMAAAADAPr/CwAGAAMAAAA=")
 tile_set = SubResource("TileSet_btko3")
 
-[node name="well" parent="TileMap/Farm" unique_id=1963474814 instance=ExtResource("29_3ua1v")]
+[node name="well" parent="TileMap/Farm" unique_id=1963474814 instance=ExtResource("17_5aim4")]
 position = Vector2(-80, 23)
 
-[node name="Beehive" parent="TileMap/Farm" unique_id=1649100236 instance=ExtResource("28_1vso6")]
+[node name="Beehive" parent="TileMap/Farm" unique_id=1649100236 instance=ExtResource("18_h4nnu")]
 position = Vector2(-128, -67.99999)
 scale = Vector2(0.7, 0.7)
 
-[node name="Beehive2" parent="TileMap/Farm" unique_id=77213146 instance=ExtResource("28_1vso6")]
+[node name="Beehive2" parent="TileMap/Farm" unique_id=77213146 instance=ExtResource("18_h4nnu")]
 position = Vector2(-127, -28)
 scale = Vector2(0.7, 0.7)
 
-[node name="Beehive3" parent="TileMap/Farm" unique_id=1478019737 instance=ExtResource("28_1vso6")]
+[node name="Beehive3" parent="TileMap/Farm" unique_id=1478019737 instance=ExtResource("18_h4nnu")]
 position = Vector2(-157, -68)
 scale = Vector2(0.7, 0.7)
 
-[node name="Beehive4" parent="TileMap/Farm" unique_id=1789874945 instance=ExtResource("28_1vso6")]
+[node name="Beehive4" parent="TileMap/Farm" unique_id=1789874945 instance=ExtResource("18_h4nnu")]
 position = Vector2(-157, -28)
 scale = Vector2(0.7, 0.7)
 
-[node name="CropSpace" parent="TileMap/Farm" unique_id=1680679629 instance=ExtResource("19_13n8b")]
+[node name="BushSpace" parent="TileMap/Farm" unique_id=1680679629 instance=ExtResource("19_houwb")]
 z_index = 1
 position = Vector2(-313, -57.000004)
 
-[node name="CropSpace2" parent="TileMap/Farm" unique_id=589010234 instance=ExtResource("19_13n8b")]
+[node name="BushSpace2" parent="TileMap/Farm" unique_id=589010234 instance=ExtResource("19_houwb")]
 z_index = 1
 position = Vector2(-313, -23.000002)
 
-[node name="CropSpace3" parent="TileMap/Farm" unique_id=175308658 instance=ExtResource("19_13n8b")]
+[node name="BushSpace3" parent="TileMap/Farm" unique_id=175308658 instance=ExtResource("19_houwb")]
 z_index = 1
 position = Vector2(-275, -57)
 
-[node name="CropSpace4" parent="TileMap/Farm" unique_id=702662997 instance=ExtResource("19_13n8b")]
+[node name="BushSpace4" parent="TileMap/Farm" unique_id=702662997 instance=ExtResource("19_houwb")]
 z_index = 1
 position = Vector2(-274, -23)
 
-[node name="CropSpace5" parent="TileMap/Farm" unique_id=400302069 instance=ExtResource("19_13n8b")]
+[node name="BushSpace5" parent="TileMap/Farm" unique_id=400302069 instance=ExtResource("19_houwb")]
 z_index = 1
 position = Vector2(-238.00002, -57)
 
-[node name="CropSpace6" parent="TileMap/Farm" unique_id=655783184 instance=ExtResource("19_13n8b")]
+[node name="BushSpace6" parent="TileMap/Farm" unique_id=655783184 instance=ExtResource("19_houwb")]
 z_index = 1
 position = Vector2(-238, -23)
 
-[node name="TreeSpace" parent="TileMap/Farm" unique_id=266234154 instance=ExtResource("21_uqdn7")]
+[node name="TreeSpace" parent="TileMap/Farm" unique_id=266234154 instance=ExtResource("20_o8btu")]
 z_index = 1
 position = Vector2(-328, -103)
 
-[node name="TreeSpace2" parent="TileMap/Farm" unique_id=408755376 instance=ExtResource("21_uqdn7")]
+[node name="TreeSpace2" parent="TileMap/Farm" unique_id=408755376 instance=ExtResource("20_o8btu")]
 z_index = 1
 position = Vector2(-280, -103.00001)
 
-[node name="TreeSpace3" parent="TileMap/Farm" unique_id=414073003 instance=ExtResource("21_uqdn7")]
+[node name="TreeSpace3" parent="TileMap/Farm" unique_id=414073003 instance=ExtResource("20_o8btu")]
 z_index = 1
 position = Vector2(-232, -103)
 
-[node name="TreeSpace4" parent="TileMap/Farm" unique_id=274550392 instance=ExtResource("21_uqdn7")]
+[node name="TreeSpace4" parent="TileMap/Farm" unique_id=274550392 instance=ExtResource("20_o8btu")]
 z_index = 1
 position = Vector2(-184, -103.00001)
 
-[node name="CropPlot" parent="TileMap/Farm" unique_id=401292526 instance=ExtResource("21_gwaj6")]
-position = Vector2(-129, 118)
+[node name="CropSpace" parent="TileMap/Farm" unique_id=1012951821 instance=ExtResource("21_2j1j3")]
+position = Vector2(-104, 132)
+
+[node name="CropSpace2" parent="TileMap/Farm" unique_id=1359549021 instance=ExtResource("21_2j1j3")]
+position = Vector2(-104, 108)
+
+[node name="CropSpace3" parent="TileMap/Farm" unique_id=799796640 instance=ExtResource("21_2j1j3")]
+position = Vector2(-78, 132)
+
+[node name="CropSpace4" parent="TileMap/Farm" unique_id=199186862 instance=ExtResource("21_2j1j3")]
+position = Vector2(-78, 108)
+
+[node name="CropSpace5" parent="TileMap/Farm" unique_id=2029613128 instance=ExtResource("21_2j1j3")]
+position = Vector2(-52, 108.00001)
+
+[node name="CropSpace6" parent="TileMap/Farm" unique_id=2085740721 instance=ExtResource("21_2j1j3")]
+position = Vector2(-52, 132)
+
+[node name="CropSpace7" parent="TileMap/Farm" unique_id=1904511975 instance=ExtResource("21_2j1j3")]
+position = Vector2(-26, 108)
+
+[node name="CropSpace8" parent="TileMap/Farm" unique_id=1764224327 instance=ExtResource("21_2j1j3")]
+position = Vector2(-26, 132)
+
+[node name="CropSpace9" parent="TileMap/Farm" unique_id=2064660301 instance=ExtResource("21_2j1j3")]
+position = Vector2(0, 108)
+
+[node name="CropSpace10" parent="TileMap/Farm" unique_id=96832589 instance=ExtResource("21_2j1j3")]
+position = Vector2(0, 132)
 
 [node name="Bakery2" type="Node" parent="TileMap" unique_id=1896068470]
 
@@ -1091,510 +1118,510 @@ tile_set = SubResource("TileSet_qebug")
 tile_map_data = PackedByteArray("AAD//xMAAAAEAAQAAAD+/xMAAAADAAQAAAD5/xAAAAADAAAAAAAAABQAAAAEAAAAAAD//xEAAAAEAAUAAAD+/xEAAAADAAUAAAA=")
 tile_set = SubResource("TileSet_04jkj")
 
-[node name="counter2" parent="TileMap/Bakery2" unique_id=1483528737 instance=ExtResource("25_1vso6")]
+[node name="counter2" parent="TileMap/Bakery2" unique_id=1483528737 instance=ExtResource("23_xmbla")]
 position = Vector2(-262, 252)
 
-[node name="counter3" parent="TileMap/Bakery2" unique_id=1821056855 instance=ExtResource("26_t6yt7")]
+[node name="counter3" parent="TileMap/Bakery2" unique_id=1821056855 instance=ExtResource("24_ngrok")]
 position = Vector2(-200, 228)
 
-[node name="sink" parent="TileMap/Bakery2" unique_id=1193575397 instance=ExtResource("35_al5m0")]
+[node name="sink" parent="TileMap/Bakery2" unique_id=1193575397 instance=ExtResource("25_isdyu")]
 position = Vector2(-276, 239)
 
-[node name="Oven" parent="TileMap/Bakery2" unique_id=1791195692 instance=ExtResource("36_6mm6r")]
+[node name="Oven" parent="TileMap/Bakery2" unique_id=1791195692 instance=ExtResource("26_8tc7i")]
 position = Vector2(-229, 207)
 
-[node name="counter4" parent="TileMap/Bakery2" unique_id=1696051576 instance=ExtResource("37_xcb5n")]
+[node name="counter4" parent="TileMap/Bakery2" unique_id=1696051576 instance=ExtResource("27_c4deb")]
 position = Vector2(-249, 228)
 
-[node name="cutting_board" parent="TileMap/Bakery2" unique_id=1699040999 instance=ExtResource("38_te07t")]
+[node name="cutting_board" parent="TileMap/Bakery2" unique_id=1699040999 instance=ExtResource("28_sw2vp")]
 position = Vector2(-185, 201)
 scale = Vector2(0.4, 0.4)
 
-[node name="dough" parent="TileMap/Bakery2" unique_id=270167653 instance=ExtResource("39_b4e6k")]
+[node name="dough" parent="TileMap/Bakery2" unique_id=270167653 instance=ExtResource("29_jdjvx")]
 position = Vector2(-267, 210)
 scale = Vector2(0.3, 0.3)
 
-[node name="manual_blender" parent="TileMap/Bakery2" unique_id=160944382 instance=ExtResource("40_0sgyr")]
+[node name="manual_blender" parent="TileMap/Bakery2" unique_id=160944382 instance=ExtResource("30_8g8aq")]
 position = Vector2(-275, 207)
 scale = Vector2(0.3, 0.3)
 
-[node name="blender" parent="TileMap/Bakery2" unique_id=535444567 instance=ExtResource("41_l33cg")]
+[node name="blender" parent="TileMap/Bakery2" unique_id=535444567 instance=ExtResource("31_fl40u")]
 position = Vector2(-175, 203)
 scale = Vector2(0.4, 0.4)
 
-[node name="ingredients" parent="TileMap/Bakery2" unique_id=692917907 instance=ExtResource("42_xcb5n")]
+[node name="ingredients" parent="TileMap/Bakery2" unique_id=692917907 instance=ExtResource("32_6agqs")]
 position = Vector2(-255, 208.00002)
 scale = Vector2(0.3, 0.3)
 
-[node name="dishes" parent="TileMap/Bakery2" unique_id=1592523703 instance=ExtResource("43_te07t")]
+[node name="dishes" parent="TileMap/Bakery2" unique_id=1592523703 instance=ExtResource("33_of366")]
 position = Vector2(-210.00002, 187)
 scale = Vector2(0.7, 0.7)
 
-[node name="ingredients2" parent="TileMap/Bakery2" unique_id=1890655014 instance=ExtResource("44_b4e6k")]
+[node name="ingredients2" parent="TileMap/Bakery2" unique_id=1890655014 instance=ExtResource("34_lspjd")]
 position = Vector2(-182.00003, 190)
 scale = Vector2(0.7, 0.7)
 
-[node name="Counter" parent="TileMap/Bakery2" unique_id=873098121 instance=ExtResource("24_hmc15")]
+[node name="Counter" parent="TileMap/Bakery2" unique_id=873098121 instance=ExtResource("35_07sb8")]
 position = Vector2(-199, 255)
 
-[node name="bread_stand" parent="TileMap/Bakery2" unique_id=115038288 instance=ExtResource("26_qebug")]
+[node name="bread_stand" parent="TileMap/Bakery2" unique_id=115038288 instance=ExtResource("36_dk2pd")]
 position = Vector2(-144, 252)
 
-[node name="sweet_stand" parent="TileMap/Bakery2" unique_id=1180083164 instance=ExtResource("27_o2rbt")]
+[node name="sweet_stand" parent="TileMap/Bakery2" unique_id=1180083164 instance=ExtResource("37_a2jdt")]
 position = Vector2(-158, 302)
 
-[node name="sofaR" parent="TileMap/Bakery2" unique_id=645288242 instance=ExtResource("29_r0ikl")]
+[node name="sofaR" parent="TileMap/Bakery2" unique_id=645288242 instance=ExtResource("38_0sujd")]
 position = Vector2(-41, 311)
 scale = Vector2(0.4, 0.4)
 
-[node name="sofaR2" parent="TileMap/Bakery2" unique_id=442887806 instance=ExtResource("29_r0ikl")]
+[node name="sofaR2" parent="TileMap/Bakery2" unique_id=442887806 instance=ExtResource("38_0sujd")]
 position = Vector2(-41, 279)
 scale = Vector2(0.4, 0.4)
 
-[node name="sofaL" parent="TileMap/Bakery2" unique_id=1920418150 instance=ExtResource("30_opbav")]
+[node name="sofaL" parent="TileMap/Bakery2" unique_id=1920418150 instance=ExtResource("39_cxdgx")]
 position = Vector2(9, 311)
 scale = Vector2(0.4, 0.4)
 
-[node name="sofaL2" parent="TileMap/Bakery2" unique_id=970804862 instance=ExtResource("30_opbav")]
+[node name="sofaL2" parent="TileMap/Bakery2" unique_id=970804862 instance=ExtResource("39_cxdgx")]
 position = Vector2(9, 279)
 scale = Vector2(0.4, 0.4)
 
-[node name="Mesa2" parent="TileMap/Bakery2" unique_id=2040825548 instance=ExtResource("31_coyub")]
+[node name="Mesa2" parent="TileMap/Bakery2" unique_id=2040825548 instance=ExtResource("40_m7w2p")]
 position = Vector2(-15, 312)
 scale = Vector2(0.5, 0.5)
 
-[node name="MesaV" parent="TileMap/Bakery2" unique_id=475302274 instance=ExtResource("34_te07t")]
+[node name="MesaV" parent="TileMap/Bakery2" unique_id=475302274 instance=ExtResource("41_5yard")]
 position = Vector2(-15, 279)
 scale = Vector2(0.5, 0.5)
 
-[node name="cafe_board" parent="TileMap/Bakery2" unique_id=587291277 instance=ExtResource("33_p5wkl")]
+[node name="cafe_board" parent="TileMap/Bakery2" unique_id=587291277 instance=ExtResource("42_u84s7")]
 position = Vector2(-271, 188)
 scale = Vector2(0.5, 0.5)
 
-[node name="pastries_counter" parent="TileMap/Bakery2" unique_id=621744536 instance=ExtResource("24_dt0r1")]
+[node name="pastries_counter" parent="TileMap/Bakery2" unique_id=621744536 instance=ExtResource("43_33bit")]
 position = Vector2(-102, 302)
 
-[node name="wall" parent="TileMap" unique_id=1889551116 instance=ExtResource("14_uqdn7")]
+[node name="wall" parent="TileMap" unique_id=1889551116 instance=ExtResource("14_oyb3p")]
 z_index = 2
 position = Vector2(-276, 324)
 scale = Vector2(0.6, 0.6)
 
-[node name="fence_door2" parent="TileMap" unique_id=2096683146 instance=ExtResource("23_hmc15")]
+[node name="fence_door2" parent="TileMap" unique_id=2096683146 instance=ExtResource("15_2hrtt")]
 position = Vector2(-276, 348)
 scale = Vector2(1.5, 1.5)
 
 [node name="Trees" type="Node" parent="TileMap" unique_id=1095749843]
 
-[node name="TreeP" parent="TileMap/Trees" unique_id=702486470 instance=ExtResource("14_0sgyr")]
+[node name="TreeP" parent="TileMap/Trees" unique_id=702486470 instance=ExtResource("44_pjvc3")]
 position = Vector2(14, -128)
 
-[node name="TreeP5" parent="TileMap/Trees" unique_id=882520460 instance=ExtResource("14_0sgyr")]
+[node name="TreeP5" parent="TileMap/Trees" unique_id=882520460 instance=ExtResource("44_pjvc3")]
 position = Vector2(-264, -280)
 
-[node name="Tree16" parent="TileMap/Trees" unique_id=497185229 instance=ExtResource("17_0pcbe")]
+[node name="Tree16" parent="TileMap/Trees" unique_id=497185229 instance=ExtResource("45_vnce2")]
 position = Vector2(-258, -228.00002)
 scale = Vector2(1.5, 1.5)
 
-[node name="TreeP2" parent="TileMap/Trees" unique_id=869635245 instance=ExtResource("14_0sgyr")]
+[node name="TreeP2" parent="TileMap/Trees" unique_id=869635245 instance=ExtResource("44_pjvc3")]
 position = Vector2(-27, -133)
 
-[node name="Tree12" parent="TileMap/Trees" unique_id=1640076886 instance=ExtResource("17_0pcbe")]
+[node name="Tree12" parent="TileMap/Trees" unique_id=1640076886 instance=ExtResource("45_vnce2")]
 position = Vector2(-298, -243)
 scale = Vector2(1.5, 1.5)
 
-[node name="TreeP4" parent="TileMap/Trees" unique_id=175940268 instance=ExtResource("14_0sgyr")]
+[node name="TreeP4" parent="TileMap/Trees" unique_id=175940268 instance=ExtResource("44_pjvc3")]
 position = Vector2(-317, -194)
 
-[node name="TreeP6" parent="TileMap/Trees" unique_id=709390297 instance=ExtResource("14_0sgyr")]
+[node name="TreeP6" parent="TileMap/Trees" unique_id=709390297 instance=ExtResource("44_pjvc3")]
 position = Vector2(-199, -209)
 
-[node name="TreeP7" parent="TileMap/Trees" unique_id=976339590 instance=ExtResource("14_0sgyr")]
+[node name="TreeP7" parent="TileMap/Trees" unique_id=976339590 instance=ExtResource("44_pjvc3")]
 position = Vector2(-158, -293)
 
-[node name="TreeP8" parent="TileMap/Trees" unique_id=1723890052 instance=ExtResource("14_0sgyr")]
+[node name="TreeP8" parent="TileMap/Trees" unique_id=1723890052 instance=ExtResource("44_pjvc3")]
 position = Vector2(-237, -314)
 
-[node name="TreeP9" parent="TileMap/Trees" unique_id=757321412 instance=ExtResource("14_0sgyr")]
+[node name="TreeP9" parent="TileMap/Trees" unique_id=757321412 instance=ExtResource("44_pjvc3")]
 position = Vector2(-256, -184)
 
-[node name="TreeP10" parent="TileMap/Trees" unique_id=1758577812 instance=ExtResource("14_0sgyr")]
+[node name="TreeP10" parent="TileMap/Trees" unique_id=1758577812 instance=ExtResource("44_pjvc3")]
 position = Vector2(-134, -193)
 
-[node name="TreeP11" parent="TileMap/Trees" unique_id=605209048 instance=ExtResource("14_0sgyr")]
+[node name="TreeP11" parent="TileMap/Trees" unique_id=605209048 instance=ExtResource("44_pjvc3")]
 position = Vector2(-114, -274)
 
-[node name="TreeP12" parent="TileMap/Trees" unique_id=1372691404 instance=ExtResource("14_0sgyr")]
+[node name="TreeP12" parent="TileMap/Trees" unique_id=1372691404 instance=ExtResource("44_pjvc3")]
 position = Vector2(-32, -206)
 
-[node name="TreeP13" parent="TileMap/Trees" unique_id=2084027406 instance=ExtResource("14_0sgyr")]
+[node name="TreeP13" parent="TileMap/Trees" unique_id=2084027406 instance=ExtResource("44_pjvc3")]
 position = Vector2(41, -233)
 
-[node name="TreeP14" parent="TileMap/Trees" unique_id=450690967 instance=ExtResource("14_0sgyr")]
+[node name="TreeP14" parent="TileMap/Trees" unique_id=450690967 instance=ExtResource("44_pjvc3")]
 position = Vector2(-9, -294)
 
-[node name="TreeP15" parent="TileMap/Trees" unique_id=1366913849 instance=ExtResource("14_0sgyr")]
+[node name="TreeP15" parent="TileMap/Trees" unique_id=1366913849 instance=ExtResource("44_pjvc3")]
 position = Vector2(-72, -247)
 
-[node name="TreeP3" parent="TileMap/Trees" unique_id=1353766405 instance=ExtResource("14_0sgyr")]
+[node name="TreeP3" parent="TileMap/Trees" unique_id=1353766405 instance=ExtResource("44_pjvc3")]
 position = Vector2(-75, -129)
 
-[node name="Tree5" parent="TileMap/Trees" unique_id=687825472 instance=ExtResource("17_0pcbe")]
+[node name="Tree5" parent="TileMap/Trees" unique_id=687825472 instance=ExtResource("45_vnce2")]
 position = Vector2(-93, -110)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree6" parent="TileMap/Trees" unique_id=484205454 instance=ExtResource("17_0pcbe")]
+[node name="Tree6" parent="TileMap/Trees" unique_id=484205454 instance=ExtResource("45_vnce2")]
 position = Vector2(-55, -126)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree7" parent="TileMap/Trees" unique_id=787558755 instance=ExtResource("17_0pcbe")]
+[node name="Tree7" parent="TileMap/Trees" unique_id=787558755 instance=ExtResource("45_vnce2")]
 position = Vector2(-12, -108)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree8" parent="TileMap/Trees" unique_id=152763805 instance=ExtResource("17_0pcbe")]
+[node name="Tree8" parent="TileMap/Trees" unique_id=152763805 instance=ExtResource("45_vnce2")]
 position = Vector2(40, -120)
 scale = Vector2(1.5, 1.5)
 
-[node name="CBTree" parent="TileMap/Trees" unique_id=886894166 instance=ExtResource("21_qebug")]
+[node name="CBTree" parent="TileMap/Trees" unique_id=886894166 instance=ExtResource("46_q37gl")]
 position = Vector2(-100, -84)
 scale = Vector2(0.5, 0.5)
 
-[node name="CBTree2" parent="TileMap/Trees" unique_id=1819098278 instance=ExtResource("21_qebug")]
+[node name="CBTree2" parent="TileMap/Trees" unique_id=1819098278 instance=ExtResource("46_q37gl")]
 position = Vector2(-71, -84)
 scale = Vector2(0.5, 0.5)
 
-[node name="CBTree3" parent="TileMap/Trees" unique_id=1373733880 instance=ExtResource("21_qebug")]
+[node name="CBTree3" parent="TileMap/Trees" unique_id=1373733880 instance=ExtResource("46_q37gl")]
 position = Vector2(-42, -84)
 scale = Vector2(0.5, 0.5)
 
-[node name="CBTree4" parent="TileMap/Trees" unique_id=1527936948 instance=ExtResource("21_qebug")]
+[node name="CBTree4" parent="TileMap/Trees" unique_id=1527936948 instance=ExtResource("46_q37gl")]
 position = Vector2(-13, -84)
 scale = Vector2(0.5, 0.5)
 
-[node name="CBTree5" parent="TileMap/Trees" unique_id=358286083 instance=ExtResource("21_qebug")]
+[node name="CBTree5" parent="TileMap/Trees" unique_id=358286083 instance=ExtResource("46_q37gl")]
 position = Vector2(15, -84)
 scale = Vector2(0.5, 0.5)
 
-[node name="Coop" parent="TileMap/Trees" unique_id=1860616439 instance=ExtResource("12_no8kt")]
+[node name="Coop" parent="TileMap/Trees" unique_id=1860616439 instance=ExtResource("47_hejoe")]
 position = Vector2(-19, -55)
 
-[node name="Tree" parent="TileMap/Trees" unique_id=543920494 instance=ExtResource("17_0pcbe")]
+[node name="Tree" parent="TileMap/Trees" unique_id=543920494 instance=ExtResource("45_vnce2")]
 position = Vector2(-72, -66)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree2" parent="TileMap/Trees" unique_id=1818317886 instance=ExtResource("17_0pcbe")]
+[node name="Tree2" parent="TileMap/Trees" unique_id=1818317886 instance=ExtResource("45_vnce2")]
 position = Vector2(-305, -135)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree9" parent="TileMap/Trees" unique_id=80012621 instance=ExtResource("17_0pcbe")]
+[node name="Tree9" parent="TileMap/Trees" unique_id=80012621 instance=ExtResource("45_vnce2")]
 position = Vector2(-225, -175)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree10" parent="TileMap/Trees" unique_id=2006769719 instance=ExtResource("17_0pcbe")]
+[node name="Tree10" parent="TileMap/Trees" unique_id=2006769719 instance=ExtResource("45_vnce2")]
 position = Vector2(-287, -179)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree11" parent="TileMap/Trees" unique_id=764952465 instance=ExtResource("17_0pcbe")]
+[node name="Tree11" parent="TileMap/Trees" unique_id=764952465 instance=ExtResource("45_vnce2")]
 position = Vector2(-353, -176)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree13" parent="TileMap/Trees" unique_id=743567444 instance=ExtResource("17_0pcbe")]
+[node name="Tree13" parent="TileMap/Trees" unique_id=743567444 instance=ExtResource("45_vnce2")]
 position = Vector2(-204, -292)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree14" parent="TileMap/Trees" unique_id=281117819 instance=ExtResource("17_0pcbe")]
+[node name="Tree14" parent="TileMap/Trees" unique_id=281117819 instance=ExtResource("45_vnce2")]
 position = Vector2(-164, -234)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree15" parent="TileMap/Trees" unique_id=1460064828 instance=ExtResource("17_0pcbe")]
+[node name="Tree15" parent="TileMap/Trees" unique_id=1460064828 instance=ExtResource("45_vnce2")]
 position = Vector2(-225.00002, -245.00002)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree17" parent="TileMap/Trees" unique_id=119145543 instance=ExtResource("17_0pcbe")]
+[node name="Tree17" parent="TileMap/Trees" unique_id=119145543 instance=ExtResource("45_vnce2")]
 position = Vector2(-1, -244.00002)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree18" parent="TileMap/Trees" unique_id=361128670 instance=ExtResource("17_0pcbe")]
+[node name="Tree18" parent="TileMap/Trees" unique_id=361128670 instance=ExtResource("45_vnce2")]
 position = Vector2(-95, -230)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree19" parent="TileMap/Trees" unique_id=1994277742 instance=ExtResource("17_0pcbe")]
+[node name="Tree19" parent="TileMap/Trees" unique_id=1994277742 instance=ExtResource("45_vnce2")]
 position = Vector2(-4, -173)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree20" parent="TileMap/Trees" unique_id=1919272309 instance=ExtResource("17_0pcbe")]
+[node name="Tree20" parent="TileMap/Trees" unique_id=1919272309 instance=ExtResource("45_vnce2")]
 position = Vector2(-166, -175)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree21" parent="TileMap/Trees" unique_id=1026747880 instance=ExtResource("17_0pcbe")]
+[node name="Tree21" parent="TileMap/Trees" unique_id=1026747880 instance=ExtResource("45_vnce2")]
 position = Vector2(-94, -178)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree22" parent="TileMap/Trees" unique_id=1907106460 instance=ExtResource("17_0pcbe")]
+[node name="Tree22" parent="TileMap/Trees" unique_id=1907106460 instance=ExtResource("45_vnce2")]
 position = Vector2(30.000002, -282)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree23" parent="TileMap/Trees" unique_id=1903800184 instance=ExtResource("17_0pcbe")]
+[node name="Tree23" parent="TileMap/Trees" unique_id=1903800184 instance=ExtResource("45_vnce2")]
 position = Vector2(46, -169.00002)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree24" parent="TileMap/Trees" unique_id=1607756694 instance=ExtResource("17_0pcbe")]
+[node name="Tree24" parent="TileMap/Trees" unique_id=1607756694 instance=ExtResource("45_vnce2")]
 position = Vector2(-37, -269)
 scale = Vector2(1.5, 1.5)
 
-[node name="TreeP16" parent="TileMap/Trees" unique_id=1209296316 instance=ExtResource("14_0sgyr")]
+[node name="TreeP16" parent="TileMap/Trees" unique_id=1209296316 instance=ExtResource("44_pjvc3")]
 position = Vector2(75, -144)
 
-[node name="Tree25" parent="TileMap/Trees" unique_id=125154545 instance=ExtResource("17_0pcbe")]
+[node name="Tree25" parent="TileMap/Trees" unique_id=125154545 instance=ExtResource("45_vnce2")]
 position = Vector2(177, -144)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree26" parent="TileMap/Trees" unique_id=1821838650 instance=ExtResource("17_0pcbe")]
+[node name="Tree26" parent="TileMap/Trees" unique_id=1821838650 instance=ExtResource("45_vnce2")]
 position = Vector2(108, -141)
 scale = Vector2(1.5, 1.5)
 
-[node name="TreeP17" parent="TileMap/Trees" unique_id=152104486 instance=ExtResource("14_0sgyr")]
+[node name="TreeP17" parent="TileMap/Trees" unique_id=152104486 instance=ExtResource("44_pjvc3")]
 position = Vector2(74, -99)
 
-[node name="TreeP18" parent="TileMap/Trees" unique_id=1473302365 instance=ExtResource("14_0sgyr")]
+[node name="TreeP18" parent="TileMap/Trees" unique_id=1473302365 instance=ExtResource("44_pjvc3")]
 position = Vector2(259, -140)
 
-[node name="TreeP19" parent="TileMap/Trees" unique_id=1267237605 instance=ExtResource("14_0sgyr")]
+[node name="TreeP19" parent="TileMap/Trees" unique_id=1267237605 instance=ExtResource("44_pjvc3")]
 position = Vector2(224, 4)
 
-[node name="TreeP20" parent="TileMap/Trees" unique_id=942013599 instance=ExtResource("14_0sgyr")]
+[node name="TreeP20" parent="TileMap/Trees" unique_id=942013599 instance=ExtResource("44_pjvc3")]
 position = Vector2(143, -176)
 
-[node name="TreeP21" parent="TileMap/Trees" unique_id=1501114507 instance=ExtResource("14_0sgyr")]
+[node name="TreeP21" parent="TileMap/Trees" unique_id=1501114507 instance=ExtResource("44_pjvc3")]
 position = Vector2(82, -205)
 
-[node name="TreeP22" parent="TileMap/Trees" unique_id=2114216694 instance=ExtResource("14_0sgyr")]
+[node name="TreeP22" parent="TileMap/Trees" unique_id=2114216694 instance=ExtResource("44_pjvc3")]
 position = Vector2(95, 36)
 
-[node name="TreeP23" parent="TileMap/Trees" unique_id=1352599237 instance=ExtResource("14_0sgyr")]
+[node name="TreeP23" parent="TileMap/Trees" unique_id=1352599237 instance=ExtResource("44_pjvc3")]
 position = Vector2(123, -45)
 
-[node name="TreeP24" parent="TileMap/Trees" unique_id=1820250848 instance=ExtResource("14_0sgyr")]
+[node name="TreeP24" parent="TileMap/Trees" unique_id=1820250848 instance=ExtResource("44_pjvc3")]
 position = Vector2(188, 51)
 
-[node name="TreeP25" parent="TileMap/Trees" unique_id=1591054370 instance=ExtResource("14_0sgyr")]
+[node name="TreeP25" parent="TileMap/Trees" unique_id=1591054370 instance=ExtResource("44_pjvc3")]
 position = Vector2(333, 11)
 
-[node name="TreeP26" parent="TileMap/Trees" unique_id=21264205 instance=ExtResource("14_0sgyr")]
+[node name="TreeP26" parent="TileMap/Trees" unique_id=21264205 instance=ExtResource("44_pjvc3")]
 position = Vector2(283, -50)
 
-[node name="TreeP27" parent="TileMap/Trees" unique_id=1501667371 instance=ExtResource("14_0sgyr")]
+[node name="TreeP27" parent="TileMap/Trees" unique_id=1501667371 instance=ExtResource("44_pjvc3")]
 position = Vector2(183, -101.99999)
 
-[node name="Tree27" parent="TileMap/Trees" unique_id=1344084180 instance=ExtResource("17_0pcbe")]
+[node name="Tree27" parent="TileMap/Trees" unique_id=1344084180 instance=ExtResource("45_vnce2")]
 position = Vector2(233, -105.99999)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree28" parent="TileMap/Trees" unique_id=272309715 instance=ExtResource("17_0pcbe")]
+[node name="Tree28" parent="TileMap/Trees" unique_id=272309715 instance=ExtResource("45_vnce2")]
 position = Vector2(141, -108.99999)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree29" parent="TileMap/Trees" unique_id=729556141 instance=ExtResource("17_0pcbe")]
+[node name="Tree29" parent="TileMap/Trees" unique_id=729556141 instance=ExtResource("45_vnce2")]
 position = Vector2(82, -53)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree30" parent="TileMap/Trees" unique_id=364557654 instance=ExtResource("17_0pcbe")]
+[node name="Tree30" parent="TileMap/Trees" unique_id=364557654 instance=ExtResource("45_vnce2")]
 position = Vector2(170, -50)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree31" parent="TileMap/Trees" unique_id=761945119 instance=ExtResource("17_0pcbe")]
+[node name="Tree31" parent="TileMap/Trees" unique_id=761945119 instance=ExtResource("45_vnce2")]
 position = Vector2(73, -5)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree32" parent="TileMap/Trees" unique_id=1354614522 instance=ExtResource("17_0pcbe")]
+[node name="Tree32" parent="TileMap/Trees" unique_id=1354614522 instance=ExtResource("45_vnce2")]
 position = Vector2(221, -180)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree33" parent="TileMap/Trees" unique_id=1183024765 instance=ExtResource("17_0pcbe")]
+[node name="Tree33" parent="TileMap/Trees" unique_id=1183024765 instance=ExtResource("45_vnce2")]
 position = Vector2(291, -1.5258789e-05)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree34" parent="TileMap/Trees" unique_id=234671775 instance=ExtResource("17_0pcbe")]
+[node name="Tree34" parent="TileMap/Trees" unique_id=234671775 instance=ExtResource("45_vnce2")]
 position = Vector2(123, 3)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree35" parent="TileMap/Trees" unique_id=222406146 instance=ExtResource("17_0pcbe")]
+[node name="Tree35" parent="TileMap/Trees" unique_id=222406146 instance=ExtResource("45_vnce2")]
 position = Vector2(233, 56)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree36" parent="TileMap/Trees" unique_id=247398668 instance=ExtResource("17_0pcbe")]
+[node name="Tree36" parent="TileMap/Trees" unique_id=247398668 instance=ExtResource("45_vnce2")]
 position = Vector2(238, -58)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree37" parent="TileMap/Trees" unique_id=1313157415 instance=ExtResource("17_0pcbe")]
+[node name="Tree37" parent="TileMap/Trees" unique_id=1313157415 instance=ExtResource("45_vnce2")]
 position = Vector2(135, 51)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree38" parent="TileMap/Trees" unique_id=125206242 instance=ExtResource("17_0pcbe")]
+[node name="Tree38" parent="TileMap/Trees" unique_id=125206242 instance=ExtResource("45_vnce2")]
 position = Vector2(323, -41)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree39" parent="TileMap/Trees" unique_id=14843189 instance=ExtResource("17_0pcbe")]
+[node name="Tree39" parent="TileMap/Trees" unique_id=14843189 instance=ExtResource("45_vnce2")]
 position = Vector2(283, 59.999985)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree40" parent="TileMap/Trees" unique_id=1338436805 instance=ExtResource("17_0pcbe")]
+[node name="Tree40" parent="TileMap/Trees" unique_id=1338436805 instance=ExtResource("45_vnce2")]
 position = Vector2(84, 80)
 scale = Vector2(1.5, 1.5)
 
-[node name="TreeP28" parent="TileMap/Trees" unique_id=596138961 instance=ExtResource("14_0sgyr")]
+[node name="TreeP28" parent="TileMap/Trees" unique_id=596138961 instance=ExtResource("44_pjvc3")]
 position = Vector2(86, 142)
 
-[node name="Tree41" parent="TileMap/Trees" unique_id=1023474240 instance=ExtResource("17_0pcbe")]
+[node name="Tree41" parent="TileMap/Trees" unique_id=1023474240 instance=ExtResource("45_vnce2")]
 position = Vector2(179, 105)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree42" parent="TileMap/Trees" unique_id=1300984870 instance=ExtResource("17_0pcbe")]
+[node name="Tree42" parent="TileMap/Trees" unique_id=1300984870 instance=ExtResource("45_vnce2")]
 position = Vector2(148, 148)
 scale = Vector2(1.5, 1.5)
 
-[node name="TreeP29" parent="TileMap/Trees" unique_id=1064182852 instance=ExtResource("14_0sgyr")]
+[node name="TreeP29" parent="TileMap/Trees" unique_id=1064182852 instance=ExtResource("44_pjvc3")]
 position = Vector2(127, 95)
 
-[node name="TreeP30" parent="TileMap/Trees" unique_id=1640179463 instance=ExtResource("14_0sgyr")]
+[node name="TreeP30" parent="TileMap/Trees" unique_id=1640179463 instance=ExtResource("44_pjvc3")]
 position = Vector2(279, 111)
 
-[node name="TreeP31" parent="TileMap/Trees" unique_id=437439433 instance=ExtResource("14_0sgyr")]
+[node name="TreeP31" parent="TileMap/Trees" unique_id=437439433 instance=ExtResource("44_pjvc3")]
 position = Vector2(190, 192)
 
-[node name="TreeP32" parent="TileMap/Trees" unique_id=398359892 instance=ExtResource("14_0sgyr")]
+[node name="TreeP32" parent="TileMap/Trees" unique_id=398359892 instance=ExtResource("44_pjvc3")]
 position = Vector2(126, 267)
 
-[node name="TreeP33" parent="TileMap/Trees" unique_id=2015083207 instance=ExtResource("14_0sgyr")]
+[node name="TreeP33" parent="TileMap/Trees" unique_id=2015083207 instance=ExtResource("44_pjvc3")]
 position = Vector2(227, 246)
 
-[node name="TreeP34" parent="TileMap/Trees" unique_id=237491521 instance=ExtResource("14_0sgyr")]
+[node name="TreeP34" parent="TileMap/Trees" unique_id=237491521 instance=ExtResource("44_pjvc3")]
 position = Vector2(274, 322)
 
-[node name="TreeP35" parent="TileMap/Trees" unique_id=848397644 instance=ExtResource("14_0sgyr")]
+[node name="TreeP35" parent="TileMap/Trees" unique_id=848397644 instance=ExtResource("44_pjvc3")]
 position = Vector2(192, 344)
 
-[node name="TreeP36" parent="TileMap/Trees" unique_id=2123720284 instance=ExtResource("14_0sgyr")]
+[node name="TreeP36" parent="TileMap/Trees" unique_id=2123720284 instance=ExtResource("44_pjvc3")]
 position = Vector2(350, 220)
 
-[node name="TreeP37" parent="TileMap/Trees" unique_id=1063913021 instance=ExtResource("14_0sgyr")]
+[node name="TreeP37" parent="TileMap/Trees" unique_id=1063913021 instance=ExtResource("44_pjvc3")]
 position = Vector2(259, 171)
 
-[node name="Tree43" parent="TileMap/Trees" unique_id=936067996 instance=ExtResource("17_0pcbe")]
+[node name="Tree43" parent="TileMap/Trees" unique_id=936067996 instance=ExtResource("45_vnce2")]
 position = Vector2(309, 167)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree44" parent="TileMap/Trees" unique_id=585685096 instance=ExtResource("17_0pcbe")]
+[node name="Tree44" parent="TileMap/Trees" unique_id=585685096 instance=ExtResource("45_vnce2")]
 position = Vector2(133, 196)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree45" parent="TileMap/Trees" unique_id=1082666819 instance=ExtResource("17_0pcbe")]
+[node name="Tree45" parent="TileMap/Trees" unique_id=1082666819 instance=ExtResource("45_vnce2")]
 position = Vector2(85, 216)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree46" parent="TileMap/Trees" unique_id=976924282 instance=ExtResource("17_0pcbe")]
+[node name="Tree46" parent="TileMap/Trees" unique_id=976924282 instance=ExtResource("45_vnce2")]
 position = Vector2(274, 204)
 scale = Vector2(1.5, 1.5)
 
-[node name="TreePino4" parent="TileMap/Trees" unique_id=45817510 instance=ExtResource("46_l33cg")]
+[node name="TreePino4" parent="TileMap/Trees" unique_id=45817510 instance=ExtResource("48_pj0qk")]
 position = Vector2(-129, -244)
 
-[node name="TreePino5" parent="TileMap/Trees" unique_id=344340181 instance=ExtResource("46_l33cg")]
+[node name="TreePino5" parent="TileMap/Trees" unique_id=344340181 instance=ExtResource("48_pj0qk")]
 position = Vector2(205, -42)
 
-[node name="TreePino6" parent="TileMap/Trees" unique_id=392500712 instance=ExtResource("46_l33cg")]
+[node name="TreePino6" parent="TileMap/Trees" unique_id=392500712 instance=ExtResource("48_pj0qk")]
 position = Vector2(329, 54)
 
-[node name="TreePino7" parent="TileMap/Trees" unique_id=1595760529 instance=ExtResource("46_l33cg")]
+[node name="TreePino7" parent="TileMap/Trees" unique_id=1595760529 instance=ExtResource("48_pj0qk")]
 position = Vector2(280, -105)
 
-[node name="TreePino8" parent="TileMap/Trees" unique_id=1314380531 instance=ExtResource("46_l33cg")]
+[node name="TreePino8" parent="TileMap/Trees" unique_id=1314380531 instance=ExtResource("48_pj0qk")]
 position = Vector2(103, -190)
 
-[node name="TreePino9" parent="TileMap/Trees" unique_id=1278287765 instance=ExtResource("46_l33cg")]
+[node name="TreePino9" parent="TileMap/Trees" unique_id=1278287765 instance=ExtResource("48_pj0qk")]
 position = Vector2(16, -216)
 
-[node name="TreePino10" parent="TileMap/Trees" unique_id=970054280 instance=ExtResource("46_l33cg")]
+[node name="TreePino10" parent="TileMap/Trees" unique_id=970054280 instance=ExtResource("48_pj0qk")]
 position = Vector2(-190, -274)
 
-[node name="TreePino11" parent="TileMap/Trees" unique_id=85118374 instance=ExtResource("46_l33cg")]
+[node name="TreePino11" parent="TileMap/Trees" unique_id=85118374 instance=ExtResource("48_pj0qk")]
 position = Vector2(207, 72)
 
-[node name="TreePino12" parent="TileMap/Trees" unique_id=598618476 instance=ExtResource("46_l33cg")]
+[node name="TreePino12" parent="TileMap/Trees" unique_id=598618476 instance=ExtResource("48_pj0qk")]
 position = Vector2(105, 158)
 
-[node name="TreePino13" parent="TileMap/Trees" unique_id=561022298 instance=ExtResource("46_l33cg")]
+[node name="TreePino13" parent="TileMap/Trees" unique_id=561022298 instance=ExtResource("48_pj0qk")]
 position = Vector2(148, 224)
 
-[node name="TreePino14" parent="TileMap/Trees" unique_id=713016715 instance=ExtResource("46_l33cg")]
+[node name="TreePino14" parent="TileMap/Trees" unique_id=713016715 instance=ExtResource("48_pj0qk")]
 position = Vector2(211, 147)
 
-[node name="TreePino15" parent="TileMap/Trees" unique_id=1650811937 instance=ExtResource("46_l33cg")]
+[node name="TreePino15" parent="TileMap/Trees" unique_id=1650811937 instance=ExtResource("48_pj0qk")]
 position = Vector2(266, 251)
 
-[node name="TreePino16" parent="TileMap/Trees" unique_id=1296415115 instance=ExtResource("46_l33cg")]
+[node name="TreePino16" parent="TileMap/Trees" unique_id=1296415115 instance=ExtResource("48_pj0qk")]
 position = Vector2(182, 295)
 
-[node name="TreePino17" parent="TileMap/Trees" unique_id=1559017747 instance=ExtResource("46_l33cg")]
+[node name="TreePino17" parent="TileMap/Trees" unique_id=1559017747 instance=ExtResource("48_pj0qk")]
 position = Vector2(352, 284)
 
-[node name="Tree47" parent="TileMap/Trees" unique_id=342578032 instance=ExtResource("17_0pcbe")]
+[node name="Tree47" parent="TileMap/Trees" unique_id=342578032 instance=ExtResource("45_vnce2")]
 position = Vector2(76, 264)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree48" parent="TileMap/Trees" unique_id=1472479922 instance=ExtResource("17_0pcbe")]
+[node name="Tree48" parent="TileMap/Trees" unique_id=1472479922 instance=ExtResource("45_vnce2")]
 position = Vector2(229, 107)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree49" parent="TileMap/Trees" unique_id=1732877230 instance=ExtResource("17_0pcbe")]
+[node name="Tree49" parent="TileMap/Trees" unique_id=1732877230 instance=ExtResource("45_vnce2")]
 position = Vector2(310, 253)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree50" parent="TileMap/Trees" unique_id=1693589492 instance=ExtResource("17_0pcbe")]
+[node name="Tree50" parent="TileMap/Trees" unique_id=1693589492 instance=ExtResource("45_vnce2")]
 position = Vector2(220, 288)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree51" parent="TileMap/Trees" unique_id=1372005826 instance=ExtResource("17_0pcbe")]
+[node name="Tree51" parent="TileMap/Trees" unique_id=1372005826 instance=ExtResource("45_vnce2")]
 position = Vector2(314, 324)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree52" parent="TileMap/Trees" unique_id=626259804 instance=ExtResource("17_0pcbe")]
+[node name="Tree52" parent="TileMap/Trees" unique_id=626259804 instance=ExtResource("45_vnce2")]
 position = Vector2(385, 179)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree53" parent="TileMap/Trees" unique_id=186684254 instance=ExtResource("17_0pcbe")]
+[node name="Tree53" parent="TileMap/Trees" unique_id=186684254 instance=ExtResource("45_vnce2")]
 position = Vector2(138, 320)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree54" parent="TileMap/Trees" unique_id=16575020 instance=ExtResource("17_0pcbe")]
+[node name="Tree54" parent="TileMap/Trees" unique_id=16575020 instance=ExtResource("45_vnce2")]
 position = Vector2(390, 229)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree55" parent="TileMap/Trees" unique_id=737437495 instance=ExtResource("17_0pcbe")]
+[node name="Tree55" parent="TileMap/Trees" unique_id=737437495 instance=ExtResource("45_vnce2")]
 position = Vector2(189, 227)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree56" parent="TileMap/Trees" unique_id=653063155 instance=ExtResource("17_0pcbe")]
+[node name="Tree56" parent="TileMap/Trees" unique_id=653063155 instance=ExtResource("45_vnce2")]
 position = Vector2(87, 349)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree3" parent="TileMap/Trees" unique_id=734615938 instance=ExtResource("17_0pcbe")]
+[node name="Tree3" parent="TileMap/Trees" unique_id=734615938 instance=ExtResource("45_vnce2")]
 position = Vector2(-236, -138)
 scale = Vector2(1.5, 1.5)
 
-[node name="Tree4" parent="TileMap/Trees" unique_id=1351317174 instance=ExtResource("17_0pcbe")]
+[node name="Tree4" parent="TileMap/Trees" unique_id=1351317174 instance=ExtResource("45_vnce2")]
 position = Vector2(-161.00002, -135)
 scale = Vector2(1.5, 1.5)
 
-[node name="TreePino" parent="TileMap/Trees" unique_id=1411965859 instance=ExtResource("46_l33cg")]
+[node name="TreePino" parent="TileMap/Trees" unique_id=1411965859 instance=ExtResource("48_pj0qk")]
 position = Vector2(163, 9)
 
-[node name="TreePino2" parent="TileMap/Trees" unique_id=418758887 instance=ExtResource("46_l33cg")]
+[node name="TreePino2" parent="TileMap/Trees" unique_id=418758887 instance=ExtResource("48_pj0qk")]
 position = Vector2(113, -98)
 
-[node name="TreePino3" parent="TileMap/Trees" unique_id=1801323313 instance=ExtResource("46_l33cg")]
+[node name="TreePino3" parent="TileMap/Trees" unique_id=1801323313 instance=ExtResource("48_pj0qk")]
 position = Vector2(-51, -175)
 
-[node name="Player" parent="." unique_id=62884988 instance=ExtResource("1_kn0ld")]
+[node name="Player" parent="." unique_id=62884988 instance=ExtResource("49_w2jjc")]
 position = Vector2(-184, -86)
 
 [node name="Chickens" type="Node2D" parent="." unique_id=564528914]
@@ -1603,11 +1630,11 @@ position = Vector2(-47.451363, 19.008316)
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="Chickens" unique_id=1569536511]
 navigation_polygon = SubResource("NavigationPolygon_3ua1v")
 
-[node name="Chicken" parent="Chickens" unique_id=1876987760 instance=ExtResource("32_3ua1v")]
+[node name="Chicken" parent="Chickens" unique_id=1876987760 instance=ExtResource("50_aei6u")]
 z_index = 1
 position = Vector2(35.45136, -17.008316)
 
-[node name="Chicken2" parent="Chickens" unique_id=1510907900 instance=ExtResource("32_3ua1v")]
+[node name="Chicken2" parent="Chickens" unique_id=1510907900 instance=ExtResource("50_aei6u")]
 z_index = 1
 position = Vector2(-17.548635, -41.008316)
 
@@ -1617,43 +1644,43 @@ position = Vector2(-17.548635, -41.008316)
 navigation_polygon = SubResource("NavigationPolygon_r0ikl")
 navigation_layers = 2
 
-[node name="cow" parent="Cows" unique_id=1077693140 instance=ExtResource("33_r0ikl")]
+[node name="cow" parent="Cows" unique_id=1077693140 instance=ExtResource("51_ne13v")]
 position = Vector2(-254, 36)
 
-[node name="cow2" parent="Cows" unique_id=734954034 instance=ExtResource("33_r0ikl")]
+[node name="cow2" parent="Cows" unique_id=734954034 instance=ExtResource("51_ne13v")]
 position = Vector2(-199, 117)
 
 [node name="Bees" type="Node" parent="." unique_id=1358372139]
 
-[node name="Bee" parent="Bees" unique_id=2004895695 instance=ExtResource("49_b4e6k")]
+[node name="Bee" parent="Bees" unique_id=2004895695 instance=ExtResource("52_5l1j7")]
 z_index = 1
 position = Vector2(-162, -77)
 
-[node name="Bee2" parent="Bees" unique_id=1012407562 instance=ExtResource("49_b4e6k")]
+[node name="Bee2" parent="Bees" unique_id=1012407562 instance=ExtResource("52_5l1j7")]
 z_index = 1
 position = Vector2(-63, -41)
 
-[node name="Bee3" parent="Bees" unique_id=949214817 instance=ExtResource("49_b4e6k")]
+[node name="Bee3" parent="Bees" unique_id=949214817 instance=ExtResource("52_5l1j7")]
 z_index = 1
 position = Vector2(-133, -10)
 
-[node name="Bee4" parent="Bees" unique_id=295658823 instance=ExtResource("49_b4e6k")]
+[node name="Bee4" parent="Bees" unique_id=295658823 instance=ExtResource("52_5l1j7")]
 z_index = 1
 position = Vector2(-191, -26)
 
-[node name="Bee5" parent="Bees" unique_id=773918205 instance=ExtResource("49_b4e6k")]
+[node name="Bee5" parent="Bees" unique_id=773918205 instance=ExtResource("52_5l1j7")]
 z_index = 1
 position = Vector2(-245, -47)
 
-[node name="Bee6" parent="Bees" unique_id=580061840 instance=ExtResource("49_b4e6k")]
+[node name="Bee6" parent="Bees" unique_id=580061840 instance=ExtResource("52_5l1j7")]
 z_index = 1
 position = Vector2(-199, -90)
 
-[node name="Bee7" parent="Bees" unique_id=121403175 instance=ExtResource("49_b4e6k")]
+[node name="Bee7" parent="Bees" unique_id=121403175 instance=ExtResource("52_5l1j7")]
 z_index = 1
 position = Vector2(-319, -73)
 
-[node name="Bee8" parent="Bees" unique_id=1888302602 instance=ExtResource("49_b4e6k")]
+[node name="Bee8" parent="Bees" unique_id=1888302602 instance=ExtResource("52_5l1j7")]
 z_index = 1
 position = Vector2(-260, -85)
 
@@ -1662,4 +1689,4 @@ navigation_polygon = SubResource("NavigationPolygon_13n8b")
 navigation_layers = 4
 
 [node name="PlantingSystem" type="Node2D" parent="." unique_id=1596363724]
-script = ExtResource("51_l33cg")
+script = ExtResource("53_hm3sf")

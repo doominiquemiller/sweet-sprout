@@ -4,7 +4,7 @@ extends State
 @export var animation  : AnimatedSprite2D
 @export var egg_spawn  : Marker2D
 
-const EGG_SCENE := preload("res://Scenes/Items/egg.tscn")
+const EGG_SCENE := preload("res://Scenes/Animals/egg.tscn")
 
 const LAY_ANIMATION_NAME : String = "idle"
 const LAY_DURATION_FALLBACK : float = 1.0

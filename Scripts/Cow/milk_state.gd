@@ -12,7 +12,7 @@ extends State
 @export var animation    : AnimatedSprite2D
 @export var milk_spawn   : Marker2D   # arrastra el MilkSpawnPoint aquí
 
-const MILK_SCENE := preload("res://Scenes/Items/milk.tscn")
+const MILK_SCENE := preload("res://Scenes/Animals/milk.tscn")
 
 # TEMPORAL: usa "idle" mientras no tengas animación de dar leche.
 # Cuando la crees, cambia esto al nombre real (ej: "milk")

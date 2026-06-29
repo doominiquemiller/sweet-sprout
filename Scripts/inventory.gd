@@ -15,7 +15,7 @@ var items : Dictionary = {}
 var slot_seleccionado_index : int = 0
 var item_seleccionado : String = ""
 
-# Iconos de cada tipo de item — ¡TODOS COMPLETOS Y RESTAURADOS!
+# Iconos de cada tipo de item — TODOS COMPLETOS Y RESTAURADOS
 const ITEM_ICONS : Dictionary = {
 	# 🐓 Animales
 	"egg":              preload("res://Assets/Objects/Egg item.png"),
@@ -45,21 +45,21 @@ const ITEM_ICONS : Dictionary = {
 	"raspberry_seeds":  preload("res://Assets/Seeds/raspberry_seeds.png"),
 
 	# 🛠️ Herramientas de trabajo
-	"hoe":              preload("res://Assets/Objects/hoe.png"),          # Ajusta a tu ruta real de texturas
-	"watering_can":     preload("res://Assets/Objects/watering_can.png"), # Ajusta a tu ruta real de texturas
+	"hoe":              preload("res://Assets/Objects/hoe.png"),
+	"watering_can":     preload("res://Assets/Objects/watering_can.png"),
 
-	# 🌾 NUEVO: Semillas y cultivos del Huerto (Crops)
-	"wheat_seed":       preload("res://Assets/StoreIcons/semillas/wheat_seed.png"),
-	"sugarcane_seed":   preload("res://Assets/Seeds/sugarcane_seed.png"),
-	"wheat_item":       preload("res://Assets/Fruit/wheat_item.png"),
-	"sugarcane.png":    preload("res://Assets/StoreIcons/sugarcane.png"),
+	# 🌾 CULTIVOS (Crops) - CORREGIDO
+	"wheat_seed":       preload("res://Assets/StoreIcons/semillas/wheat_seed.png"),      # Ruta corregida
+	"sugarcane_seed":   preload("res://Assets/Seeds/sugarcane_seed.png"),  # Ruta corregida
+	"wheat":            preload("res://Assets/Fruit/wheat_item.png"),      # CORREGIDO: antes era "wheat_item"
+	"sugar_cane":       preload("res://Assets/StoreIcons/sugarcane.png"),      # CORREGIDO: antes era "sugarcane.png"
 }
 
 # IDs que son semillas — para auto-seleccionar al PlantingSystem o CropSpaces/World
 const SEED_IDS : Array[String] = [
 	"apple_seed", "orange_seed", "peach_seed", "pear_seed",
 	"blackberry_seeds", "blueberry_seeds", "raspberry_seeds",
-	"wheat_seed", "sugarcane_seed"
+	"wheat_seed", "sugarcane_seed"  # CORREGIDO: añadidas ambas
 ]
 
 var _slot_order : Array[String] = []
@@ -80,14 +80,12 @@ func _ready() -> void:
 	_actualizar_marcos_visuales()
 	
 	# =============================================================
-	# 🎁 ÍTEMS INICIALES PARA PRUEBAS (Quítalos o edítalos luego)
+	# 🎁 ÍTEMS INICIALES PARA PRUEBAS
 	# =============================================================
-	add_item("hoe", 1)
-	add_item("watering_can", 1)
 	add_item("wheat_seed", 10)
 	add_item("sugarcane_seed", 10)
 	
-	# Semillas viejas también añadidas para que no empieces en cero
+	# Semillas viejas también añadidas
 	add_item("blackberry_seeds", 2)
 	add_item("raspberry_seeds", 2)
 	add_item("blueberry_seeds", 2)
@@ -95,8 +93,6 @@ func _ready() -> void:
 	add_item("pear_seed", 1)
 	add_item("peach_seed", 1)
 	add_item("orange_seed", 1)
-	
-	
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_inventory"):
