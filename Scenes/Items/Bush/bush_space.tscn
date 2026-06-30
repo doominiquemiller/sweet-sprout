@@ -10,7 +10,7 @@ region = Rect2(4, 100, 8, 8)
 script/source = "extends Area2D
 
 # =============================================================
-#  BushSpace — Parcela Exclusiva para Arbustos (Sincronizada)
+#  BushSpace — Parcela Exclusiva para Arbustos (Tiempo Real)
 # =============================================================
 
 @export var fruit_bush_scene : PackedScene = preload(\"res://Scenes/Items/Bush/fruit_bush.tscn\")
@@ -18,7 +18,6 @@ script/source = "extends Area2D
 var is_player_inside : bool = false
 var hosted_plant     : Node = null
 
-# Diccionario filtrado: Solo acepta semillas de arbustos (Bayas)
 const SEED_CONFIG : Dictionary = {
 	\"blackberry_seeds\": {\"type\": \"blackberry\"},
 	\"blueberry_seeds\":  {\"type\": \"blueberry\"},
@@ -28,7 +27,6 @@ const SEED_CONFIG : Dictionary = {
 func _ready() -> void:
 	add_to_group(\"crop_space\")
 	
-	# Conexiones limpias de señales del Area2D
 	if body_entered.is_connected(_on_body_entered):
 		body_entered.disconnect(_on_body_entered)
 	if body_exited.is_connected(_on_body_exited):
@@ -41,26 +39,23 @@ func _unhandled_input(event: InputEvent) -> void:
 	if not is_player_inside:
 		return
 
-	# Detecta interacción con la F o acción configurada
 	if event.is_action_pressed(\"interact\") or (event is InputEventKey and event.pressed and event.keycode == KEY_F):
 		_handle_interaction()
 
-# Controla si el jugador va a cosechar o a plantar
 func _handle_interaction() -> void:
-	# 1. SI YA HAY UN ARBUSTO INSTANCIADO: Intentamos cosecharlo
+	# 1. SI YA HAY UN ARBUSTO INSTANCIADO
 	if hosted_plant != null and is_instance_valid(hosted_plant):
-		# Sincronizado: Comprobamos la variable 'is_ready' de tu arbusto
 		if hosted_plant.get(\"is_ready\") == true:
-			# Sincronizado: Llamamos exactamente a la función 'collect_harvest' de tu arbusto
 			if hosted_plant.has_method(\"collect_harvest\"):
 				hosted_plant.collect_harvest() 
 			else:
 				print(\"⚠️ [BushSpace] Error: El script del arbusto no tiene el método collect_harvest.\")
 		else:
-			print(\"[BushSpace] Las bayas aún no están listas para ser cosechadas.\")
-		return # Cortamos la ejecución aquí para que no intente plantar encima
+			print(\"[BushSpace] Las bayas aún no están listas para ser cosechadas (Espera a que pasen los 2 minutos).\")
+		
+		return # Detiene la ejecución aquí para evitar plantar encima
 
-	# 2. SI NO HAY NADA ALOJADO: Procedemos con el proceso de plantado
+	# 2. SI NO HAY NADA ALOJADO
 	_try_plant()
 
 func _try_plant() -> void:
@@ -121,7 +116,7 @@ func _on_body_exited(body: Node2D) -> void:
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k2qs8"]
-size = Vector2(34, 29.333336)
+size = Vector2(16, 13.333334)
 
 [node name="BushSpace" type="Sprite2D" unique_id=1680679629]
 scale = Vector2(1.5, 1.5)
@@ -131,5 +126,5 @@ texture = SubResource("AtlasTexture_k2qs8")
 script = SubResource("GDScript_3ro8n")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1385434360]
-position = Vector2(1, 6.357829e-07)
+position = Vector2(0, -7.947286e-08)
 shape = SubResource("RectangleShape2D_k2qs8")

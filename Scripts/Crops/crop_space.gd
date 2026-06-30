@@ -34,7 +34,7 @@ var time_multiplier: float = 1.0
 @onready var detection_area: Area2D = $Area2D
 @onready var collision_shape: CollisionShape2D = $Area2D/CollisionShape2D
 @onready var interaction_label: Label = $Label
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
 
 # Diccionario de semillas válidas (AMBAS)
 const VALID_SEEDS = {
@@ -58,8 +58,7 @@ func _ready() -> void:
 	
 	_setup_crop()
 	_setup_sprite()
-	_create_grow_animation()
-	
+
 	if detection_area:
 		detection_area.body_entered.connect(_on_body_entered)
 		detection_area.body_exited.connect(_on_body_exited)
@@ -130,16 +129,6 @@ func _update_sprite_frame(stage: int) -> void:
 	)
 	sprite.region_rect = region
 	
-	if animation_player and animation_player.has_animation("grow"):
-		animation_player.play("grow")
-		animation_player.seek(float(current_stage) * 0.2, true)
-
-func _create_grow_animation() -> void:
-	if not animation_player:
-		return
-	
-	if animation_player.has_animation("grow"):
-		animation_player.remove_animation("grow")
 	
 	var anim = Animation.new()
 	anim.length = total_frames * 0.2
@@ -158,7 +147,6 @@ func _create_grow_animation() -> void:
 		)
 		anim.track_insert_key(track_index, time, rect)
 	
-	animation_player.add_animation("grow", anim)
 
 # =============================================================
 #  ACTUALIZACIÓN AUTOMÁTICA

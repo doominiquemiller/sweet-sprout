@@ -1,7 +1,7 @@
 extends Node2D
 
 # =============================================================
-#  Beehive — Colmena Segura por Pulso de Minuto
+#  Beehive — Colmena Autónoma (Tiempo Real - 4 Minutos)
 # =============================================================
 
 @onready var area            : Area2D   = $Area2D
@@ -17,8 +17,8 @@ var _player_nearby : bool = false
 
 const MAX_HONEY_STORAGE : int = 2 
 
-var _produced_morning_this_day : bool = false
-var _produced_afternoon_this_day : bool = false
+# Temporizador para la producción en tiempo real
+var production_timer : Timer
 
 # =============================================================
 func _enter_tree() -> void:
@@ -34,30 +34,27 @@ func _ready() -> void:
 	honey_indicator.visible = false
 	honey_indicator.position = Vector2(0, ICON_BASE_Y)
 
-# =============================================================
-#  SISTEMA DE PRODUCCIÓN HORARIA (Llamado una vez por minuto)
-# =============================================================
-func check_production(hour: int) -> void:
-	# --- MAÑANA (6:00 AM a 8:00 AM) ---
-	if hour >= 9 and hour < 11:
-		if not _produced_morning_this_day:
-			_produced_morning_this_day = true
-			_trigger_production("Mañana")
-			
-	# --- TARDE (4:00 PM a 6:00 PM) ---
-	elif hour >= 16 and hour < 19:
-		if not _produced_afternoon_this_day:
-			_produced_afternoon_this_day = true
-			_trigger_production("Tarde")
+	# Configuramos el Timer mediante código
+	production_timer = Timer.new()
+	production_timer.one_shot = false # Ciclo infinito (cada 4 minutos intenta producir)
+	production_timer.autostart = true
+	production_timer.timeout.connect(_on_production_timer_timeout)
+	add_child(production_timer)
+	
+	# 4 minutos reales = 240 segundos
+	production_timer.start(240.0)
+	print("[Beehive] Temporizador de producción de miel iniciado: 4 minutos reales.")
 
-func reset_daily_production_flags() -> void:
-	_produced_morning_this_day = false
-	_produced_afternoon_this_day = false
-	print("[Beehive] Banderas reiniciadas. Listas para el nuevo día.")
+# =============================================================
+#  SISTEMA DE PRODUCCIÓN EN TIEMPO REAL
+# =============================================================
+func _on_production_timer_timeout() -> void:
+	_trigger_production()
 
-func _trigger_production(momento: String) -> void:
+func _trigger_production() -> void:
+	# Comprobamos si la colmena ya alcanzó el límite de almacenamiento
 	if _honey_count >= MAX_HONEY_STORAGE:
-		print("[Beehive] Miel lista en la %s, pero la colmena ya está llena (%d/%d)." % [momento, _honey_count, MAX_HONEY_STORAGE])
+		print("[Beehive] Producción lista, pero la colmena ya está llena (%d/%d)." % [_honey_count, MAX_HONEY_STORAGE])
 		return
 		
 	_honey_count = min(_honey_count + 1, MAX_HONEY_STORAGE)
@@ -69,7 +66,7 @@ func _trigger_production(momento: String) -> void:
 	
 	var tween = create_tween()
 	tween.tween_property(honey_indicator, "position", Vector2(0, ICON_SPAWN_Y), 0.4).set_ease(Tween.EASE_OUT)
-	print("[Beehive] ¡Éxito! Producción de la %s. Miel en colmena: %d" % [momento, _honey_count])
+	print("[Beehive] ¡Éxito! Nueva miel producida. Miel almacenada en colmena: %d/%d" % [_honey_count, MAX_HONEY_STORAGE])
 
 # =============================================================
 #  RECOGER MIEL
@@ -96,7 +93,7 @@ func _collect_honey() -> void:
 	print("[Beehive] Cosechado: %d de miel. Total Inventario: %d" % [amount_to_give, Inventory.get_item_count("honey")])
 
 # =============================================================
-#  DETECCIÓN
+#  DETECCIÓN DEL JUGADOR
 # =============================================================
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group("player") or body.name == "Player":

@@ -1,11 +1,10 @@
 extends StaticBody2D
 
 # =============================================================
-#  FruitTree — Centrado y Detección de HarvestArea Corregida
+#  FruitTree — Versión Tiempo Real (2 Minutos)
 # =============================================================
 
 @onready var sprite : AnimatedSprite2D = $AnimatedSprite2D
-# Corregido: Apunta al nombre real de tu escena hijo
 @onready var harvest_area : Area2D = $HarvestArea 
 
 const ANIM_MAP : Dictionary = {
@@ -22,17 +21,23 @@ const FRUIT_ITEM : Dictionary = {
 	"pear":   "pear",
 }
 
-var fruit_type     : String = ""
-var is_planted     : bool   = false
-var is_ready       : bool   = false
-var _produced_morning_this_day   : bool = false
-var _produced_afternoon_this_day : bool = false
+var fruit_type : String = ""
+var is_planted : bool   = false
+var is_ready   : bool   = false
+
+# Timer interno para controlar el crecimiento autónomo
+var growth_timer : Timer
 
 func _ready() -> void:
 	add_to_group("planted_trees")
 	z_index = 1
 	
-	# Ajuste inicial de posición
+	# Creamos y configuramos el Timer mediante código
+	growth_timer = Timer.new()
+	growth_timer.one_shot = true
+	growth_timer.timeout.connect(_on_growth_timer_timeout)
+	add_child(growth_timer)
+	
 	if sprite:
 		_ajustar_posicion_local()
 
@@ -48,30 +53,40 @@ func plant(type: String) -> void:
 	sprite.frame = 0
 	_actualizar_escala()
 
-func check_hourly_growth(hour: int) -> void:
+	# Iniciamos la primera fase: 60 segundos (1 minuto) para pasar a árbol joven/adulto
+	growth_timer.start(60.0)
+	print("[FruitTree] %s plantado. Crecimiento en tiempo real iniciado (Fase 1)." % fruit_type)
+
+# Maneja la evolución automática por tiempo real (recorre los frames de animación)
+func _on_growth_timer_timeout() -> void:
 	if not is_planted:
 		return
 
-	if hour >= 7 and hour < 9 and sprite.frame == 0:
+	if sprite.frame == 0:
+		# Pasa de Semilla/Brote (Frame 0) a Árbol Joven (Frame 1)
 		sprite.frame = 1
-	if hour >= 10 and sprite.frame == 1:
-		sprite.frame = 2
+		print("[FruitTree] %s creció a árbol joven (Frame 1)." % fruit_type)
+		_actualizar_escala()
+		# En el caso del árbol, puedes hacer que pase directamente al frame 2 en otros 30-60 seg si quieres,
+		# o seguir la secuencia normal. Vamos a configurar 30s para Frame 2, y 30s para frutos (Total 2 min).
+		growth_timer.start(30.0)
 		
-	if hour >= 12 and hour < 15:
-		if not _produced_morning_this_day and sprite.frame == 2:
-			_produced_morning_this_day = true
-			_spawn_fruit()
-	elif hour >= 16 and hour < 20:
-		if not _produced_afternoon_this_day and sprite.frame == 2:
-			_produced_afternoon_this_day = true
-			_spawn_fruit()
-			
-	_actualizar_escala()
+	elif sprite.frame == 1:
+		# Pasa de Árbol Joven (Frame 1) a Árbol Adulto sin frutas (Frame 2)
+		sprite.frame = 2
+		print("[FruitTree] %s creció a árbol adulto listo para producir (Frame 2)." % fruit_type)
+		_actualizar_escala()
+		growth_timer.start(30.0) # Últimos 30 segundos para dar fruta (Total: 120s = 2 min)
+
+	elif sprite.frame == 2 and not is_ready:
+		# Pasa de Árbol Adulto (Frame 2) a Árbol con Frutos (Frame 3)
+		_spawn_fruit()
 
 func _spawn_fruit() -> void:
 	sprite.frame = 3
 	is_ready = true
 	_actualizar_escala()
+	print("[FruitTree] ¡El árbol de %s dio frutos en tiempo real! (Frame 3)" % fruit_type)
 
 func _actualizar_escala() -> void:
 	if not sprite:
@@ -81,28 +96,24 @@ func _actualizar_escala() -> void:
 	else:
 		sprite.scale = Vector2(1.0, 1.0)
 	
-	# Re-ajustamos el desfase cada vez que cambia de tamaño/frame
 	_ajustar_posicion_local()
 
-## NUEVO: Corrige el desfase del origen vertical de los árboles altos
 func _ajustar_posicion_local() -> void:
 	if sprite.frame == 0:
-		# Las semillas se quedan en el centro exacto (0,0)
 		sprite.position = Vector2.ZERO
 	else:
-		# Si los frames 1, 2 o 3 quedan muy altos, cambia este -16 por el valor 
-		# de píxeles que necesites bajar (ej. Vector2(0, 8) para bajarlo)
-		sprite.position = Vector2(0, 0)
+		sprite.position = Vector2(0, 0) # Modifica si los frames altos necesitan reajuste vertical
 
-func _harvest() -> void:
+# Función pública llamada desde TreeSpace para cosechar
+func collect_harvest() -> void:
 	var item_id : String = FRUIT_ITEM[fruit_type]
 	Inventory.add_item(item_id, 1)
 
 	is_ready = false
-	sprite.frame = 2 
+	sprite.frame = 2 # Vuelve a árbol adulto base sin frutas (Frame 2)
 	_actualizar_escala()
-	print("[FruitTree] Cosechado con éxito: %s" % item_id)
-
-func reset_daily_tree_flags() -> void:
-	_produced_morning_this_day = false
-	_produced_afternoon_this_day = false
+	print("[FruitTree] Cosechado con éxito: %s. Volviendo al frame 2." % item_id)
+	
+	# Reinicia automáticamente el contador para volver a producir frutas en 1 minuto real
+	growth_timer.start(60.0)
+	print("[FruitTree] %s volverá a dar frutos en 1 minuto real." % fruit_type)

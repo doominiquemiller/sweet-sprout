@@ -10,7 +10,7 @@ region = Rect2(4, 100, 8, 8)
 script/source = "extends Area2D
 
 # =============================================================
-#  TreeSpace Area — Parcela Autónoma (Código de Raíz Area2D)
+#  TreeSpace Area — Parcela Autónoma (Tiempo Real Corregida)
 # =============================================================
 
 @export var fruit_tree_scene : PackedScene = preload(\"res://Scenes/Items/Trees/fruit_trees.tscn\")
@@ -19,16 +19,15 @@ var is_player_inside : bool = false
 var hosted_tree     : Node = null
 
 const SEED_TO_FRUIT : Dictionary = {
-	\"apple_seed\":  \"apple\",
-	\"pear_seed\":   \"pear\",
-	\"orange_seed\": \"orange\",
-	\"peach_seed\":  \"peach\",
+	\"apple_seed\":   \"apple\",
+	\"pear_seed\":    \"pear\",
+	\"orange_seed\":  \"orange\",
+	\"peach_seed\":   \"peach\",
 }
 
 func _ready() -> void:
 	add_to_group(\"tree_space\")
 	
-	# Al ser este mismo nodo un Area2D, conectamos sus señales nativas directamente
 	if body_entered.is_connected(_on_body_entered):
 		body_entered.disconnect(_on_body_entered)
 	if body_exited.is_connected(_on_body_exited):
@@ -45,16 +44,22 @@ func _unhandled_input(event: InputEvent) -> void:
 		_handle_space_interaction()
 
 func _handle_space_interaction() -> void:
-	# SI YA HAY UN ÁRBOL: Cosechar usando su variable interna
+	# 1. SI YA HAY UN ÁRBOL INSTANCIADO: Intentamos interactuar con él
 	if hosted_tree != null and is_instance_valid(hosted_tree):
 		if hosted_tree.get(\"is_ready\") == true:
-			if hosted_tree.has_method(\"_harvest\"):
-				hosted_tree._harvest()
+			if hosted_tree.has_method(\"collect_harvest\"):
+				hosted_tree.collect_harvest() # Usamos el método unificado
+			elif hosted_tree.has_method(\"_harvest\"):
+				hosted_tree._harvest() # Fallback por si acaso
 		else:
-			print(\"[TreeSpace] El árbol no tiene frutas listas.\")
-		return
+			print(\"[TreeSpace] El árbol está creciendo o no tiene frutas listas aún.\")
+		
+		return # CORREGIDO: Bloquea aquí siempre para evitar que intente plantar encima
 
-	# SI NO HAY ÁRBOL: Plantar semilla seleccionada
+	# 2. SI NO HAY ÁRBOL: Procedemos al proceso de plantado
+	_try_plant()
+
+func _try_plant() -> void:
 	var selected_seed : String = Inventory.get_item_seleccionado()
 	if selected_seed == \"\" or not SEED_TO_FRUIT.has(selected_seed):
 		print(\"[TreeSpace] Selecciona una semilla de árbol válida en tu inventario.\")
@@ -76,10 +81,8 @@ func _plant_tree_directly(seed_id: String) -> void:
 	var fruit_type : String = SEED_TO_FRUIT[seed_id]
 
 	var new_tree = fruit_tree_scene.instantiate()
-	
-	# CENTRADO ABSOLUTO: Al meterlo como hijo directo de este Area2D,
-	# la posición local (0,0) lo clava en el centro exacto de la colisión de tierra.
 	add_child(new_tree)
+	
 	new_tree.position = Vector2.ZERO
 	new_tree.z_index = 1
 
@@ -99,7 +102,7 @@ func _plant_tree_directly(seed_id: String) -> void:
 	print(\"[TreeSpace] ¡Árbol de %s plantado y centrado correctamente!\" % fruit_type)
 
 # =============================================================
-#  DETECCIÓN JUGADOR (Señales Propias del Area2D)
+#  DETECCIÓN JUGADOR
 # =============================================================
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group(\"player\") or body.name == \"Player\":
