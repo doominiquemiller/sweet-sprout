@@ -19,8 +19,6 @@ extends CanvasLayer
 @onready var day_label   : Label       = $ClockPanel/DayBadge/DayLabel
 @onready var money_label : Label       = $MoneyBadge/MoneyLabel
 
-# --- Única textura de flecha ---
-const TEX_ARROW := preload("res://Assets/weather/midday_arrow.png")
 
 # --- Iconos de momento del día ---
 const TEX_DAY_ICON    := preload("res://Assets/weather/Day.png")
@@ -56,7 +54,7 @@ var current_season : int = 0   # índice en SEASON_NAMES
 var total_days_elapsed : int = 0  # contador absoluto, nunca se resetea — útil para debug
 var _weekday_offset : int = 0  # offset aleatorio — solo afecta el NOMBRE del día (MON,TUE...)
 
-var money : int = 0
+var money : int = 500
 var _last_period : int = -1
 
 # Flag para asegurar que day_ended solo se emita UNA vez por día
@@ -71,9 +69,9 @@ signal season_changed(season_index: int)
 # =============================================================
 func _ready() -> void:
 
-	# El día del mes SIEMPRE empieza en 1.
-	# Solo el NOMBRE del día de la semana (MON, TUE...) es aleatorio,
-	# para variar qué día cae el inicio de la partida.
+	# Conectamos la UI al dinero global para que cambie automáticamente al vender o comprar
+	Inventory.money_changed.connect(_on_money_changed)
+	_refresh()
 	_weekday_offset = randi_range(0, 6)
 
 	_refresh()
@@ -103,6 +101,8 @@ func _process(delta: float) -> void:
 func _refresh() -> void:
 	_update_day_label()
 	_update_icon()
+	if money_label:
+		money_label.text = "%dg" % Inventory.money
 
 func _update_day_label() -> void:
 	# Usamos current_day - 1 para que el Día 1 corresponda al offset inicial aleatorio
@@ -154,17 +154,15 @@ func set_paused(paused: bool) -> void:
 #  API PÚBLICA — DINERO
 # =============================================================
 func add_money(amount: int) -> void:
-	money += amount
-	money_label.text = "%dg" % money
-	emit_signal("money_changed", money)
+	Inventory.add_money(amount)
+	
 
 func spend_money(amount: int) -> bool:
-	if money < amount:
-		return false
-	money -= amount
-	money_label.text = "%dg" % money
-	emit_signal("money_changed", money)
-	return true
+	return Inventory.spend_money(amount)
+	
+func _on_money_changed(nuevo_monto: int) -> void:
+	if money_label:
+		money_label.text = "%dg" % nuevo_monto
 
 # =============================================================
 #  API PÚBLICA — CALENDARIO
@@ -220,6 +218,7 @@ func _on_boton_dormir_pressed() -> void:
 func _on_texture_button_pressed() -> void:
 	var store = store_scene.instantiate()
 	add_child(store)
+	
 	
 func _on_close_button_pressed() -> void:
 	queue_free()

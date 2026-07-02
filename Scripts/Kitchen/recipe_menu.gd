@@ -1,15 +1,14 @@
 extends Control
 
 # =============================================================
-#  RecipeMenu — Mesa de Preparación (Agrupa ingredientes crudos)
+#  RecipeMenu — Envia la orden de preparado al Counter
 # =============================================================
 
-@onready var recipe_list_container = $Panel/VBoxContainer 
+@onready var recipe_list_container = $Panel
 
 var player_ref = null
 var counter_ref = null
 
-# Diccionario mapeado con los resultados en formato crudo/preparado para el horno
 const RECIPES = {
 	"Masa de Pan Base": {
 		"ingredients": ["harina", "milk", "levadura"],
@@ -45,7 +44,6 @@ func update_recipe_list():
 		var btn = Button.new()
 		btn.text = recipe_name
 		
-		# Valida la disponibilidad usando tu script global de Inventario
 		var can_craft = check_ingredients(recipe_name)
 		
 		btn.disabled = not can_craft
@@ -54,19 +52,13 @@ func update_recipe_list():
 
 func check_ingredients(recipe_name: String) -> bool:
 	var recipe = RECIPES[recipe_name]
-	
-	# 1. Comprobar ingredientes obligatorios mediante el Singleton Global de tu inventario
 	for ing in recipe["ingredients"]:
 		if not Inventory.has_item(ing, 1):
 			return false
 			
-	# 2. Comprobar categorías opcionales (debe tener mínimo una unidad de cualquiera listada)
-	if recipe.has("optional_bayas"):
-		if not has_any_in_inventory(recipe["optional_bayas"]): return false
-	if recipe.has("optional_glaseado"):
-		if not has_any_in_inventory(recipe["optional_glaseado"]): return false
-	if recipe.has("optional_fruta"):
-		if not has_any_in_inventory(recipe["optional_fruta"]): return false
+	if recipe.has("optional_bayas") and not has_any_in_inventory(recipe["optional_bayas"]): return false
+	if recipe.has("optional_glaseado") and not has_any_in_inventory(recipe["optional_glaseado"]): return false
+	if recipe.has("optional_fruta") and not has_any_in_inventory(recipe["optional_fruta"]): return false
 		
 	return true
 
@@ -78,24 +70,19 @@ func has_any_in_inventory(options: Array) -> bool:
 
 func craft_recipe(recipe_name: String):
 	var recipe = RECIPES[recipe_name]
-	print("[Counter] Preparando mezcla: ", recipe_name)
+	print("[RecipeMenu] Enviando ingredientes al counter para preparar: ", recipe_name)
 	
-	# 1. Quitar ingredientes fijos obligatorios
+	# Consumimos los materiales del inventario de inmediato
 	for ing in recipe["ingredients"]:
 		Inventory.remove_item(ing, 1)
 		
-	# 2. Quitar el primer ingrediente opcional que encontremos que posea el jugador
 	_consume_first_matching_optional(recipe, "optional_bayas")
 	_consume_first_matching_optional(recipe, "optional_glaseado")
 	_consume_first_matching_optional(recipe, "optional_fruta")
 	
-	# 3. Otorgar la preparación cruda lista para hornear
-	Inventory.add_item(recipe["result"], 1)
-	print("[Counter] ¡Preparación terminada! %s listo para el horno." % recipe["result"])
-	
-	# Cerramos el menú notificando al counter
-	if counter_ref:
-		counter_ref.close_menu()
+	# Le decimos al counter que empiece a trabajar durante 1 minuto
+	if counter_ref and counter_ref.has_method("start_preparation"):
+		counter_ref.start_preparation(recipe["result"])
 	else:
 		queue_free()
 

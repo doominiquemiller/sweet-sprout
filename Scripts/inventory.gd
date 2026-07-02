@@ -216,3 +216,22 @@ func _refresh_slots() -> void:
 			slot.set_empty()
 
 	_actualizar_marcos_visuales()
+	
+# =============================================================
+# SISTEMA DE DINERO GLOBAL CENTRALIZADO
+# =============================================================
+var money: int = 500 : 
+	set(val):
+		money = val
+		emit_signal("money_changed", money)
+
+signal money_changed(nuevo_monto)
+
+func add_money(amount: int) -> void:
+	money += amount
+
+func spend_money(amount: int) -> bool:
+	if money >= amount:
+		money -= amount
+		return true
+	return false

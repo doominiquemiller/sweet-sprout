@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://bci7ifqbqjfhb"]
+
+[ext_resource type="Texture2D" uid="uid://in7pcemoa6fg" path="res://Assets/Objects/exterior_deco.png" id="1_5d5g2"]
+[ext_resource type="Script" uid="uid://dw0jnivt324wb" path="res://Scripts/sell_baul.gd" id="1_kidil"]
+[ext_resource type="FontFile" uid="uid://n5p8m4kiw5un" path="res://Fonts/CutePixel.ttf" id="3_sg6wd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kidil"]
+atlas = ExtResource("1_5d5g2")
+region = Rect2(112.10748, 0, 16.708435, 16.056885)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sg6wd"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_inwuu"]
+size = Vector2(20, 16)
+
+[node name="SellBaul" type="StaticBody2D" unique_id=1852073511]
+script = ExtResource("1_kidil")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1216274139]
+texture = SubResource("AtlasTexture_kidil")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=208544023]
+shape = SubResource("RectangleShape2D_sg6wd")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1366301906]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1961733896]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_inwuu")
+debug_color = Color(0.6183175, 0.43776512, 0.8032404, 0.41960785)
+
+[node name="Label" type="Label" parent="." unique_id=126403499]
+offset_top = -35.0
+offset_right = 40.0
+offset_bottom = -12.0
+theme_override_fonts/font = ExtResource("3_sg6wd")
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 1

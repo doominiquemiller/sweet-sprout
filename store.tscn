@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dnjddeegnddgf"]
 
-[ext_resource type="PackedScene" path="res://store_item.tscn" id="1_c176v"]
+[ext_resource type="PackedScene" uid="uid://b6i4s3s034soq" path="res://store_item.tscn" id="1_c176v"]
 [ext_resource type="Texture2D" uid="uid://bvfera5kw8dku" path="res://Assets/Icons/Close.png" id="2_3hi0p"]
 [ext_resource type="Texture2D" uid="uid://c1x4mc8qpia46" path="res://Assets/Inventory/Panel.png" id="2_s3f3m"]
 [ext_resource type="Texture2D" uid="uid://b3fpbips0chsl" path="res://Assets/emoji style ui/Store Menu.png" id="3_jdgcu"]
@@ -15,166 +15,77 @@ script/source = "extends Control
 var store_item_id : int = 0
 
 var store_data: Array = [
-	{
-		\"icon_path\" : \"res://Assets/StoreIcons/Egg_item.png\",
-		\"label1\" : \"Huevo\",
-		\"label2\" : \"10 coins\",
-		\"custom_button_text\" : \"Buy\"
-	},
-	{
-		\"icon_path\" : \"res://Assets/StoreIcons/Milk_item.png\",
-		\"label1\" : \"Leche\",
-		\"label2\" : \"10 coins\",
-		\"custom_button_text\" : \"Buy\"
-	},
-	{
-		\"icon_path\" : \"res://Assets/StoreIcons/flour.png\",
-		\"label1\" : \"Harina\",
-		\"label2\" : \"10 coins\",
-		\"custom_button_text\" : \"Buy\"
-	},
-	{
-		\"icon_path\" : \"res://Assets/StoreIcons/butter.png\",
-		\"label1\" : \"Mantequilla\",
-		\"label2\" : \"10 coins\",
-		\"custom_button_text\" : \"Buy\"
-	},
-	{
-		\"icon_path\" : \"res://Assets/StoreIcons/honey.png\",
-		\"label1\" : \"Miel\",
-		\"label2\" : \"10 coins\",
-		\"custom_button_text\" : \"Buy\"
-	},
-	{
-		\"icon_path\" : \"res://Assets/StoreIcons/oil.png\",
-		\"label1\" : \"Aceite\",
-		\"label2\" : \"10 coins\",
-		\"custom_button_text\" : \"Buy\"
-	},
-	{
-		\"icon_path\" : \"res://Assets/StoreIcons/yeast.png\",
-		\"label1\" : \"Levadura\",
-		\"label2\" : \"10 coins\",
-		\"custom_button_text\" : \"Buy\"
-	},
-	{
-		\"icon_path\" : \"res://Assets/StoreIcons/sugarcane.png\",
-		\"label1\" : \"Caña de azúcar\",
-		\"label2\" : \"10 coins\",
-		\"custom_button_text\" : \"Buy\"
-	},
-	{
-		\"icon_path\" : \"res://Assets/StoreIcons/semillas/wheat_seed.png\",
-		\"label1\" : \"Semilla de trigo\",
-		\"label2\" : \"10 coins\",
-		\"custom_button_text\" : \"Buy\"
-	},
-	{
-		\"icon_path\" : \"res://Assets/StoreIcons/frutos/wheat.png\",
-		\"label1\" : \"Trigo\",
-		\"label2\" : \"10 coins\",
-		\"custom_button_text\" : \"Buy\"
-	},
-	{
-		\"icon_path\" : \"res://Assets/StoreIcons/semillas/apple_seed.png\",
-		\"label1\" : \"Semilla de manzana\",
-		\"label2\" : \"10 coins\",
-		\"custom_button_text\" : \"Buy\"
-	},
-	{
-		\"icon_path\" : \"res://Assets/StoreIcons/frutos/apple.png\",
-		\"label1\" : \"Manzana\",
-		\"label2\" : \"10 coins\",
-		\"custom_button_text\" : \"Buy\"
-	},
-	{
-		\"icon_path\" : \"res://Assets/StoreIcons/semillas/orange_seed.png\",
-		\"label1\" : \"Semilla de naranja\",
-		\"label2\" : \"10 coins\",
-		\"custom_button_text\" : \"Buy\"
-	},
-	{
-		\"icon_path\" : \"res://Assets/StoreIcons/frutos/orange.png\",
-		\"label1\" : \"Naranja\",
-		\"label2\" : \"10 coins\",
-		\"custom_button_text\" : \"Buy\"
-	},
-	{
-		\"icon_path\" : \"res://Assets/StoreIcons/semillas/peach_seed.png\",
-		\"label1\" : \"Semilla de melocotón\",
-		\"label2\" : \"10 coins\",
-		\"custom_button_text\" : \"Buy\"
-	},
-	{
-		\"icon_path\" : \"res://Assets/StoreIcons/frutos/peach.png\",
-		\"label1\" : \"Melocotón\",
-		\"label2\" : \"10 coins\",
-		\"custom_button_text\" : \"Buy\"
-	},
-	{
-		\"icon_path\" : \"res://Assets/StoreIcons/semillas/pear_seed.png\",
-		\"label1\" : \"Semilla de pera\",
-		\"label2\" : \"10 coins\",
-		\"custom_button_text\" : \"Buy\"
-	},
-	{
-		\"icon_path\" : \"res://Assets/StoreIcons/frutos/pear.png\",
-		\"label1\" : \"Pera\",
-		\"label2\" : \"10 coins\",
-		\"custom_button_text\" : \"Buy\"
-	},
-	{
-		\"icon_path\" : \"res://Assets/StoreIcons/semillas/blackberry_seed.png\",
-		\"label1\" : \"Semilla de zarzamora\",
-		\"label2\" : \"10 coins\",
-		\"custom_button_text\" : \"Buy\"
-	},
-	{
-		\"icon_path\" : \"res://Assets/StoreIcons/frutos/blackberry.png\",
-		\"label1\" : \"Zarzamora\",
-		\"label2\" : \"10 coins\",
-		\"custom_button_text\" : \"Buy\"
-	},
-	{
-		\"icon_path\" : \"res://Assets/StoreIcons/semillas/blueberry_seed.png\",
-		\"label1\" : \"Semilla de Arándano\",
-		\"label2\" : \"10 coins\",
-		\"custom_button_text\" : \"Buy\"
-	},
-	{
-		\"icon_path\" : \"res://Assets/StoreIcons/frutos/blueberry.png\",
-		\"label1\" : \"Arándano\",
-		\"label2\" : \"10 coins\",
-		\"custom_button_text\" : \"Buy\"
-	},
-	{
-		\"icon_path\" : \"res://Assets/StoreIcons/semillas/raspberry_seed.png\",
-		\"label1\" : \"Semilla de Frambuesa\",
-		\"label2\" : \"10 coins\",
-		\"custom_button_text\" : \"Buy\"
-	},
-	{
-		\"icon_path\" : \"res://Assets/StoreIcons/frutos/raspberry.png\",
-		\"label1\" : \"Frambuesa\",
-		\"label2\" : \"10 coins\",
-		\"custom_button_text\" : \"Buy\"
-	}
+	{ \"item_id\": \"egg\", \"price\": 8, \"icon_path\": \"res://Assets/StoreIcons/Egg_item.png\", \"label1\": \"Huevo\", \"label2\": \"8 coins\", \"custom_button_text\": \"Buy\" },
+	{ \"item_id\": \"milk\", \"price\": 15, \"icon_path\": \"res://Assets/StoreIcons/Milk_item.png\", \"label1\": \"Leche\", \"label2\": \"15 coins\", \"custom_button_text\": \"Buy\" },
+	{ \"item_id\": \"flour\", \"price\": 10, \"icon_path\": \"res://Assets/StoreIcons/flour.png\", \"label1\": \"Harina\", \"label2\": \"10 coins\", \"custom_button_text\": \"Buy\" },
+	{ \"item_id\": \"butter\", \"price\": 12, \"icon_path\": \"res://Assets/StoreIcons/butter.png\", \"label1\": \"Mantequilla\", \"label2\": \"12 coins\", \"custom_button_text\": \"Buy\" },
+	{ \"item_id\": \"honey\", \"price\": 18, \"icon_path\": \"res://Assets/StoreIcons/honey.png\", \"label1\": \"Miel\", \"label2\": \"18 coins\", \"custom_button_text\": \"Buy\" },
+	{ \"item_id\": \"oil\", \"price\": 14, \"icon_path\": \"res://Assets/StoreIcons/oil.png\", \"label1\": \"Aceite\", \"label2\": \"14 coins\", \"custom_button_text\": \"Buy\" },
+	{ \"item_id\": \"yeast\", \"price\": 5, \"icon_path\": \"res://Assets/StoreIcons/yeast.png\", \"label1\": \"Levadura\", \"label2\": \"5 coins\", \"custom_button_text\": \"Buy\" },
+	{ \"item_id\": \"sugar_cane\", \"price\": 20, \"icon_path\": \"res://Assets/StoreIcons/sugarcane.png\", \"label1\": \"Caña de azúcar\", \"label2\": \"20 coins\", \"custom_button_text\": \"Buy\" },
+	{ \"item_id\": \"wheat_seed\", \"price\": 6, \"icon_path\": \"res://Assets/StoreIcons/semillas/wheat_seed.png\", \"label1\": \"Semilla de trigo\", \"label2\": \"6 coins\", \"custom_button_text\": \"Buy\" },
+	{ \"item_id\": \"wheat\", \"price\": 20, \"icon_path\": \"res://Assets/StoreIcons/frutos/wheat.png\", \"label1\": \"Trigo\", \"label2\": \"20 coins\", \"custom_button_text\": \"Buy\" },
+	{ \"item_id\": \"apple_seed\", \"price\": 40, \"icon_path\": \"res://Assets/StoreIcons/semillas/apple_seed.png\", \"label1\": \"Semilla de manzana\", \"label2\": \"40 coins\", \"custom_button_text\": \"Buy\" },
+	{ \"item_id\": \"apple\", \"price\": 30, \"icon_path\": \"res://Assets/StoreIcons/frutos/apple.png\", \"label1\": \"Manzana\", \"label2\": \"30 coins\", \"custom_button_text\": \"Buy\" },
+	{ \"item_id\": \"orange_seed\", \"price\": 40, \"icon_path\": \"res://Assets/StoreIcons/semillas/orange_seed.png\", \"label1\": \"Semilla de naranja\", \"label2\": \"40 coins\", \"custom_button_text\": \"Buy\" },
+	{ \"item_id\": \"orange\", \"price\": 30, \"icon_path\": \"res://Assets/StoreIcons/frutos/orange.png\", \"label1\": \"Naranja\", \"label2\": \"30 coins\", \"custom_button_text\": \"Buy\" },
+	{ \"item_id\": \"peach_seed\", \"price\": 45, \"icon_path\": \"res://Assets/StoreIcons/semillas/peach_seed.png\", \"label1\": \"Semilla de melocotón\", \"label2\": \"45 coins\", \"custom_button_text\": \"Buy\" },
+	{ \"item_id\": \"peach\", \"price\": 35, \"icon_path\": \"res://Assets/StoreIcons/frutos/peach.png\", \"label1\": \"Melocotón\", \"label2\": \"35 coins\", \"custom_button_text\": \"Buy\" },
+	{ \"item_id\": \"pear_seed\", \"price\": 40, \"icon_path\": \"res://Assets/StoreIcons/semillas/pear_seed.png\", \"label1\": \"Semilla de pera\", \"label2\": \"40 coins\", \"custom_button_text\": \"Buy\" },
+	{ \"item_id\": \"pear\", \"price\": 30, \"icon_path\": \"res://Assets/StoreIcons/frutos/pear.png\", \"label1\": \"Pera\", \"label2\": \"30 coins\", \"custom_button_text\": \"Buy\" },
+	{ \"item_id\": \"blackberry_seed\", \"price\": 25, \"icon_path\": \"res://Assets/StoreIcons/semillas/blackberry_seed.png\", \"label1\": \"Semilla de zarzamora\", \"label2\": \"25 coins\", \"custom_button_text\": \"Buy\" },
+	{ \"item_id\": \"blackberry_item\", \"price\": 24, \"icon_path\": \"res://Assets/StoreIcons/frutos/blackberry.png\", \"label1\": \"Zarzamora\", \"label2\": \"24 coins\", \"custom_button_text\": \"Buy\" },
+	{ \"item_id\": \"blueberry_seed\", \"price\": 25, \"icon_path\": \"res://Assets/StoreIcons/semillas/blueberry_seed.png\", \"label1\": \"Semilla de Arándano\", \"label2\": \"25 coins\", \"custom_button_text\": \"Buy\" },
+	{ \"item_id\": \"blueberry_item\", \"price\": 24, \"icon_path\": \"res://Assets/StoreIcons/frutos/blueberry.png\", \"label1\": \"Arándano\", \"label2\": \"24 coins\", \"custom_button_text\": \"Buy\" },
+	{ \"item_id\": \"raspberry_seed\", \"price\": 25, \"icon_path\": \"res://Assets/StoreIcons/semillas/raspberry_seed.png\", \"label1\": \"Semilla de Frambuesa\", \"label2\": \"25 coins\", \"custom_button_text\": \"Buy\" },
+	{ \"item_id\": \"raspberry_item\", \"price\": 24, \"icon_path\": \"res://Assets/StoreIcons/frutos/raspberry.png\", \"label1\": \"Frambuesa\", \"label2\": \"24 coins\", \"custom_button_text\": \"Buy\" }
 ]
 
 func _ready() -> void:
 	setup_store()
 	
 func setup_store() -> void:
+	store_item_id = 0
+	for child in grid.get_children():
+		child.queue_free()
+		
 	for data in store_data:
 		var temp = store_item.instantiate()
-		temp.item_buy_pressed.connect(on_item_buy_pressed)
 		grid.add_child(temp)
+		temp.item_buy_pressed.connect(on_item_buy_pressed)
 		temp.setup(data, store_item_id)
 		store_item_id += 1
 		
-func on_item_buy_pressed(id:int) -> void:
-	print(store_data[id].get(\"label1\")+\" comprado.\")
-
+func on_item_buy_pressed(id: int) -> void:
+	print(\"\\n=== [DIAGNÓSTICO TIENDA] Botón presionado ===\")
+	if id < 0 or id >= store_data.size():
+		print(\"[DIAGNÓSTICO] ID fuera de rango: \", id)
+		return
+		
+	var item_data = store_data[id]
+	var cost = item_data.get(\"price\", 10)
+	var item_to_give = item_data.get(\"item_id\", \"\")
+	var item_name = item_data.get(\"label1\", \"Objeto\")
+	
+	print(\"[DIAGNÓSTICO] Intentando comprar: \", item_name, \" (ID: \", item_to_give, \") por \", cost, \" monedas.\")
+	print(\"[DIAGNÓSTICO] Dinero actual en Inventory Autoload: \", Inventory.money)
+	
+	if Inventory.has_method(\"spend_money\"):
+		var exito_pago = Inventory.spend_money(cost)
+		print(\"[DIAGNÓSTICO] Resultado de spend_money(): \", exito_pago)
+		
+		if exito_pago:
+			print(\"[DIAGNÓSTICO] Pago aceptado. Intentando añadir al inventario...\")
+			if Inventory.has_method(\"add_item\"):
+				Inventory.add_item(item_to_give, 1)
+				print(\"[DIAGNÓSTICO] Función add_item() ejecutada.\")
+			else:
+				print(\"[❌ DIAGNÓSTICO ERROR] El Autoload Inventory NO tiene la función add_item()\")
+		else:
+			print(\"[DIAGNÓSTICO] Pago rechazado. Fondos insuficientes.\")
+	else:
+		print(\"[❌ DIAGNÓSTICO ERROR] El Autoload Inventory NO tiene la función spend_money()\")
+	print(\"============================================\\n\")
 
 func _on_texture_button_pressed() -> void:
 	queue_free()

@@ -1,33 +1,63 @@
 extends StaticBody2D
 
 # =============================================================
-#  Counter — Objeto de Interacción para Cocina (Con Label)
+#  Counter — Mesa de Preparación con Tiempo Real (1 Minuto)
 # =============================================================
 
 @onready var area_2d = $Area2D
-# Asegúrate de añadir un nodo Label como hijo de tu escena Counter y arrastrarlo aquí o llamarlo $Label
-@onready var interaction_label : Label = $Label
+@onready var interaction_label : Label = $Label 
 
 var player_present: bool = false
 var recipe_menu_scene = preload("res://Scenes/Kitchen/recipe_menu.tscn")
 var current_menu = null
 
+# Variables del estado de preparación
+var is_preparing: bool = false
+var preparation_time_left: float = 0.0
+var item_ready_to_collect: String = "" # Guarda el ID de la receta cruda terminada
+
 func _ready() -> void:
 	area_2d.body_entered.connect(_on_body_entered)
 	area_2d.body_exited.connect(_on_body_exited)
 	
-	# El texto empieza oculto o vacío hasta que el jugador se acerque
 	if interaction_label:
 		interaction_label.visible = false
 		interaction_label.text = ""
+
+func _process(delta: float) -> void:
+	# Si está preparando, disminuimos el tiempo en segundos reales
+	if is_preparing:
+		preparation_time_left -= delta
+		
+		if preparation_time_left > 0:
+			# Actualizamos el texto flotante con los segundos restantes
+			if interaction_label:
+				interaction_label.text = "Preparando... %ds" % ceil(preparation_time_left)
+				interaction_label.visible = true
+		else:
+			# ¡Tiempo terminado!
+			is_preparing = false
+			preparation_time_left = 0.0
+			_on_preparation_finished()
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if not player_present:
 		return
 
-	# Detección de la tecla F
 	if event.is_pressed() and event.keycode == KEY_F:
 		get_viewport().set_input_as_handled()
+		
+		# CASO 1: Hay un ítem listo para recoger
+		if item_ready_to_collect != "":
+			_collect_item()
+			return
+			
+		# CASO 2: El counter está ocupado trabajando
+		if is_preparing:
+			print("[Counter] El mueble está ocupado preparando una receta.")
+			return
+			
+		# CASO 3: El counter está libre, abrimos el menú
 		toggle_recipe_menu()
 
 func toggle_recipe_menu() -> void:
@@ -36,48 +66,74 @@ func toggle_recipe_menu() -> void:
 		current_menu = recipe_menu_scene.instantiate()
 		get_tree().current_scene.add_child(current_menu)
 		
-		# Ocultamos el texto temporalmente mientras el menú esté abierto
 		if interaction_label:
 			interaction_label.visible = false
 		
 		var player = get_tree().get_first_node_in_group("player") or get_tree().get_first_node_in_group("Player")
 		if player:
 			current_menu.open_menu(player, self)
-		else:
-			print("[Error] No se encontró ningún nodo en el grupo 'Player'")
 	else:
 		close_menu()
 
 func close_menu() -> void:
 	if current_menu != null:
-		print("[Counter] Cerrando menú.")
 		current_menu.queue_free()
 		current_menu = null
+		_update_label_state()
+
+# Llamado desde RecipeMenu cuando el jugador selecciona una receta válida
+func start_preparation(result_item_id: String) -> void:
+	close_menu() # Cierra el menú de selección
+	
+	item_ready_to_collect = result_item_id
+	preparation_time_left = 60.0 # 1 minuto en segundos reales
+	is_preparing = true
+	
+	print("[Counter] Comenzando preparación de 60 segundos para: ", result_item_id)
+
+func _on_preparation_finished() -> void:
+	print("[Counter] ¡Preparación completada en tiempo real!")
+	_update_label_state()
+
+func _collect_item() -> void:
+	print("[Counter] Entregando producto al jugador: ", item_ready_to_collect)
+	Inventory.add_item(item_ready_to_collect, 1)
+	
+	# Reiniciamos el mueble
+	item_ready_to_collect = ""
+	_update_label_state()
+
+# Controla dinámicamente qué debe decir el texto flotante según el estado
+func _update_label_state() -> void:
+	if not interaction_label:
+		return
 		
-		# Si el jugador sigue estando cerca al cerrar el menú, restauramos el aviso
-		if player_present and interaction_label:
+	if not player_present and not is_preparing:
+		interaction_label.visible = false
+		return
+		
+	if is_preparing:
+		# El texto se maneja continuamente en el _process
+		interaction_label.visible = true
+	elif item_ready_to_collect != "":
+		interaction_label.text = "[F] Recoger mezcla lista"
+		interaction_label.visible = true
+	else:
+		if player_present:
 			interaction_label.text = "[F] Preparar Recetas"
 			interaction_label.visible = true
 
 # =============================================================
-#  DETECCIÓN Y FEEDBACK VISUAL
+#  DETECCIÓN DE AREA
 # =============================================================
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player") or body.is_in_group("Player") or body.name == "Player":
 		player_present = true
-		
-		# Mostramos el mensaje en el Label al acercarse
-		if interaction_label:
-			interaction_label.text = "[F] Preparar Recetas"
-			interaction_label.visible = true
-		print("[Counter] Jugador detectado en cocina.")
+		_update_label_state()
 
 func _on_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player") or body.is_in_group("Player") or body.name == "Player":
 		player_present = false
-		
-		# Ocultamos y limpiamos el Label al alejarse
-		if interaction_label:
-			interaction_label.visible = false
-			interaction_label.text = ""
-		close_menu()
+		_update_label_state()
+		if current_menu != null:
+			close_menu()
