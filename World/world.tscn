@@ -947,7 +947,7 @@ vertices = PackedVector2Array(27, -55.328125, 27, -10.0234375, -345, -10.96875, 
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-355, -120, -102, -120, 37, -62, 37, 0, -355, -1)])
 
-[node name="world" type="Node2D" unique_id=1530126941]
+[node name="world" type="Node2D" unique_id=1530126941 groups=["player"]]
 y_sort_enabled = true
 script = ExtResource("1_o2cvn")
 
@@ -977,7 +977,7 @@ tile_map_data = PackedByteArray("AAD6//z/AAABAAAAAAD7//z/AAACAAMAAAD8//z/AAACAAM
 tile_set = SubResource("TileSet_kn0ld")
 
 [node name="wall2" parent="TileMap" unique_id=1298083150 instance=ExtResource("14_oyb3p")]
-z_index = 2
+z_index = 4
 position = Vector2(-324, 180)
 scale = Vector2(0.6, 0.6)
 
@@ -1194,7 +1194,7 @@ scale = Vector2(0.5, 0.5)
 position = Vector2(-15, 279)
 scale = Vector2(0.5, 0.5)
 
-[node name="cafe_board" parent="TileMap/Bakery2" unique_id=587291277 instance=ExtResource("42_u84s7")]
+[node name="cafe_board" parent="TileMap/Bakery2" unique_id=587291277 groups=["player"] instance=ExtResource("42_u84s7")]
 position = Vector2(-271, 188)
 scale = Vector2(0.5, 0.5)
 
@@ -1202,7 +1202,7 @@ scale = Vector2(0.5, 0.5)
 position = Vector2(-102, 302)
 
 [node name="wall" parent="TileMap" unique_id=1889551116 instance=ExtResource("14_oyb3p")]
-z_index = 2
+z_index = 4
 position = Vector2(-276, 324)
 scale = Vector2(0.6, 0.6)
 
@@ -1622,7 +1622,7 @@ position = Vector2(113, -98)
 position = Vector2(-51, -175)
 
 [node name="Player" parent="." unique_id=62884988 instance=ExtResource("49_w2jjc")]
-position = Vector2(-184, -86)
+position = Vector2(-298, 381)
 
 [node name="Chickens" type="Node2D" parent="." unique_id=564528914]
 position = Vector2(-47.451363, 19.008316)

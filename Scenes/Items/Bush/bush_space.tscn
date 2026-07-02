@@ -10,7 +10,7 @@ region = Rect2(4, 100, 8, 8)
 script/source = "extends Area2D
 
 # =============================================================
-#  BushSpace — Parcela Exclusiva para Arbustos (Tiempo Real)
+#  BushSpace — Parcela de Arbustos (Sincronizada con los Grupos del Mundo)
 # =============================================================
 
 @export var fruit_bush_scene : PackedScene = preload(\"res://Scenes/Items/Bush/fruit_bush.tscn\")
@@ -25,7 +25,12 @@ const SEED_CONFIG : Dictionary = {
 }
 
 func _ready() -> void:
+	# CORREGIDO: Añadido a ambos grupos (singular y plural) para evitar fallos con world.gd u otros sistemas
 	add_to_group(\"crop_space\")
+	add_to_group(\"crop_spaces\")
+	
+	monitoring = true
+	monitorable = true
 	
 	if body_entered.is_connected(_on_body_entered):
 		body_entered.disconnect(_on_body_entered)
@@ -36,16 +41,26 @@ func _ready() -> void:
 	body_exited.connect(_on_body_exited)
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not is_player_inside:
-		return
-
-	if event.is_action_pressed(\"interact\") or (event is InputEventKey and event.pressed and event.keycode == KEY_F):
-		_handle_interaction()
+	# Captura la tecla F física de forma limpia
+	if event is InputEventKey and event.pressed and event.keycode == KEY_F:
+		
+		# Verificación manual si el motor físico se retrasó un frame
+		if not is_player_inside:
+			for body in get_overlapping_bodies():
+				if body.is_in_group(\"player\") or body.name == \"Player\":
+					is_player_inside = true
+					break
+		
+		if is_player_inside:
+			get_viewport().set_input_as_handled() # Consumimos el input para que nadie más lo use
+			_handle_interaction()
 
 func _handle_interaction() -> void:
 	# 1. SI YA HAY UN ARBUSTO INSTANCIADO
 	if hosted_plant != null and is_instance_valid(hosted_plant):
-		if hosted_plant.get(\"is_ready\") == true:
+		var ready_to_harvest = hosted_plant.is_ready if \"is_ready\" in hosted_plant else false
+		
+		if ready_to_harvest:
 			if hosted_plant.has_method(\"collect_harvest\"):
 				hosted_plant.collect_harvest() 
 			else:
@@ -53,7 +68,7 @@ func _handle_interaction() -> void:
 		else:
 			print(\"[BushSpace] Las bayas aún no están listas para ser cosechadas (Espera a que pasen los 2 minutos).\")
 		
-		return # Detiene la ejecución aquí para evitar plantar encima
+		return
 
 	# 2. SI NO HAY NADA ALOJADO
 	_try_plant()
@@ -116,7 +131,7 @@ func _on_body_exited(body: Node2D) -> void:
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k2qs8"]
-size = Vector2(16, 13.333334)
+size = Vector2(25.333334, 25.333336)
 
 [node name="BushSpace" type="Sprite2D" unique_id=1680679629]
 scale = Vector2(1.5, 1.5)
@@ -126,5 +141,5 @@ texture = SubResource("AtlasTexture_k2qs8")
 script = SubResource("GDScript_3ro8n")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1385434360]
-position = Vector2(0, -7.947286e-08)
+position = Vector2(-4.7683716e-07, 3.1789145e-07)
 shape = SubResource("RectangleShape2D_k2qs8")

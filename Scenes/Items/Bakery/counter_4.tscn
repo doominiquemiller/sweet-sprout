@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://dvskwlg0t5gv3"]
 
+[ext_resource type="Script" uid="uid://bagmv5bxjehb2" path="res://Scripts/Kitchen/counter_4.gd" id="1_lopys"]
 [ext_resource type="Texture2D" uid="uid://s2ios5p8nbxa" path="res://Assets/Bakery/bakery.png" id="1_wme45"]
+[ext_resource type="FontFile" uid="uid://n5p8m4kiw5un" path="res://Fonts/CutePixel.ttf" id="3_x0y18"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7onmy"]
 atlas = ExtResource("1_wme45")
@@ -9,7 +11,11 @@ region = Rect2(288.00897, 20.16687, 32.463806, 27.805153)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wcns2"]
 size = Vector2(32, 15)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wme45"]
+size = Vector2(30, 16)
+
 [node name="counter4" type="StaticBody2D" unique_id=1483528737]
+script = ExtResource("1_lopys")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1996388226]
 anchors_preset = 8
@@ -29,3 +35,17 @@ stretch_mode = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=92401378]
 position = Vector2(-16, -4.5)
 shape = SubResource("RectangleShape2D_wcns2")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1817589876]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1147952328]
+position = Vector2(-16, 1)
+shape = SubResource("RectangleShape2D_wme45")
+debug_color = Color(0.6858715, 0.37199014, 0.8531065, 0.41960785)
+
+[node name="Label" type="Label" parent="." unique_id=775934461]
+offset_top = -35.0
+offset_right = 40.0
+offset_bottom = -12.0
+theme_override_fonts/font = ExtResource("3_x0y18")
+horizontal_alignment = 1
