@@ -28,7 +28,7 @@ animations = [{
 size = Vector2(64, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jrubs"]
-size = Vector2(41, 27)
+size = Vector2(30, 22.5)
 
 [node name="Counter" type="StaticBody2D" unique_id=873098121]
 visibility_layer = 3
@@ -45,6 +45,6 @@ shape = SubResource("RectangleShape2D_xkw6t")
 [node name="Area2D" type="Area2D" parent="." unique_id=1113000239]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=470718180]
-position = Vector2(-16, -16)
+position = Vector2(-16, -13.75)
 shape = SubResource("RectangleShape2D_jrubs")
 debug_color = Color(0.62320155, 0.43675715, 0.7970354, 0.41960785)

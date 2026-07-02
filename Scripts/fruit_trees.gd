@@ -1,77 +1,119 @@
-extends Node2D
+extends StaticBody2D
 
 # =============================================================
-#  FruitTree — Controlador de Animaciones y Crecimiento
+#  FruitTree — Versión Tiempo Real (2 Minutos)
 # =============================================================
 
-# Referencias a los nodos hijos (Asegúrate de que se llamen así en tu escena FruitTree)
-@onready var animated_sprite : AnimatedSprite2D = $AnimatedSprite2D
-@onready var harvest_area    : Area2D           = $HarvestArea
+@onready var sprite : AnimatedSprite2D = $AnimatedSprite2D
+@onready var harvest_area : Area2D = $HarvestArea 
 
-# Estados de crecimiento del árbol (Corresponden a tus frames 0, 1 y 2)
-enum TreeState { SPROUT = 0, ADULT = 1, READY_TO_HARVEST = 2 }
+const ANIM_MAP : Dictionary = {
+	"apple":  "tree_apple",
+	"orange": "tree_orange",
+	"peach":  "tree_peach",
+	"pear":   "tree_pear",
+}
 
-var current_state : TreeState = TreeState.SPROUT
-var fruit_type    : String    = ""
+const FRUIT_ITEM : Dictionary = {
+	"apple":  "apple",
+	"orange": "orange",
+	"peach":  "peach",
+	"pear":   "pear",
+}
 
-# =============================================================
+var fruit_type : String = ""
+var is_planted : bool   = false
+var is_ready   : bool   = false
+
+# Timer interno para controlar el crecimiento autónomo
+var growth_timer : Timer
+
 func _ready() -> void:
-	# Nos añadimos al grupo global para que el botón de dormir nos encuentre al pasar la noche
 	add_to_group("planted_trees")
+	z_index = 1
 	
-	# Enlazamos la señal de colisión de forma segura desde el hijo Area2D
-	if harvest_area:
-		harvest_area.body_entered.connect(_on_player_entered_range)
-		harvest_area.body_exited.connect(_on_player_exited_range)
-	else:
-		print("⚠️ [FruitTree] ERROR: No se encontró el nodo hijo 'HarvestArea' en la jerarquía.")
-
-# =============================================================
-#  CONFIGURACIÓN AL SEMBRAR
-# =============================================================
-func setup_tree(type: String) -> void:
-	fruit_type = type
-	current_state = TreeState.SPROUT  # Inicia como brote (Frame 0)
-	print("[FruitTree] Sembrado árbol de: ", fruit_type)
-	_update_tree_visuals()
+	# Creamos y configuramos el Timer mediante código
+	growth_timer = Timer.new()
+	growth_timer.one_shot = true
+	growth_timer.timeout.connect(_on_growth_timer_timeout)
+	add_child(growth_timer)
+	
+	if sprite:
+		_ajustar_posicion_local()
 
 func plant(type: String) -> void:
-	setup_tree(type)
+	if not ANIM_MAP.has(type):
+		return
+	fruit_type = type
+	is_planted = true
+	is_ready = false
+	
+	sprite.stop()
+	sprite.animation = ANIM_MAP[fruit_type]
+	sprite.frame = 0
+	_actualizar_escala()
 
-# =============================================================
-#  CONTROL DE FRAMES VISUALES
-# =============================================================
-func _update_tree_visuals() -> void:
-	if not animated_sprite:
+	# Iniciamos la primera fase: 60 segundos (1 minuto) para pasar a árbol joven/adulto
+	growth_timer.start(60.0)
+	print("[FruitTree] %s plantado. Crecimiento en tiempo real iniciado (Fase 1)." % fruit_type)
+
+# Maneja la evolución automática por tiempo real (recorre los frames de animación)
+func _on_growth_timer_timeout() -> void:
+	if not is_planted:
 		return
 
-	# Si creaste una animación por fruta (ej: "apple"), reproduce esa animación y fija el frame del estado
-	if animated_sprite.sprite_frames.has_animation(fruit_type):
-		animated_sprite.play(fruit_type)
-		animated_sprite.frame = current_state
+	if sprite.frame == 0:
+		# Pasa de Semilla/Brote (Frame 0) a Árbol Joven (Frame 1)
+		sprite.frame = 1
+		print("[FruitTree] %s creció a árbol joven (Frame 1)." % fruit_type)
+		_actualizar_escala()
+		# En el caso del árbol, puedes hacer que pase directamente al frame 2 en otros 30-60 seg si quieres,
+		# o seguir la secuencia normal. Vamos a configurar 30s para Frame 2, y 30s para frutos (Total 2 min).
+		growth_timer.start(30.0)
+		
+	elif sprite.frame == 1:
+		# Pasa de Árbol Joven (Frame 1) a Árbol Adulto sin frutas (Frame 2)
+		sprite.frame = 2
+		print("[FruitTree] %s creció a árbol adulto listo para producir (Frame 2)." % fruit_type)
+		_actualizar_escala()
+		growth_timer.start(30.0) # Últimos 30 segundos para dar fruta (Total: 120s = 2 min)
+
+	elif sprite.frame == 2 and not is_ready:
+		# Pasa de Árbol Adulto (Frame 2) a Árbol con Frutos (Frame 3)
+		_spawn_fruit()
+
+func _spawn_fruit() -> void:
+	sprite.frame = 3
+	is_ready = true
+	_actualizar_escala()
+	print("[FruitTree] ¡El árbol de %s dio frutos en tiempo real! (Frame 3)" % fruit_type)
+
+func _actualizar_escala() -> void:
+	if not sprite:
+		return
+	if sprite.frame == 0:
+		sprite.scale = Vector2(0.5, 0.5)
 	else:
-		# Si usas la animación "default" para todo, descomenta las líneas de abajo:
-		# animated_sprite.play("default")
-		# animated_sprite.frame = current_state
-		pass
+		sprite.scale = Vector2(1.0, 1.0)
+	
+	_ajustar_posicion_local()
 
-# Función vital llamada por el sistema de dormir para avanzar las etapas
-func advance_growth_state() -> void:
-	if current_state < TreeState.READY_TO_HARVEST:
-		current_state += 1 as TreeState
-		_update_tree_visuals()
-		print("[FruitTree] ¡El tiempo avanzó! Nuevo estado del árbol: ", current_state)
+func _ajustar_posicion_local() -> void:
+	if sprite.frame == 0:
+		sprite.position = Vector2.ZERO
+	else:
+		sprite.position = Vector2(0, 0) # Modifica si los frames altos necesitan reajuste vertical
 
-# =============================================================
-#  DETECCIÓN INTERACTIVA
-# =============================================================
-func _on_player_entered_range(body: Node2D) -> void:
-	if body.is_in_group("player") or body.name == "Player":
-		if current_state == TreeState.READY_TO_HARVEST:
-			print("[FruitTree] ¡Cosecha lista! Presiona interactuar para recoger tu: ", fruit_type)
-		else:
-			print("[FruitTree] El árbol está creciendo. Estado actual: ", current_state)
+# Función pública llamada desde TreeSpace para cosechar
+func collect_harvest() -> void:
+	var item_id : String = FRUIT_ITEM[fruit_type]
+	Inventory.add_item(item_id, 1)
 
-func _on_player_exited_range(body: Node2D) -> void:
-	if body.is_in_group("player") or body.name == "Player":
-		print("[FruitTree] El jugador se alejó del árbol.")
+	is_ready = false
+	sprite.frame = 2 # Vuelve a árbol adulto base sin frutas (Frame 2)
+	_actualizar_escala()
+	print("[FruitTree] Cosechado con éxito: %s. Volviendo al frame 2." % item_id)
+	
+	# Reinicia automáticamente el contador para volver a producir frutas en 1 minuto real
+	growth_timer.start(60.0)
+	print("[FruitTree] %s volverá a dar frutos en 1 minuto real." % fruit_type)

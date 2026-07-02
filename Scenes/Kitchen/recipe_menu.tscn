@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bjc8jichiifru"]
+
+[ext_resource type="Script" uid="uid://oshi85el3wmr" path="res://Scripts/Kitchen/recipe_menu.gd" id="1_y6xgi"]
+
+[node name="RecipeMenu" type="Control" unique_id=1560853151]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_y6xgi")
+
+[node name="Panel" type="Panel" parent="." unique_id=645069679]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ItemList" type="ItemList" parent="Panel" unique_id=566662824]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

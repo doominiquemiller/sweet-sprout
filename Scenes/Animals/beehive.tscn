@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://52yrvejy7y0b"]
 
 [ext_resource type="Texture2D" uid="uid://dulrsqqw5feof" path="res://Assets/Objects/beehive.png" id="1_fso6m"]
+[ext_resource type="Script" uid="uid://dqo24kwir3p7u" path="res://Scripts/bee/beehive.gd" id="1_g1hee"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g1hee"]
 atlas = ExtResource("1_fso6m")
@@ -9,9 +10,10 @@ atlas = ExtResource("1_fso6m")
 size = Vector2(26, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_coqyc"]
-size = Vector2(32, 43)
+size = Vector2(37, 49)
 
 [node name="Beehive" type="StaticBody2D" unique_id=1649100236]
+script = ExtResource("1_g1hee")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=2047391969]
 anchors_preset = 8
@@ -34,6 +36,8 @@ shape = SubResource("RectangleShape2D_8d63o")
 [node name="Area2D" type="Area2D" parent="." unique_id=1808404421]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1213186871]
-position = Vector2(0, 2.5)
+position = Vector2(-0.5, -2.5)
 shape = SubResource("RectangleShape2D_coqyc")
 debug_color = Color(0.62537414, 0.41669652, 0.85252297, 0.41960785)
+
+[node name="HoneyIndicator" type="Sprite2D" parent="." unique_id=566993903]

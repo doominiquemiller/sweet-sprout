@@ -1,67 +1,67 @@
 [gd_scene format=3 uid="uid://duxmkmgty85gt"]
 
-[ext_resource type="Texture2D" uid="uid://fq755et6okoa" path="res://Assets/Tilesets/Doors.png" id="1_lylan"]
 [ext_resource type="Script" uid="uid://b0yufee2lm71w" path="res://Scripts/door.gd" id="1_tkwx8"]
+[ext_resource type="Texture2D" uid="uid://dg8yu3vt5j47w" path="res://Assets/Tilesets/Wooden_House_Walls_Tilset.png" id="2_wqenf"]
 [ext_resource type="FontFile" uid="uid://n5p8m4kiw5un" path="res://Fonts/CutePixel.ttf" id="3_tex1h"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1s1qu"]
-atlas = ExtResource("1_lylan")
-region = Rect2(0, 0, 16, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_4akuk"]
+atlas = ExtResource("2_wqenf")
+region = Rect2(16, 94, 16, 18)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tkwx8"]
-atlas = ExtResource("1_lylan")
-region = Rect2(0, 32, 16, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_o835x"]
+atlas = ExtResource("2_wqenf")
+region = Rect2(64, 94, 16, 18)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tex1h"]
-atlas = ExtResource("1_lylan")
-region = Rect2(16, 0, 16, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_u6sdj"]
+atlas = ExtResource("2_wqenf")
+region = Rect2(16, 126, 16, 18)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qtt6v"]
-atlas = ExtResource("1_lylan")
-region = Rect2(16, 32, 16, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_bhwyo"]
+atlas = ExtResource("2_wqenf")
+region = Rect2(64, 126, 16, 18)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3rnec"]
-atlas = ExtResource("1_lylan")
-region = Rect2(16, 32, 16, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_bfnrw"]
+atlas = ExtResource("2_wqenf")
+region = Rect2(64, 126, 16, 18)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_oi35t"]
-atlas = ExtResource("1_lylan")
-region = Rect2(16, 0, 16, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_0hngn"]
+atlas = ExtResource("2_wqenf")
+region = Rect2(16, 126, 16, 18)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ngtrb"]
-atlas = ExtResource("1_lylan")
-region = Rect2(0, 32, 16, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_l3aa7"]
+atlas = ExtResource("2_wqenf")
+region = Rect2(64, 94, 16, 18)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rj6nu"]
-atlas = ExtResource("1_lylan")
-region = Rect2(0, 0, 16, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_iw23u"]
+atlas = ExtResource("2_wqenf")
+region = Rect2(16, 94, 16, 18)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_wm0ht"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1s1qu")
+"texture": SubResource("AtlasTexture_4akuk")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tkwx8")
+"texture": SubResource("AtlasTexture_o835x")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tex1h")
+"texture": SubResource("AtlasTexture_u6sdj")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qtt6v")
+"texture": SubResource("AtlasTexture_bhwyo")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3rnec")
+"texture": SubResource("AtlasTexture_bfnrw")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_oi35t")
+"texture": SubResource("AtlasTexture_0hngn")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ngtrb")
+"texture": SubResource("AtlasTexture_l3aa7")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rj6nu")
+"texture": SubResource("AtlasTexture_iw23u")
 }],
 "loop": false,
 "name": &"door",
@@ -69,7 +69,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_miru8"]
-size = Vector2(16, 23)
+size = Vector2(16, 17)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_es77j"]
 size = Vector2(20, 42)
@@ -78,11 +78,12 @@ size = Vector2(20, 42)
 script = ExtResource("1_tkwx8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=204971810]
+position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_wm0ht")
 animation = &"door"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=895823462]
-position = Vector2(0, -4.5)
+position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_miru8")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=619580057]
@@ -101,3 +102,4 @@ offset_right = 20.0
 offset_bottom = -17.0
 theme_override_fonts/font = ExtResource("3_tex1h")
 theme_override_font_sizes/font_size = 10
+text = "[F] Abrir"

@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://blndarpado0nr"]
+
+[ext_resource type="Texture2D" uid="uid://c3tko702bwhge" path="res://Assets/Crops/wheat_sheet.png" id="2_5sd86"]
+[ext_resource type="Script" uid="uid://cu5bnwgirtlj6" path="res://Scripts/Crops/crop_space.gd" id="2_76xyn"]
+[ext_resource type="FontFile" uid="uid://n5p8m4kiw5un" path="res://Fonts/CutePixel.ttf" id="3_5sd86"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k2qs8"]
+atlas = ExtResource("2_5sd86")
+region = Rect2(0, 0, 16, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k2qs8"]
+size = Vector2(15.333333, 14.666667)
+
+[node name="CropSpace" type="Node2D" unique_id=374812966]
+scale = Vector2(0.3, 0.3)
+script = ExtResource("2_76xyn")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1680679629]
+texture = SubResource("AtlasTexture_k2qs8")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=567870882]
+scale = Vector2(1.5, 1.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1385434360]
+position = Vector2(0, 10.666667)
+shape = SubResource("RectangleShape2D_k2qs8")
+
+[node name="Label" type="Label" parent="." unique_id=1406797808]
+visible = false
+z_index = 2
+offset_top = -35.0
+offset_right = 40.0
+offset_bottom = -12.0
+theme_override_fonts/font = ExtResource("3_5sd86")
+theme_override_font_sizes/font_size = 28

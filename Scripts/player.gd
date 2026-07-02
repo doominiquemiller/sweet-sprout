@@ -8,7 +8,7 @@ extends CharacterBody2D
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
-# 🖐️ NUEVO: Referencia al sprite del ítem en la mano
+# 🖐️ Referencia al sprite del ítem en la mano
 @onready var item_en_mano_sprite: Sprite2D = $ItemEnMano
 
 # Pre-cargamos la escena del árbol frutal para clonarla en el mapa
@@ -17,9 +17,19 @@ const FRUIT_TREE_SCENE = preload("res://Scenes/Items/Trees/fruit_trees.tscn")
 # Almacenamiento de celdas ocupadas localmente por seguridad
 var celdas_ocupadas: Dictionary = {}
 
+# 🎒 INVENTARIO DE INGREDIENTES LOCAL (Sincronizado en minúsculas con el sistema global)
+var inventory: Array = ["harina", "milk", "levadura", "egg"]
+
 # =============================================================
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	
+	# SOLUCIÓN: Forzamos que el Player pertenezca a ambos grupos para que todo el mapa lo detecte
+	if not is_in_group("player"):
+		add_to_group("player")
+	if not is_in_group("Player"):
+		add_to_group("Player")
+		
 	# Nos aseguramos de que empiece oculto al arrancar
 	if item_en_mano_sprite:
 		item_en_mano_sprite.visible = false
@@ -29,8 +39,7 @@ func _physics_process(_delta: float) -> void:
 	_actualizar_item_en_mano()
 
 	# 📦 CONGELAMIENTO EN INVENTARIO:
-	# Si el inventario está abierto, el jugador se detiene pero mantiene la escucha de acciones
-	if Inventory and Inventory.visible:
+	if (Inventory and Inventory.visible):
 		velocity = Vector2.ZERO
 		actualizar_animacion_8_vias(Vector2.ZERO)
 		return
@@ -55,12 +64,10 @@ func _actualizar_item_en_mano() -> void:
 		
 	var item_id : String = Inventory.get_item_seleccionado()
 	
-	# Si no hay nada seleccionado, ocultamos el sprite de la mano
 	if item_id == "":
 		item_en_mano_sprite.visible = false
 		return
 		
-	# Buscamos si el inventario global tiene la textura de ese ítem registrada
 	if Inventory.ITEM_ICONS.has(item_id):
 		item_en_mano_sprite.texture = Inventory.ITEM_ICONS[item_id]
 		item_en_mano_sprite.visible = true
@@ -72,7 +79,11 @@ func _actualizar_item_en_mano() -> void:
 # =============================================================
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact") or (event is InputEventKey and event.pressed and event.keycode == KEY_F):
-		_intentar_plantar()
+		var item_en_mano = Inventory.get_item_seleccionado()
+		var semillas_validas: Array[String] = ["apple_seed", "orange_seed", "peach_seed", "pear_seed"]
+		
+		if item_en_mano in semillas_validas:
+			_intentar_plantar()
 
 func _intentar_plantar() -> void:
 	if not capa_cultivos:
@@ -86,15 +97,9 @@ func _intentar_plantar() -> void:
 	if item_en_mano == "":
 		print("No hay semilla seleccionada.")
 		return
-		
-	var semillas_validas : Array[String] = ["apple_seed", "orange_seed", "peach_seed", "pear_seed"]
-	if not item_en_mano in semillas_validas:
-		return
 
-	# Obtener coordenadas de la celda actual del jugador
 	var posicion_celda : Vector2i = capa_cultivos.local_to_map(capa_cultivos.to_local(global_position))
 	
-	# Verificar si el terreno es válido
 	if capa_cultivos.get_cell_source_id(posicion_celda) == -1:
 		print("Aquí no se puede plantar.")
 		return
@@ -108,7 +113,6 @@ func _intentar_plantar() -> void:
 		return
 
 	var tipo_fruta : String = item_en_mano.replace("_seed", "")
-	
 	var se_quito : bool = inventario_global.remove_item(item_en_mano, 1)
 	
 	if se_quito:

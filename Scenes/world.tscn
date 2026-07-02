@@ -1,9 +1,7 @@
-[gd_scene format=4 uid="uid://b1fdg53evmpx1"]
+[gd_scene format=4 uid="uid://bujalu60se00m"]
 
 [ext_resource type="Texture2D" uid="uid://bdp0mw5o2ivu2" path="res://Assets/Tilesets/Grass.png" id="1_7yui6"]
-[ext_resource type="PackedScene" uid="uid://b4i4fpk0eybx7" path="res://Scenes/player.tscn" id="1_kn0ld"]
 [ext_resource type="Script" uid="uid://d31xbc4m43ghi" path="res://Scripts/world.gd" id="1_pyn1s"]
-[ext_resource type="PackedScene" uid="uid://bveh1fe4dvwx8" path="res://Scenes/sleep_screen.tscn" id="3_b4e6k"]
 [ext_resource type="Texture2D" uid="uid://cv11nc2v7ba6i" path="res://Assets/Tilesets/CHills.png" id="5_t2t4p"]
 [ext_resource type="Texture2D" uid="uid://jr25d8h6tbyu" path="res://Assets/Objects/Basic Grass Biom things 1.png" id="6_axeuq"]
 [ext_resource type="Texture2D" uid="uid://o2wh6v8fmeis" path="res://Assets/Tilesets/Tilled_Dirt_Wide.png" id="6_t2t4p"]
@@ -17,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://dw7wt177quejw" path="res://Scenes/Items/Trees/treeP.tscn" id="14_0sgyr"]
 [ext_resource type="PackedScene" uid="uid://b6nkjlv1lberw" path="res://Scenes/Items/Trees/tree.tscn" id="17_0pcbe"]
 [ext_resource type="PackedScene" uid="uid://dbedud0wrda8x" path="res://Scenes/Items/Decor/haybale.tscn" id="18_axeuq"]
-[ext_resource type="PackedScene" uid="uid://i6ndiexpiyb7" path="res://Scenes/Items/Trees/tree_space.tscn" id="19_13n8b"]
+[ext_resource type="PackedScene" uid="uid://bgfkcyi0xqxb3" path="res://Scenes/Items/Trees/fruit_trees.tscn" id="20_yq1aw"]
 [ext_resource type="PackedScene" uid="uid://dwl3akclvb6ln" path="res://Scenes/Items/Bush/fruit_bush.tscn" id="21_pyn1s"]
 [ext_resource type="PackedScene" uid="uid://dkrsmo13p2aqr" path="res://Scenes/Items/Trees/cb_tree.tscn" id="21_qebug"]
 [ext_resource type="Texture2D" uid="uid://dg8yu3vt5j47w" path="res://Assets/Tilesets/Wooden_House_Walls_Tilset.png" id="22_pt3ps"]
@@ -51,7 +49,6 @@
 [ext_resource type="PackedScene" uid="uid://gkn71ljrtmiq" path="res://Scenes/Items/Bakery/ingredients2.tscn" id="44_b4e6k"]
 [ext_resource type="PackedScene" uid="uid://c34picphhum36" path="res://Scenes/Items/Trees/treePino.tscn" id="46_l33cg"]
 [ext_resource type="PackedScene" uid="uid://dm76s17n37nnl" path="res://Scenes/Animals/bee.tscn" id="49_b4e6k"]
-[ext_resource type="Script" uid="uid://co8u4ndjgy3de" path="res://Scripts/planting_system.gd" id="51_l33cg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r0ikl"]
 texture = ExtResource("8_axeuq")
@@ -1149,19 +1146,14 @@ texture = ExtResource("26_ochwf")
 sources/0 = SubResource("TileSetAtlasSource_r74th")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_3ua1v"]
-vertices = PackedVector2Array(3.453125, -3.0078125, 6.453125, -50.007813, 49.453125, -50.007813, 49.453125, -47.007813, 45.453125, -13.0078125, 3.453125, 14.9921875, 68.453125, -47.007813, 68.453125, -13.0078125, 45.453125, 14.9921875, -13.546875, -3.0078125, -13.546875, -20.007813, -12.546875, -50.007813, 6.453125, -73.00781, -37.546875, -20.007813, -37.546875, -50.007813, -12.546875, -73.00781)
+vertices = PackedVector2Array(3.453125, -3.0078125, 6.453125, -50.007813, 49.453125, -50.007813, 49.453125, -47.007813, 45.453125, -13.0078125, 3.453125, 14.9921875, 68.453125, -47.007813, 68.453125, -13.0078125, 45.453125, 14.9921875, -13.546875, -3.0078125, -13.546875, -20.007813, -12.546875, -64.00781, 6.453125, -73.00781, -37.546875, -20.007813, -37.546875, -64.00781, -12.546875, -73.00781)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(3, 6, 7, 4), PackedInt32Array(4, 8, 5), PackedInt32Array(1, 0, 9, 10, 11, 12), PackedInt32Array(10, 13, 14, 11), PackedInt32Array(12, 11, 15)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(55.451363, 24.991684, -6.5486374, 24.991684, -6.5486374, 6.991684, -23.548637, 6.991684, -23.548637, -10.008316, -47.548637, -10.008316, -47.548637, -60.008316, -22.548637, -60.008316, -22.548637, -83.008316, 16.451363, -83.008316, 16.451363, -60.008316, 59.451363, -60.008316, 59.451363, -57.008316, 78.45136, -57.008316, 78.45136, -3.008316, 55.451363, -3.008316)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(55.451363, 24.991684, -6.5486374, 24.991684, -6.5486374, 6.991684, -23.548637, 6.991684, -23.548637, -10.008316, -47.548637, -10.008316, -47.548637, -74.008316, -22.548637, -74.008316, -22.548637, -83.008316, 16.451363, -83.008316, 16.451363, -60.008316, 59.451363, -60.008316, 59.451363, -57.008316, 78.45136, -57.008316, 78.45136, -3.008316, 55.451363, -3.008316)])
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_r0ikl"]
-vertices = PackedVector2Array(-198, 61, -198, 60, -173, 60, -173, 145, -258, 145, -258, 128, -223, 61, -274, 128, -274, 13, -223, 13)
+vertices = PackedVector2Array(-198, 58, -198, 57, -173, 57, -173, 145, -258, 145, -258, 128, -223, 58, -276, 128, -276, 13, -223, 13)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(0, 3, 4, 5, 6), PackedInt32Array(6, 5, 7, 8, 9)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-284, 138, -284, 3, -213, 3, -213, 51, -208, 51, -208, 50, -163, 50, -163, 155, -268, 155, -268, 138)])
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_13n8b"]
-vertices = PackedVector2Array(-113, -6, -172, -6, -172, -87, -113, -87)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-182, -97, -103, -97, -103, 4, -182, 4)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-286, 138, -286, 3, -213, 3, -213, 48, -208, 48, -208, 47, -163, 47, -163, 155, -268, 155, -268, 138)])
 
 [node name="world" type="Node2D" unique_id=1530126941]
 y_sort_enabled = true
@@ -1169,7 +1161,7 @@ script = ExtResource("1_pyn1s")
 
 [node name="clock_ui" parent="." unique_id=1588631544 instance=ExtResource("23_xbk3s")]
 
-[node name="SleepScreen" parent="." unique_id=834690660 instance=ExtResource("3_b4e6k")]
+[node name="SleepScreen" parent="." unique_id=834690660]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1093347763]
 
@@ -1246,9 +1238,6 @@ scale = Vector2(0.7, 0.7)
 [node name="Beehive4" parent="TileMap/Farm" unique_id=1789874945 instance=ExtResource("28_1vso6")]
 position = Vector2(-157, -28)
 scale = Vector2(0.7, 0.7)
-
-[node name="TreeSpace" parent="TileMap/Farm" unique_id=280366587 instance=ExtResource("19_13n8b")]
-position = Vector2(-328, -104)
 
 [node name="Bakery2" type="Node" parent="TileMap" unique_id=1896068470]
 
@@ -1790,7 +1779,29 @@ position = Vector2(113, -98)
 [node name="TreePino3" parent="TileMap/Trees" unique_id=1801323313 instance=ExtResource("46_l33cg")]
 position = Vector2(-51, -175)
 
-[node name="Player" parent="." unique_id=62884988 instance=ExtResource("1_kn0ld")]
+[node name="FruitTrees" type="Node" parent="TileMap" unique_id=613816829]
+
+[node name="treeA" parent="TileMap/FruitTrees" unique_id=275646237 instance=ExtResource("20_yq1aw")]
+position = Vector2(-280, -117)
+scale = Vector2(1.5, 1.5)
+
+[node name="treeA5" parent="TileMap/FruitTrees" unique_id=1553273653 instance=ExtResource("20_yq1aw")]
+position = Vector2(-328, -117)
+scale = Vector2(1.5, 1.5)
+
+[node name="treeA2" parent="TileMap/FruitTrees" unique_id=2137713046 instance=ExtResource("20_yq1aw")]
+position = Vector2(-232.00002, -117)
+scale = Vector2(1.5, 1.5)
+
+[node name="treeA3" parent="TileMap/FruitTrees" unique_id=1318707020 instance=ExtResource("20_yq1aw")]
+position = Vector2(-184, -117.00001)
+scale = Vector2(1.5, 1.5)
+
+[node name="treeA4" parent="TileMap/FruitTrees" unique_id=1359521170 instance=ExtResource("20_yq1aw")]
+position = Vector2(-136, -117)
+scale = Vector2(1.5, 1.5)
+
+[node name="Player" parent="." unique_id=62884988]
 z_index = 2
 position = Vector2(-184, -86)
 
@@ -1824,23 +1835,20 @@ position = Vector2(-199, 117)
 
 [node name="Bee" parent="Bees" unique_id=2004895695 instance=ExtResource("49_b4e6k")]
 z_index = 1
-position = Vector2(-162, -77)
+position = Vector2(-180, -46)
+scale = Vector2(1.5, 1.5)
 
 [node name="Bee2" parent="Bees" unique_id=1012407562 instance=ExtResource("49_b4e6k")]
 z_index = 1
-position = Vector2(-123, -51)
+position = Vector2(-112, -52)
+scale = Vector2(1.5, 1.5)
 
 [node name="Bee3" parent="Bees" unique_id=949214817 instance=ExtResource("49_b4e6k")]
 z_index = 1
-position = Vector2(-133, -10)
+position = Vector2(-141, -5)
+scale = Vector2(1.5, 1.5)
 
 [node name="Bee4" parent="Bees" unique_id=295658823 instance=ExtResource("49_b4e6k")]
 z_index = 1
-position = Vector2(-152, -29)
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Bees" unique_id=1392717420]
-navigation_polygon = SubResource("NavigationPolygon_13n8b")
-navigation_layers = 4
-
-[node name="PlantingSystem" type="Node2D" parent="." unique_id=1596363724]
-script = ExtResource("51_l33cg")
+position = Vector2(-172, -28)
+scale = Vector2(1.5, 1.5)

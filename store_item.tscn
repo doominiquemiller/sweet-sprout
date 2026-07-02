@@ -1,7 +1,7 @@
-[gd_scene format=3 uid="uid://fun8hf7ajwe3"]
+[gd_scene format=3 uid="uid://b6i4s3s034soq"]
 
 [ext_resource type="Texture2D" uid="uid://dsy1hun8ksl2q" path="res://Assets/Objects/Egg_item.png" id="1_kjxej"]
-[ext_resource type="Script" uid="uid://c2gyuhctjqdvj" path="res://Scripts/store_item.gd" id="1_om1ql"]
+[ext_resource type="Script" path="res://Scripts/store_item.gd" id="1_om1ql"]
 [ext_resource type="FontFile" uid="uid://n5p8m4kiw5un" path="res://Fonts/CutePixel.ttf" id="2_om1ql"]
 
 [node name="StoreItem" type="PanelContainer" unique_id=798024514]

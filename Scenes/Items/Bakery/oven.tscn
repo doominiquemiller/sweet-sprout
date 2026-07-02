@@ -10,7 +10,7 @@ region = Rect2(272.07944, 48.94588, 17.080505, 46.160625)
 size = Vector2(17, 20.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8v8yq"]
-size = Vector2(21, 26)
+size = Vector2(15, 19)
 
 [node name="Oven" type="StaticBody2D" unique_id=1791195692]
 
@@ -36,6 +36,6 @@ shape = SubResource("RectangleShape2D_ml8wo")
 [node name="Area2D" type="Area2D" parent="." unique_id=333183253]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=430349804]
-position = Vector2(-11.5, 15)
+position = Vector2(-11.5, 20.5)
 shape = SubResource("RectangleShape2D_8v8yq")
 debug_color = Color(0.58814657, 0.43373305, 0.8684508, 0.41960785)
