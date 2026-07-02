@@ -53,6 +53,11 @@ const ITEM_ICONS : Dictionary = {
 	"sugarcane_seed":   preload("res://Assets/Seeds/sugarcane_seed.png"),  # Ruta corregida
 	"wheat":            preload("res://Assets/Fruit/wheat_item.png"),      # CORREGIDO: antes era "wheat_item"
 	"sugar_cane":       preload("res://Assets/StoreIcons/sugarcane.png"),      # CORREGIDO: antes era "sugarcane.png"
+
+"raw_bread": preload("res://Assets/raw_recipes/raw_bread.png"),
+	"raw_berry_cookies": preload("res://Assets/raw_recipes/raw_berry_cookies.png"),
+	"raw_donuts": preload("res://Assets/raw_recipes/raw_donuts.png"),
+	"raw_pancakes": preload("res://Assets/raw_recipes/raw_pancakes.png"),
 }
 
 # IDs que son semillas — para auto-seleccionar al PlantingSystem o CropSpaces/World
