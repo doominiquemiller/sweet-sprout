@@ -9,7 +9,7 @@ extends StaticBody2D
 @onready var interaction_label : Label = $Label
 
 var player_present: bool = false
-var recipe_menu_scene = preload("res://Scenes/Kitchen/recipe_menu.tscn")
+@export var recipe_scene: PackedScene
 var current_menu = null
 
 func _ready() -> void:
@@ -30,34 +30,41 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		toggle_recipe_menu()
 
+
 func toggle_recipe_menu() -> void:
 	if current_menu == null:
-		print("[Counter] Abriendo menú de recetas...")
-		current_menu = recipe_menu_scene.instantiate()
+		current_menu = recipe_scene.instantiate()
+		current_menu.position = Vector2(276, 124)
 		get_tree().current_scene.add_child(current_menu)
 		
-		# Ocultamos el texto temporalmente mientras el menú esté abierto
+		print(current_menu.get_parent().name)
+		print(current_menu.get_index())
+
+		print(current_menu.position)
+
+		current_menu.position = Vector2(276, 124)
+
+		print(current_menu.position)
+		
+		await get_tree().create_timer(2.0).timeout
+		print(is_instance_valid(current_menu))
+		current_menu.z_index = 99
+		print(get_tree().current_scene)
+		print(get_tree().root)
+		
 		if interaction_label:
 			interaction_label.visible = false
-		
-		var player = get_tree().get_first_node_in_group("player") or get_tree().get_first_node_in_group("Player")
-		if player:
-			current_menu.open_menu(player, self)
-		else:
-			print("[Error] No se encontró ningún nodo en el grupo 'Player'")
 	else:
 		close_menu()
 
 func close_menu() -> void:
-	if current_menu != null:
-		print("[Counter] Cerrando menú.")
+	if current_menu:
 		current_menu.queue_free()
 		current_menu = null
-		
-		# Si el jugador sigue estando cerca al cerrar el menú, restauramos el aviso
-		if player_present and interaction_label:
-			interaction_label.text = "[F] Preparar Recetas"
+
+		if player_present:
 			interaction_label.visible = true
+			interaction_label.text = "[F] Preparar Recetas"
 
 # =============================================================
 #  DETECCIÓN Y FEEDBACK VISUAL

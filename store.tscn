@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dnjddeegnddgf"]
 
-[ext_resource type="PackedScene" path="res://store_item.tscn" id="1_c176v"]
+[ext_resource type="PackedScene" uid="uid://b6i4s3s034soq" path="res://store_item.tscn" id="1_c176v"]
 [ext_resource type="Texture2D" uid="uid://bvfera5kw8dku" path="res://Assets/Icons/Close.png" id="2_3hi0p"]
 [ext_resource type="Texture2D" uid="uid://c1x4mc8qpia46" path="res://Assets/Inventory/Panel.png" id="2_s3f3m"]
 [ext_resource type="Texture2D" uid="uid://b3fpbips0chsl" path="res://Assets/emoji style ui/Store Menu.png" id="3_jdgcu"]
@@ -216,7 +216,7 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 columns = 2
 
-[node name="StoreMenu" type="Sprite2D" parent="." unique_id=388375954]
+[node name="ExitButton" type="Sprite2D" parent="." unique_id=388375954]
 position = Vector2(645, -55.5)
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("3_jdgcu")
