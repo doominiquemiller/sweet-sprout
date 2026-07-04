@@ -1,109 +1,75 @@
 extends CanvasLayer
 
-# =============================================================
-#  Inventory — Sistema de inventario con grilla de slots
-# =============================================================
+@onready var panel : PanelContainer = $Panel
+@onready var slot_grid : GridContainer = $Panel/SlotGrid
 
-@onready var panel     : PanelContainer = $Panel
-@onready var slot_grid : GridContainer  = $Panel/SlotGrid
+const COLUMNS : int = 4
+const ROWS : int = 3
+const TOTAL_SLOTS : int = ROWS * COLUMNS
 
-const COLUMNS    : int = 4
-const ROWS       : int = 3
-const TOTAL_SLOTS: int = ROWS * COLUMNS
-
-var items : Dictionary = {}
 var slot_seleccionado_index : int = 0
 var item_seleccionado : String = ""
+var _slot_nodes : Array = []
 
-# Iconos de cada tipo de item
 const ITEM_ICONS : Dictionary = {
-	# 🐓 Animales
-	"egg":              preload("res://Assets/Objects/Egg item.png"),
-	"milk":             preload("res://Assets/Objects/Milk_item.png"),
-	"honey":            preload("res://Assets/Objects/Honey_item.png"),
-	
-	# 🍎 Frutas cosechadas (Árboles)
-	"apple":            preload("res://Assets/Fruit/apple_fruit.png"),
-	"orange":           preload("res://Assets/Fruit/orange_fruit.png"),
-	"peach":            preload("res://Assets/Fruit/peach_fruit.png"),
-	"pear":             preload("res://Assets/Fruit/pear_fruit.png"),
-	
-	# 🌱 Semillas de árboles
-	"apple_seed":       preload("res://Assets/Seeds/apple_seed.png"),
-	"orange_seed":      preload("res://Assets/Seeds/orange_seed.png"),
-	"peach_seed":       preload("res://Assets/Seeds/peach_seed.png"),
-	"pear_seed":        preload("res://Assets/Seeds/pear_seed.png"),
-	
-	# 🫐 Bayas cosechadas (Arbustos)
-	"blackberry_item":  preload("res://Assets/Fruit/blackberry_item.png"),
-	"blueberry_item":   preload("res://Assets/Fruit/blueberry_item.png"),
-	"raspberry_item":   preload("res://Assets/Fruit/raspberry_item.png"),
-	
-	# 🌿 Semillas de arbustos (Bushes)
+	"egg": preload("res://Assets/Objects/Egg item.png"),
+	"milk": preload("res://Assets/Objects/Milk_item.png"),
+	"honey": preload("res://Assets/Objects/Honey_item.png"),
+	"apple": preload("res://Assets/Fruit/apple_fruit.png"),
+	"orange": preload("res://Assets/Fruit/orange_fruit.png"),
+	"peach": preload("res://Assets/Fruit/peach_fruit.png"),
+	"pear": preload("res://Assets/Fruit/pear_fruit.png"),
+	"apple_seed": preload("res://Assets/Seeds/apple_seed.png"),
+	"orange_seed": preload("res://Assets/Seeds/orange_seed.png"),
+	"peach_seed": preload("res://Assets/Seeds/peach_seed.png"),
+	"pear_seed": preload("res://Assets/Seeds/pear_seed.png"),
+	"blackberry_item": preload("res://Assets/Fruit/blackberry_item.png"),
+	"blueberry_item": preload("res://Assets/Fruit/blueberry_item.png"),
+	"raspberry_item": preload("res://Assets/Fruit/raspberry_item.png"),
 	"blackberry_seeds": preload("res://Assets/Seeds/blackberry_seeds.png"),
-	"blueberry_seeds":  preload("res://Assets/Seeds/blueberry_seeds.png"),
-	"raspberry_seeds":  preload("res://Assets/Seeds/raspberry_seeds.png"),
-
-	# 🛠️ Herramientas de trabajo
-	"hoe":              preload("res://Assets/Objects/hoe.png"),
-	"watering_can":     preload("res://Assets/Objects/watering_can.png"),
-
-	# 🌾 CULTIVOS
-	"wheat_seed":       preload("res://Assets/StoreIcons/semillas/wheat_seed.png"),
-	"sugarcane_seed":   preload("res://Assets/Seeds/sugarcane_seed.png"),
-	"wheat":            preload("res://Assets/Fruit/wheat_item.png"),
-	"sugar_cane":       preload("res://Assets/StoreIcons/sugarcane.png"),
-	
+	"blueberry_seeds": preload("res://Assets/Seeds/blueberry_seeds.png"),
+	"raspberry_seeds": preload("res://Assets/Seeds/raspberry_seeds.png"),
+	"hoe": preload("res://Assets/Objects/hoe.png"),
+	"watering_can": preload("res://Assets/Objects/watering_can.png"),
+	"wheat_seed": preload("res://Assets/StoreIcons/semillas/wheat_seed.png"),
+	"sugarcane_seed": preload("res://Assets/Seeds/sugarcane_seed.png"),
+	"wheat": preload("res://Assets/Fruit/wheat_item.png"),
+	"sugar_cane": preload("res://Assets/StoreIcons/sugarcane.png"),
 	"raw_bread": preload("res://Assets/raw_recipes/raw_bread.png"),
 	"raw_berry_cookies": preload("res://Assets/raw_recipes/raw_berry_cookies.png"),
 	"raw_donuts": preload("res://Assets/raw_recipes/raw_donuts.png"),
 	"raw_pancakes": preload("res://Assets/raw_recipes/raw_pancakes.png"),
 }
 
-# IDs que son semillas
 const SEED_IDS : Array[String] = [
 	"apple_seed", "orange_seed", "peach_seed", "pear_seed",
 	"blackberry_seeds", "blueberry_seeds", "raspberry_seeds",
 	"wheat_seed", "sugarcane_seed"
 ]
 
-var _slot_order : Array[String] = []
-var _slot_nodes : Array = []
-
-signal item_added(item_id: String, amount: int)
-signal inventory_changed
-
-# =============================================================
 func _ready() -> void:
-	add_to_group("inventory")
 	visible = false
 	slot_grid.columns = COLUMNS
-
 	_slot_nodes = slot_grid.get_children()
+	
 	for slot in _slot_nodes:
 		slot.set_empty()
-
-	_actualizar_marcos_visuales()
 	
-	# Conectar señal de dinero global
-	Global.money_changed.connect(_on_money_changed_global)
+	# Conectar señal de actualización del inventario
+	Global.inventory_updated.connect(_refresh_slots)
 	
-	# =============================================================
-	# 🎁 ÍTEMS INICIALES PARA PRUEBAS
-	# =============================================================
-	add_item("wheat_seed", 10)
-	add_item("sugarcane_seed", 10)
-	add_item("blackberry_seeds", 2)
-	add_item("raspberry_seeds", 2)
-	add_item("blueberry_seeds", 2)
-	add_item("apple_seed", 1)
-	add_item("pear_seed", 1)
-	add_item("peach_seed", 1)
-	add_item("orange_seed", 1)
-
-func _on_money_changed_global(new_amount: int) -> void:
-	# Actualizar cualquier UI que muestre dinero
-	pass
+	# Items iniciales de prueba
+	Global.add_item("wheat_seed", 5)
+	Global.add_item("sugarcane_seed", 5)
+	Global.add_item("blackberry_seeds", 2)
+	Global.add_item("raspberry_seeds", 2)
+	Global.add_item("blueberry_seeds", 2)
+	Global.add_item("apple_seed", 1)
+	Global.add_item("pear_seed", 1)
+	Global.add_item("peach_seed", 1)
+	Global.add_item("orange_seed", 1)
+	
+	_refresh_slots()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_inventory"):
@@ -120,9 +86,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		cambiar_seleccion(1)
 		get_viewport().set_input_as_handled()
 
-# =============================================================
-#  NAVEGACIÓN POR TECLADO
-# =============================================================
 func cambiar_seleccion(direccion: int) -> void:
 	slot_seleccionado_index += direccion
 
@@ -134,13 +97,14 @@ func cambiar_seleccion(direccion: int) -> void:
 	_actualizar_marcos_visuales()
 
 func _actualizar_marcos_visuales() -> void:
+	var order = Global.get_inventory_order()
 	for i in range(_slot_nodes.size()):
 		var slot = _slot_nodes[i]
 		if slot.has_method("marcar_como_seleccionado"):
 			slot.marcar_como_seleccionado(i == slot_seleccionado_index)
 
-	if slot_seleccionado_index < _slot_order.size():
-		item_seleccionado = _slot_order[slot_seleccionado_index]
+	if slot_seleccionado_index < order.size():
+		item_seleccionado = order[slot_seleccionado_index]
 	else:
 		item_seleccionado = ""
 
@@ -165,35 +129,6 @@ func limpiar_seleccion() -> void:
 	item_seleccionado = ""
 	_sync_planting_system()
 
-# =============================================================
-#  API PÚBLICA
-# =============================================================
-func add_item(item_id: String, amount: int = 1) -> void:
-	if not items.has(item_id):
-		items[item_id] = 0
-		_slot_order.append(item_id)
-	items[item_id] += amount
-	_refresh_slots()
-	emit_signal("item_added", item_id, amount)
-	emit_signal("inventory_changed")
-
-func remove_item(item_id: String, amount: int = 1) -> bool:
-	if not items.has(item_id) or items[item_id] < amount:
-		return false
-	items[item_id] -= amount
-	if items[item_id] <= 0:
-		items.erase(item_id)
-		_slot_order.erase(item_id)
-	_refresh_slots()
-	emit_signal("inventory_changed")
-	return true
-
-func get_item_count(item_id: String) -> int:
-	return items.get(item_id, 0)
-
-func has_item(item_id: String, amount: int = 1) -> bool:
-	return get_item_count(item_id) >= amount
-
 func toggle() -> void:
 	visible = not visible
 	if visible:
@@ -206,15 +141,17 @@ func open() -> void:
 func close() -> void:
 	visible = false
 
-# =============================================================
 func _refresh_slots() -> void:
+	var inventory = Global.get_inventory()
+	var order = Global.get_inventory_order()
+	
 	for i in range(_slot_nodes.size()):
 		var slot = _slot_nodes[i]
-		if i < _slot_order.size():
-			var item_id : String = _slot_order[i]
+		if i < order.size():
+			var item_id : String = order[i]
 			var icon : Texture2D = ITEM_ICONS.get(item_id, null)
 			slot.mi_item_id = item_id
-			slot.set_item(icon, items[item_id])
+			slot.set_item(icon, inventory[item_id])
 		else:
 			slot.mi_item_id = ""
 			slot.set_empty()

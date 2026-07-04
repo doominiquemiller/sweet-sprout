@@ -172,6 +172,11 @@ func _on_boton_dormir_pressed() -> void:
 # =============================================================
 @export var store_scene: PackedScene
 
+func _on_store_button_pressed() -> void:
+	print("Abriendo tienda...")
+	var store = store_scene.instantiate()
+	add_child(store)
+
 func _on_texture_button_pressed() -> void:
 	var store = store_scene.instantiate()
 	add_child(store)
