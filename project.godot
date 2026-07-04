@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 WeatherSystem="*uid://bd6mbmigfyybc"
 GameTime="*uid://b3xhf2wc52nc2"
 Inventory="*uid://bqa65unlacyr4"
+Global="*uid://bw43sike0qgx7"
 
 [display]
 

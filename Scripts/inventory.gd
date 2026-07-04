@@ -15,7 +15,7 @@ var items : Dictionary = {}
 var slot_seleccionado_index : int = 0
 var item_seleccionado : String = ""
 
-# Iconos de cada tipo de item — TODOS COMPLETOS Y RESTAURADOS
+# Iconos de cada tipo de item
 const ITEM_ICONS : Dictionary = {
 	# 🐓 Animales
 	"egg":              preload("res://Assets/Objects/Egg item.png"),
@@ -48,23 +48,23 @@ const ITEM_ICONS : Dictionary = {
 	"hoe":              preload("res://Assets/Objects/hoe.png"),
 	"watering_can":     preload("res://Assets/Objects/watering_can.png"),
 
-	# 🌾 CULTIVOS (Crops) - CORREGIDO
-	"wheat_seed":       preload("res://Assets/StoreIcons/semillas/wheat_seed.png"),      # Ruta corregida
-	"sugarcane_seed":   preload("res://Assets/Seeds/sugarcane_seed.png"),  # Ruta corregida
-	"wheat":            preload("res://Assets/Fruit/wheat_item.png"),      # CORREGIDO: antes era "wheat_item"
-	"sugar_cane":       preload("res://Assets/StoreIcons/sugarcane.png"),      # CORREGIDO: antes era "sugarcane.png"
-
-"raw_bread": preload("res://Assets/raw_recipes/raw_bread.png"),
+	# 🌾 CULTIVOS
+	"wheat_seed":       preload("res://Assets/StoreIcons/semillas/wheat_seed.png"),
+	"sugarcane_seed":   preload("res://Assets/Seeds/sugarcane_seed.png"),
+	"wheat":            preload("res://Assets/Fruit/wheat_item.png"),
+	"sugar_cane":       preload("res://Assets/StoreIcons/sugarcane.png"),
+	
+	"raw_bread": preload("res://Assets/raw_recipes/raw_bread.png"),
 	"raw_berry_cookies": preload("res://Assets/raw_recipes/raw_berry_cookies.png"),
 	"raw_donuts": preload("res://Assets/raw_recipes/raw_donuts.png"),
 	"raw_pancakes": preload("res://Assets/raw_recipes/raw_pancakes.png"),
 }
 
-# IDs que son semillas — para auto-seleccionar al PlantingSystem o CropSpaces/World
+# IDs que son semillas
 const SEED_IDS : Array[String] = [
 	"apple_seed", "orange_seed", "peach_seed", "pear_seed",
 	"blackberry_seeds", "blueberry_seeds", "raspberry_seeds",
-	"wheat_seed", "sugarcane_seed"  # CORREGIDO: añadidas ambas
+	"wheat_seed", "sugarcane_seed"
 ]
 
 var _slot_order : Array[String] = []
@@ -75,6 +75,7 @@ signal inventory_changed
 
 # =============================================================
 func _ready() -> void:
+	add_to_group("inventory")
 	visible = false
 	slot_grid.columns = COLUMNS
 
@@ -84,13 +85,14 @@ func _ready() -> void:
 
 	_actualizar_marcos_visuales()
 	
+	# Conectar señal de dinero global
+	Global.money_changed.connect(_on_money_changed_global)
+	
 	# =============================================================
 	# 🎁 ÍTEMS INICIALES PARA PRUEBAS
 	# =============================================================
 	add_item("wheat_seed", 10)
 	add_item("sugarcane_seed", 10)
-	
-	# Semillas viejas también añadidas
 	add_item("blackberry_seeds", 2)
 	add_item("raspberry_seeds", 2)
 	add_item("blueberry_seeds", 2)
@@ -98,6 +100,10 @@ func _ready() -> void:
 	add_item("pear_seed", 1)
 	add_item("peach_seed", 1)
 	add_item("orange_seed", 1)
+
+func _on_money_changed_global(new_amount: int) -> void:
+	# Actualizar cualquier UI que muestre dinero
+	pass
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_inventory"):
@@ -133,13 +139,11 @@ func _actualizar_marcos_visuales() -> void:
 		if slot.has_method("marcar_como_seleccionado"):
 			slot.marcar_como_seleccionado(i == slot_seleccionado_index)
 
-	# Actualizar item seleccionado
 	if slot_seleccionado_index < _slot_order.size():
 		item_seleccionado = _slot_order[slot_seleccionado_index]
 	else:
 		item_seleccionado = ""
 
-	# Si el item seleccionado es una semilla, informar al PlantingSystem
 	_sync_planting_system()
 
 func _sync_planting_system() -> void:
@@ -216,22 +220,3 @@ func _refresh_slots() -> void:
 			slot.set_empty()
 
 	_actualizar_marcos_visuales()
-	
-# =============================================================
-# SISTEMA DE DINERO GLOBAL CENTRALIZADO
-# =============================================================
-var money: int = 500 : 
-	set(val):
-		money = val
-		emit_signal("money_changed", money)
-
-signal money_changed(nuevo_monto)
-
-func add_money(amount: int) -> void:
-	money += amount
-
-func spend_money(amount: int) -> bool:
-	if money >= amount:
-		money -= amount
-		return true
-	return false

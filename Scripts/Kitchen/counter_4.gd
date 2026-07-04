@@ -8,7 +8,7 @@ extends StaticBody2D
 @onready var interaction_label : Label = $Label 
 
 var player_present: bool = false
-var recipe_menu_scene = preload("res://Scenes/Kitchen/recipe_menu.tscn")
+var recipe_menu_scene = preload("res://Scenes/Kitchen/crafting_menu.tscn")
 var current_menu = null
 
 # Variables del estado de preparación
@@ -25,17 +25,14 @@ func _ready() -> void:
 		interaction_label.text = ""
 
 func _process(delta: float) -> void:
-	# Si está preparando, disminuimos el tiempo en segundos reales
 	if is_preparing:
 		preparation_time_left -= delta
 		
 		if preparation_time_left > 0:
-			# Actualizamos el texto flotante con los segundos restantes
 			if interaction_label:
 				interaction_label.text = "Preparando... %ds" % ceil(preparation_time_left)
 				interaction_label.visible = true
 		else:
-			# ¡Tiempo terminado!
 			is_preparing = false
 			preparation_time_left = 0.0
 			_on_preparation_finished()
@@ -47,24 +44,25 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_pressed() and event.keycode == KEY_F:
 		get_viewport().set_input_as_handled()
 		
-		# CASO 1: Hay un ítem listo para recoger
 		if item_ready_to_collect != "":
 			_collect_item()
 			return
 			
-		# CASO 2: El counter está ocupado trabajando
 		if is_preparing:
 			print("[Counter] El mueble está ocupado preparando una receta.")
 			return
 			
-		# CASO 3: El counter está libre, abrimos el menú
 		toggle_recipe_menu()
 
 func toggle_recipe_menu() -> void:
 	if current_menu == null:
 		print("[Counter] Abriendo menú de recetas...")
 		current_menu = recipe_menu_scene.instantiate()
-		get_tree().current_scene.add_child(current_menu)
+		
+		var layer = CanvasLayer.new()
+		layer.layer = 100
+		layer.add_child(current_menu)
+		get_tree().root.add_child(layer)
 		
 		if interaction_label:
 			interaction_label.visible = false
@@ -77,16 +75,18 @@ func toggle_recipe_menu() -> void:
 
 func close_menu() -> void:
 	if current_menu != null:
+		var layer = current_menu.get_parent()
 		current_menu.queue_free()
+		if layer is CanvasLayer:
+			layer.queue_free()
 		current_menu = null
 		_update_label_state()
 
-# Llamado desde RecipeMenu cuando el jugador selecciona una receta válida
 func start_preparation(result_item_id: String) -> void:
-	close_menu() # Cierra el menú de selección
+	close_menu()
 	
 	item_ready_to_collect = result_item_id
-	preparation_time_left = 60.0 # 1 minuto en segundos reales
+	preparation_time_left = 60.0
 	is_preparing = true
 	
 	print("[Counter] Comenzando preparación de 60 segundos para: ", result_item_id)
@@ -99,11 +99,9 @@ func _collect_item() -> void:
 	print("[Counter] Entregando producto al jugador: ", item_ready_to_collect)
 	Inventory.add_item(item_ready_to_collect, 1)
 	
-	# Reiniciamos el mueble
 	item_ready_to_collect = ""
 	_update_label_state()
 
-# Controla dinámicamente qué debe decir el texto flotante según el estado
 func _update_label_state() -> void:
 	if not interaction_label:
 		return
@@ -113,7 +111,6 @@ func _update_label_state() -> void:
 		return
 		
 	if is_preparing:
-		# El texto se maneja continuamente en el _process
 		interaction_label.visible = true
 	elif item_ready_to_collect != "":
 		interaction_label.text = "[F] Recoger mezcla lista"
@@ -123,9 +120,6 @@ func _update_label_state() -> void:
 			interaction_label.text = "[F] Preparar Recetas"
 			interaction_label.visible = true
 
-# =============================================================
-#  DETECCIÓN DE AREA
-# =============================================================
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player") or body.is_in_group("Player") or body.name == "Player":
 		player_present = true
