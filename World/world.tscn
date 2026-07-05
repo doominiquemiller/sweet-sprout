@@ -18,8 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://dbedud0wrda8x" path="res://Scenes/Items/Decor/haybale.tscn" id="16_g3lo7"]
 [ext_resource type="PackedScene" uid="uid://csujxnmorl57l" path="res://Scenes/Items/Estructures/well.tscn" id="17_5aim4"]
 [ext_resource type="PackedScene" uid="uid://52yrvejy7y0b" path="res://Scenes/Animals/beehive.tscn" id="18_h4nnu"]
-[ext_resource type="PackedScene" uid="uid://i6ndiexpiyb7" path="res://Scenes/Items/Bush/bush_space.tscn" id="19_houwb"]
-[ext_resource type="PackedScene" uid="uid://de08lga4kyrkh" path="res://Scenes/Items/Trees/tree_space.tscn" id="20_o8btu"]
+[ext_resource type="PackedScene" uid="uid://i6ndiexpiyb7" path="res://Scenes/Items/Trees/tree_space.tscn" id="20_o8btu"]
 [ext_resource type="PackedScene" uid="uid://blndarpado0nr" path="res://Scenes/Items/Crops/crop_space.tscn" id="21_2j1j3"]
 [ext_resource type="Texture2D" uid="uid://nwcvo04wv0ci" path="res://Assets/Objects/Basic Furniture.png" id="22_12w7i"]
 [ext_resource type="PackedScene" uid="uid://bj7f20chsx37u" path="res://Scenes/Items/Bakery/counter_2.tscn" id="23_xmbla"]
@@ -50,13 +49,15 @@
 [ext_resource type="PackedScene" uid="uid://qtv5mkkbufy3" path="res://Scenes/Items/Bush/cb_bush.tscn" id="46_dmovf"]
 [ext_resource type="PackedScene" uid="uid://dkrsmo13p2aqr" path="res://Scenes/Items/Trees/cb_tree.tscn" id="46_q37gl"]
 [ext_resource type="PackedScene" uid="uid://wbq2klspeapf" path="res://Scenes/Items/Estructures/coop.tscn" id="47_hejoe"]
-[ext_resource type="PackedScene" uid="uid://bci7ifqbqjfhb" path="res://Scenes/Items/Decor/sell_baul.tscn" id="47_i5ake"]
+[ext_resource type="PackedScene" path="res://Scenes/Items/Decor/sell_baul.tscn" id="47_i5ake"]
 [ext_resource type="PackedScene" uid="uid://c34picphhum36" path="res://Scenes/Items/Trees/treePino.tscn" id="48_pj0qk"]
 [ext_resource type="PackedScene" uid="uid://b4i4fpk0eybx7" path="res://World/player.tscn" id="49_w2jjc"]
 [ext_resource type="PackedScene" uid="uid://da4sddfeth374" path="res://Scenes/Animals/chicken.tscn" id="50_aei6u"]
 [ext_resource type="PackedScene" uid="uid://b7bgllmssqghd" path="res://Scenes/Animals/cow.tscn" id="51_ne13v"]
 [ext_resource type="PackedScene" uid="uid://dm76s17n37nnl" path="res://Scenes/Animals/bee.tscn" id="52_5l1j7"]
 [ext_resource type="Script" uid="uid://co8u4ndjgy3de" path="res://Scripts/planting_system.gd" id="53_hm3sf"]
+[ext_resource type="Script" uid="uid://c6qtlktrfmuvr" path="res://Scenes/customer_spawner.gd" id="57_dmovf"]
+[ext_resource type="PackedScene" uid="uid://dwebyyrtakua2" path="res://npc.tscn" id="58_m1472"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r0ikl"]
 texture = ExtResource("4_3gnva")
@@ -1234,27 +1235,27 @@ scale = Vector2(0.7, 0.7)
 position = Vector2(-157, -28)
 scale = Vector2(0.7, 0.7)
 
-[node name="BushSpace" parent="TileMap/Farm" unique_id=1680679629 instance=ExtResource("19_houwb")]
+[node name="BushSpace" parent="TileMap/Farm" unique_id=1680679629 instance=ExtResource("20_o8btu")]
 z_index = 1
 position = Vector2(-313, -57.000004)
 
-[node name="BushSpace2" parent="TileMap/Farm" unique_id=589010234 instance=ExtResource("19_houwb")]
+[node name="BushSpace2" parent="TileMap/Farm" unique_id=589010234 instance=ExtResource("20_o8btu")]
 z_index = 1
 position = Vector2(-313, -23.000002)
 
-[node name="BushSpace3" parent="TileMap/Farm" unique_id=175308658 instance=ExtResource("19_houwb")]
+[node name="BushSpace3" parent="TileMap/Farm" unique_id=175308658 instance=ExtResource("20_o8btu")]
 z_index = 1
 position = Vector2(-275, -57)
 
-[node name="BushSpace4" parent="TileMap/Farm" unique_id=702662997 instance=ExtResource("19_houwb")]
+[node name="BushSpace4" parent="TileMap/Farm" unique_id=702662997 instance=ExtResource("20_o8btu")]
 z_index = 1
 position = Vector2(-274, -23)
 
-[node name="BushSpace5" parent="TileMap/Farm" unique_id=400302069 instance=ExtResource("19_houwb")]
+[node name="BushSpace5" parent="TileMap/Farm" unique_id=400302069 instance=ExtResource("20_o8btu")]
 z_index = 1
 position = Vector2(-238.00002, -57)
 
-[node name="BushSpace6" parent="TileMap/Farm" unique_id=655783184 instance=ExtResource("19_houwb")]
+[node name="BushSpace6" parent="TileMap/Farm" unique_id=655783184 instance=ExtResource("20_o8btu")]
 z_index = 1
 position = Vector2(-238, -23)
 
@@ -2125,3 +2126,13 @@ navigation_layers = 4
 
 [node name="PlantingSystem" type="Node2D" parent="." unique_id=1596363724]
 script = ExtResource("53_hm3sf")
+
+[node name="Client" type="Node2D" parent="." unique_id=657437602]
+
+[node name="CustomerSpawner" type="Node" parent="Client" unique_id=84020966 node_paths=PackedStringArray("spawn_point")]
+script = ExtResource("57_dmovf")
+customer_scene = ExtResource("58_m1472")
+spawn_point = NodePath("../Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="Client" unique_id=1670046741]
+position = Vector2(-65, 281)

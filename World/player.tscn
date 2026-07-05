@@ -247,6 +247,7 @@ process_mode = 3
 z_index = 3
 y_sort_enabled = true
 script = ExtResource("1_cvnsp")
+velocidad = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1260662474]
 sprite_frames = SubResource("SpriteFrames_0gysh")
