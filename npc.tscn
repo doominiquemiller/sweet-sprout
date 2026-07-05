@@ -1,55 +1,8 @@
-[gd_scene format=3 uid="uid://dwebyyrtakua2"]
-
-[ext_resource type="Script" uid="uid://bvjg3l330irr7" path="res://cliente.gd" id="1_xxcha"]
-[ext_resource type="Texture2D" uid="uid://c8jghqptpy47d" path="res://Assets/Characters/Basic Charakter Spritesheet.png" id="2_kh24r"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ul7y6"]
-atlas = ExtResource("2_kh24r")
-region = Rect2(0, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bc6q4"]
-atlas = ExtResource("2_kh24r")
-region = Rect2(48, 0, 48, 48)
+[gd_scene format=3 uid="uid://w3xeb4m071jg"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_v7lw1"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ul7y6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bc6q4")
-}],
-"loop": true,
-"name": &"default",
-"speed": 2.0
-}]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mcvl2"]
-radius = 5.0
-height = 12.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_d61ma"]
-radius = 14.0
-
-[node name="NPC" type="CharacterBody2D" unique_id=1985181061 groups=["player"]]
-script = ExtResource("1_xxcha")
+[node name="NPC" type="CharacterBody2D" unique_id=1985181061]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1439515605]
 sprite_frames = SubResource("SpriteFrames_v7lw1")
-frame_progress = 0.49631462
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=248162254]
-shape = SubResource("CapsuleShape2D_mcvl2")
-
-[node name="Area2D" type="Area2D" parent="." unique_id=472344593]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1408385679]
-shape = SubResource("CircleShape2D_d61ma")
-
-[node name="Label" type="Label" parent="." unique_id=1588185874]
-offset_right = 40.0
-offset_bottom = 23.0
-
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

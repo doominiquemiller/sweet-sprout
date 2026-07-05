@@ -18,7 +18,7 @@ const VALID_PRODUCTS = ["bread", "berry_cookies", "donuts", "pancakes"]
 # Diccionario interno para saber qué hay guardado en la vitrina y cuántos
 var stocked_items: Dictionary = {
 	"bread": 0,
-	"cookies": 0,
+	"berry_cookies": 0,
 	"donuts": 0,
 	"pancakes": 0
 }
@@ -52,14 +52,18 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			_try_retire_item()
 
 func _deposit_item(item_id: String) -> void:
-	var removed = Inventory.remove_item(item_id, 1)
+	var removed = Global.remove_item(item_id, 1)
 	if removed:
-		stocked_items[item_id] += 1
-		print("[Vitrina] Añadido: ", item_id, ". Total en vitrina: ", stocked_items[item_id])
+		# Corregido: "cookies" no existía en el diccionario inicial, usamos "berry_cookies"
+		var dict_key = "berry_cookies" if item_id == "cookies" else item_id
+		if stocked_items.has(dict_key):
+			stocked_items[dict_key] += 1
+			print("[Vitrina] Añadido: ", dict_key, ". Total en vitrina: ", stocked_items[dict_key])
 		
-		# Limpiamos la mano del jugador si ya no le quedan unidades de ese ítem
-		if not Inventory.has_item(item_id, 1):
-			Inventory.limpiar_seleccion()
+		# CORREGIDO: Evaluamos el inventario lógico con Global
+		if not Global.has_item(item_id, 1):
+			if Inventory.has_method("limpiar_seleccion"):
+				Inventory.limpiar_seleccion()
 			
 		_update_showcase_state()
 
@@ -68,7 +72,8 @@ func _try_retire_item() -> void:
 	for item_id in stocked_items.keys():
 		if stocked_items[item_id] > 0:
 			stocked_items[item_id] -= 1
-			Inventory.add_item(item_id, 1)
+			# CORREGIDO: Añadimos el ítem al inventario lógico a través de Global
+			Global.add_item(item_id, 1)
 			print("[Vitrina] Retirado: ", item_id, ". Quedan: ", stocked_items[item_id])
 			_update_showcase_state()
 			return
@@ -86,9 +91,9 @@ func _update_showcase_state() -> void:
 	
 	# Cambiar dinámicamente el frame según la cantidad de objetos
 	if total_stored > 0:
-		animated_sprite.frame = 1  # Frame con dulces (imagen image_a2772a.png)
+		animated_sprite.frame = 1  # Frame con dulces
 	else:
-		animated_sprite.frame = 0  # Frame vacío (imagen image_a2772a.png)
+		animated_sprite.frame = 0  # Frame vacío
 		
 	_update_label_text(total_stored)
 

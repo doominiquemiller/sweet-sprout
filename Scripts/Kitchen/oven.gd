@@ -1,22 +1,18 @@
 extends StaticBody2D
 
 # =============================================================
-#  Oven — Estación de Horneado Independiente en Tiempo Real
+#  Oven — Estación de Horneado Independiente en Tiempo Real conectado a Global
 # =============================================================
 
 @onready var area_2d = $Area2D
-
-# ⚠️ NOTA: Añade un nodo Label a la escena Oven en Godot para ver los textos flotantes
 @onready var interaction_label : Label = $Label 
 
 var player_present: bool = false
-
-# Diccionario que asocia la receta cruda ("raw_...") con su resultado horneado final
 const COOKING_RECIPES = {
 	"raw_bread": "bread",
-	"raw_berry_cookies": "cookies",
-	"raw_donuts": "donuts",
-	"raw_pancakes": "pancakes"
+	"raw_berry_cookies": "cookie",
+	"raw_donuts": "donut",
+	"raw_pancakes": "pancake"
 }
 
 # Estados del horno
@@ -69,7 +65,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		_try_start_baking()
 
 func _try_start_baking() -> void:
-	# Obtenemos el objeto que el jugador ha seleccionado de su mano en el inventario global
+	# Obtenemos el objeto que el jugador ha seleccionado de su mano en el inventario visual
 	var selected_item = Inventory.get_item_seleccionado()
 	
 	if selected_item == "":
@@ -78,15 +74,16 @@ func _try_start_baking() -> void:
 		
 	# Verificamos si el objeto seleccionado es una receta cruda válida para el horno
 	if COOKING_RECIPES.has(selected_item):
-		# Consumimos la receta cruda del inventario
-		var removed = Inventory.remove_item(selected_item, 1)
+		# Consumimos la receta cruda del inventario central Global
+		var removed = Global.remove_item(selected_item, 1)
 		if removed:
 			item_inside_raw = selected_item
 			baking_time_left = 60.0 # 1 minuto real en segundos
 			is_baking = true
 			
 			# Limpiamos la mano del jugador ya que el objeto se introdujo al horno
-			Inventory.limpiar_seleccion()
+			if Inventory.has_method("limpiar_seleccion"):
+				Inventory.limpiar_seleccion()
 			
 			print("[Oven] Se ha introducido %s al horno. Iniciando 60 segundos." % selected_item)
 			_update_label_state()
@@ -103,9 +100,9 @@ func _on_baking_finished() -> void:
 	_update_label_state()
 
 func _collect_baked_item() -> void:
-	print("[Oven] Jugador recoge el producto final: ", item_ready_to_collect)
-	# Guardamos de forma segura la receta horneada en el inventario
-	Inventory.add_item(item_ready_to_collect, 1)
+	print("[Oven] Jugador recoge el producto final mediante Global: ", item_ready_to_collect)
+	# Guardamos de forma segura la receta horneada en el inventario central Global
+	Global.add_item(item_ready_to_collect, 1)
 	
 	# Reiniciamos las variables para dejar el horno libre nuevamente
 	item_ready_to_collect = ""

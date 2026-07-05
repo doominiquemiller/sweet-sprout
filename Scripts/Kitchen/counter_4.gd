@@ -1,7 +1,7 @@
 extends StaticBody2D
 
 # =============================================================
-#  Counter — Mesa de Preparación con Tiempo Real (1 Minuto)
+#  Counter — Mesa de Preparación con Tiempo Real (1 Minuto) conectado a Global
 # =============================================================
 
 @onready var area_2d = $Area2D
@@ -96,8 +96,9 @@ func _on_preparation_finished() -> void:
 	_update_label_state()
 
 func _collect_item() -> void:
-	print("[Counter] Entregando producto al jugador: ", item_ready_to_collect)
-	Inventory.add_item(item_ready_to_collect, 1)
+	print("[Counter] Entregando producto al jugador mediante Global: ", item_ready_to_collect)
+	# Modificado para usar tu Autoload Global de forma directa
+	Global.add_item(item_ready_to_collect, 1)
 	
 	item_ready_to_collect = ""
 	_update_label_state()

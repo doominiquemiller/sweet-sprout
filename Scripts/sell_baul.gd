@@ -1,11 +1,12 @@
 extends StaticBody2D
 
 # =============================================================
-#  SellBaul — Sistema de Venta de Ingredientes conectado a ClockUI
+#  SellBaul — Sistema de Venta de Ingredientes conectado a Global
 # =============================================================
 
 @onready var area_2d = $Area2D
 @onready var interaction_label : Label = $Label
+@onready var sonido_venta: AudioStreamPlayer2D = $SonidoVenta
 
 var player_present: bool = false
 
@@ -50,39 +51,25 @@ func _try_sell_item() -> void:
 	if ITEM_PRICES.has(selected_item):
 		var price = ITEM_PRICES[selected_item]
 		
-		# 1. Intentamos quitar el objeto del inventario del jugador
-		var removed = Inventory.remove_item(selected_item, 1)
+		# 1. Intentamos quitar el objeto usando el inventario global (o tu script local Inventory si maneja la mano)
+		var removed = Global.remove_item(selected_item, 1)
 		if removed:
-			# 2. Buscamos el nodo de la interfaz que contiene el script ClockUI
-			var clock_ui = _find_clock_ui_node(get_tree().current_scene)
+			# 2. Sumamos el dinero directamente al Autoload Global
+			Global.add_money(price)
 			
-			if clock_ui and clock_ui.has_method("add_money"):
-				clock_ui.add_money(price) # 👈 Aquí le suma el dinero real a tu UI
-				print("[Baul] Dinero enviado exitosamente a ClockUI.")
-			else:
-				# Alternativa por si usas un Autoload/Singleton global
-				if Inventory.has_method("add_money"):
-					Inventory.add_money(price)
-				print("[⚠️ Alerta] No se encontró ClockUI en la escena, usando fallback.")
+			# 3. Reproducimos el efecto de sonido de la venta
+			if sonido_venta:
+				sonido_venta.play()
 
-			print("[Baul] Vendido 1x %s por %d monedas." % [selected_item, price])
+			print("[Baul] Vendido 1x %s por %d monedas usando Global." % [selected_item, price])
 			
-			if not Inventory.has_item(selected_item, 1):
+			# Sincronizamos la limpieza de la mano si tu script de inventario visual lo requiere
+			if not Global.has_item(selected_item, 1) and Inventory.has_method("limpiar_seleccion"):
 				Inventory.limpiar_seleccion()
 				
 			_show_temporary_message("+%d Monedas!" % price)
 	else:
 		_show_temporary_message("Este objeto no se\npuede vender aquí.")
-
-# Función recursiva auxiliar para encontrar automáticamente tu nodo ClockUI en la escena activa
-func _find_clock_ui_node(current_node: Node) -> Node:
-	if current_node.get_script() and "money" in current_node and current_node.has_method("add_money"):
-		return current_node
-	for child in current_node.get_children():
-		var found = _find_clock_ui_node(child)
-		if found:
-			return found
-	return null
 
 func _show_temporary_message(msg: String) -> void:
 	if not interaction_label: return

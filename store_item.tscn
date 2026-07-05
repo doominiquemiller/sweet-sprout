@@ -9,6 +9,7 @@ offset_right = 290.0
 offset_bottom = 106.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 1
 script = ExtResource("1_om1ql")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1003391115]
@@ -81,4 +82,3 @@ theme_override_fonts/font = ExtResource("2_om1ql")
 text = "Comprar"
 
 [connection signal="pressed" from="HBoxContainer/MarginContainer2/VBoxContainer/Button" to="." method="_on_button_pressed"]
-[connection signal="tree_exited" from="HBoxContainer/MarginContainer2/VBoxContainer/Button" to="." method="_on_button_tree_exited"]

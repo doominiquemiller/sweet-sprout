@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dvkgqcyel18r3"
+path="res://.godot/imported/GRASS_FOOTSTEP_3.wav-ccc832b3bd20684517459c8fc5229265.sample"
+
+[deps]
+
+source_file="res://Sounds & Music/GRASS_FOOTSTEP_3.wav"
+dest_files=["res://.godot/imported/GRASS_FOOTSTEP_3.wav-ccc832b3bd20684517459c8fc5229265.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
