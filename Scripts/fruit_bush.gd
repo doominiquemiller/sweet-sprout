@@ -75,7 +75,9 @@ func _ready_to_harvest() -> bool:
 # Función pública para ejecutar la cosecha desde el BushSpace
 func collect_harvest() -> void:
 	var item_id : String = FRUIT_ITEM[bush_type]
-	Inventory.add_item(item_id, 1)
+	
+	# CORREGIDO: Añade la fruta directamente usando el Autoload Global
+	Global.add_item(item_id, 1)
 	
 	# Reset de estados
 	is_ready = false

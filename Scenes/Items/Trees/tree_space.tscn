@@ -60,14 +60,17 @@ func _handle_space_interaction() -> void:
 	_try_plant()
 
 func _try_plant() -> void:
-	var selected_seed : String = Inventory.get_item_seleccionado()
+	# CORREGIDO: Ajustado el fallback por si la selección de ítem vive en la UI o pasó a Global
+	var selected_seed : String = Inventory.get_item_seleccionado() if has_node(\"/root/Inventory\") else \"\"
 	if selected_seed == \"\" or not SEED_TO_FRUIT.has(selected_seed):
 		print(\"[TreeSpace] Selecciona una semilla de árbol válida en tu inventario.\")
 		return
 
-	if not Inventory.has_item(selected_seed, 1):
+	# CORREGIDO: Usa el Autoload Global para verificar existencias
+	if not Global.has_item(selected_seed, 1):
 		print(\"[TreeSpace] No te quedan unidades de esta semilla.\")
-		Inventory.limpiar_seleccion()
+		if has_node(\"/root/Inventory\") and Inventory.has_method(\"limpiar_seleccion\"):
+			Inventory.limpiar_seleccion()
 		return
 
 	_plant_tree_directly(selected_seed)
@@ -77,7 +80,8 @@ func _plant_tree_directly(seed_id: String) -> void:
 		print(\"⚠️ [TreeSpace] ERROR: Falta asignar la escena de los árboles.\")
 		return
 
-	Inventory.remove_item(seed_id, 1)
+	# CORREGIDO: Remueve el ítem usando Global
+	Global.remove_item(seed_id, 1)
 	var fruit_type : String = SEED_TO_FRUIT[seed_id]
 
 	var new_tree = fruit_tree_scene.instantiate()
@@ -96,8 +100,10 @@ func _plant_tree_directly(seed_id: String) -> void:
 		print(\"[TreeSpace] Parcela liberada.\")
 	)
 
-	if not Inventory.has_item(seed_id, 1):
-		Inventory.limpiar_seleccion()
+	# CORREGIDO: Usa Global para revisar si se agotó y limpia la selección de la UI de forma segura
+	if not Global.has_item(seed_id, 1):
+		if has_node(\"/root/Inventory\") and Inventory.has_method(\"limpiar_seleccion\"):
+			Inventory.limpiar_seleccion()
 		
 	print(\"[TreeSpace] ¡Árbol de %s plantado y centrado correctamente!\" % fruit_type)
 

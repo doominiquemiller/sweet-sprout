@@ -1408,7 +1408,7 @@ z_index = 4
 position = Vector2(-276, 324)
 scale = Vector2(0.6, 0.6)
 
-[node name="fence_door2" parent="TileMap" unique_id=2096683146 instance=ExtResource("15_2hrtt")]
+[node name="fence_door2" parent="TileMap" unique_id=2096683146 groups=["player"] instance=ExtResource("15_2hrtt")]
 position = Vector2(-276, 348)
 scale = Vector2(1.5, 1.5)
 

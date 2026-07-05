@@ -41,17 +41,14 @@ func _on_item_buy_pressed(id: int) -> void:
 	var item_id = data["item_id"]
 	var price = data["price"]
 	
-	print("Comprando: ", item_id, " | Precio: ", price, " | Dinero: ", Global.get_money())
+	print("Intentando comprar: ", item_id, " | Precio: ", price, " | Dinero actual: ", Global.get_money())
 
-	if Global.get_money() < price:
-		print("Fondos insuficientes")
-		return
-
+	# CORREGIDO: spend_money comprueba y descuenta directamente. Evitamos ifs redundantes.
 	if Global.spend_money(price):
 		Global.add_item(item_id, 1)
-		print("Comprado: ", item_id)
+		print("[ÉXITO] Comprado: ", item_id, " | Nuevo saldo: ", Global.get_money())
 	else:
-		print("Error al comprar")
+		print("[FRACASO] Fondos insuficientes para comprar ", item_id)
 
 func _on_texture_button_pressed() -> void:
 	queue_free()

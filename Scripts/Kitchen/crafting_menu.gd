@@ -82,7 +82,8 @@ func setup_recipe_menu() -> void:
 
 func check_ingredients(ingredients: Array) -> bool:
 	for ing in ingredients:
-		if not Inventory.has_item(ing, 1):
+		# CORREGIDO: Ahora consulta stock usando el Autoload Global
+		if not Global.has_item(ing, 1):
 			return false
 	return true
 
@@ -102,7 +103,8 @@ func on_prepare_pressed(id: int) -> void:
 
 	if check_ingredients(required_ingredients):
 		for ing in required_ingredients:
-			Inventory.remove_item(ing, 1)
+			# CORREGIDO: Consume los ingredientes usando Global
+			Global.remove_item(ing, 1)
 
 		print("[ÉXITO] Ingredientes consumidos, iniciando preparación de: ", raw_item_result)
 
@@ -110,7 +112,8 @@ func on_prepare_pressed(id: int) -> void:
 			counter_ref.start_preparation(raw_item_result)
 		else:
 			push_warning("[CraftingMenu] No hay counter_ref válido, entregando item directo.")
-			Inventory.add_item(raw_item_result, 1)
+			# CORREGIDO: Entrega de ítem de emergencia usando Global
+			Global.add_item(raw_item_result, 1)
 			queue_free()
 	else:
 		print("[ERROR] No tienes los ingredientes suficientes.")

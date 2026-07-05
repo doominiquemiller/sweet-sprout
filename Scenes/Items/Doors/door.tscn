@@ -101,5 +101,5 @@ offset_top = -40.0
 offset_right = 20.0
 offset_bottom = -17.0
 theme_override_fonts/font = ExtResource("3_tex1h")
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 16
 text = "[F] Abrir"

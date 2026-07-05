@@ -89,8 +89,12 @@ func _collect_honey() -> void:
 	honey_indicator.position = Vector2(0, ICON_BASE_Y)
 	honey_indicator.modulate.a = 1.0
 
-	Inventory.add_item("honey", amount_to_give)
-	print("[Beehive] Cosechado: %d de miel. Total Inventario: %d" % [amount_to_give, Inventory.get_item_count("honey")])
+	# CORREGIDO: Añade la miel directamente al Autoload Global
+	Global.add_item("honey", amount_to_give)
+	
+	# CORREGIDO: Si requieres imprimir la cantidad actual del stock, búscalo en el diccionario de Global
+	var current_stock = Global.inventory_data.get("honey", 0) if "inventory_data" in Global else 0
+	print("[Beehive] Cosechado: %d de miel. Total Inventario: %d" % [amount_to_give, current_stock])
 
 # =============================================================
 #  DETECCIÓN DEL JUGADOR

@@ -107,7 +107,9 @@ func _ajustar_posicion_local() -> void:
 # Función pública llamada desde TreeSpace para cosechar
 func collect_harvest() -> void:
 	var item_id : String = FRUIT_ITEM[fruit_type]
-	Inventory.add_item(item_id, 1)
+	
+	# CORREGIDO: Añade la fruta recolectada directamente al Autoload Global
+	Global.add_item(item_id, 1)
 
 	is_ready = false
 	sprite.frame = 2 # Vuelve a árbol adulto base sin frutas (Frame 2)

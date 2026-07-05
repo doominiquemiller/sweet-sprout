@@ -28,5 +28,6 @@ func _on_body_exited(body: Node) -> void:
 
 func _pickup() -> void:
 	can_pickup = false
-	Inventory.add_item("milk", 1)
+	# CORREGIDO: Añade la leche recolectada usando el Autoload Global
+	Global.add_item("milk", 1)
 	queue_free()

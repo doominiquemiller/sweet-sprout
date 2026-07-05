@@ -16,19 +16,24 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_body_entered(body: Node) -> void:
 	print("[Egg] body_entered: ", body.name, " | grupos: ", body.get_groups())
-	if body.is_in_group("player"):
+	if body.is_in_group("player") or body.name == "Player":
 		can_pickup = true
 		print("[Egg] >>> can_pickup activado <<<")
 
 func _on_body_exited(body: Node) -> void:
-	if body.is_in_group("player"):
+	if body.is_in_group("player") or body.name == "Player":
 		can_pickup = false
 		print("[Egg] can_pickup desactivado (jugador se alejó)")
 
 func _pickup() -> void:
 	can_pickup = false
-	print("[Egg] Antes de add_item, Inventory.items = ", Inventory.items)
-	Inventory.add_item("egg", 1)
-	print("[Egg] Después de add_item, Inventory.items = ", Inventory.items)
-	print("[Egg] _slot_order = ", Inventory._slot_order)
+	
+	# CORREGIDO: Muestra el estado del inventario global antes de añadir
+	var global_items = Global.inventory_data if "inventory_data" in Global else {}
+	print("[Egg] Antes de add_item, Global.inventory_data = ", global_items)
+	
+	# CORREGIDO: Se añade el huevo usando el Autoload Global
+	Global.add_item("egg", 1)
+	
+	print("[Egg] Después de add_item, Global.inventory_data = ", global_items)
 	queue_free()

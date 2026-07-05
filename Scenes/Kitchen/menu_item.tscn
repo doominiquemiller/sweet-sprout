@@ -13,12 +13,14 @@ script = ExtResource("1_e63nc")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1003391115]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer" unique_id=307090594]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
+mouse_filter = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
@@ -42,6 +44,7 @@ theme_override_constants/margin_bottom = 5
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer2" unique_id=1094439692]
 layout_direction = 1
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 5
 alignment = 1
 
@@ -78,7 +81,7 @@ size_flags_vertical = 3
 theme_override_colors/font_pressed_color = Color(0.13635722, 0.7325087, 0.47499424, 1)
 theme_override_colors/font_hover_color = Color(0.2396616, 0.91169435, 0.60609883, 1)
 theme_override_fonts/font = ExtResource("3_nxtqp")
-text = "Buy"
+text = "Comprar"
 
 [connection signal="pressed" from="HBoxContainer/MarginContainer2/VBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="tree_exited" from="HBoxContainer/MarginContainer2/VBoxContainer/Button" to="." method="_on_button_tree_exited"]
