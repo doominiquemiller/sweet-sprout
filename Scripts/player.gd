@@ -20,6 +20,7 @@ var celdas_ocupadas: Dictionary = {}
 # 🎒 INVENTARIO DE INGREDIENTES LOCAL (Sincronizado en minúsculas con el sistema global)
 var inventory: Array = ["harina", "milk", "levadura", "egg"]
 
+
 # =============================================================
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS

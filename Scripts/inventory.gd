@@ -43,7 +43,10 @@ const ITEM_ICONS : Dictionary = {
 	"flour": preload("res://Assets/StoreIcons/flour.png"),
 	"butter": preload("res://Assets/StoreIcons/butter.png"),
 	"oil": preload("res://Assets/StoreIcons/oil.png"),
-	
+	"bread": preload("res://Assets/Bakery/recetas/bread.png"),
+	"cookie": preload("res://Assets/Bakery/recetas/cookie.png"),
+	"donut": preload("res://Assets/Bakery/recetas/donut.png"),
+	"pancake": preload("res://Assets/Bakery/recetas/pancake.png"),
 }
 
 const SEED_IDS : Array[String] = [
@@ -75,6 +78,8 @@ func _ready() -> void:
 	Global.add_item("orange_seed", 1)
 	Global.add_item("yeast", 1)
 	Global.add_item("flour", 1)
+	Global.add_item("milk", 1)
+	Global.add_item("bread", 1)
 	
 	_refresh_slots()
 
