@@ -67,16 +67,13 @@ func _ready() -> void:
 	
 	# Items iniciales de prueba
 	Global.add_item("wheat_seed", 5)
-	Global.add_item("sugarcane_seed", 5)
-	Global.add_item("blackberry_seeds", 2)
-	Global.add_item("raspberry_seeds", 2)
-	Global.add_item("blueberry_seeds", 2)
-	Global.add_item("apple_seed", 1)
-	Global.add_item("pear_seed", 1)
-	Global.add_item("peach_seed", 1)
-	Global.add_item("orange_seed", 1)
 	Global.add_item("yeast", 1)
 	Global.add_item("flour", 1)
+	Global.add_item("milk", 1)
+	Global.add_item("bread", 1)
+	Global.add_item("egg", 1)
+	Global.add_item("oil", 1)
+
 	
 	_refresh_slots()
 

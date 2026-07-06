@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bwa27i2h3ep2e" path="res://Scenes/Kitchen/menu_item.tscn" id="2_74jqs"]
 [ext_resource type="Texture2D" uid="uid://c1x4mc8qpia46" path="res://Assets/Inventory/Panel.png" id="2_vnvap"]
 [ext_resource type="Texture2D" uid="uid://b3fpbips0chsl" path="res://Assets/emoji style ui/Store Menu.png" id="3_8hnx0"]
+[ext_resource type="Texture2D" uid="uid://bvfera5kw8dku" path="res://Assets/Icons/Close.png" id="5_gb6fn"]
 
 [node name="CraftingMenu" type="Control" unique_id=1098486450]
 custom_minimum_size = Vector2(100, 0)
@@ -36,7 +37,9 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="GridContainer" type="GridContainer" parent="ScrollContainer" unique_id=113408274]
+layout_direction = 2
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 
@@ -56,5 +59,10 @@ offset_right = 64.0
 offset_bottom = -38.5
 grow_horizontal = 0
 scale = Vector2(3, 3)
+
+[node name="Close" type="Sprite2D" parent="." unique_id=924081220]
+position = Vector2(645, -56)
+scale = Vector2(4, 4)
+texture = ExtResource("5_gb6fn")
 
 [connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

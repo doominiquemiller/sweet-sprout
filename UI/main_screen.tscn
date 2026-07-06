@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://vh6d1fnik42f"]
+[gd_scene format=4 uid="uid://dvok8q08dtvb3"]
 
 [ext_resource type="Script" uid="uid://c1xyadpt5whpc" path="res://Scripts/main_menu.gd" id="1_0vrmq"]
 [ext_resource type="FontFile" uid="uid://n5p8m4kiw5un" path="res://Fonts/CutePixel.ttf" id="1_2icua"]
@@ -541,14 +541,11 @@ texture = SubResource("AtlasTexture_moioh")
 [node name="SonidoBoton" type="AudioStreamPlayer2D" parent="." unique_id=2100004963]
 stream = ExtResource("9_a74w1")
 autoplay = true
-bus = &"SFX"
 
 [node name="SonidoHover" type="AudioStreamPlayer2D" parent="." unique_id=719908254]
 stream = ExtResource("10_y6r1m")
 autoplay = true
-bus = &"SFX"
 
 [node name="MusicaFondo" type="AudioStreamPlayer2D" parent="." unique_id=494273551]
 stream = ExtResource("11_pfjv5")
 autoplay = true
-bus = &"Musica"

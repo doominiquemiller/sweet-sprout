@@ -4,15 +4,42 @@ extends Control
 @export var store_item : PackedScene
 
 var store_data: Array = [
-	{"item_id": "apple_seed", "price": 40, "icon_path": "res://Assets/Seeds/apple_seed.png", "label1": "Semilla de Manzana", "label2": "40 coins", "custom_button_text": "Buy"},
-	{"item_id": "orange_seed", "price": 40, "icon_path": "res://Assets/Seeds/orange_seed.png", "label1": "Semilla de Naranja", "label2": "40 coins", "custom_button_text": "Buy"},
-	{"item_id": "peach_seed", "price": 45, "icon_path": "res://Assets/Seeds/peach_seed.png", "label1": "Semilla de Melocotón", "label2": "45 coins", "custom_button_text": "Buy"},
-	{"item_id": "pear_seed", "price": 40, "icon_path": "res://Assets/Seeds/pear_seed.png", "label1": "Semilla de Pera", "label2": "40 coins", "custom_button_text": "Buy"},
-	{"item_id": "wheat_seed", "price": 6, "icon_path": "res://Assets/StoreIcons/semillas/wheat_seed.png", "label1": "Semilla de Trigo", "label2": "6 coins", "custom_button_text": "Buy"},
-	{"item_id": "sugarcane_seed", "price": 20, "icon_path": "res://Assets/Seeds/sugarcane_seed.png", "label1": "Semilla de Caña de Azúcar", "label2": "20 coins", "custom_button_text": "Buy"},
-	{"item_id": "milk", "price": 15, "icon_path": "res://Assets/Objects/Milk_item.png", "label1": "Leche", "label2": "15 coins", "custom_button_text": "Buy"},
-	{"item_id": "egg", "price": 8, "icon_path": "res://Assets/Objects/Egg item.png", "label1": "Huevo", "label2": "8 coins", "custom_button_text": "Buy"},
-	{"item_id": "honey", "price": 18, "icon_path": "res://Assets/Objects/Honey_item.png", "label1": "Miel", "label2": "18 coins", "custom_button_text": "Buy"}
+	# Ingredientes
+	{"item_id":"egg",              "price":10, "icon_path":"res://Assets/StoreIcons/Egg_item.png",                "label1":"Huevo",                  "label2":"10 coins", "custom_button_text":"Comprar"},
+	{"item_id":"milk",             "price":15, "icon_path":"res://Assets/StoreIcons/Milk_item.png",               "label1":"Leche",                  "label2":"15 coins", "custom_button_text":"Comprar"},
+	{"item_id":"flour",            "price":20, "icon_path":"res://Assets/StoreIcons/flour.png",                   "label1":"Harina",                 "label2":"20 coins", "custom_button_text":"Comprar"},
+	{"item_id":"butter",           "price":25, "icon_path":"res://Assets/StoreIcons/butter.png",                  "label1":"Mantequilla",            "label2":"25 coins", "custom_button_text":"Comprar"},
+	{"item_id":"honey",            "price":22, "icon_path":"res://Assets/StoreIcons/honey.png",                   "label1":"Miel",                   "label2":"22 coins", "custom_button_text":"Comprar"},
+	{"item_id":"oil",              "price":18, "icon_path":"res://Assets/StoreIcons/oil.png",                     "label1":"Aceite",                 "label2":"18 coins", "custom_button_text":"Comprar"},
+	{"item_id":"yeast",            "price":15, "icon_path":"res://Assets/StoreIcons/yeast.png",                   "label1":"Levadura",               "label2":"15 coins", "custom_button_text":"Comprar"},
+	{"item_id":"sugar_cane",       "price":12, "icon_path":"res://Assets/StoreIcons/sugarcane.png",               "label1":"Caña de azúcar",         "label2":"12 coins", "custom_button_text":"Comprar"},
+
+	# Cultivos
+	{"item_id":"wheat_seed",       "price":8,  "icon_path":"res://Assets/StoreIcons/semillas/wheat_seed.png",     "label1":"Semilla de trigo",       "label2":"8 coins",  "custom_button_text":"Comprar"},
+	{"item_id":"wheat",            "price":12, "icon_path":"res://Assets/StoreIcons/frutos/wheat.png",            "label1":"Trigo",                  "label2":"12 coins", "custom_button_text":"Comprar"},
+
+	# Árboles
+	{"item_id":"apple_seed",       "price":40, "icon_path":"res://Assets/StoreIcons/semillas/apple_seed.png",     "label1":"Semilla de manzana",     "label2":"40 coins", "custom_button_text":"Comprar"},
+	{"item_id":"apple",            "price":20, "icon_path":"res://Assets/StoreIcons/frutos/apple.png",            "label1":"Manzana",                "label2":"20 coins", "custom_button_text":"Comprar"},
+
+	{"item_id":"orange_seed",      "price":40, "icon_path":"res://Assets/StoreIcons/semillas/orange_seed.png",    "label1":"Semilla de naranja",     "label2":"40 coins", "custom_button_text":"Comprar"},
+	{"item_id":"orange",           "price":20, "icon_path":"res://Assets/StoreIcons/frutos/orange.png",           "label1":"Naranja",                "label2":"20 coins", "custom_button_text":"Comprar"},
+
+	{"item_id":"pear_seed",        "price":40, "icon_path":"res://Assets/StoreIcons/semillas/pear_seed.png",      "label1":"Semilla de pera",        "label2":"40 coins", "custom_button_text":"Comprar"},
+	{"item_id":"pear",             "price":20, "icon_path":"res://Assets/StoreIcons/frutos/pear.png",             "label1":"Pera",                   "label2":"20 coins", "custom_button_text":"Comprar"},
+
+	{"item_id":"peach_seed",       "price":45, "icon_path":"res://Assets/StoreIcons/semillas/peach_seed.png",     "label1":"Semilla de melocotón",   "label2":"45 coins", "custom_button_text":"Comprar"},
+	{"item_id":"peach",            "price":25, "icon_path":"res://Assets/StoreIcons/frutos/peach.png",            "label1":"Melocotón",              "label2":"25 coins", "custom_button_text":"Comprar"},
+
+	# Berries
+	{"item_id":"blackberry_seeds", "price":22, "icon_path":"res://Assets/StoreIcons/semillas/blackberry_seed.png","label1":"Semilla de zarzamora",   "label2":"22 coins", "custom_button_text":"Comprar"},
+	{"item_id":"blackberry_item",  "price":16, "icon_path":"res://Assets/StoreIcons/frutos/blackberry.png",       "label1":"Zarzamora",              "label2":"16 coins", "custom_button_text":"Comprar"},
+
+	{"item_id":"blueberry_seeds",  "price":22, "icon_path":"res://Assets/StoreIcons/semillas/blueberry_seed.png", "label1":"Semilla de arándano",    "label2":"22 coins", "custom_button_text":"Comprar"},
+	{"item_id":"blueberry_item",   "price":18, "icon_path":"res://Assets/StoreIcons/frutos/blueberry.png",        "label1":"Arándano",               "label2":"18 coins", "custom_button_text":"Comprar"},
+
+	{"item_id":"raspberry_seeds",  "price":22, "icon_path":"res://Assets/StoreIcons/semillas/raspberry_seed.png", "label1":"Semilla de frambuesa",   "label2":"22 coins", "custom_button_text":"Comprar"},
+	{"item_id":"raspberry_item",   "price":18, "icon_path":"res://Assets/StoreIcons/frutos/raspberry.png",        "label1":"Frambuesa",              "label2":"18 coins", "custom_button_text":"Comprar"}
 ]
 
 func _ready() -> void:
