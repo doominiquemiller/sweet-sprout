@@ -3,13 +3,22 @@ extends CharacterBody2D
 # Velocidad de caminata del personaje en píxeles por segundo
 @export var velocidad: float = 120.0
 
-# Capa del mapa o sistema de plantación asignable desde el inspector
+# 🗺️ Capas del mapa asignables desde el inspector
 @export var capa_cultivos: TileMapLayer 
+@export var capa_suelo: TileMapLayer # <- ASIGNA AQUÍ TU CAPA DE SUELO PRINCIPAL O CONSTRUCCIONES
+
+# Ajusta el tiempo entre pasos (en segundos)
+const TIEMPO_ENTRE_PASOS := 0.35
+var temporizador_pasos := 0.0
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
-# 🖐️ Referencia al sprite del ítem en la mano
+# Referencia al sprite del ítem en la mano
 @onready var item_en_mano_sprite: Sprite2D = $ItemEnMano
+
+# Referencias a los reproductores de audio
+@onready var pasos_cesped: AudioStreamPlayer2D = $PasosCesped
+@onready var pasos_madera: AudioStreamPlayer2D = $PasosMadera
 
 # Pre-cargamos la escena del árbol frutal para clonarla en el mapa
 const FRUIT_TREE_SCENE = preload("res://Scenes/Items/Trees/fruit_trees.tscn") 
@@ -34,7 +43,7 @@ func _ready() -> void:
 	if item_en_mano_sprite:
 		item_en_mano_sprite.visible = false
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	# ACTUALIZAR EL ÍTEM VISUAL EN LA MANO
 	_actualizar_item_en_mano()
 
@@ -54,6 +63,54 @@ func _physics_process(_delta: float) -> void:
 	
 	move_and_slide()
 	actualizar_animacion_8_vias(direccion)
+	
+	# Control de audio de pasos en base al movimiento real
+	_procesar_sonido_pasos(delta)
+
+# =============================================================
+#  SISTEMA DE AUDIO PARA PASOS EN TILEMAP
+# =============================================================
+func _procesar_sonido_pasos(delta: float) -> void:
+	if velocity.length() > 1.0:
+		temporizador_pasos -= delta
+		
+		if temporizador_pasos <= 0:
+			_reproducir_paso_segun_suelo()
+			temporizador_pasos = TIEMPO_ENTRE_PASOS
+	else:
+		temporizador_pasos = 0.0
+
+func _reproducir_paso_segun_suelo() -> void:
+	var capa_a_leer : TileMapLayer = capa_suelo if capa_suelo else capa_cultivos
+	
+	if not capa_a_leer:
+		pasos_cesped.play()
+		return
+		
+	var posicion_celda : Vector2i = capa_a_leer.local_to_map(capa_a_leer.to_local(global_position))
+	var source_id : int = capa_a_leer.get_cell_source_id(posicion_celda)
+	
+	# Si no hay nada en la capa principal, cambiamos COMPLETAMENTE a la capa de cultivos
+	if source_id == -1 and capa_suelo and capa_cultivos:
+		capa_a_leer = capa_cultivos
+		posicion_celda = capa_a_leer.local_to_map(capa_a_leer.to_local(global_position))
+		source_id = capa_a_leer.get_cell_source_id(posicion_celda)
+	
+	# Si ambas están vacías, asume césped por defecto
+	if source_id == -1:
+		pasos_cesped.play()
+		return
+		
+	# Ahora sí extraemos las coordenadas usando la capa que de verdad contiene el bloque
+	var coords_atlas : Vector2i = capa_a_leer.get_cell_atlas_coords(posicion_celda)
+	
+	print("ID Origen: ", source_id, " | Coordenadas Atlas: ", coords_atlas)
+	
+	# Condición limpia usando los datos exactos de image_019cf8.png
+	if source_id == 0 and coords_atlas == Vector2i(1, 1):
+		pasos_madera.play()
+	else:
+		pasos_cesped.play()
 
 # =============================================================
 #  MUESTRA U OCULTA EL ÍTEM EN LA MANO DEL PLAYER

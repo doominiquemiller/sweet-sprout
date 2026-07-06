@@ -46,8 +46,11 @@ shape = SubResource("RectangleShape2D_wme45")
 debug_color = Color(0.6858715, 0.37199014, 0.8531065, 0.41960785)
 
 [node name="Label" type="Label" parent="." unique_id=775934461]
+z_index = 5
+texture_filter = 1
 offset_top = -35.0
 offset_right = 40.0
 offset_bottom = -12.0
 theme_override_fonts/font = ExtResource("3_x0y18")
+theme_override_font_sizes/font_size = 16
 horizontal_alignment = 1

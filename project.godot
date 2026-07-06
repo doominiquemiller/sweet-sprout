@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Sweet Sprout"
-run/main_scene="uid://b1fdg53evmpx1"
+run/main_scene="uid://vh6d1fnik42f"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 WeatherSystem="*uid://bd6mbmigfyybc"
 GameTime="*uid://b3xhf2wc52nc2"
 Inventory="*uid://bqa65unlacyr4"
+Global="*uid://bw43sike0qgx7"
 
 [display]
 

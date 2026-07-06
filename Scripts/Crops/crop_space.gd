@@ -129,7 +129,6 @@ func _update_sprite_frame(stage: int) -> void:
 	)
 	sprite.region_rect = region
 	
-	
 	var anim = Animation.new()
 	anim.length = total_frames * 0.2
 	anim.loop_mode = Animation.LOOP_NONE
@@ -146,7 +145,6 @@ func _update_sprite_frame(stage: int) -> void:
 			frame_height
 		)
 		anim.track_insert_key(track_index, time, rect)
-	
 
 # =============================================================
 #  ACTUALIZACIÓN AUTOMÁTICA
@@ -217,11 +215,8 @@ func _handle_interaction() -> void:
 #  PLANTACIÓN - ACEPTA AMBAS SEMILLAS
 # =============================================================
 func _try_plant() -> void:
-	if not Inventory:
-		print("[CropSpace] ERROR: Sistema de inventario no encontrado")
-		return
-	
-	var selected_seed = Inventory.get_item_seleccionado()
+	# CORREGIDO: Comprobación de selección adaptada dinámicamente según la UI
+	var selected_seed : String = Inventory.get_item_seleccionado() if has_node("/root/Inventory") else ""
 	
 	if selected_seed == "" or selected_seed == null:
 		_show_interaction_message("Selecciona una semilla")
@@ -241,10 +236,11 @@ func _try_plant() -> void:
 		_show_interaction_message("Semilla no válida para esta parcela")
 		return
 	
-	# Verificar si tiene la semilla
-	if not Inventory.has_item(selected_seed, 1):
+	# CORREGIDO: Verifica existencias en el Autoload Global
+	if not Global.has_item(selected_seed, 1):
 		_show_interaction_message("No tienes %s" % SEED_DISPLAY_NAMES.get(selected_seed, selected_seed))
-		Inventory.limpiar_seleccion()
+		if has_node("/root/Inventory") and Inventory.has_method("limpiar_seleccion"):
+			Inventory.limpiar_seleccion()
 		return
 	
 	# Si la semilla es diferente al tipo de parcela, cambiar el cultivo
@@ -258,7 +254,8 @@ func _try_plant() -> void:
 	_plant_crop(selected_seed)
 
 func _plant_crop(seed_id: String) -> void:
-	Inventory.remove_item(seed_id, 1)
+	# CORREGIDO: Remueve el ítem usando Global
+	Global.remove_item(seed_id, 1)
 	
 	is_planted = true
 	is_ready = false
@@ -272,8 +269,10 @@ func _plant_crop(seed_id: String) -> void:
 	var display_name = crop_data.get("display_name", crop_type)
 	_show_interaction_message("¡%s plantado!" % display_name)
 	
-	if not Inventory.has_item(seed_id, 1):
-		Inventory.limpiar_seleccion()
+	# CORREGIDO: Limpieza de UI segura mediante Global e Inventory
+	if not Global.has_item(seed_id, 1):
+		if has_node("/root/Inventory") and Inventory.has_method("limpiar_seleccion"):
+			Inventory.limpiar_seleccion()
 	
 	print("[CropSpace] %s plantado a las %.1f" % [crop_type, planting_hour])
 
@@ -294,8 +293,8 @@ func _harvest_crop() -> void:
 		harvest_count += 1
 		_show_interaction_message("¡Cosecha extra! +1 %s" % harvest_item)
 	
-	if Inventory and Inventory.has_method("add_item"):
-		Inventory.add_item(harvest_item, harvest_count)
+	# CORREGIDO: Añade la cosecha recolectada directamente al inventario Global
+	Global.add_item(harvest_item, harvest_count)
 	
 	var display_name = crop_data.get("display_name", harvest_item)
 	_show_interaction_message("¡Cosechados %d %s!" % [harvest_count, display_name])
@@ -366,7 +365,7 @@ func _on_body_exited(body: Node2D) -> void:
 
 # Obtener la hora actual del juego
 func get_game_time() -> float:
-	if GameTime and GameTime.has_method("get_current_time"):
+	if typeof(get_node_or_null("/root/GameTime")) != TYPE_NIL and GameTime.has_method("get_current_time"):
 		return GameTime.get_current_time()
 	return simulated_hour
 
@@ -385,6 +384,3 @@ func _input(event: InputEvent) -> void:
 			KEY_T:
 				simulated_hour += 1.0
 				print("[CropSpace] Tiempo: %.1f" % simulated_hour)
-			KEY_P: # Forzar plantación
-				var seed = "wheat_seed" if crop_type == "wheat" else "sugarcane_seed"
-				_plant_crop(seed)

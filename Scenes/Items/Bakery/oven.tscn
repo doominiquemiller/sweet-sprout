@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://c8tgii52je7ao"]
 
 [ext_resource type="Texture2D" uid="uid://s2ios5p8nbxa" path="res://Assets/Bakery/bakery.png" id="1_ml8wo"]
+[ext_resource type="Script" uid="uid://vvcogokktvm6" path="res://Scripts/Kitchen/oven.gd" id="1_w3x4y"]
+[ext_resource type="FontFile" uid="uid://n5p8m4kiw5un" path="res://Fonts/CutePixel.ttf" id="3_dw15i"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8v8yq"]
 atlas = ExtResource("1_ml8wo")
@@ -13,6 +15,7 @@ size = Vector2(17, 20.5)
 size = Vector2(15, 19)
 
 [node name="Oven" type="StaticBody2D" unique_id=1791195692]
+script = ExtResource("1_w3x4y")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=266193716]
 anchors_preset = 8
@@ -39,3 +42,13 @@ shape = SubResource("RectangleShape2D_ml8wo")
 position = Vector2(-11.5, 20.5)
 shape = SubResource("RectangleShape2D_8v8yq")
 debug_color = Color(0.58814657, 0.43373305, 0.8684508, 0.41960785)
+
+[node name="Label" type="Label" parent="." unique_id=663293084]
+z_index = 5
+texture_filter = 1
+offset_top = -35.0
+offset_right = 40.0
+offset_bottom = -12.0
+theme_override_fonts/font = ExtResource("3_dw15i")
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
