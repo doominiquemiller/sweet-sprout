@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://in7pcemoa6fg" path="res://Assets/Objects/exterior_deco.png" id="1_5d5g2"]
 [ext_resource type="Script" uid="uid://dw0jnivt324wb" path="res://Scripts/sell_baul.gd" id="1_kidil"]
 [ext_resource type="FontFile" uid="uid://n5p8m4kiw5un" path="res://Fonts/CutePixel.ttf" id="3_sg6wd"]
+[ext_resource type="AudioStream" uid="uid://crleqjqpxfl1a" path="res://Sounds & Music/Coin Bag 3-1.wav" id="4_inwuu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kidil"]
 atlas = ExtResource("1_5d5g2")
@@ -37,3 +38,7 @@ offset_bottom = -12.0
 theme_override_fonts/font = ExtResource("3_sg6wd")
 theme_override_font_sizes/font_size = 16
 horizontal_alignment = 1
+
+[node name="SonidoVenta" type="AudioStreamPlayer2D" parent="." unique_id=1402134324]
+stream = ExtResource("4_inwuu")
+bus = &"SFX"

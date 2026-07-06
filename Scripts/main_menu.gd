@@ -8,14 +8,14 @@ const WORLD_SCENE := "res://World/world.tscn"
 
 func _ready() -> void:
 	# Conexiones para los clics
-	$Fondo/VBoxContainer/Jugar.pressed.connect(_on_jugar_pressed)
-	$Fondo/VBoxContainer/Opciones.pressed.connect(_on_opciones_pressed)
-	$Fondo/VBoxContainer/Salir.pressed.connect(_on_salir_pressed)
+	$VBoxContainer/Jugar.pressed.connect(_on_jugar_pressed)
+	$VBoxContainer/Opciones.pressed.connect(_on_opciones_pressed)
+	$VBoxContainer/Salir.pressed.connect(_on_salir_pressed)
 	
 	# Conexiones para el hover (pasar el cursor)
-	$Fondo/VBoxContainer/Jugar.mouse_entered.connect(_on_boton_hover)
-	$Fondo/VBoxContainer/Opciones.mouse_entered.connect(_on_boton_hover)
-	$Fondo/VBoxContainer/Salir.mouse_entered.connect(_on_boton_hover)
+	$VBoxContainer/Jugar.mouse_entered.connect(_on_boton_hover)
+	$VBoxContainer/Opciones.mouse_entered.connect(_on_boton_hover)
+	$VBoxContainer/Salir.mouse_entered.connect(_on_boton_hover)
 
 func _on_boton_hover() -> void:
 	sonido_hover.play()

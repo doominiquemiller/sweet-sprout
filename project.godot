@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Sweet Sprout"
-run/main_scene="uid://dvwi23mnpj1db"
+run/main_scene="uid://vh6d1fnik42f"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
