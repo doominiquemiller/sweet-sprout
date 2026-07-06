@@ -60,6 +60,8 @@
 [ext_resource type="PackedScene" uid="uid://dm76s17n37nnl" path="res://Scenes/Animals/bee.tscn" id="52_5l1j7"]
 [ext_resource type="Script" uid="uid://co8u4ndjgy3de" path="res://Scripts/planting_system.gd" id="53_hm3sf"]
 [ext_resource type="AudioStream" uid="uid://c4bsoykba8gdr" path="res://Sounds & Music/2. At Water's Edge.wav" id="58_dmovf"]
+[ext_resource type="Script" uid="uid://u8nnumiuj6am" path="res://Scripts/customer_spawner.gd" id="60_eyejc"]
+[ext_resource type="PackedScene" uid="uid://w3xeb4m071jg" path="res://World/npc.tscn" id="61_l3fwa"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r0ikl"]
 texture = ExtResource("4_3gnva")
@@ -2232,4 +2234,13 @@ script = ExtResource("53_hm3sf")
 stream = ExtResource("58_dmovf")
 volume_db = -15.0
 autoplay = true
-bus = &"Musica"
+
+[node name="Clients" type="Node" parent="." unique_id=302528394]
+
+[node name="Marker2D" type="Marker2D" parent="Clients" unique_id=348991873]
+position = Vector2(-277, 276)
+
+[node name="CustomerSpawner" type="Node" parent="Clients" unique_id=583677504 node_paths=PackedStringArray("spawn_point")]
+script = ExtResource("60_eyejc")
+customer_scene = ExtResource("61_l3fwa")
+spawn_point = NodePath("../Marker2D")

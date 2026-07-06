@@ -118,7 +118,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"down",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -135,7 +135,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"down_left",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -152,7 +152,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"down_right",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -169,7 +169,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"left",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -186,7 +186,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"right",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -203,7 +203,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"up",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -220,7 +220,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"up_left",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -237,7 +237,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"up_right",
-"speed": 5.0
+"speed": 6.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v0iea"]
@@ -252,7 +252,8 @@ script = ExtResource("1_cvnsp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1260662474]
 sprite_frames = SubResource("SpriteFrames_0gysh")
-animation = &"down"
+animation = &"up_right"
+frame_progress = 0.6231393
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=494866450]
 position = Vector2(-1, 12)
@@ -268,8 +269,6 @@ scale = Vector2(0.7, 0.7)
 
 [node name="PasosCesped" type="AudioStreamPlayer2D" parent="." unique_id=320204976]
 stream = ExtResource("3_s0vun")
-bus = &"SFX"
 
 [node name="PasosMadera" type="AudioStreamPlayer2D" parent="." unique_id=613420464]
 stream = ExtResource("4_j8qpl")
-bus = &"SFX"
