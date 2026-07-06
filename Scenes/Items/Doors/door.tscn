@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://b0yufee2lm71w" path="res://Scripts/door.gd" id="1_tkwx8"]
 [ext_resource type="Texture2D" uid="uid://dg8yu3vt5j47w" path="res://Assets/Tilesets/Wooden_House_Walls_Tilset.png" id="2_wqenf"]
 [ext_resource type="FontFile" uid="uid://n5p8m4kiw5un" path="res://Fonts/CutePixel.ttf" id="3_tex1h"]
+[ext_resource type="AudioStream" uid="uid://dmj3s5exeynsj" path="res://Sounds & Music/Door Open 4-1.wav" id="4_o835x"]
+[ext_resource type="AudioStream" uid="uid://lu6fqsxqfs8h" path="res://Sounds & Music/Door Close 4-1.wav" id="5_u6sdj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4akuk"]
 atlas = ExtResource("2_wqenf")
@@ -103,3 +105,11 @@ offset_bottom = -17.0
 theme_override_fonts/font = ExtResource("3_tex1h")
 theme_override_font_sizes/font_size = 16
 text = "[F] Abrir"
+
+[node name="SonidoAbrir" type="AudioStreamPlayer2D" parent="." unique_id=2069220178]
+stream = ExtResource("4_o835x")
+bus = &"SFX"
+
+[node name="SonidoCerrar" type="AudioStreamPlayer2D" parent="." unique_id=1134643384]
+stream = ExtResource("5_u6sdj")
+bus = &"SFX"

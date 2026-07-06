@@ -2,17 +2,21 @@ extends Node2D
 
 # =============================================================
 #  FenceDoor
-#  Frame 0     = cerrada (inicio)
-#  Frame 1-2   = abriéndose
-#  Frame 3-4   = abierta
-#  Frame 5-6   = cerándose
-#  Frame 7     = cerrada (final)
+#  Frame 0      = cerrada (inicio)
+#  Frame 1-2    = abriéndose
+#  Frame 3-4    = abierta
+#  Frame 5-6    = cerándose
+#  Frame 7      = cerrada (final)
 # =============================================================
 
 @onready var sprite         : AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision      : CollisionShape2D = $CollisionShape2D
 @onready var area           : Area2D           = $Area2D
 @onready var interact_label : Label            = $InteractLabel
+
+# Nodos de sonido añadidos
+@onready var sonido_abrir   : AudioStreamPlayer2D = $SonidoAbrir
+@onready var sonido_cerrar  : AudioStreamPlayer2D = $SonidoCerrar
 
 enum DoorState { CLOSED, OPENING, OPEN, CLOSING }
 
@@ -41,7 +45,6 @@ func _process(delta: float) -> void:
 		DoorState.CLOSING:
 			_advance_frames(delta, 7, DoorState.CLOSED)
 
-# from_frame ya no se usa, lo quitamos del parámetro
 func _advance_frames(delta: float, to_frame: int, next_state: DoorState) -> void:
 	_frame_timer += delta
 	if _frame_timer >= FRAME_DURATION:
@@ -79,12 +82,20 @@ func _open_door() -> void:
 	sprite.frame = 1
 	collision.set_deferred("disabled", true)
 	interact_label.text = "[F] Cerrar"
+	
+	# Reproduce sonido al abrir
+	if sonido_abrir:
+		sonido_abrir.play()
 
 func _close_door() -> void:
 	state = DoorState.CLOSING
 	_frame_timer = 0.0
 	sprite.frame = 5
 	interact_label.text = "[F] Abrir"
+	
+	# Reproduce sonido al cerrar
+	if sonido_cerrar:
+		sonido_cerrar.play()
 
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group("player"):

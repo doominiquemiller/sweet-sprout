@@ -36,9 +36,8 @@ func setup(data: Dictionary, id: int) -> void:
 		buy_button.pressed.connect(_on_buy_pressed)
 
 func _ready() -> void:
-	# No hacer nada aquí, esperar a setup()
-	pass
+	print("SCRIPT ACTIVO EN ESTE NODO: ", get_script().resource_path if get_script() else "SIN SCRIPT")
 
 func _on_buy_pressed() -> void:
-	print(">>> StoreItem._on_buy_pressed() - ID: ", item_id, " | Data: ", item_data.get("item_id", "no_data") if item_data else "null")
+	print(">>> [TIENDA-StoreItem] Botón presionado - ID: ", item_id, " | Data: ", item_data.get("item_id", "no_data") if item_data else "null")
 	item_buy_pressed.emit(item_id)

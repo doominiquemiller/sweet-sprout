@@ -9,7 +9,7 @@ atlas = ExtResource("2_5sd86")
 region = Rect2(0, 0, 16, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k2qs8"]
-size = Vector2(15.333333, 14.666667)
+size = Vector2(39.999996, 33.33333)
 
 [node name="CropSpace" type="Node2D" unique_id=374812966]
 scale = Vector2(0.3, 0.3)
@@ -22,7 +22,7 @@ texture = SubResource("AtlasTexture_k2qs8")
 scale = Vector2(1.5, 1.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1385434360]
-position = Vector2(0, 10.666667)
+position = Vector2(0, 9.999998)
 shape = SubResource("RectangleShape2D_k2qs8")
 
 [node name="Label" type="Label" parent="." unique_id=1406797808]

@@ -44,6 +44,7 @@ var recipe_data: Array = [
 
 func _ready() -> void:
 	setup_recipe_menu()
+	print("SCRIPT ACTIVO EN ESTE NODO: ", get_script().resource_path if get_script() else "SIN SCRIPT")
 
 # =============================================================
 #  Llamado desde counter_4.gd (toggle_recipe_menu) al abrir el menú
@@ -92,6 +93,7 @@ func check_ingredients(ingredients: Array) -> bool:
 #  temporizador real de 60 segundos (en vez de dar el item al instante)
 # =============================================================
 func on_prepare_pressed(id: int) -> void:
+	print(">>> [CRAFTING-crafting_menu] Señal recibida - ID: ", id)
 	if id < 0 or id >= recipe_data.size():
 		return
 

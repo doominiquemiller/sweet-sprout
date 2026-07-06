@@ -18,6 +18,7 @@ var store_data: Array = [
 func _ready() -> void:
 	print("=== TIENDA INICIADA ===")
 	setup_store()
+	print("SCRIPT ACTIVO EN ESTE NODO: ", get_script().resource_path if get_script() else "SIN SCRIPT")
 
 func setup_store() -> void:
 	for child in grid.get_children():
@@ -34,6 +35,7 @@ func setup_store() -> void:
 		id += 1
 
 func _on_item_buy_pressed(id: int) -> void:
+	print(">>> [TIENDA-Store] Señal recibida en Store.gd - ID: ", id)
 	if id < 0 or id >= store_data.size():
 		return
 
